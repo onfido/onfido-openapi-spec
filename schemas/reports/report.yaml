@@ -1,0 +1,48 @@
+    type: object
+    required:
+      - name
+    properties:
+      id:
+        type: string
+        readOnly: true
+        description: The unique identifier for the report. Read-only.
+      created_at:
+        type: string
+        readOnly: true
+        format: date-time
+        description: The date and time at which the report was first initiated. Read-only.
+      href:
+        type: string
+        readOnly: true
+        description: The API endpoint to retrieve the report. Read-only.
+      status:
+        type: string
+        readOnly: true
+        description: The current state of the report in the checking process. Read-only.
+      result:
+        type: string
+        readOnly: true
+        description: The result of the report. Read-only.
+      sub_result:
+        type: string
+        readOnly: true
+        description: The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.
+      breakdown:
+        type: object
+        readOnly: true
+        additionalProperties: true
+        description: The details of the report. This is specific to each type of report. Read-only.
+      properties:
+        type: object
+        readOnly: true
+        additionalProperties: true
+        description: The properties associated with the report, if any. Read-only.
+
+      name:
+        type: string
+        description: The name of the report type.
+      documents:
+        type: array
+        description: Array of objects with document ids that were used in the Onfido engine. [ONLY USED IN A DOCUMENT CHECK]
+        items:
+          $ref: report_document.yaml

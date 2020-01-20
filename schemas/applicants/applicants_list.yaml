@@ -1,0 +1,6 @@
+    type: object
+    properties:
+      applicants:
+        type: array
+        items:
+          $ref: applicant.yaml

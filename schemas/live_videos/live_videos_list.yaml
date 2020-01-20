@@ -1,0 +1,6 @@
+    type: object
+    properties:
+      live_videos:
+        type: array
+        items:
+          $ref: live_video.yaml

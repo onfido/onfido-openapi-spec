@@ -1,0 +1,18 @@
+description: Unexpected error
+content:
+  application/json:
+    schema:
+      type: object
+      title: Error
+      properties:
+        error:
+          title: ErrorProperties
+          type: object
+          properties:
+            type:
+              type: string
+            message:
+              type: string
+            fields:
+              type: object
+              additionalProperties: true

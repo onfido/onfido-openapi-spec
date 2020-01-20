@@ -1,0 +1,19 @@
+  sdk_token:
+    post:
+      summary: Generate a SDK token
+      operationId: generate_sdk_token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/sdk_tokens/sdk_token.yaml
+      responses:
+        "200":
+          description: Generated
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/sdk_tokens/sdk_token.yaml
+        default:
+          $ref: ../responses/default_error.yaml

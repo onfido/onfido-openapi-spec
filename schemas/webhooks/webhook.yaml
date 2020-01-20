@@ -1,0 +1,39 @@
+    type: object
+    required:
+      - url
+    properties:
+      id:
+        type: string
+        readOnly: true
+        description: The unique identifier of the webhook. Read-only.
+      token:
+        type: string
+        readOnly: true
+        description: Webhook secret token used to sign the webhook's payload. Read-only.
+      href:
+        type: string
+        readOnly: true
+        description: The API endpoint to retrieve the webhook. Read-only.
+
+      url:
+        type: string
+        description: The url that will listen to notifications (must be https).
+      enabled:
+        type: boolean
+        description: Determine if the webhook is active.
+      environments:
+        type: array
+        description: >
+          The environments from which the webhook will receive events.
+          Allowed values are “sandbox” and “live”.
+          If the environments parameter is omitted the webhook will receive events from both environments.
+        items:
+          type: string
+      events:
+        type: array
+        description: >
+          The events that will be published to the webhook.
+          The supported events are: `report.completed`, `report.withdrawn`, `check.completed`, `check.started`, `check.form_opened`, `check.form_completed`.
+          If the events parameter is omitted all the events will be subscribed.
+        items:
+          type: string

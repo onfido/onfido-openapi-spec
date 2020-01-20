@@ -1,0 +1,64 @@
+  live_videos:
+    get:
+      summary: List live videos
+      operationId: list_live_videos
+      parameters:
+        - name: applicant_id
+          in: query
+          required: true
+          description: The id of the applicant the live videos belong to.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An array of live videos
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/live_videos/live_videos_list.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  live_video:
+    get:
+      summary: Retrieve live video
+      operationId: find_live_video
+      parameters:
+        - name: live_video_id
+          in: path
+          required: true
+          description: The live video’s unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A live video
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/live_videos/live_video.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  download:
+    get:
+      summary: Download live video
+      description: Live videos are downloaded using this endpoint.
+      operationId: download_live_video
+      parameters:
+        - name: live_video_id
+          in: path
+          required: true
+          description: The live video’s unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The live video's binary data.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml

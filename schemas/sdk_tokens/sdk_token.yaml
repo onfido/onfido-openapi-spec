@@ -1,0 +1,18 @@
+type: object
+properties:
+  applicant_id:
+    type: string
+    writeOnly: true
+    description: The unique identifier of the applicant
+  referrer:
+    type: string
+    writeOnly: true
+    description: The referrer URL pattern
+  application_id:
+    type: string
+    writeOnly: true
+    description: The application ID (iOS or Android)
+  token:
+    type: string
+    readOnly: true
+    description: The generated SDK token

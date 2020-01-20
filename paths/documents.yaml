@@ -1,0 +1,104 @@
+  documents:
+    get:
+      summary: List documents
+      operationId: list_documents
+      description: All documents belonging to an applicant can be listed from this endpoint
+      parameters:
+        - name: applicant_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of Documents
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/documents/documents_list.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+    post:
+      summary: Upload a document
+      operationId: upload_document
+      description: >
+        Documents are uploaded using this endpoint. Along with the file upload the relevant document type must be specified.
+        Documents must be uploaded as a multipart form. The valid file types are: jpg, png and pdf. The file size must be between 2KB and 3MB.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - type
+                - file
+                - applicant_id
+              properties:
+                applicant_id:
+                  type: string
+                  description: The ID of the applicant whose document is being uploaded.
+                type:
+                  type: string
+                  description: The type of document.
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be uploaded.
+                side:
+                  type: string
+                  description: Either the `front` or `back` of the document.
+                issuing_country:
+                  type: string
+                  description: The issuing country of the document, a 3-letter ISO code.
+      responses:
+        "201":
+          description: A document
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/documents/document.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  document:
+    get:
+      summary: A single document can be retrieved by calling this endpoint with the document’s unique identifier.
+      operationId: find_document
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A document
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/documents/document.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  download:
+    get:
+      summary: Download a documents raw data
+      operationId: download_document
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The document binary data
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml

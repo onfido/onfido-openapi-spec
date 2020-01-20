@@ -1,0 +1,6 @@
+    type: object
+    properties:
+      live_photos:
+        type: array
+        items:
+          $ref: live_photo.yaml

@@ -1,0 +1,6 @@
+    type: object
+    properties:
+      checks:
+        type: array
+        items:
+          $ref: check.yaml

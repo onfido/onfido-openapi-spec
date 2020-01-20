@@ -1,0 +1,102 @@
+  live_photos:
+    get:
+      summary: List live photos
+      operationId: list_live_photos
+      parameters:
+        - name: applicant_id
+          in: query
+          required: true
+          description: The id of the applicant the live photos belong to.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An array of live photos
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/live_photos/live_photos_list.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+    post:
+      summary: Upload live photo
+      operationId: upload_live_photo
+      description: >
+        You can upload live photos to this endpoint. Like document upload, files must be uploaded as a multipart form.
+        Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
+        Live photos are validated at the point of upload to check that they contain exactly one face.
+        This validation can be disabled by setting the advanced_validation argument to false.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - applicant_id
+                - file
+              properties:
+                applicant_id:
+                  type: string
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be uploaded.
+                advanced_validation:
+                  type: boolean
+                  description: Validates that the live photo contains exactly one face.
+                  default: true
+      responses:
+        "201":
+          description: The Live Photo
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/live_photos/live_photo.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  live_photo:
+    get:
+      summary: Retrieve live photo
+      operationId: find_live_photo
+      parameters:
+        - name: live_photo_id
+          in: path
+          required: true
+          description: The live photo’s unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A live photo
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/live_photos/live_photo.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  download:
+    get:
+      summary: Download live photo
+      description: Live photos are downloaded using this endpoint.
+      operationId: download_live_photo
+      parameters:
+        - name: live_photo_id
+          in: path
+          required: true
+          description: The live photo’s unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The live photo's binary data.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml

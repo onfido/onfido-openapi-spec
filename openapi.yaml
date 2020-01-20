@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Onfido API
+  description: The Onfido API is used to submit check requests.
+  version: 3.0.0
+  license:
+    name: MIT
+servers:
+  - url: https://api.onfido.com/v3
+  - url: https://api.{region}.onfido.com/v3
+    variables:
+      region:
+        enum:
+          - us
+        default: us
+security:
+  - Token: []
+components:
+  securitySchemes:
+    Token:
+      type: apiKey
+      name: Authorization
+      in: header
+externalDocs:
+  url: https://documentation.onfido.com
+paths:
+  #
+  # CORE RESOURCES
+  #
+  # Applicants
+  /applicants:
+    $ref: paths/applicants.yaml#/applicants
+  /applicants/{applicant_id}:
+    $ref: paths/applicants.yaml#/applicant
+  /applicants/{applicant_id}/restore:
+    $ref: paths/applicants.yaml#/restore
+  # Documents
+  /documents:
+    $ref: paths/documents.yaml#/documents
+  /documents/{document_id}:
+    $ref: paths/documents.yaml#/document
+  /documents/{document_id}/download:
+    $ref: paths/documents.yaml#/download
+  # Live Photos
+  /live_photos:
+    $ref: paths/live_photos.yaml#/live_photos
+  /live_photos/{live_photo_id}:
+    $ref: paths/live_photos.yaml#/live_photo
+  /live_photos/{live_photo_id}/download:
+    $ref: paths/live_photos.yaml#/download
+  # Live Videos
+  /live_videos:
+    $ref: paths/live_videos.yaml#/live_videos
+  /live_videos/{live_video_id}:
+    $ref: paths/live_videos.yaml#/live_video
+  /live_videos/{live_video_id}/download:
+    $ref: paths/live_videos.yaml#/download
+  # Checks
+  /checks:
+    $ref: paths/checks.yaml#/checks
+  /checks/{check_id}:
+    $ref: paths/checks.yaml#/check
+  /checks/{check_id}/resume:
+    $ref: paths/checks.yaml#/resume
+  # Reports
+  /reports:
+    $ref: paths/reports.yaml#/reports
+  /reports/{report_id}:
+    $ref: paths/reports.yaml#/report
+  /reports/{report_id}/resume:
+    $ref: paths/reports.yaml#/resume
+  /reports/{report_id}/cancel:
+    $ref: paths/reports.yaml#/cancel
+  #
+  # OTHER ENDPOINTS
+  #
+  # Webhooks
+  /webhooks:
+    $ref: paths/webhooks.yaml#/webhooks
+  /webhooks/{webhook_id}:
+    $ref: paths/webhooks.yaml#/webhook
+  # Address Picker
+  /addresses/pick:
+    $ref: paths/addresses.yaml#/pick
+  # SDK Tokens
+  /sdk_token:
+    $ref: paths/sdk_tokens.yaml#/sdk_token

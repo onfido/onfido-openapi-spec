@@ -1,0 +1,19 @@
+  pick:
+    get:
+      summary: Search for addresses by postcode
+      operationId: find_addresses
+      parameters:
+        - name: postcode
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of addresses
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/address/addresses_list.yaml
+        default:
+          $ref: ../responses/default_error.yaml

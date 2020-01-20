@@ -1,0 +1,71 @@
+  reports:
+    get:
+      summary: All the reports belonging to a particular check can be listed from this endpoint.
+      operationId: list_reports
+      parameters:
+        - name: check_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of Reports
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/reports/reports_list.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  report:
+    get:
+      summary: A single report can be retrieved using this endpoint with the corresponding unique identifier.
+      operationId: find_report
+      parameters:
+        - name: report_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Report object
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/reports/report.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  resume:
+    post:
+      summary: This endpoint is for resuming individual paused reports.
+      operationId: resume_report
+      parameters:
+        - name: report_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          $ref: ../responses/default_error.yaml
+
+  cancel:
+    post:
+      summary: This endpoint is for cancelling individual paused reports.
+      operationId: cancel_report
+      parameters:
+        - name: report_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          $ref: ../responses/default_error.yaml
