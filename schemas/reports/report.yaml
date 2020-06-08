@@ -37,6 +37,10 @@
         readOnly: true
         additionalProperties: true
         description: The properties associated with the report, if any. Read-only.
+      check_id:
+        type: string
+        readOnly: true
+        description: The ID of the check to which the report belongs. Read-only.
 
       name:
         type: string
