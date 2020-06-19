@@ -12,6 +12,10 @@ properties:
     type: string
     writeOnly: true
     description: The application ID (iOS or Android)
+  cross_device_url:
+    type: string
+    writeOnly: true
+    description: Enterprise Feature - The URL to be used for the cross device flow of the Web SDK
   token:
     type: string
     readOnly: true
