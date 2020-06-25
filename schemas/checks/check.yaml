@@ -73,3 +73,9 @@
         type: array
         items:
           type: string
+      document_ids:
+        description: Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.
+        type: array
+        writeOnly: true
+        items:
+          type: string
