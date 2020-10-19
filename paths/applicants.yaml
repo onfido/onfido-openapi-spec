@@ -73,7 +73,7 @@
     put:
       summary: Update Applicant
       description: >
-        Allows updating of an applicant’s information before any checks are created.
+        Applicant details can be updated between check creations.
 
         - Partial updates
         - Addresses and ID numbers present will replace existing ones
