@@ -62,3 +62,26 @@
                 format: binary
         default:
           $ref: ../responses/default_error.yaml
+
+  download_frame:
+    get:
+      summary: Download live video frame
+      description: Live video frames are downloaded using this endpoint.
+      operationId: download_live_video_frame
+      parameters:
+        - name: live_video_id
+          in: path
+          required: true
+          description: The live video’s unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The live video frame's binary data.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml

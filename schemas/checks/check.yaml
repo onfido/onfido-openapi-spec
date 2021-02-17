@@ -79,3 +79,12 @@
         writeOnly: true
         items:
           type: string
+      consider:
+        description: Returns a pre-determined consider sub-result in sandbox for the specific reports in the consider array.
+        type: array
+        items:
+          type: string
+        writeOnly: true
+      sub_result:
+        description: Triggers a pre-determined sub-result response for sandbox Document reports.
+        type: string
