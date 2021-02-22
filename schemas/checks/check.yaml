@@ -47,6 +47,9 @@
       applicant_id:
         type: string
         description: The ID of the applicant to do the check on.
+      privacy_notices_read_consent_given:
+        type: boolean
+        description: Indicates whether the pricvacy notices and terms of service have been read and, where specfic laws require, that consent has been given for Onfido.
       tags:
         type: array
         items:
