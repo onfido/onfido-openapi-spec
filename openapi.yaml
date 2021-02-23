@@ -55,6 +55,8 @@ paths:
     $ref: paths/live_videos.yaml#/live_video
   /live_videos/{live_video_id}/download:
     $ref: paths/live_videos.yaml#/download
+  /live_videos/{live_video_id}/frame:
+    $ref: paths/live_videos.yaml#/download_frame
   # Checks
   /checks:
     $ref: paths/checks.yaml#/checks

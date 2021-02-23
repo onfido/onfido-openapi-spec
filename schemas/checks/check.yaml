@@ -47,6 +47,10 @@
       applicant_id:
         type: string
         description: The ID of the applicant to do the check on.
+      privacy_notices_read_consent_given:
+        type: boolean
+        writeOnly: true
+        description: Indicates whether the privacy notices and terms of service have been read and, where specific laws require, that consent has been given for Onfido.
       tags:
         type: array
         items:
@@ -79,3 +83,12 @@
         writeOnly: true
         items:
           type: string
+      consider:
+        description: Returns a pre-determined consider sub-result in sandbox for the specific reports in the consider array.
+        type: array
+        items:
+          type: string
+        writeOnly: true
+      sub_result:
+        description: Triggers a pre-determined sub-result response for sandbox Document reports.
+        type: string
