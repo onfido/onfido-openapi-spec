@@ -64,6 +64,8 @@ paths:
     $ref: paths/checks.yaml#/check
   /checks/{check_id}/resume:
     $ref: paths/checks.yaml#/resume
+  /checks/{check_id}/download:
+    $ref: paths/checks.yaml#/download
   # Reports
   /reports:
     $ref: paths/reports.yaml#/reports
