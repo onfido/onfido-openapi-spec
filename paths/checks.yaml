@@ -74,7 +74,7 @@
           $ref: ../responses/default_error.yaml
 
   download: 
-    post:
+    get:
       summary: Download a PDF of the check
       operationId: download_check
       parameters:
