@@ -2,17 +2,18 @@ openapi: 3.0.0
 info:
   title: Onfido API
   description: The Onfido API is used to submit check requests.
-  version: 3.0.0
+  version: 3.1.0
   license:
     name: MIT
 servers:
-  - url: https://api.onfido.com/v3
-  - url: https://api.{region}.onfido.com/v3
+  - url: https://api.{region}.onfido.com/v3.1
     variables:
       region:
         enum:
+          - eu
           - us
-        default: us
+          - ca
+        default: eu
 security:
   - Token: []
 components:
@@ -64,6 +65,8 @@ paths:
     $ref: paths/checks.yaml#/check
   /checks/{check_id}/resume:
     $ref: paths/checks.yaml#/resume
+  /checks/{check_id}/download:
+    $ref: paths/checks.yaml#/download
   # Reports
   /reports:
     $ref: paths/reports.yaml#/reports

@@ -72,3 +72,20 @@
           description: No Content
         default:
           $ref: ../responses/default_error.yaml
+
+  download: 
+    get:
+      summary: Download a PDF of the check
+      operationId: download_check
+      parameters:
+        - name: check_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The PDF binary data
+        default:
+          $ref: ../responses/default_error.yaml
+          
