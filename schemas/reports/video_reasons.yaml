@@ -1,0 +1,14 @@
+type: object
+properties:  
+  fake_webcam:
+    type: string
+    description: Flags when evidence is found that a fake webcam was used.
+  challenge_reuse:
+    type: string
+    description: Flags when evidence is found that the video was uploaded in an attempt to circumvent the randomness of the speaking and head turn challenges
+  emulator:
+    type: string
+    description: Flags when evidence is found that an Android emulator was used.
+  reasons:
+    type: string
+    description: Additional comma separated details such as the name of the fake webcam.

@@ -1,0 +1,336 @@
+type: object
+properties:
+  right_to_work:
+    type: object
+    description: Asserts whether the applicant has the right to work.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          applicant_has_the_right_to_work:
+            type: object
+            description: Asserts whether the applicant has the right to work, has restricted right to work or no right to work.
+            properties:
+              result:
+                type: string 
+              properties:
+                type: object
+  data_comparison:
+    type: object
+    description: Asserts whether data on the document is consistent with data provided when creating an applicant through the API.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          issuing_country:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          gender:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_expiry:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          last_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_type:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_numbers:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          first_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  data_validation:
+    type: object
+    description: Asserts whether algorithmically validatable elements are correct.
+    properties:
+      result: 
+        type: string
+      breakdown:
+        type: object
+        properties:
+          gender:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_numbers:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+                properties:
+                  document_number:
+                    type: string
+                    description: Flags if the document number is not the expected length and format for document.
+          document_expiration:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          expiry_date:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          mrz:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  image_integrity:
+    type: object
+    description: Asserts if the document is of sufficient quality to verify.    
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          image_quality:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          supported_document:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          colour_picture:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          conclusive_document_quality:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  visual_authenticity:
+    type: object
+    description: Asserts whether visual, non-textual, elements are correct given the type of document.
+    properties: 
+      result: 
+        type: string
+      breakdown:
+        type: object
+        properties:
+          fonts:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          picture_face_integrity:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          template:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          security_features:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          original_document_present:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          digital_tampering:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          other:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          face_detection:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  data_consistency:
+    type: object
+    description: Asserts whether data represented in multiple places on the document is consistent.
+    properties: 
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          date_of_expiry:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_numbers:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          issuing_country:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_type:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          gender:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          first_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          nationality:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          last_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  police_record:
+    type: object
+    description: Asserts whether the document had been identified as lost, stolen or otherwise compromised.
+    properties:
+      result:
+        type: string
+  compromised_document:
+    type: object
+    description: Asserts whether the image of the document has been found in our internal database of compromised documents.
+    properties:
+      result:
+        type: string
+  age_validation:
+    type: object
+    description: Asserts whether the age calculated from the document’s date of birth data point is greater than or equal to the minimum accepted age. 
+    properties:
+      result:
+        type: string
+
+
+            
+
+                        

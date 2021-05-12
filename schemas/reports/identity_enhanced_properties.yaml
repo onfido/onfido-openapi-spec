@@ -1,0 +1,19 @@
+type: object
+properties:
+  matched_address: 
+    description: Returns address number which has been matched.
+    type: number
+  matched_addresses:
+    description: Returns array of sources which contain matched addresses for the corresponding address number.
+    type: array
+    items: 
+      type: object
+      properties:
+        id:
+          type: number
+          description: The address number.
+        match_types:
+          type: array
+          description: Sources which contain matched addresses.
+          items:
+            type: string 

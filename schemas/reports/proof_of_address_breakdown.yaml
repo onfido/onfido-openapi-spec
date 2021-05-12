@@ -1,0 +1,65 @@
+type: object
+properties:
+  data_comparison:
+    type: object
+    description: Asserts whether the first name, last name and address provided by the applicant match those on the PoA document.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          address:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          first_name:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          last_name:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+  document_classification:
+    type: object
+    description: Asserts whether the document is of a valid type as PoA.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          supported_document:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+  image_integrity:
+    type: object
+    description: Asserts whether the quality of the uploaded document was sufficient to verify the address.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          image_quality:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+

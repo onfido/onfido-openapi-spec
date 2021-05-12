@@ -1,0 +1,16 @@
+type: object
+properties:
+  previously_seen_faces:
+    type: object 
+    description: Asserts whether the applicant's most recent facial media (live photo or live video) matches any other live photos or live videos already in your Onfido account database.
+    properties:
+      result:
+        type: string
+  image_integrity:
+    type: object
+    description: Asserts whether the uploaded live photo or live video and the content contained within it were of sufficient quality to perform a face comparison.
+    properties:
+      result:
+        type: string 
+
+

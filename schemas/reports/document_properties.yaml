@@ -1,0 +1,184 @@
+type: object
+properties:
+  date_of_birth:
+    type: string
+    format: date
+  date_of_expiry:
+    type: string
+    format: date
+  document_numbers:
+    type: array
+    items:
+      type: object
+      properties:
+        value: 
+          type: string
+        type:
+          type: string
+  document_type:
+    type: string
+  first_name:
+    type: string
+  gender:
+    type: string
+  issuing_country:
+    type: string
+  last_name:
+    type: string
+  nationality: 
+    type: string 
+  issuing_state:
+    type: string
+  issuing_date:
+    type: string
+    format: date
+  categorisation:
+    type: string 
+  mrz_line1:
+    type: string
+  mrz_line2:
+    type: string
+  mrz_line3:
+    type: string 
+  address:
+    type: string
+  place_of_birth:
+    type: string
+  spouse_name:
+    type: string
+  widow_name:
+    type: string
+  alias_name:
+    type: string
+  issuing_authority:
+    type: string
+  real_id_compliance:
+    type: string
+  address_lines:
+    type: object
+    properties:
+      street_address:
+        type: string 
+      state:
+        type: string
+      postal_code:
+        type: string
+      country:
+        type: string
+      city: 
+        type: string 
+      country_code:
+        type: string
+  barcode:
+    type: array
+    items:
+      type: object
+      properties:
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:  
+          type: string 
+        document_type:
+          type: string 
+        date_of_expiry:
+          type: string 
+          format: date
+        date_of_birth:
+          type: string
+          format: date
+        issuing_date:
+          type: string
+          format: date
+        address_line_1:
+          type: string 
+        address_line_2:
+          type: string 
+        address_line_3:
+          type: string 
+        address_line_4:
+          type: string 
+        address_line_5:
+          type: string 
+        issuing_state:
+          type: string
+        class:
+          type: string
+        gender:
+          type: string 
+        issuing_country:
+          type: string
+        document_number:
+          type: string 
+        real_id_classification:
+          type: string
+  driving_licence_information:
+    type: object
+    properties:
+      category:
+        type: string
+      obtainment_date:
+        type: string
+        format: date
+      expiry_date:
+        type: string
+        format: date
+      codes:
+        type: string
+  document_classification:
+    type: object
+    properties:
+      issuing_country:
+        type: string
+      document_type:
+        type: string
+      issuing_state:
+        type: string
+  extracted_data:
+    type: object
+    properties:
+      document_number:
+        type: string
+      date_of_birth:
+        type: string
+        format: date
+      date_of_expiry:
+        type: string
+        format: date
+      first_name:
+        type: string
+      last_name:
+        type: string
+      middle_name:
+        type: string
+      full_name:
+        type: string
+      spouse_name:
+        type: string
+      widow_name:
+        type: string
+      alias_name:
+        type: string
+      gender:
+        type: string
+      mrz_line1:
+        type: string
+      mrz_line2:
+        type: string
+      mrz_line3:
+        type: string 
+      nationality: 
+        type: string 
+      address_line_1:
+        type: string
+      address_line_2:
+        type: string
+      address_line_3:
+        type: string
+      address_line_4:
+        type: string
+      address_line_5:
+        type: string
+      issuing_authority:
+        type: string 

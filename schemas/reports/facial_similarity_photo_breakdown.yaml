@@ -1,0 +1,71 @@
+type: object
+properties:
+  face_comparison:
+    type: object
+    description: Asserts whether the face in the document matches the face in the live photo.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          face_match:
+            type: object
+            description: Contains a score value under the properties bag.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  score:
+                    type: number
+                    format: float
+                    description: A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match.
+  image_integrity:
+    type: object
+    description: Asserts whether the quality and integrity of the uploaded files were sufficient to perform a face comparison.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          face_detected:
+            type: object
+            description: Asserts a single face of good enough quality has been found in both the document image and the live photo.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+          source_integrity:
+            type: object
+            description: Asserts whether the live photo is trustworthy - i.e. not digitally tampered, from a fake webcam, or from other dubious sources.
+            properties:
+              result:
+                type: string
+              properties:
+                $ref: photo_reasons.yaml
+  visual_authenticity:
+    type: object
+    description: Asserts whether the person in the live photo is real and not a spoof.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          spoofing_detection:
+            type: object
+            description: Contains a score value under the properties bag.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  score:
+                    type: number
+                    format: float
+                    description: A floating point number between 0 and 1. The closer the score is to 0, the more likely it is to be a spoof.

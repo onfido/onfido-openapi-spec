@@ -1,0 +1,342 @@
+type: object
+properties:
+  data_comparison:
+    type: object
+    description: Asserts whether data on the document is consistent with data provided when creating an applicant through the API.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          issuing_country:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          gender:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_expiry:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          last_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_type:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_numbers:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          first_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  data_validation:
+    type: object
+    description: Asserts whether algorithmically validatable elements are correct.
+    properties:
+      result: 
+        type: string
+      breakdown:
+        type: object
+        properties:
+          gender:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_numbers:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_expiration:
+            type: object
+            description: If this is flagged, the document has expired.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          expiry_date:
+            type: object
+            description: If this is flagged, the expiration date has the incorrect format.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          mrz:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+  image_integrity:
+    type: object
+    description: Asserts if the document is of sufficient quality to verify.    
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          image_quality:
+            type: object
+            description: Asserts whether the quality of the image was sufficient for processing.
+            properties:
+              result: 
+                type: string 
+              properties:
+                $ref: document_IQ_reasons.yaml
+          supported_document:
+            type: object
+            description: Asserts whether the submitted document is supported.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          colour_picture:
+            type: object
+            description: Asserts whether the image was a colour one. 
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          conclusive_document_quality:
+            type: object
+            description: Asserts if the document was of enough quality to be able to perform a fraud inspection. 
+            properties:
+              result: 
+                type: string 
+              properties:
+                $ref: document_CDQ_reasons.yaml
+  visual_authenticity:
+    type: object
+    description: Asserts whether visual, non-textual, elements are correct given the type of document.
+    properties: 
+      result: 
+        type: string
+      breakdown:
+        type: object
+        properties:
+          fonts:
+            type: object
+            description: Fonts in the document don’t match the expected ones.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          picture_face_integrity:
+            type: object
+            description: The pictures of the person identified on the document show signs of tampering or alteration.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          template:
+            type: object
+            description: The document doesn’t match the expected template for the document type and country it is from.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          security_features:
+            type: object
+            description: Security features expected on the document are missing or wrong.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          original_document_present:
+            type: object
+            description: The document was not present when the photo was taken.
+            properties:
+              result: 
+                type: string 
+              properties:
+                $ref: document_ODP_reasons.yaml
+          digital_tampering:
+            type: object
+            description: Indication of digital tampering in the image.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          other:
+            type: object
+            description: This sub-breakdown is returned for backward compatibility reasons. Its value will be consider when at least one of the other breakdowns is consider, and clear when all the other breakdowns are clear.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          face_detection:
+            type: object
+            description: No face was detected on the document.
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object   
+  data_consistency:
+    type: object
+    description: Asserts whether data represented in multiple places on the document is consistent.
+    properties: 
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          date_of_expiry:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_numbers:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          issuing_country:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          document_type:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          gender:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          first_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          nationality:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          last_name:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object 
+          multiple_data_sources_present:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object           
+  police_record:
+    type: object
+    description: Asserts whether the document had been identified as lost, stolen or otherwise compromised.
+    properties:
+      result:
+        type: string
+  compromised_document:
+    type: object
+    description: Asserts whether the image of the document has been found in our internal database of compromised documents.
+    properties:
+      result:
+        type: string
+  age_validation:
+    type: object
+    description: Asserts whether the age calculated from the document’s date of birth data point is greater than or equal to the minimum accepted age. 
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          minimum_accepted_age:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+
