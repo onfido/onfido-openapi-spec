@@ -1,0 +1,23 @@
+type: object
+properties:
+  matches:
+    description: Returns any matching applicant IDs as entries inside a matches array under a properties bag.
+    type: array
+    items: 
+      type: object
+      properties:
+        applicant_id: 
+          type: string 
+          format: uuid
+          description: The applicant ID of the matched applicant.
+        score:
+          type: number
+          format: float
+          description: A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match.
+        media_id: 
+          type: string
+          format: uuid
+          description: The corresponding UUID for the media type.
+        media_type:
+          type: string 
+          description: The media type (for example live_photos or live_videos).

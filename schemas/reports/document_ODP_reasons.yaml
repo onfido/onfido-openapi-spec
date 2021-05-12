@@ -1,0 +1,14 @@
+type: object
+properties:
+  photo_of_screen:
+    type: string
+    description: When the applicant's document is on a physical screen or device.
+  screenshot:
+    type: string
+    description: When the applicant has used their mobile phone, tablet, or computer to take a photo within the device.
+  document_on_printed_paper:
+    type: string 
+    description: When the applicant has previously captured an image of the document, printed it out, and has now taken a photo of this print out to upload.
+  scan: 
+    type: string
+    description: When the document has clearly been captured using a scanner and there are visible indicators of this

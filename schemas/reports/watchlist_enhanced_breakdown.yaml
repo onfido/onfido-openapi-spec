@@ -1,0 +1,26 @@
+type: object
+properties:
+  politically_exposed_person:
+    type: object
+    description: Asserts if there are any records found in the proprietary database of Politically Exposed Persons sourced from government lists, websites and other media sources.
+    properties:
+      result:
+        type: string
+  sanction:
+    type: object
+    description: Asserts if there are any records found in Government and International Organisations Sanctions Lists.
+    properties:
+      result:
+        type: string
+  adverse_media:
+    type: object
+    description: Asserts if there are any records found of negative events reported by publicly and generally available media sources.
+    properties:
+      result:
+        type: string
+  monitored_lists:
+    type: object
+    description: Asserts if there are any records found in Law-Enforcement and Regulatory bodies Monitored Lists (including Terrorism, Money Laundering and Most Wanted lists).
+    properties:
+      result:
+        type: string

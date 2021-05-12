@@ -1,0 +1,32 @@
+type: object
+properties: 
+  dark_photo:
+    type: string
+    description: When an image of the document is too dark to be able to see data points.
+  glare_on_photo:
+    type: string
+    description: When there is light reflecting on the document causing glare to obstruct data points.
+  blurred_photo:
+    type: string
+    description: When data points are blurred and no reference can be made elsewhere in the document or if the data points are too blurry and 'they could be something else'.
+  covered_photo:
+    type: string 
+    description: When data points have been covered either by the applicant or by another object such as a sticker.
+  other_photo_issue:
+    type: string
+    description: Any other reason not listed, such as when holograms are obscuring data points.
+  damaged_document:
+    type: string
+    description: When a document is damaged and we are unable to make out data points.
+  incorrect_side:
+    type: string 
+    description: When the incorrect side of a document has been uploaded, and we have not received the front.
+  cut_off_document:
+    type: string
+    description: When data points are not included in the image due to the document being cut off.
+  no_document_in_image:
+    type: string
+    description: If no document has been uploaded or there is a blank image.
+  two_documents_uploaded:
+    type: string
+    description: When 2 different documents are submitted in the same check.

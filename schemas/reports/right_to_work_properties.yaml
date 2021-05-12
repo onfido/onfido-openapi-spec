@@ -1,0 +1,44 @@
+type: object
+description: Returns the information contained in the submitted document.
+properties:
+  nationality: 
+    type: string 
+  last_name:
+    type: string
+  issuing_country:
+    type: string
+  gender: 
+    type: string
+  first_name:
+    type: string
+  document_type:
+    type: string
+  document_numbers:
+    type: array
+    items:
+      type: object
+      properties:
+        value:
+          type: string
+        type:
+          type: string  
+  date_of_expiry:
+    type: string
+    format: date
+  date_of_birth:
+    type: string
+    format: date
+  document_version:
+    type: string 
+  issuing_date:
+    type: string
+    format: date
+  mrz_line1:
+    type: string
+  mrz_line2:
+    type: string
+  place_of_birth:
+    type: string
+  issuing_authority:
+    type: string 
+  

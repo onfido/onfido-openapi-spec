@@ -1,0 +1,29 @@
+type: object
+properties:
+  address:
+    description: This property provides the address on the document.
+    type: string
+  document_type:
+    description: This property provides the document type according to the set of supported documents.
+    type: string
+  first_names:
+    description: This property provides the first names on the document, including any initials and middle names.
+    type: string
+  last_names:
+    description: This property provided the last names on the document.
+    type: string
+  issue_date: 
+    description: This property provides the issue date of the document.
+    type: string
+    format: date
+  issuer:
+    description: This property provides the document issuer (e.g. HSBC, British Gas).
+    type: string  
+  summary_period_start:
+    description: This property provides the summary period start date.
+    type: string
+    format: date
+  summary_period_end:
+    description: This property provides the summary period end date.
+    type: string
+    format: date

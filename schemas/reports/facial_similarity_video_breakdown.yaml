@@ -1,0 +1,83 @@
+type: object
+properties:
+  face_comparison:
+    type: object
+    readOnly: true
+    description: Asserts whether the face in the document matches the face in the live video.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          face_match:
+            type: object
+            description: Contains a score value under the properties bag.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  score:
+                    type: number
+                    format: float
+                    description: A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match.
+  image_integrity:
+    type: object
+    readOnly: true
+    description: Asserts whether the quality and integrity of the uploaded files were sufficient to perform a face comparison.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          face_detected:
+            type: object
+            description: Asserts a single face of good enough quality has been found in both the document image and the live video.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+          source_integrity:
+            type: object
+            description: Asserts whether the live video is trustworthy - e.g. not from a fake webcam.
+            properties:
+              result:
+                type: string
+              properties:
+                $ref: video_reasons.yaml
+  visual_authenticity:
+    type: object
+    readOnly: true
+    description: Asserts whether the person in the live video is real (not a spoof) and live.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          liveness_detected:
+            type: object
+            description: Asserts whether the numbers and head movements were correctly executed.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+          spoofing_detection:
+            type: object
+            description: Asserts whether the live video is not a spoof (such as videos of digital screens).
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  score:
+                    type: number
+                    format: float
+                    description: A floating point number between 0 and 1. The closer the score is to 0, the more likely it is to be a spoof.
+

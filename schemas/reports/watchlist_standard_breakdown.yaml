@@ -1,0 +1,20 @@
+type: object
+properties:
+  sanction:
+    type: object
+    description: Asserts if there are any records found in Government and International Organisations Sanctions Lists.
+    properties:
+      result:
+        type: string
+  politically_exposed_person:
+    type: object
+    description: Asserts if there are any records found in the proprietary database of Politically Exposed Persons sourced from government lists, websites and other media sources.
+    properties:
+      result:
+        type: string
+  legal_and_regulatory_warnings:
+    type: object
+    description: Asserts if there are any records found in Law-Enforcement and Regulatory bodies Monitored Lists (including Terrorism, Money Laundering and Most Wanted lists).
+    properties:
+      result:
+        type: string      
