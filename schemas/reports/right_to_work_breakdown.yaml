@@ -329,8 +329,41 @@ properties:
     properties:
       result:
         type: string
-
-
-            
-
-                        
+  share_code_validation:
+    type: object
+    description: Asserts whether the applicant has a valid right to work share code. Only returned when a share code is provided.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          document_id:
+            type: object
+            description: Contains the document ID number in the properties bag.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  document_id:
+                    type: string
+                    description: The document ID to retrieve the GOV.UK evidence document of the applicant's right to work.
+          applicant_has_valid_share_code:
+            type: object
+            description: Asserts whether the provided share code is valid.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+          name_matched:
+            type: object
+            description: Asserts whether the applicant's given name matches the name on the share code results document.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object  
+                
