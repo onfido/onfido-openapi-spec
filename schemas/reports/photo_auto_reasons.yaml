@@ -1,0 +1,17 @@
+type: object
+properties:
+  digital_tampering:
+    type: string
+    description: Flags when evidence is found that the image was manipulated by Photoshop, or other software.
+  fake_webcam:
+    type: string
+    description: Flags when evidence is found that a fake webcam was used.
+  time_of_capture:
+    type: string
+    description: Flags when evidence is found that the live photo was taken more than 24 hours before live photo upload.
+  emulator:
+    type: string
+    description: Flags when evidence is found that an Android emulator was used.
+  reasons:
+    type: string
+    description: Additional comma separated details such as the exact digital tampering software used, or the name of the fake webcam.

@@ -46,7 +46,7 @@ properties:
               result:
                 type: string
               properties:
-                $ref: photo_reasons.yaml
+                $ref: photo_auto_reasons.yaml
   visual_authenticity:
     type: object
     description: Asserts whether the person in the live photo is real and not a spoof.
