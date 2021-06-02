@@ -6,7 +6,7 @@ This specification supports Onfido API v3 onwards.
 
 For our latest stable release that is officially supported please use [v1.0.0](https://github.com/onfido/onfido-openapi-spec/tree/v1.0.0). 
 
-## Swagger Editor and Postman
+##  Swagger Editor and Postman
 
 You can export Onfido's OpenAPI specification to both [Swagger Editor](https://editor.swagger.io/) and [Postman](https://www.postman.com/) by importing the `output.json` file into the respective tools. 
 
