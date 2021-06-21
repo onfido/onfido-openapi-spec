@@ -82,7 +82,7 @@
         items:
           type: string
       document_ids:
-        description: Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.
+        description: Optional. Array of strings describing which document to process in checks containing a Document report or a Facial Similarity report, or both. By default, the most recently uploaded document is used. `document_ids` is only usable with Document and Facial Similarity reports.
         type: array
         writeOnly: true
         items:

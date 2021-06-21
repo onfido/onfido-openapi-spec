@@ -23,6 +23,10 @@ properties:
                     type: number
                     format: float
                     description: A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match.
+                  document_id:
+                    type: string
+                    format: uuid
+                    description: The UUID for the document containing the extracted face that was used for face matching. 
   image_integrity:
     type: object
     readOnly: true

@@ -113,6 +113,38 @@ properties:
           type: string 
         real_id_classification:
           type: string
+  nfc:
+    type: object
+    properties:
+      document_type:
+        type: string
+      issuing_country:
+        type: string
+      full_name:
+        type: string
+      document_number:
+        type: string
+      nationality:
+        type: string
+      date_of_birth:
+        type: string
+        format: date
+      gender:
+        type: string
+      date_of_expiry:
+        type: string
+        format: date
+      personal_number:
+        type: string
+      place_of_birth:
+        type: string
+      address:
+        type: string
+      issuing_date:
+        type: string
+        format: date
+      issuing_authority:
+        type: string
   driving_licence_information:
     type: object
     properties:
