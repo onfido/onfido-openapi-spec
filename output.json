@@ -3,14 +3,14 @@
   "info": {
     "title": "Onfido API",
     "description": "The Onfido API is used to submit check requests.",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "license": {
       "name": "MIT"
     }
   },
   "servers": [
     {
-      "url": "https://api.{region}.onfido.com/v3.1",
+      "url": "https://api.{region}.onfido.com/v3.2",
       "variables": {
         "region": {
           "enum": [
@@ -1097,7 +1097,7 @@
                     }
                   },
                   "document_ids": {
-                    "description": "Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.",
+                    "description": "Optional. Array of strings describing which document to process in checks containing a Document report or a Facial Similarity report, or both. By default, the most recently uploaded document is used. `document_ids` is only usable with Document and Facial Similarity reports.",
                     "type": "array",
                     "writeOnly": true,
                     "items": {
@@ -1323,7 +1323,7 @@
                         },
                         "documents": {
                           "type": "array",
-                          "description": "Array of objects with document ids that were used in the Onfido engine. [ONLY USED IN A DOCUMENT CHECK]",
+                          "description": "Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]",
                           "items": {
                             "type": "object",
                             "required": [
@@ -1385,6 +1385,11 @@
                                                   "type": "number",
                                                   "format": "float",
                                                   "description": "A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match."
+                                                },
+                                                "document_id": {
+                                                  "type": "string",
+                                                  "format": "uuid",
+                                                  "description": "The UUID for the document containing the extracted face that was used for face matching."
                                                 }
                                               }
                                             }
@@ -1590,6 +1595,11 @@
                                                   "type": "number",
                                                   "format": "float",
                                                   "description": "A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match."
+                                                },
+                                                "document_id": {
+                                                  "type": "string",
+                                                  "format": "uuid",
+                                                  "description": "The UUID for the document containing the extracted face that was used for face matching."
                                                 }
                                               }
                                             }
@@ -1731,6 +1741,11 @@
                                                   "type": "number",
                                                   "format": "float",
                                                   "description": "A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match."
+                                                },
+                                                "document_id": {
+                                                  "type": "string",
+                                                  "format": "uuid",
+                                                  "description": "The UUID for the document containing the extracted face that was used for face matching."
                                                 }
                                               }
                                             }
@@ -2029,6 +2044,17 @@
                                           }
                                         },
                                         "mrz": {
+                                          "type": "object",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        },
+                                        "barcode": {
                                           "type": "object",
                                           "properties": {
                                             "result": {
@@ -2475,6 +2501,44 @@
                                       }
                                     }
                                   }
+                                },
+                                "issuing_authority": {
+                                  "type": "object",
+                                  "description": "Asserts whether data on the document matches the issuing authority data.",
+                                  "properties": {
+                                    "result": {
+                                      "type": "string"
+                                    },
+                                    "breakdown": {
+                                      "type": "object",
+                                      "properties": {
+                                        "nfc_active_authentication": {
+                                          "type": "object",
+                                          "description": "Asserts whether the document NFC chip is original or cloned.",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        },
+                                        "nfc_passive_authentication": {
+                                          "type": "object",
+                                          "description": "Asserts whether the document NFC chip data was tampered.",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             },
@@ -2646,6 +2710,53 @@
                                       "real_id_classification": {
                                         "type": "string"
                                       }
+                                    }
+                                  }
+                                },
+                                "nfc": {
+                                  "type": "object",
+                                  "properties": {
+                                    "document_type": {
+                                      "type": "string"
+                                    },
+                                    "issuing_country": {
+                                      "type": "string"
+                                    },
+                                    "full_name": {
+                                      "type": "string"
+                                    },
+                                    "document_number": {
+                                      "type": "string"
+                                    },
+                                    "nationality": {
+                                      "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                      "type": "string",
+                                      "format": "date"
+                                    },
+                                    "gender": {
+                                      "type": "string"
+                                    },
+                                    "date_of_expiry": {
+                                      "type": "string",
+                                      "format": "date"
+                                    },
+                                    "personal_number": {
+                                      "type": "string"
+                                    },
+                                    "place_of_birth": {
+                                      "type": "string"
+                                    },
+                                    "address": {
+                                      "type": "string"
+                                    },
+                                    "issuing_date": {
+                                      "type": "string",
+                                      "format": "date"
+                                    },
+                                    "issuing_authority": {
+                                      "type": "string"
                                     }
                                   }
                                 },

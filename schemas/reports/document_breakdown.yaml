@@ -118,6 +118,13 @@ properties:
                 type: string 
               properties:
                 type: object
+          barcode:  
+            type: object
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
   image_integrity:
     type: object
     description: Asserts if the document is of sufficient quality to verify.    
@@ -339,4 +346,28 @@ properties:
                 type: string 
               properties:
                 type: object
-
+  issuing_authority:
+    type: object
+    description: Asserts whether data on the document matches the issuing authority data.
+    properties: 
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          nfc_active_authentication:
+            type: object
+            description: Asserts whether the document NFC chip is original or cloned.
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          nfc_passive_authentication:
+            type: object
+            description: Asserts whether the document NFC chip data was tampered.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
