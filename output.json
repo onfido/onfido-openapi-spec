@@ -186,7 +186,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -242,7 +242,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -273,7 +273,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -313,7 +313,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -335,7 +335,7 @@
             "description": "No Content"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -359,7 +359,7 @@
             "description": "No Content"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -399,7 +399,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -500,7 +500,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -531,7 +531,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -563,7 +563,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -603,7 +603,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -683,7 +683,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -715,7 +715,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -749,7 +749,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -789,7 +789,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -852,7 +852,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -886,7 +886,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -920,7 +920,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -959,33 +959,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Error",
-                  "properties": {
-                    "error": {
-                      "title": "ErrorProperties",
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string"
-                        },
-                        "message": {
-                          "type": "string"
-                        },
-                        "fields": {
-                          "type": "object",
-                          "additionalProperties": true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -1133,7 +1107,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -1164,7 +1138,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -1188,7 +1162,7 @@
             "description": "No Content"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -1212,7 +1186,7 @@
             "description": "The PDF binary data"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -1251,7 +1225,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -3968,7 +3942,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -3992,7 +3966,7 @@
             "description": "No Content"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -4016,7 +3990,7 @@
             "description": "No Content"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -4045,7 +4019,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -4116,7 +4090,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -4147,7 +4121,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -4186,7 +4160,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       },
@@ -4208,7 +4182,7 @@
             "description": "Webhook deleted"
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -4247,7 +4221,7 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
@@ -4305,7 +4279,54 @@
             }
           },
           "default": {
-            "$ref": "#/paths/~1checks/get/responses/default"
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "summary": "Run a health check on the Onfido API",
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "description": "Regional base URL is operational",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Error",
+                  "properties": {
+                    "error": {
+                      "title": "ErrorProperties",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "fields": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
