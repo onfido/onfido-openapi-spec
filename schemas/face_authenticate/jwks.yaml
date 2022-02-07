@@ -1,0 +1,20 @@
+  type: object
+  properties:
+    alg:
+      type: string
+      description: The specific cryptographic algorithm used with the key.
+    kty:
+      type: string
+      description: The family of cryptographic algorithms used with the key.
+    use:
+      type: string
+      description: How the key was meant to be used.
+    n:
+      type: string
+      description: The modulus for the RSA public key.
+    e:
+      type: string
+      description: The exponent for the RSA public key.
+    kid: 
+      type: string
+      description: The unique identifier for the key.

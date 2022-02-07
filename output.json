@@ -439,6 +439,10 @@
                   "issuing_country": {
                     "type": "string",
                     "description": "The issuing country of the document, a 3-letter ISO code."
+                  },
+                  "validate_image_quality": {
+                    "type": "boolean",
+                    "description": "Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds."
                   }
                 }
               }
@@ -4327,6 +4331,368 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/applicants/{applicant_id}/face": {
+      "post": {
+        "summary": "Create a trusted face from a file or a live photo or live video id",
+        "operationId": "create_trusted_face",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "description": "You must pass one of the parameters to create a trusted face. The parameters are mutually exclusive.",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The file to be uploaded."
+                  },
+                  "live_photo_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the live photo."
+                  },
+                  "live_video_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the live video."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a trusted face",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1applicants~1%7Bapplicant_id%7D~1face/get/responses/200/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves an applicant's trusted face.",
+        "operationId": "retrieve_trusted_face",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trusted face object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "applicant_id": {
+                      "type": "string",
+                      "description": "The unique identifier for the applicant."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time when this trusted face was created."
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time when this trusted face was last updated."
+                    },
+                    "download_href": {
+                      "type": "string",
+                      "description": "The URI that can be used to download the trusted face."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a trusted face.",
+        "operationId": "destroy_trusted_face",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/applicants/{applicant_id}/face/download": {
+      "get": {
+        "summary": "Downloads an applicant's trusted face.",
+        "operationId": "download_trusted_face",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The binary data representing the image.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/auth/keys": {
+      "get": {
+        "summary": "Returns a JWKS (JSON Web Key Set) with public keys to verify the JWT token returned in the Authentication result.",
+        "operationId": "verify_authentication_token",
+        "responses": {
+          "200": {
+            "description": "JWKS (JSON Web Key Set)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "alg": {
+                      "type": "string",
+                      "description": "The specific cryptographic algorithm used with the key."
+                    },
+                    "kty": {
+                      "type": "string",
+                      "description": "The family of cryptographic algorithms used with the key."
+                    },
+                    "use": {
+                      "type": "string",
+                      "description": "How the key was meant to be used."
+                    },
+                    "n": {
+                      "type": "string",
+                      "description": "The modulus for the RSA public key."
+                    },
+                    "e": {
+                      "type": "string",
+                      "description": "The exponent for the RSA public key."
+                    },
+                    "kid": {
+                      "type": "string",
+                      "description": "The unique identifier for the key."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/auth/attempts": {
+      "get": {
+        "summary": "List authentication attempts",
+        "operationId": "list_authentication_attempts",
+        "parameters": [
+          {
+            "name": "applicant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A timestamp used to get attempts after a certain date and time.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A timestamp used to get attempts before a certain date and time.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of Authentication attempts.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "attempts": {
+                      "description": "Data of each authentication attempt.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "The UUID of the Authentication attempt.",
+                            "type": "string"
+                          },
+                          "applicant_id": {
+                            "description": "The UUID of the applicant that made the attempt.",
+                            "type": "string"
+                          },
+                          "timestamp": {
+                            "description": "The date and time at which the attempt was made.",
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "success": {
+                            "description": "The result of the Authentication attempt.",
+                            "type": "boolean"
+                          },
+                          "error": {
+                            "description": "The reason why an Authentication attempt failed.",
+                            "type": "string"
+                          },
+                          "sdk_source": {
+                            "description": "SDK type used in the Authentication attempt.",
+                            "type": "string"
+                          },
+                          "sdk_version": {
+                            "description": "SDK version used in the Authentication attempt.",
+                            "type": "string"
+                          },
+                          "sdk_metadata": {
+                            "description": "SDK metadata of the device used in the Authentication process.",
+                            "type": "object",
+                            "properties": {
+                              "system": {
+                                "type": "object",
+                                "properties": {
+                                  "product": {
+                                    "type": "string"
+                                  },
+                                  "model": {
+                                    "type": "string"
+                                  },
+                                  "manufacturer": {
+                                    "type": "string"
+                                  },
+                                  "hardware": {
+                                    "type": "string"
+                                  },
+                                  "fingerprint": {
+                                    "type": "string"
+                                  },
+                                  "brand": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "image_href": {
+                            "description": "The href to download the audit image used for the attempt.",
+                            "type": "string",
+                            "format": "binary"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/auth/attempts/{attempt_id}/image": {
+      "get": {
+        "summary": "Retrieves the audit image used for the given Authentication attempt.",
+        "operationId": "retrieve_audit_image",
+        "parameters": [
+          {
+            "name": "attempt_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The binary data representing the image.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
       }
