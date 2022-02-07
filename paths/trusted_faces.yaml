@@ -1,0 +1,94 @@
+  face:
+    post:
+      summary: Create a trusted face from a file or a live photo or live video id
+      operationId: create_trusted_face
+      parameters:
+        - name: applicant_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              description: You must pass one of the parameters to create a trusted face. The parameters are mutually exclusive. 
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be uploaded.
+                live_photo_id:
+                  type: string
+                  description: The unique identifier of the live photo.
+                live_video_id:
+                  type: string
+                  description: The unique identifier of the live video.
+      responses:
+        "201":
+          description: Create a trusted face 
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/trusted_faces/trusted_face.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+    get:
+      summary: Retrieves an applicant's trusted face.
+      operationId: retrieve_trusted_face
+      parameters:
+        - name: applicant_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Trusted face object
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/trusted_faces/trusted_face.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+    delete:
+      summary: Deletes a trusted face.
+      operationId: destroy_trusted_face
+      parameters:
+        - name: applicant_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          $ref: ../responses/default_error.yaml
+
+  download:
+    get:
+      summary: Downloads an applicant's trusted face.
+      operationId: download_trusted_face
+      parameters:
+        - name: applicant_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The binary data representing the image.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml
+          
+  

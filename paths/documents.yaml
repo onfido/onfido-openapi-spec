@@ -52,6 +52,9 @@
                 issuing_country:
                   type: string
                   description: The issuing country of the document, a 3-letter ISO code.
+                validate_image_quality:
+                  type: boolean
+                  description: Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.
       responses:
         "201":
           description: A document

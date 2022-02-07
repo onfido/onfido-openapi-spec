@@ -1,0 +1,66 @@
+  keys:
+    get:
+      summary: Returns a JWKS (JSON Web Key Set) with public keys to verify the JWT token returned in the Authentication result.
+      operationId: verify_authentication_token
+      responses:
+        "200":
+          description: JWKS (JSON Web Key Set)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/face_authenticate/jwks.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  auth: 
+    get:
+      summary: List authentication attempts
+      operationId: list_authentication_attempts
+      parameters:
+        - name: applicant_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: after
+          in: query
+          description: A timestamp used to get attempts after a certain date and time.
+          schema:
+            type: string
+            format: date-time
+        - name: before
+          in: query
+          description: A timestamp used to get attempts before a certain date and time.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: An array of Authentication attempts.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/face_authenticate/authentication_attempts.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  image:
+    get:
+      summary: Retrieves the audit image used for the given Authentication attempt.
+      operationId: retrieve_audit_image
+      parameters:
+        - name: attempt_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The binary data representing the image.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml

@@ -1,0 +1,190 @@
+type: object
+properties:
+  document:
+    type: object
+    description: Asserts whether the document data provided matches a real driving license in the DMV driver's license database.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          category:
+            type: object
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+          expiration_date:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          issue_date:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          document_number:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+  address:
+    type: object
+    description: Asserts whether the address data provided matches a real driving license in the DMV driver's license database.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          city:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          line_1:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          line_2:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          state_code:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          zip4:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          zip5:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+  personal:
+    type: object
+    description: Asserts whether the personal data provided matches a real driving license in the DMV driver's license database.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          first_name:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          name_suffix:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          height:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          weight:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          sex_code:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          eye_color:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          date_of_birth:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          last_name:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          middle_name:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          first_name_fuzzy:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          middle_name_fuzzy:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          last_name_fuzzy:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object
+          middle_initial:
+            type: object
+            properties:
+              result: 
+                type: string
+              properties:
+                type: object

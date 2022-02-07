@@ -93,3 +93,15 @@ paths:
   # Ping 
   /ping:
     $ref: paths/ping.yaml#/ping
+  # Trusted Faces
+  /applicants/{applicant_id}/face:
+    $ref: paths/trusted_faces.yaml#/face
+  /applicants/{applicant_id}/face/download:
+    $ref: paths/trusted_faces.yaml#/download
+  # Face Authentication
+  /auth/keys:
+    $ref: paths/face_authenticate.yaml#/keys
+  /auth/attempts:
+    $ref: paths/face_authenticate.yaml#/auth
+  /auth/attempts/{attempt_id}/image:
+    $ref: paths/face_authenticate.yaml#/image
