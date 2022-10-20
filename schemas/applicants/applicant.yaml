@@ -42,3 +42,16 @@
         type: array
         items:
           $ref: id_number.yaml
+      phone_number:
+        type: string
+        description: The applicant’s phone number
+      consents:
+        type: array
+        items:
+          type: object
+          additionalProperties: true
+          description: The applicant’s consents  
+      location:
+        $ref: ../location/location.yaml
+    
+            

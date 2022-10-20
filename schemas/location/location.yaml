@@ -1,0 +1,8 @@
+type: object
+properties:
+  ip_address:
+    type: string
+    description: The applicant's ip address.
+  country_of_residence:
+    type: string
+    description: The applicant's country of residence.

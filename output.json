@@ -3,14 +3,14 @@
   "info": {
     "title": "Onfido API",
     "description": "The Onfido API is used to submit check requests.",
-    "version": "3.2.0",
+    "version": "3.4.0",
     "license": {
       "name": "MIT"
     }
   },
   "servers": [
     {
-      "url": "https://api.{region}.onfido.com/v3.2",
+      "url": "https://api.{region}.onfido.com/v3.4",
       "variables": {
         "region": {
           "enum": [
@@ -117,7 +117,7 @@
                       },
                       "sub_street": {
                         "type": "string",
-                        "description": "The sub-street of the applicant’s address"
+                        "description": "The sub-street of the applicant’s validate_image_quality"
                       },
                       "town": {
                         "type": "string",
@@ -166,6 +166,31 @@
                           "type": "string",
                           "description": "Two letter code of issuing state (state-issued driving licenses only)"
                         }
+                      }
+                    }
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "description": "The applicant’s phone number"
+                  },
+                  "consents": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "The applicant’s consents"
+                    }
+                  },
+                  "location": {
+                    "type": "object",
+                    "properties": {
+                      "ip_address": {
+                        "type": "string",
+                        "description": "The applicant's ip address."
+                      },
+                      "country_of_residence": {
+                        "type": "string",
+                        "description": "The applicant's country of residence."
                       }
                     }
                   }
@@ -443,6 +468,19 @@
                   "validate_image_quality": {
                     "type": "boolean",
                     "description": "Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds."
+                  },
+                  "location": {
+                    "type": "object",
+                    "properties": {
+                      "ip_address": {
+                        "type": "string",
+                        "description": "The applicant's ip address."
+                      },
+                      "country_of_residence": {
+                        "type": "string",
+                        "description": "The applicant's country of residence."
+                      }
+                    }
                   }
                 }
               }
@@ -3992,6 +4030,162 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs": {
+      "post": {
+        "summary": "Create a workflow run.",
+        "operationId": "create_workflow_run",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "workflow_id": {
+                    "type": "string",
+                    "required": true,
+                    "description": "The unique identifier for the workflow."
+                  },
+                  "applicant_id": {
+                    "type": "string",
+                    "required": true,
+                    "description": "The unique identifier for the applicant."
+                  },
+                  "custom_data": {
+                    "type": "object",
+                    "description": "Optional object with custom input data to be used in the workflow run."
+                  },
+                  "link": {
+                    "type": "object",
+                    "description": "Optional object for the configuration of the workflow run link."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A workflow run object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1workflow_runs/post/responses/201/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs/{workflow_run_id}": {
+      "get": {
+        "summary": "A single workflow run can be retrieved by calling this endpoint with the unique identifier of the workflow run.",
+        "operationId": "retrieve_workflow_run",
+        "parameters": [
+          {
+            "name": "workflow_run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the workflow run.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A workflow run object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1workflow_runs/post/responses/201/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs/{workflow_run_id}/task": {
+      "get": {
+        "summary": "The tasks of a workflow can be retrieved by calling this endpoint with the unique identifier of the workflow run.",
+        "operationId": "list_tasks",
+        "parameters": [
+          {
+            "name": "workflow_run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the workflow run to which the tasks belongs.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A subset of task objects that were already started or completed, ordered by the created_at field, in ascending order.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1workflow_runs/tasks/get/responses/200/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs/{workflow_run_id}/tasks/{task_id}": {
+      "get": {
+        "summary": "A single task can be retrieved by calling this endpoint with the unique identifier of the task and workflow run.",
+        "operationId": "retrieve_task",
+        "parameters": [
+          {
+            "name": "workflow_run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the workflow run to which the task belongs.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "description": "The identifier of the task you want to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A task object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1workflow_runs/tasks/get/responses/200/content/application~1json/schema"
+                }
+              }
+            }
           },
           "default": {
             "$ref": "#/paths/~1ping/get/responses/default"

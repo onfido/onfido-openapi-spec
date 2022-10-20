@@ -55,6 +55,8 @@
                 validate_image_quality:
                   type: boolean
                   description: Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.
+                location:
+                  $ref: ../schemas/location/location.yaml
       responses:
         "201":
           description: A document
