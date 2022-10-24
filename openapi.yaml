@@ -81,10 +81,10 @@ paths:
     $ref: paths/workflow_runs.yaml#/workflow_runs
   /workflow_runs/{workflow_run_id}:
     $ref: paths/workflow_runs.yaml#/workflow_runs
-  /workflow_runs/{workflow_run_id}/task:
+  /workflow_runs/{workflow_run_id}/tasks:
     $ref: paths/workflow_runs.yaml#/tasks
   /workflow_runs/{workflow_run_id}/tasks/{task_id}:
-    $ref: paths/workflow_runs.yaml#/task      
+    $ref: paths/workflow_runs.yaml#/task
   #
   # OTHER ENDPOINTS
   #

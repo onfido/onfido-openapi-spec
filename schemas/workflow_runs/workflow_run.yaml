@@ -2,49 +2,58 @@ type: object
 properties:
   id:
     type: string
-    description: The unique identifier for the workflow run.
+    description: The unique identifier for the Workflow Run.
   applicant_id:
     type: string
-    description: The unique identifier for the applicant.
+    description: The unique identifier for the Applicant.
   workflow_id:
     type: string
-    description: The unique identifier for the workflow.
+    description: The unique identifier for the Workflow.
   workflow_version_id:
     type: string
-    description: The identifier for the workflow version.
+    description: The identifier for the Workflow version.
   dashboard_url:
     type: string
-    description: The URL for viewing the workflow run results on your Onfido Dashboard.
+    description: The URL for viewing the Workflow Run results on your Onfido Dashboard.
   status:
     type: string
-    description: The status of the workflow run. Possible values are processing, awaiting_input, approved, declined, review, abandoned and error.
+    description: The status of the Workflow Run. Possible values are 'processing', 'awaiting_input', 'approved', 'declined', 'review', 'abandoned' and 'error'.
   output:
     type: object
-    description: Output object contains all of the properties configured on the workflow version.
+    description: Output object contains all of the properties configured on the Workflow version.
   reasons:
     type: array
-    description: The reasons the workflow run outcome was reached. Configurable when creating the workflow version.
+    description: The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow version.
+    items:
+      type: string
   error:
     type: object
-    description: Error object. Only set when the workflow run status is error.
+    description: Error object. Only set when the Workflow Run status is 'error'.
+    properties:
+      type:
+        type: string
+        description: The type of error.
+      message:
+        type: string
+        description: A textual description of the error.
   created_at:
     type: string
     format: date-time
-    description: The date and time when the workflow run was created.
+    description: The date and time when the Workflow Run was created.
   updated_at:
     type: string
     format: date-time
-    description: The date and time when the workflow run was last updated.
+    description: The date and time when the Workflow Run was last updated.
   link:
     type: object
-    description: Object for the configuration of the workflow run link.
+    description: Object for the configuration of the Workflow Run link.
     properties:
       url:
         type: string
-        description: Link to access the workflow run without the need to integrate with Onfido's SDKs.
+        description: Link to access the Workflow Run without the need to integrate with Onfido's SDKs.
       completed_redirect_url:
         type: string
-        description: When the interactive section of the workflow run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
+        description: When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
       expired_redirect_url:
         type: string
         description: When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.
