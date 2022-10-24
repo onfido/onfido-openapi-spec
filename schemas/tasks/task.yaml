@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The identifier for the Task.
+  task_def_id:
+    type: string
+    description: The identifier for the Task Definition.
+  input:
+    type: object
+    description: Input object with the fields used by the Task to execute.
+  output:
+    type: object
+    description: Output object with the fields produced by the Task execution.
+  created_at:
+    type: string
+    format: date-time
+    description: The date and time when the Task was created.
+  updated_at:
+    type: string
+    format: date-time
+    description: The date and time when the Task was last updated.

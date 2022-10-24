@@ -3,14 +3,14 @@
   "info": {
     "title": "Onfido API",
     "description": "The Onfido API is used to submit check requests.",
-    "version": "3.2.0",
+    "version": "3.4.0",
     "license": {
       "name": "MIT"
     }
   },
   "servers": [
     {
-      "url": "https://api.{region}.onfido.com/v3.2",
+      "url": "https://api.{region}.onfido.com/v3.4",
       "variables": {
         "region": {
           "enum": [
@@ -166,6 +166,31 @@
                           "type": "string",
                           "description": "Two letter code of issuing state (state-issued driving licenses only)"
                         }
+                      }
+                    }
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "description": "The applicant’s phone number"
+                  },
+                  "consents": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "description": "The applicant’s consents"
+                    }
+                  },
+                  "location": {
+                    "type": "object",
+                    "properties": {
+                      "ip_address": {
+                        "type": "string",
+                        "description": "The applicant's ip address."
+                      },
+                      "country_of_residence": {
+                        "type": "string",
+                        "description": "The applicant's country of residence."
                       }
                     }
                   }
@@ -443,6 +468,19 @@
                   "validate_image_quality": {
                     "type": "boolean",
                     "description": "Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds."
+                  },
+                  "location": {
+                    "type": "object",
+                    "properties": {
+                      "ip_address": {
+                        "type": "string",
+                        "description": "The applicant's ip address."
+                      },
+                      "country_of_residence": {
+                        "type": "string",
+                        "description": "The applicant's country of residence."
+                      }
+                    }
                   }
                 }
               }
@@ -705,7 +743,7 @@
             "schema": {
               "type": "string"
             }
-          }
+          } 
         ],
         "responses": {
           "200": {
@@ -3992,6 +4030,308 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs": {
+      "post": {
+        "summary": "Create a workflow run.",
+        "operationId": "create_workflow_run",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "applicant_id",
+                  "workflow_id"
+                ],
+                "properties": {
+                  "workflow_id": {
+                    "type": "string",
+                    "description": "The unique identifier for the Workflow."
+                  },
+                  "applicant_id": {
+                    "type": "string",
+                    "description": "The unique identifier for the Applicant."
+                  },
+                  "custom_data": {
+                    "type": "object",
+                    "description": "Optional object with custom input data to be used in the Workflow Run."
+                  },
+                  "link": {
+                    "type": "object",
+                    "description": "Optional object for the configuration of the Workflow Run link."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A Workflow Run object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier for the Workflow Run."
+                    },
+                    "applicant_id": {
+                      "type": "string",
+                      "description": "The unique identifier for the Applicant."
+                    },
+                    "workflow_id": {
+                      "type": "string",
+                      "description": "The unique identifier for the Workflow."
+                    },
+                    "workflow_version_id": {
+                      "type": "string",
+                      "description": "The identifier for the Workflow version."
+                    },
+                    "dashboard_url": {
+                      "type": "string",
+                      "description": "The URL for viewing the Workflow Run results on your Onfido Dashboard."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the Workflow Run. Possible values are 'processing', 'awaiting_input', 'approved', 'declined', 'review', 'abandoned' and 'error'."
+                    },
+                    "output": {
+                      "type": "object",
+                      "description": "Output object contains all of the properties configured on the Workflow version."
+                    },
+                    "reasons": {
+                      "type": "array",
+                      "description": "The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow version.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "description": "Error object. Only set when the Workflow Run status is 'error'.",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "The type of error."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A textual description of the error."
+                        }
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time when the Workflow Run was created."
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time when the Workflow Run was last updated."
+                    },
+                    "link": {
+                      "type": "object",
+                      "description": "Object for the configuration of the Workflow Run link.",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Link to access the Workflow Run without the need to integrate with Onfido's SDKs."
+                        },
+                        "completed_redirect_url": {
+                          "type": "string",
+                          "description": "When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page."
+                        },
+                        "expired_redirect_url": {
+                          "type": "string",
+                          "description": "When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message."
+                        },
+                        "expires_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Date and time when the link will expire."
+                        },
+                        "language": {
+                          "type": "string",
+                          "description": "The code for the language when the workflow run is acessed using the link."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs/{workflow_run_id}": {
+      "get": {
+        "summary": "A single Workflow Run can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.",
+        "operationId": "retrieve_workflow_run",
+        "parameters": [
+          {
+            "name": "workflow_run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the Workflow Run.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Workflow Run object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1workflow_runs/post/responses/201/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs/{workflow_run_id}/tasks": {
+      "get": {
+        "summary": "The Tasks of a Workflow can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.",
+        "operationId": "list_tasks",
+        "parameters": [
+          {
+            "name": "workflow_run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the Workflow Run to which the Tasks belong.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of subset Task objects that were already started or completed, ordered by the created_at field, in ascending order.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The identifier for the Task."
+                          },
+                          "task_def_id": {
+                            "type": "string",
+                            "description": "The identifier for the Task Definition."
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date and time when the Task was created."
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date and time when the Task was last updated."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
+      }
+    },
+    "/workflow_runs/{workflow_run_id}/tasks/{task_id}": {
+      "get": {
+        "summary": "A single Task can be retrieved by calling this endpoint with the unique identifier of the Task and Workflow Run.",
+        "operationId": "retrieve_task",
+        "parameters": [
+          {
+            "name": "workflow_run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the Workflow Run to which the Task belongs.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "description": "The identifier of the Task you want to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Task object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The identifier for the Task."
+                    },
+                    "task_def_id": {
+                      "type": "string",
+                      "description": "The identifier for the Task Definition."
+                    },
+                    "input": {
+                      "type": "object",
+                      "description": "Input object with the fields used by the Task to execute."
+                    },
+                    "output": {
+                      "type": "object",
+                      "description": "Output object with the fields produced by the Task execution."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time when the Task was created."
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time when the Task was last updated."
+                    }
+                  }
+                }
+              }
+            }
           },
           "default": {
             "$ref": "#/paths/~1ping/get/responses/default"
