@@ -1,0 +1,6 @@
+    type: object
+    properties:
+      workflow_runs:
+        type: array
+        items:
+          $ref: workflow_run.yaml

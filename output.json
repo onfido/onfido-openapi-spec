@@ -4176,6 +4176,79 @@
             "$ref": "#/paths/~1ping/get/responses/default"
           }
         }
+      },
+      "get": {
+        "summary": "List Workflow Runs.",
+        "operationId": "list_workflow_runs",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The number of the page to be retrieved. If not specified, defaults to 1.",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "A list of comma separated status values to filter the results. Possible values are 'processing', 'awaiting_input', 'approved', 'declined', 'review', 'abandoned' and 'error'.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at_gt",
+            "in": "query",
+            "description": "A ISO-8601 date to filter results with a created date greater than (after) the one provided.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "created_at_lt",
+            "in": "query",
+            "description": "A ISO-8601 date to filter results with a created date less than (before) the one provided.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "A string with the value 'desc' or 'asc' that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to 'desc'.",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of Workflow Run objects matching the query parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "workflow_runs": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/paths/~1workflow_runs/post/responses/201/content/application~1json/schema"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/paths/~1ping/get/responses/default"
+          }
+        }
       }
     },
     "/workflow_runs/{workflow_run_id}": {

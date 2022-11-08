@@ -1,24 +1,4 @@
-  workflow_runs:
-    get:
-      summary: A single workflow run can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
-      operationId: retrieve_workflow_run
-      parameters:
-        - name: workflow_run_id
-          in: path
-          required: true
-          description: The unique identifier of the Workflow Run.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A Workflow Run object.
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/workflow_runs/workflow_run.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
+  workflow_run:
     post:
       summary: Create a Workflow Run.
       operationId: create_workflow_run
@@ -52,7 +32,70 @@
                 $ref: ../schemas/workflow_runs/workflow_run.yaml
         default:
           $ref: ../responses/default_error.yaml
+    get:
+      summary: List Workflow Runs.
+      operationId: list_workflow_runs
+      parameters:
+        - name: page
+          in: query
+          description: The number of the page to be retrieved. If not specified, defaults to 1.
+          schema:
+            type: integer
+            default: 1
+        - name: status
+          in: query
+          description: A list of comma separated status values to filter the results. Possible values are 'processing', 'awaiting_input', 'approved', 'declined', 'review', 'abandoned' and 'error'.
+          schema:
+            type: string
+        - name: created_at_gt
+          in: query
+          description: A ISO-8601 date to filter results with a created date greater than (after) the one provided.
+          schema:
+            type: string
+            format: date-time
+        - name: created_at_lt
+          in: query
+          description: A ISO-8601 date to filter results with a created date less than (before) the one provided.
+          schema:
+            type: string
+            format: date-time
+        - name: sort
+          in: query
+          description: A string with the value 'desc' or 'asc' that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to 'desc'.
+          schema:
+            type: string
+            default: desc        
+      responses:
+        "200":
+          description: An array of Workflow Run objects matching the query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/workflow_runs/workflow_runs_list.yaml
+        default:
+          $ref: ../responses/default_error.yaml      
 
+  workflow_runs:
+    get:
+      summary: A single workflow run can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
+      operationId: retrieve_workflow_run
+      parameters:
+        - name: workflow_run_id
+          in: path
+          required: true
+          description: The unique identifier of the Workflow Run.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A Workflow Run object.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/workflow_runs/workflow_run.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+  
   tasks:
     get:
       summary: The tasks of a Workflow can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
