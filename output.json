@@ -3,21 +3,17 @@
   "info": {
     "title": "Onfido API",
     "description": "The Onfido API is used to submit check requests.",
-    "version": "3.4.0",
+    "version": "3.5.0",
     "license": {
       "name": "MIT"
     }
   },
   "servers": [
     {
-      "url": "https://api.{region}.onfido.com/v3.4",
+      "url": "https://api.{region}.onfido.com/v3.5",
       "variables": {
         "region": {
-          "enum": [
-            "eu",
-            "us",
-            "ca"
-          ],
+          "enum": ["eu", "us", "ca"],
           "default": "eu"
         }
       }
@@ -438,11 +434,7 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "type",
-                  "file",
-                  "applicant_id"
-                ],
+                "required": ["type", "file", "applicant_id"],
                 "properties": {
                   "applicant_id": {
                     "type": "string",
@@ -659,10 +651,7 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "applicant_id",
-                  "file"
-                ],
+                "required": ["applicant_id", "file"],
                 "properties": {
                   "applicant_id": {
                     "type": "string"
@@ -743,7 +732,7 @@
             "schema": {
               "type": "string"
             }
-          } 
+          }
         ],
         "responses": {
           "200": {
@@ -1342,9 +1331,7 @@
                           "description": "Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]",
                           "items": {
                             "type": "object",
-                            "required": [
-                              "id"
-                            ],
+                            "required": ["id"],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -1370,9 +1357,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "facial_similarity_photo"
-                              ]
+                              "enum": ["facial_similarity_photo"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -1515,9 +1500,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "known_faces"
-                              ]
+                              "enum": ["known_faces"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -1580,9 +1563,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "photo_fully_auto"
-                              ]
+                              "enum": ["photo_fully_auto"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -1725,9 +1706,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "facial_similarity_video"
-                              ]
+                              "enum": ["facial_similarity_video"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -2486,10 +2465,37 @@
                                 },
                                 "compromised_document": {
                                   "type": "object",
-                                  "description": "Asserts whether the image of the document has been found in our internal database of compromised documents.",
+                                  "description": "Asserts whether the image of the document has been found in our internal database or if it was used in a suspicious way.",
                                   "properties": {
                                     "result": {
                                       "type": "string"
+                                    },
+                                    "breakdown": {
+                                      "type": "object",
+                                      "properties": {
+                                        "document_database": {
+                                          "type": "object",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        },
+                                        "repeat_attempts": {
+                                          "type": "object",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 },
@@ -2886,9 +2892,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "proof_of_address"
-                              ]
+                              "enum": ["proof_of_address"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -3037,9 +3041,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "watchlist_enhanced"
-                              ]
+                              "enum": ["watchlist_enhanced"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -3154,9 +3156,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "right_to_work"
-                              ]
+                              "enum": ["right_to_work"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -3663,6 +3663,33 @@
                                   "properties": {
                                     "result": {
                                       "type": "string"
+                                    },
+                                    "breakdown": {
+                                      "type": "object",
+                                      "properties": {
+                                        "document_database": {
+                                          "type": "object",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        },
+                                        "repeat_attempts": {
+                                          "type": "object",
+                                          "properties": {
+                                            "result": {
+                                              "type": "string"
+                                            },
+                                            "properties": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 },
@@ -3803,9 +3830,7 @@
                         {
                           "properties": {
                             "name": {
-                              "enum": [
-                                "identity_enhanced"
-                              ]
+                              "enum": ["identity_enhanced"]
                             },
                             "breakdown": {
                               "type": "object",
@@ -4047,10 +4072,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "applicant_id",
-                  "workflow_id"
-                ],
+                "required": ["applicant_id", "workflow_id"],
                 "properties": {
                   "workflow_id": {
                     "type": "string",
@@ -4449,9 +4471,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "url"
-                ],
+                "required": ["url"],
                 "properties": {
                   "id": {
                     "type": "string",
@@ -5112,4 +5132,3 @@
     }
   }
 }
-
