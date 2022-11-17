@@ -326,10 +326,27 @@ properties:
         type: string
   compromised_document:
     type: object
-    description: Asserts whether the image of the document has been found in our internal database of compromised documents.
+    description: Asserts whether the image of the document has been found in our internal database or if it was used in a suspicious way.
     properties:
       result:
         type: string
+      breakdown:
+        type: object
+        properties:
+          document_database:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
+          repeat_attempts:
+            type: object
+            properties:
+              result: 
+                type: string 
+              properties:
+                type: object
   age_validation:
     type: object
     description: Asserts whether the age calculated from the document’s date of birth data point is greater than or equal to the minimum accepted age. 
