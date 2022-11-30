@@ -76,6 +76,9 @@ paths:
     $ref: paths/reports.yaml#/resume
   /reports/{report_id}/cancel:
     $ref: paths/reports.yaml#/cancel
+  /reports/{report_id}/quality_control:
+    $ref: paths/reports.yaml#/quality_control
+
   # Workflow Runs
   /workflow_runs:
     $ref: paths/workflow_runs.yaml#/workflow_run
@@ -99,6 +102,6 @@ paths:
   # SDK Tokens
   /sdk_token:
     $ref: paths/sdk_tokens.yaml#/sdk_token
-  # Ping 
+  # Ping
   /ping:
     $ref: paths/ping.yaml#/ping

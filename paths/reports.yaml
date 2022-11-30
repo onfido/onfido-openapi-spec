@@ -69,3 +69,21 @@
           description: No Content
         default:
           $ref: ../responses/default_error.yaml
+
+  quality_control:
+    get:
+      summary: Gets the quality control result when available
+      operationId: getQualityControl
+      parameters:
+        - name: report_id
+          in: path
+          required: true
+          schema:
+            type: string
+      response:
+        "200":
+          description: Quality Control result of the object (Only for documents today)
+        "404":
+          description: No quality control done for this report
+        "401":
+          description: A quality control is available but you don't have access to either the report or that quality control reason
