@@ -89,5 +89,5 @@
                 $ref: ../schemas/reports/document_quality_control.yaml
         "404":
           description: No quality control done for this report
-        "401":
+        "403":
           description: A quality control is available but you don't have access to either the report or that quality control reason
