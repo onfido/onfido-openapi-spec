@@ -82,7 +82,7 @@
             type: string
       responses:
         "200":
-          description: Quality Control result of the object (Only for documents today)
+          description: Quality Control result of the object. Built with the original report results overridden by the quality control at each breakdown if the quality control exists (Only for documents today)
           content:
             application/json:
               schema:
