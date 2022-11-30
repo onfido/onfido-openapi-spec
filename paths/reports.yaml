@@ -80,9 +80,13 @@
           required: true
           schema:
             type: string
-      response:
+      responses:
         "200":
           description: Quality Control result of the object (Only for documents today)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/reports/document_quality_control.yaml
         "404":
           description: No quality control done for this report
         "401":
