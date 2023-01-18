@@ -21,3 +21,6 @@ properties:
         media_type:
           type: string 
           description: The media type (for example live_photos or live_videos).
+        suspected:
+          type: boolean 
+          description: Weather match media is suspected or not.
