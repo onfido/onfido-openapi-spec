@@ -21,3 +21,6 @@ properties:
         media_type:
           type: string 
           description: The media type (for example live_photos or live_videos).
+        suspected:
+          type: boolean 
+          description: Indicates if match is suspected based on fuzzy name matching feature. Dependent on feature being active for account, otherwise defaults to true.
