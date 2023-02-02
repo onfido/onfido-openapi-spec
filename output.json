@@ -3,14 +3,14 @@
   "info": {
     "title": "Onfido API",
     "description": "The Onfido API is used to submit check requests.",
-    "version": "3.5.0",
+    "version": "3.6.0",
     "license": {
       "name": "MIT"
     }
   },
   "servers": [
     {
-      "url": "https://api.{region}.onfido.com/v3.5",
+      "url": "https://api.{region}.onfido.com/v3.6",
       "variables": {
         "region": {
           "enum": ["eu", "us", "ca"],
