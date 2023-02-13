@@ -188,7 +188,6 @@
               properties:
                 data:
                   type: object
-                  required: true
                   description: The Task completion payload.
       responses:
         "204":
