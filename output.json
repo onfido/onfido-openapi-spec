@@ -4436,7 +4436,7 @@
     },
     "/workflow_runs/{workflow_run_id}/tasks/{task_id}/complete": {
       "post": {
-        "summary": "Completes a Send / Receive Data task.",
+        "summary": "Completes a task.",
         "operationId": "complete_task",
         "parameters": [
           {
