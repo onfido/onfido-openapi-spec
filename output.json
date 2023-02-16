@@ -4475,8 +4475,8 @@
           }
         },
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "An empty response body"
           },
           "default": {
             "$ref": "#/paths/~1ping/get/responses/default"

@@ -190,7 +190,7 @@
                   type: object
                   description: The Task completion payload.
       responses:
-        "204":
-          description: No Content
+        "200":
+          description: An empty response body.
         default:
           $ref: ../responses/default_error.yaml
