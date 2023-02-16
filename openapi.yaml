@@ -85,6 +85,8 @@ paths:
     $ref: paths/workflow_runs.yaml#/tasks
   /workflow_runs/{workflow_run_id}/tasks/{task_id}:
     $ref: paths/workflow_runs.yaml#/task
+  /workflow_runs/{workflow_run_id}/tasks/{task_id}/complete:
+    $ref: paths/workflow_runs.yaml#/task  
   #
   # OTHER ENDPOINTS
   #

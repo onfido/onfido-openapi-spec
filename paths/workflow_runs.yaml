@@ -163,3 +163,34 @@
                 $ref: ../schemas/tasks/task.yaml
         default:
           $ref: ../responses/default_error.yaml
+    post:
+      summary: Completes a Send / Receive Data task.
+      operationId: complete_task
+      parameters:
+        - name: workflow_run_id
+          in: path
+          required: true
+          description: The unique identifier of the Workflow Run to which the Task belongs.
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: The identifier of the Task you want to complete.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: The Task completion payload.
+      responses:
+        "200":
+          description: An empty response body.
+        default:
+          $ref: ../responses/default_error.yaml
