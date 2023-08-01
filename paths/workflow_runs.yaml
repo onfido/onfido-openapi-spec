@@ -8,14 +8,15 @@
           application/json:
             schema:
               type: object
+              required:
+                - workflow_id
+                - applicant_id
               properties:
                 workflow_id:
                   type: string
-                  required: true
                   description: The unique identifier for the Workflow.
                 applicant_id:
                   type: string
-                  required: true
                   description: The unique identifier for the Applicant.
                 custom_data:
                   type: object
@@ -64,7 +65,7 @@
           description: A string with the value 'desc' or 'asc' that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to 'desc'.
           schema:
             type: string
-            default: desc        
+            default: desc
       responses:
         "200":
           description: An array of Workflow Run objects matching the query parameters.
@@ -73,7 +74,7 @@
               schema:
                 $ref: ../schemas/workflow_runs/workflow_runs_list.yaml
         default:
-          $ref: ../responses/default_error.yaml      
+          $ref: ../responses/default_error.yaml
 
   workflow_runs:
     get:
@@ -93,104 +94,5 @@
             application/json:
               schema:
                 $ref: ../schemas/workflow_runs/workflow_run.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-  
-  tasks:
-    get:
-      summary: The tasks of a Workflow can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
-      operationId: list_tasks
-      parameters:
-        - name: workflow_run_id
-          in: path
-          required: true
-          description: The unique identifier of the Workflow Run to which the Tasks belong.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: An array of subset Task objects that were already started or completed, ordered by the created_at field, in ascending order.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  tasks:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          description: The identifier for the Task.
-                        task_def_id:
-                          type: string
-                          description: The identifier for the Task Definition.
-                        created_at:
-                          type: string
-                          format: date-time
-                          description: The date and time when the Task was created.
-                        updated_at:
-                          type: string
-                          format: date-time
-                          description: The date and time when the Task was last updated.    
-        default:
-          $ref: ../responses/default_error.yaml
-
-  task:
-    get:
-      summary: A single task can be retrieved by calling this endpoint with the unique identifier of the Task and Workflow Run.
-      operationId: retrieve_task
-      parameters:
-        - name: workflow_run_id
-          in: path
-          required: true
-          description: The unique identifier of the Workflow Run to which the Task belongs.
-          schema:
-            type: string
-        - name: task_id
-          in: path
-          required: true
-          description: The identifier of the Task you want to retrieve.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A Task object.
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/tasks/task.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-    post:
-      summary: Completes a Send / Receive Data task.
-      operationId: complete_task
-      parameters:
-        - name: workflow_run_id
-          in: path
-          required: true
-          description: The unique identifier of the Workflow Run to which the Task belongs.
-          schema:
-            type: string
-        - name: task_id
-          in: path
-          required: true
-          description: The identifier of the Task you want to complete.
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: object
-                  description: The Task completion payload.
-      responses:
-        "200":
-          description: An empty response body.
         default:
           $ref: ../responses/default_error.yaml
