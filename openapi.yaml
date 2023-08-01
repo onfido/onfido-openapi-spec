@@ -3,6 +3,9 @@ info:
   title: Onfido API v3.6
   description: The Onfido API is used to submit check requests.
   version: 3.6.0
+  contact:
+    name: Onfido
+    email: engineering@onfido.com
   license:
     name: MIT
 servers:
