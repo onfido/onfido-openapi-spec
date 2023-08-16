@@ -1,0 +1,8 @@
+allOf:
+  - $ref: report.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: right_to_work_breakdown.yaml
+      properties:
+        $ref: right_to_work_properties.yaml

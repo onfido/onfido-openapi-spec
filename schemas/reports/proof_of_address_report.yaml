@@ -1,0 +1,8 @@
+allOf:
+  - $ref: report.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: proof_of_address_breakdown.yaml
+      properties:
+        $ref: proof_of_address_properties.yaml

@@ -1,0 +1,8 @@
+allOf:
+  - $ref: report.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: identity_enhanced_breakdown.yaml
+      properties:
+        $ref: identity_enhanced_properties.yaml

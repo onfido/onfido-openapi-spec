@@ -1,0 +1,6 @@
+allOf:
+  - $ref: report.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: photo_fully_auto_breakdown.yaml

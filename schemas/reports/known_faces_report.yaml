@@ -1,0 +1,8 @@
+allOf:
+  - $ref: report.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: known_faces_breakdown.yaml
+      properties:
+        $ref: known_faces_properties.yaml
