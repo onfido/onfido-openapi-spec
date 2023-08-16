@@ -1,0 +1,6 @@
+allOf:
+  - $ref: report.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: facial_similarity_video_breakdown.yaml

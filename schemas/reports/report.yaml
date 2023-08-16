@@ -1,116 +1,79 @@
-allOf:
-  - type: object
+properties:
+  readOnly: true
+  id:
+    type: string
     readOnly: true
-    properties:
-      id:
-        type: string
-        readOnly: true
-        description: The unique identifier for the report. Read-only.
-      created_at:
-        type: string
-        readOnly: true
-        format: date-time
-        description: The date and time at which the report was first initiated. Read-only.
-      href:
-        type: string
-        readOnly: true
-        description: The API endpoint to retrieve the report. Read-only.
-      status:
-        type: string
-        readOnly: true
-        description: The current state of the report in the checking process. Read-only.
-      result:
-        type: string
-        readOnly: true
-        description: The result of the report. Read-only.
-      sub_result:
-        type: string
-        readOnly: true
-        description: The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.
-      check_id:
-        type: string
-        readOnly: true
-        description: The ID of the check to which the report belongs. Read-only.
-      name:
-        type: string
-        description: The name of the report type.
-      documents:
-        type: array
-        description: Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
-        items:
-          $ref: report_document.yaml
-      breakdown:
-        type: object
-        description: The details of the report. This is specific to each type of report.
-      properties:
-        type: object
-        readOnly: true
-        additionalProperties: true
-        description: The properties associated with the report, if any. Read-only.
-  - anyOf:
-    - properties:
-        name:
-          enum: ['facial_similarity_photo']
-        breakdown:
-          $ref: facial_similarity_photo_breakdown.yaml
-    - properties:
-        name:
-          enum: ['known_faces']
-        breakdown:
-          $ref: known_faces_breakdown.yaml
-        properties:
-          $ref: known_faces_properties.yaml        
-    - properties:
-        name:
-          enum: ['photo_fully_auto']
-        breakdown:
-          $ref: photo_fully_auto_breakdown.yaml
-    - properties:
-        name:
-          enum: ['facial_similarity_video']
-        breakdown:
-          $ref: facial_similarity_video_breakdown.yaml
-    - properties:
-        name:
-          enum: ['document', 'document_with_address_information', 'document_with_driving_licence_information']
-        breakdown:
-          $ref: document_breakdown.yaml
-        properties:
-          $ref: document_properties.yaml
-    - properties:
-        name:
-          enum: ['proof_of_address']
-        breakdown:
-          $ref: proof_of_address_breakdown.yaml
-        properties:
-          $ref: proof_of_address_properties.yaml
-    - properties:
-        name:
-          enum: ['watchlist_enhanced']      
-        breakdown:
-          $ref: watchlist_enhanced_breakdown.yaml
-        properties:
-          $ref: watchlist_enhanced_properties.yaml
-    - properties:
-        name:
-          enum: ['watchlist_standard', 'watchlist_peps_only', 'watchlist_sanctions_only']   
-        breakdown:
-          $ref: watchlist_standard_breakdown.yaml
-        properties:
-          $ref: watchlist_standard_properties.yaml
-    - properties:
-        name:
-          enum: ['right_to_work']
-        breakdown:
-          $ref: right_to_work_breakdown.yaml
-        properties:
-          $ref: right_to_work_properties.yaml
-    - properties:
-        name: 
-          enum: ['identity_enhanced']
-        breakdown:
-          $ref: identity_enhanced_breakdown.yaml
-        properties:
-          $ref: identity_enhanced_properties.yaml   
-
-
+    description: The unique identifier for the report. Read-only.
+  created_at:
+    type: string
+    readOnly: true
+    format: date-time
+    description: The date and time at which the report was first initiated. Read-only.
+  href:
+    type: string
+    readOnly: true
+    description: The API endpoint to retrieve the report. Read-only.
+  status:
+    type: string
+    readOnly: true
+    description: The current state of the report in the checking process. Read-only.
+  result:
+    type: string
+    readOnly: true
+    description: The result of the report. Read-only.
+  sub_result:
+    type: string
+    readOnly: true
+    description: The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.
+  check_id:
+    type: string
+    readOnly: true
+    description: The ID of the check to which the report belongs. Read-only.
+  documents:
+    type: array
+    description: Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
+    items:
+      $ref: report_document.yaml
+  name:
+    type: string
+    description: The name of the report type.
+    enum:
+      - facial_similarity_photo
+      - known_faces
+      - photo_fully_auto
+      - facial_similarity_video
+      - document
+      - document_with_address_information
+      - document_with_driving_licence_information
+      - proof_of_address
+      - watchlist_enhanced
+      - watchlist_standard
+      - watchlist_peps_only
+      - watchlist_sanctions_only
+      - right_to_work
+      - identity_enhanced
+  breakdown:
+    type: object
+    description: The details of the report. This is specific to each type of report.
+  properties:
+    type: object
+    readOnly: true
+    additionalProperties: true
+    description: The properties associated with the report, if any. Read-only.
+discriminator:
+  propertyName: name
+  mapping:
+    facial_similarity_photo: facial_similarity_photo_report.yaml
+    known_faces: known_faces_report.yaml
+    photo_fully_auto: photo_fully_auto_report.yaml
+    facial_similarity_video: facial_similarity_video_report.yaml
+    document: document_report.yaml
+    document_with_address_information: document_report.yaml
+    document_with_driving_licence_information: document_report.yaml
+    proof_of_address: proof_of_address_report.yaml
+    watchlist_enhanced: watchlist_enhanced_report.yaml
+    watchlist_standard: watchlist_standard_report.yaml
+    watchlist_peps_only: watchlist_standard_report.yaml
+    watchlist_sanctions_only: watchlist_standard_report.yaml
+    right_to_work: right_to_work_report.yaml
+    identity_enhanced: identity_enhanced_report.yaml
