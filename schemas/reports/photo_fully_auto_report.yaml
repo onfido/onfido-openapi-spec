@@ -1,5 +1,5 @@
 allOf:
-  - $ref: report.yaml
+  - $ref: report_common.yaml
   - type: object
     properties:
       breakdown:
