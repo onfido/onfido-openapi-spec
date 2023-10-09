@@ -36,14 +36,11 @@ properties:
       message:
         type: string
         description: A textual description of the error.
-  created_at:
-    type: string
-    format: date-time
-    description: The date and time when the Workflow Run was created.
-  updated_at:
-    type: string
-    format: date-time
-    description: The date and time when the Workflow Run was last updated.
+  tags:
+    type: array
+    description: Tags or labels assigned to the workflow run.
+    items:
+      type: string
   link:
     type: object
     description: Object for the configuration of the Workflow Run link.
@@ -64,3 +61,11 @@ properties:
       language:
         type: string
         description: The code for the language when the workflow run is acessed using the link.
+  created_at:
+    type: string
+    format: date-time
+    description: The date and time when the Workflow Run was created.
+  updated_at:
+    type: string
+    format: date-time
+    description: The date and time when the Workflow Run was last updated.
