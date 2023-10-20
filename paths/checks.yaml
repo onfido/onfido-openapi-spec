@@ -86,6 +86,11 @@
       responses:
         "200":
           description: The PDF binary data
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
         default:
           $ref: ../responses/default_error.yaml
           
