@@ -1,0 +1,43 @@
+allOf:
+  - $ref: report_common.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: document_breakdown.yaml
+      properties:
+        allOf:
+          - $ref: document_properties.yaml
+          - type: object
+            properties:
+              drivers_licence:
+                type: boolean
+                description: True for **non-restricted** driving licences
+              restricted_licence:
+                type: boolean
+                description: True for **limited/restricted** driving license, including learner's permits
+              raw_licence_category:
+                type: string
+                description: Underlying, non-normalised, licence category (e.g. "Junior operators license")
+              raw_vehicle_classes:
+                type: string
+                description: Comma-separated vehicle classes that the user is qualified for
+              vehicle_class_details:
+                type: array
+                description: Detailed classes/categories information
+                items:
+                  type: object
+                  properties:
+                    category:
+                      type: string
+                      description: Vehicle class/category
+                    codes:
+                      type: string
+                      description: Special conditions driver must meet
+                    obtainment_date:
+                      type: string
+                      format: date
+                      description: Category obtainment date
+                    expiry_date:
+                      type: string
+                      format: date
+                      description: Category expiry date
