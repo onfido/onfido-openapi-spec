@@ -1863,7 +1863,8 @@
                               "enum": [
                                 "document",
                                 "document_with_address_information",
-                                "document_with_driving_licence_information"
+                                "document_with_driving_licence_information",
+                                "document_with_driver_verification"
                               ]
                             },
                             "breakdown": {

@@ -6,6 +6,7 @@ oneOf:
   - $ref: document_report.yaml
   - $ref: document_with_address_information_report.yaml
   - $ref: document_with_driving_licence_information_report.yaml
+  - $ref: document_with_driver_verification_report.yaml
   - $ref: proof_of_address_report.yaml
   - $ref: watchlist_enhanced_report.yaml
   - $ref: watchlist_standard_report.yaml
@@ -23,6 +24,7 @@ discriminator:
     document: document_report.yaml
     document_with_address_information: document_with_address_information_report.yaml
     document_with_driving_licence_information: document_with_driving_licence_information_report.yaml
+    document_with_driver_verification: document_with_driver_verification_report.yaml
     proof_of_address: proof_of_address_report.yaml
     watchlist_enhanced: watchlist_enhanced_report.yaml
     watchlist_standard: watchlist_standard_report.yaml
