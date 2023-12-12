@@ -41,3 +41,19 @@ allOf:
                       type: string
                       format: date
                       description: Category expiry date
+              passenger_vehicle:
+                type: object
+                description: Normalised data for passenger cars
+                properties:
+                  is_qualified:
+                    description: Whether they are qualified for a passenger car, such as a “B” class in the UK 
+                    type: boolean
+                  obtainment_date:
+                    description: Date the class qualification was obtained
+                    type: string
+                    format: date
+                  expiry_date:
+                    description: Date the class qualification expires, which may be different to doc expiry
+                    type: string
+                    format: date
+
