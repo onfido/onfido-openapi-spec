@@ -10,7 +10,7 @@ properties:
     type: object
     description: Input object with the fields used by the Task to execute.
   output:
-    type: object
+    type: [object, "null"]
     description: Output object with the fields produced by the Task execution.
   created_at:
     type: string
