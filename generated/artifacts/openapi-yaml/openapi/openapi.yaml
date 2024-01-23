@@ -592,7 +592,7 @@ paths:
       summary: List ID photos
     post:
       description: |
-        You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form. Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB. ID photos are validated at the point of upload to check that they contain exactly one face.
+        You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form. Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
       operationId: upload_id_photo
       requestBody:
         content:
@@ -2436,7 +2436,7 @@ components:
           description: The applicant's ip address.
           type: string
         country_of_residence:
-          description: The applicant's country of residence.
+          description: The applicant's country of residence in 3-letter ISO code.
           pattern: "^[A-Z]{3}$"
           type: string
       type: object
@@ -2876,7 +2876,7 @@ components:
         type: object
       - properties:
           breakdown:
-            $ref: '#/components/schemas/facial_similarity_video_motion_breakdown'
+            $ref: '#/components/schemas/facial_similarity_video_breakdown'
         type: object
     facial_similarity_motion_report:
       allOf:
@@ -2889,7 +2889,7 @@ components:
         type: object
       - properties:
           breakdown:
-            $ref: '#/components/schemas/facial_similarity_video_motion_breakdown'
+            $ref: '#/components/schemas/facial_similarity_motion_breakdown'
         type: object
     known_faces_report:
       allOf:
@@ -3520,14 +3520,23 @@ components:
         visual_authenticity:
           $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity'
       type: object
-    facial_similarity_video_motion_breakdown:
+    facial_similarity_video_breakdown:
       properties:
         face_comparison:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_face_comparison'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_face_comparison'
         image_integrity:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_image_integrity'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity'
         visual_authenticity:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_visual_authenticity'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity'
+      type: object
+    facial_similarity_motion_breakdown:
+      properties:
+        face_comparison:
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_face_comparison'
+        image_integrity:
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity'
+        visual_authenticity:
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity'
       type: object
     known_faces_breakdown:
       properties:
@@ -6462,7 +6471,7 @@ components:
         breakdown:
           $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown'
       type: object
-    facial_similarity_video_motion_breakdown_face_comparison:
+    facial_similarity_video_breakdown_face_comparison:
       description: Asserts whether the face in the document matches the face in the
         live video.
       properties:
@@ -6472,7 +6481,7 @@ components:
           $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown'
       readOnly: true
       type: object
-    facial_similarity_video_motion_breakdown_image_integrity_breakdown_face_detected:
+    facial_similarity_video_breakdown_image_integrity_breakdown_face_detected:
       description: Asserts a single face of good enough quality has been found in
         both the document image and the live video.
       properties:
@@ -6481,7 +6490,7 @@ components:
         properties:
           type: object
       type: object
-    facial_similarity_video_motion_breakdown_image_integrity_breakdown_source_integrity:
+    facial_similarity_video_breakdown_image_integrity_breakdown_source_integrity:
       description: Asserts whether the live video is trustworthy - e.g. not from a
         fake webcam.
       properties:
@@ -6490,24 +6499,24 @@ components:
         properties:
           $ref: '#/components/schemas/video_reasons'
       type: object
-    facial_similarity_video_motion_breakdown_image_integrity_breakdown:
+    facial_similarity_video_breakdown_image_integrity_breakdown:
       properties:
         face_detected:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_image_integrity_breakdown_face_detected'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown_face_detected'
         source_integrity:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_image_integrity_breakdown_source_integrity'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown_source_integrity'
       type: object
-    facial_similarity_video_motion_breakdown_image_integrity:
+    facial_similarity_video_breakdown_image_integrity:
       description: Asserts whether the quality and integrity of the uploaded files
         were sufficient to perform a face comparison.
       properties:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_image_integrity_breakdown'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown'
       readOnly: true
       type: object
-    facial_similarity_video_motion_breakdown_visual_authenticity_breakdown_liveness_detected:
+    facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected:
       description: Asserts whether the numbers and head movements were correctly executed.
       properties:
         result:
@@ -6515,7 +6524,7 @@ components:
         properties:
           type: object
       type: object
-    facial_similarity_video_motion_breakdown_visual_authenticity_breakdown_spoofing_detection:
+    facial_similarity_video_breakdown_visual_authenticity_breakdown_spoofing_detection:
       description: Asserts whether the live video is not a spoof (such as videos of
         digital screens).
       properties:
@@ -6524,21 +6533,21 @@ components:
         properties:
           $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties'
       type: object
-    facial_similarity_video_motion_breakdown_visual_authenticity_breakdown:
+    facial_similarity_video_breakdown_visual_authenticity_breakdown:
       properties:
         liveness_detected:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_visual_authenticity_breakdown_liveness_detected'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected'
         spoofing_detection:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_visual_authenticity_breakdown_spoofing_detection'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_spoofing_detection'
       type: object
-    facial_similarity_video_motion_breakdown_visual_authenticity:
+    facial_similarity_video_breakdown_visual_authenticity:
       description: Asserts whether the person in the live video is real (not a spoof)
         and live.
       properties:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_video_motion_breakdown_visual_authenticity_breakdown'
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown'
       readOnly: true
       type: object
     known_faces_breakdown_previously_seen_faces:

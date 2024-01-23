@@ -30,7 +30,6 @@
       description: >
         You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form.
         Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
-        ID photos are validated at the point of upload to check that they contain exactly one face.
       requestBody:
         required: true
         content:

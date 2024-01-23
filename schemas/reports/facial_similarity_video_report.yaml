@@ -8,4 +8,4 @@ allOf:
   - type: object
     properties:
       breakdown:
-        $ref: facial_similarity_video_motion_breakdown.yaml
+        $ref: facial_similarity_video_breakdown.yaml
