@@ -14,7 +14,12 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/checks/checks_list.yaml
+                type: object
+                properties:
+                  checks:
+                    type: array
+                    items:
+                      $ref: ../schemas/checks/check.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -73,9 +78,9 @@
         default:
           $ref: ../responses/default_error.yaml
 
-  download: 
+  download:
     get:
-      summary: Download a PDF of the check
+      summary: Download raw data for a check
       operationId: download_check
       parameters:
         - name: check_id
@@ -85,7 +90,11 @@
             type: string
       responses:
         "200":
-          description: The PDF binary data
+          description: The check PDF binary data
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
         default:
           $ref: ../responses/default_error.yaml
-          

@@ -2,7 +2,17 @@
     properties:
       type:
         type: string
-        description: Type of ID number. Valid values are `ssn`, `social_insurance`, `tax_id`, `identity_card`, `passport` and `driving_license`
+        enum:
+          - ssn
+          - social_insurance
+          - tax_id
+          - identity_card
+          - driving_licence
+          - share_code
+          - voter_id
+          - passport
+          - other
+        description: Type of ID number.
       value:
         type: string
         description: Value of ID number

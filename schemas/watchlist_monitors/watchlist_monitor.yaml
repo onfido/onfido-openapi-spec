@@ -1,0 +1,38 @@
+type: object
+required:
+  - applicant_id
+  - report_name
+properties:
+  id:
+    type: string
+    description: The unique identifier for the monitor.
+    readOnly: true
+  created_at:
+    type: string
+    format: date-time
+    description: The date and time at which the monitor was created.
+    readOnly: true
+  deleted_at:
+    type: string
+    format: date-time
+    description: The date and time at which the monitor was deleted. If the monitor is still active, this field will be null.
+    readOnly: true
+  applicant_id:
+    type: string
+    description: The ID for the applicant associated with the monitor.
+  report_name:
+    type: string
+    enum:
+      - watchlist_standard
+      - watchlist_aml
+    description: The name of the report type the monitor creates. Can be either "watchlist_standard" or "watchlist_aml".
+  tags:
+    type: array
+    items:
+      type: string
+    description: A list of tags associated with this monitor. These tags will be applied to each check this monitor creates.
+  sandbox:
+    type: boolean
+    default: false
+    description: Indicates whether the object was created in the sandbox or not.
+    readOnly: true

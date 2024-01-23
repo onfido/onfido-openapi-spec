@@ -15,7 +15,12 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/live_videos/live_videos_list.yaml
+                type: object
+                properties:
+                  live_videos:
+                    type: array
+                    items:
+                      $ref: ../schemas/live_videos/live_video.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -27,7 +32,7 @@
         - name: live_video_id
           in: path
           required: true
-          description: The live video’s unique identifier.
+          description: The live video's unique identifier.
           schema:
             type: string
       responses:
@@ -40,39 +45,16 @@
         default:
           $ref: ../responses/default_error.yaml
 
-  download:
-    get:
-      summary: Download live video
-      description: Live videos are downloaded using this endpoint.
-      operationId: download_live_video
-      parameters:
-        - name: live_video_id
-          in: path
-          required: true
-          description: The live video’s unique identifier.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: The live video's binary data.
-          content:
-            "*/*":
-              schema:
-                type: string
-                format: binary
-        default:
-          $ref: ../responses/default_error.yaml
-
-  download_frame:
+  frame:
     get:
       summary: Download live video frame
-      description: Live video frames are downloaded using this endpoint.
+      description: Returns the binary data representing a single frame from a live video.
       operationId: download_live_video_frame
       parameters:
         - name: live_video_id
           in: path
           required: true
-          description: The live video’s unique identifier.
+          description: The live video's unique identifier.
           schema:
             type: string
       responses:

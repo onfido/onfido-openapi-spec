@@ -1,0 +1,40 @@
+allOf:
+  - $ref: report_common.yaml
+  - type: object
+    properties:
+      name:
+        type: string
+        enum: [india_pan]
+  - type: object
+    properties:
+      breakdown:
+        type: object
+        properties:
+          device:
+            type: object
+            properties:
+              breakdown:
+                type: object
+                properties:
+                  pan_valid:
+                    type: object
+                    properties:
+                      result:
+                        type: string
+                  name_match:
+                    type: object
+                    properties:
+                      result:
+                        type: string
+      properties:
+        type: object
+        properties:
+          device:
+            type: object
+            properties:
+              pan:
+                type: string
+                description: The applicant's PAN (10 digit alphanumeric number).
+              full_name:
+                type: string
+                description: The applicant's full name.

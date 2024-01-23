@@ -1,4 +1,7 @@
 type: object
+required:
+  - postcode
+  - country
 properties:
   flat_number:
     type: string
@@ -11,16 +14,16 @@ properties:
     description: The building name of this address
   street:
     type:  string
-    description: The street of the applicant’s address
+    description: The street of the applicant's address
   sub_street:
     type:  string
-    description: The sub-street of the applicant’s address
+    description: The sub-street of the applicant's address
   town:
     type:  string
-    description: The town of the applicant’s address
+    description: The town of the applicant's address
   postcode:
     type:  string
-    description: The postcode or ZIP of the applicant’s address
+    description: The postcode or ZIP of the applicant's address
   country:
     type: string
     description: The 3 character ISO country code of this address. For example, GBR is the country code for the United Kingdom
@@ -29,10 +32,13 @@ properties:
     description: The address state. US states must use the USPS abbreviation (see also ISO 3166-2:US), for example AK, CA, or TX.
   line1:
     type: string
+    pattern: '^[^!$%^*=<>]*$'
     description: Line 1 of the applicant's address
   line2:
     type: string
+    pattern: '^[^!$%^*=<>]*$'
     description: Line 2 of the applicant's address
   line3:
     type: string
+    pattern: '^[^!$%^*=<>]*$'
     description: Line 3 of the applicant's address

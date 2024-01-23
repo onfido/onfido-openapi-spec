@@ -2,6 +2,11 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
+      name:
+        type: string
+        enum: [identity_enhanced]
+  - type: object
+    properties:
       breakdown:
         $ref: identity_enhanced_breakdown.yaml
       properties:

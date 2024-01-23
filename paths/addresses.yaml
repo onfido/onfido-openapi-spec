@@ -14,6 +14,11 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/address/addresses_list.yaml
+                type: object
+                properties:
+                  addresses:
+                    type: array
+                    items:
+                      $ref: ../schemas/address/address.yaml
         default:
           $ref: ../responses/default_error.yaml

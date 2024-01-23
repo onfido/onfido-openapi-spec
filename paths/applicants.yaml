@@ -46,7 +46,12 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/applicants/applicants_list.yaml
+                type: object
+                properties:
+                  applicants:
+                    type: array
+                    items:
+                      $ref: ../schemas/applicants/applicant.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -73,7 +78,7 @@
     put:
       summary: Update Applicant
       description: >
-        Applicant details can be updated between check creations.
+        Allows updating applicant's information before any checks is created.
 
         - Partial updates
         - Addresses and ID numbers present will replace existing ones

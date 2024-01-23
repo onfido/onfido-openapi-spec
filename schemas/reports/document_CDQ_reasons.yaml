@@ -3,10 +3,10 @@ properties:
   obscured_data_points:
     type: string
     description: When data points are obscured to the point that we cannot confirm if the fonts match the expected ones.
-  obscured_security_features: 
+  obscured_security_features:
     type: string
     description: When a critical security feature is obscured. This can also refer to when the holder's wet signature, necessary for the document to be valid, is not present.
-  abnormal_document_features: 
+  abnormal_document_features:
     type: string
     description: One of 3 reasons (1) OCR Assisted Scans (i.e. when you're able to move the mouse and highlight part of text), (2) Severely Washed out Background, (3) Overlapping Text.
   watermarks_digital_text_overlay:
@@ -23,5 +23,5 @@ properties:
     description: When the back of a document is needed for processing, but is not available.
   digital_document:
     type: string
-    description: When a document has been published digitally, there aren’t enough security features to review so we cannot perform a full fraud assessment.
+    description: When a document has been published digitally, there aren't enough security features to review so we cannot perform a full fraud assessment.
 

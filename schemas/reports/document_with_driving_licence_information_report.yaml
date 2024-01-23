@@ -2,6 +2,11 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
+      name:
+        type: string
+        enum: [document_with_driving_licence_information, no_value]
+  - type: object
+    properties:
       breakdown:
         $ref: document_breakdown.yaml
       properties:

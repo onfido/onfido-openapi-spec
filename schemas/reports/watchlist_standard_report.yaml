@@ -2,6 +2,11 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
+      name:
+        type: string
+        enum: [watchlist_standard]
+  - type: object
+    properties:
       breakdown:
         $ref: watchlist_standard_breakdown.yaml
       properties:

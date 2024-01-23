@@ -1,0 +1,13 @@
+allOf:
+  - $ref: report_common.yaml
+  - type: object
+    properties:
+      name:
+        type: string
+        enum: [us_driving_licence]
+  - type: object
+    properties:
+      breakdown:
+        $ref: us_driving_licence_breakdown.yaml
+      properties:
+        $ref: document_properties.yaml

@@ -1,4 +1,7 @@
 type: object
+required:
+  - workflow_id
+  - applicant_id
 properties:
   id:
     type: string
@@ -10,14 +13,22 @@ properties:
     type: string
     description: The unique identifier for the Workflow.
   workflow_version_id:
-    type: string
+    type: integer
     description: The identifier for the Workflow version.
   dashboard_url:
     type: string
     description: The URL for viewing the Workflow Run results on your Onfido Dashboard.
   status:
     type: string
-    description: The status of the Workflow Run. Possible values are 'processing', 'awaiting_input', 'approved', 'declined', 'review', 'abandoned' and 'error'.
+    enum:
+      - awaiting_input
+      - processing
+      - abandoned
+      - error
+      - approved
+      - review
+      - declined
+    description: The status of the Workflow Run.
   output:
     type: object
     description: Output object contains all of the properties configured on the Workflow version.
@@ -60,6 +71,14 @@ properties:
         description: Date and time when the link will expire.
       language:
         type: string
+        enum:
+          - en_US
+          - de_DE
+          - es_ES
+          - fr_FR
+          - it_IT
+          - pt_PT
+          - nl_NL
         description: The code for the language when the workflow run is acessed using the link.
   created_at:
     type: string

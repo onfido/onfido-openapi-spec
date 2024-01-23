@@ -1,0 +1,13 @@
+allOf:
+  - $ref: report_common.yaml
+  - type: object
+    properties:
+      name:
+        type: string
+        enum: [watchlist_aml]
+  - type: object
+    properties:
+      breakdown:
+        $ref: watchlist_aml_breakdown.yaml
+      properties:
+        $ref: watchlist_aml_properties.yaml

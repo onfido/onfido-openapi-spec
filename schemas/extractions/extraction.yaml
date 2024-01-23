@@ -1,0 +1,130 @@
+type: object
+properties:
+  document_id:
+    type: string
+    description: The unique identifier of the uploaded document.
+  document_classification:
+    type: object
+    properties:
+      issuing_country:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        description: Document country in 3-letter ISO code.
+      document_type:
+        type: string
+        description: Type of document.
+      issuing_state:
+        type: string
+        description: The state that issued the document (if available).
+      subtype:
+        type: string
+        enum:
+          - full
+          - not_full
+          - provisional
+        description: The document subtype (if available).
+      version:
+        type: string
+        description: The document issuing version (if available).
+  extracted_data:
+    type: object
+    properties:
+      document_number:
+        type: string
+        description: The official document number.
+      first_name:
+        type: string
+        description: First name.
+      last_name:
+        type: string
+        description: Last name.
+      full_name:
+        type: string
+        description: Full name.
+      spouse_name:
+        type: string
+        description: Spouse name (French documents only).
+      widow_name:
+        type: string
+        description: Widow name (French documents only).
+      alias_name:
+        type: string
+        description: Alias name (French documents only).
+      gender:
+        type: string
+        enum:
+          - Male
+          - Female
+        description: Gender (Valid values are Male and Female).
+      date_of_birth:
+        type: string
+        format: date
+        description: Date of birth in YYYY-MM-DD format.
+      date_of_expiry:
+        type: string
+        format: date
+        description: Date of expiry in YYYY-MM-DD format.
+      expiry_date:
+        type: string
+        format: date
+        description: Date of expiry in YYYY-MM-DD format.
+      nationality:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        description: Nationality in 3-letter ISO code.
+      mrz_line1:
+        type: string
+        description: Line 1 of the MRZ code.
+      mrz_line_1:
+        type: string
+        description: Line 1 of the MRZ code.
+      mrz_line2:
+        type: string
+        description: Line 2 of the MRZ code.
+      mrz_line_2:
+        type: string
+        description: Line 2 of the MRZ code.
+      mrz_line3:
+        type: string
+        description: Line 3 of the MRZ code.
+      mrz_line_3:
+        type: string
+        description: Line 3 of the MRZ code.
+      address_1:
+        type: string
+        description: Line 1 of the address.
+      address_2:
+        type: string
+        description: Line 2 of the address.
+      address_3:
+        type: string
+        description: Line 3 of the address.
+      address_4:
+        type: string
+        description: Line 4 of the address.
+      address_5:
+        type: string
+        description: Line 5 of the address.
+      issuing_authority:
+        type: string
+        description: Issuing authority.
+      issuing_country:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        description: Document country in 3-letter ISO code.
+      document_type:
+        type: string
+        description: Type of document.
+      place_of_birth:
+        type: string
+        description: Place of birth.
+      issuing_state:
+        type: string
+        description: The state that issued the document.
+      issuing_date:
+        type: string
+        format: date
+        description: Issuing date in YYYY-MM-DD format.
+      personal_number:
+        type: string
+        description: The owner's unique identification number.

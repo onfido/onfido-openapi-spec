@@ -1,0 +1,92 @@
+  motion_captures:
+    get:
+      summary: List motion captures
+      operationId: list_motion_captures
+      parameters:
+        - name: applicant_id
+          in: query
+          required: true
+          description: The id of the applicant the motion captures belong to.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An array of motion captures
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  motion_captures:
+                    type: array
+                    items:
+                      $ref: ../schemas/motion_captures/motion_capture.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  motion_capture:
+    get:
+      summary: Retrieve motion capture
+      operationId: find_motion_capture
+      parameters:
+        - name: motion_capture_id
+          in: path
+          required: true
+          description: The motion capture's unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A motion capture
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/motion_captures/motion_capture.yaml
+        default:
+          $ref: ../responses/default_error.yaml
+
+  download:
+    get:
+      summary: Download motion capture
+      description: Motion captures are downloaded using this endpoint.
+      operationId: download_motion_capture
+      parameters:
+        - name: motion_capture_id
+          in: path
+          required: true
+          description: The motion capture's unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The motion capture's binary data.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml
+
+  frame:
+    get:
+      summary: Download motion capture frame
+      description: Instead of the whole capture binary, a single frame can be downloaded using this endpoint. Returns the binary data representing the frame.
+      operationId: frame_motion_capture
+      parameters:
+        - name: motion_capture_id
+          in: path
+          required: true
+          description: The motion capture's unique identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The motion capture frame's binary data.
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: ../responses/default_error.yaml

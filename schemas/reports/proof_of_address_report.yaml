@@ -2,6 +2,11 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
+      name:
+        type: string
+        enum: [proof_of_address]
+  - type: object
+    properties:
       breakdown:
         $ref: proof_of_address_breakdown.yaml
       properties:
