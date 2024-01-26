@@ -465,369 +465,6 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Download live video frame
-  /motion_captures:
-    get:
-      operationId: list_motion_captures
-      parameters:
-      - description: The id of the applicant the motion captures belong to.
-        in: query
-        name: applicant_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/list_motion_captures_200_response'
-          description: An array of motion captures
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: List motion captures
-  /motion_captures/{motion_capture_id}:
-    get:
-      operationId: find_motion_capture
-      parameters:
-      - description: The motion capture's unique identifier.
-        in: path
-        name: motion_capture_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/motion_capture'
-          description: A motion capture
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Retrieve motion capture
-  /motion_captures/{motion_capture_id}/download:
-    get:
-      description: Motion captures are downloaded using this endpoint.
-      operationId: download_motion_capture
-      parameters:
-      - description: The motion capture's unique identifier.
-        in: path
-        name: motion_capture_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                format: binary
-                type: string
-          description: The motion capture's binary data.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Download motion capture
-  /motion_captures/{motion_capture_id}/frame:
-    get:
-      description: "Instead of the whole capture binary, a single frame can be downloaded\
-        \ using this endpoint. Returns the binary data representing the frame."
-      operationId: frame_motion_capture
-      parameters:
-      - description: The motion capture's unique identifier.
-        in: path
-        name: motion_capture_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                format: binary
-                type: string
-          description: The motion capture frame's binary data.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Download motion capture frame
-  /id_photos:
-    get:
-      operationId: list_id_photos
-      parameters:
-      - description: The id of the applicant the ID photos belong to.
-        in: query
-        name: applicant_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/list_id_photos_200_response'
-          description: An array of ID photos
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: List ID photos
-    post:
-      description: |
-        You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form. Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
-      operationId: upload_id_photo
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/upload_id_photo_request'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/id_photo'
-          description: The ID photo
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Upload ID photo
-  /id_photos/{id_photo_id}:
-    get:
-      operationId: find_id_photo
-      parameters:
-      - description: The ID photo's unique identifier.
-        in: path
-        name: id_photo_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/id_photo'
-          description: A ID photo
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Retrieve ID photo
-  /id_photos/{id_photo_id}/download:
-    get:
-      description: ID photos are downloaded using this endpoint.
-      operationId: download_id_photo
-      parameters:
-      - description: The ID photo's unique identifier.
-        in: path
-        name: id_photo_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                format: binary
-                type: string
-          description: The ID photo's binary data.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Download ID photo
-  /watchlist_monitors:
-    get:
-      operationId: list_watchlist_monitors
-      parameters:
-      - description: "The id of the applicant the watchlist monitors belong to. If\
-          \ omitted, all monitors for the account will be listed."
-        in: query
-        name: applicant_id
-        required: true
-        schema:
-          type: string
-      - description: Whether to also include deleted (inactive) monitors.
-        in: query
-        name: include_deleted
-        schema:
-          default: false
-          type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/watchlist_monitor'
-                type: array
-          description: An array of watchlist monitors
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: List all available monitors for an applicant
-    post:
-      operationId: create_watchlist_monitor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/watchlist_monitor'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/watchlist_monitor'
-          description: Created watchlist monitor
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Creates a new monitor for the applicant
-  /watchlist_monitors/{monitor_id}:
-    delete:
-      operationId: destroy_watchlist_monitor
-      parameters:
-      - in: path
-        name: monitor_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Deactivates the given monitor
-    get:
-      operationId: find_watchlist_monitor
-      parameters:
-      - description: The watchlist monitor's unique identifier.
-        in: path
-        name: monitor_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/watchlist_monitor'
-          description: A watchlist monitor
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Retrieves a single monitor
-  /watchlist_monitors/{monitor_id}/matches:
-    get:
-      operationId: list_watchlist_monitor_matches
-      parameters:
-      - in: path
-        name: monitor_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/list_watchlist_monitor_matches_200_response_inner'
-                type: array
-          description: An array of watchlist monitors
-      summary: "List match IDs on this monitor, as well as their enabled/disabled\
-        \ status"
-    patch:
-      operationId: update_monitor_match
-      parameters:
-      - in: path
-        name: monitor_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/update_monitor_match_request'
-        required: true
-      responses:
-        "204":
-          description: No Content
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Update the enabled status of the given match
-  /watchlist_monitors/{monitor_id}/new_report:
-    post:
-      operationId: force_new_record_creation
-      parameters:
-      - in: path
-        name: monitor_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/applicant'
-          description: Created
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Force new report creation (BETA)
   /workflow_runs:
     get:
       operationId: list_workflow_runs
@@ -1051,97 +688,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Retrieves the signed evidence file for the designated Workflow Run
-  /reports:
+  /motion_captures:
     get:
-      operationId: list_reports
+      operationId: list_motion_captures
       parameters:
-      - in: query
-        name: check_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/list_reports_200_response'
-          description: List of Reports
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: All the reports belonging to a particular check can be listed from
-        this endpoint.
-  /reports/{report_id}:
-    get:
-      operationId: find_report
-      parameters:
-      - in: path
-        name: report_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/report'
-          description: Report object
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: A single report can be retrieved using this endpoint with the corresponding
-        unique identifier.
-  /reports/{report_id}/resume:
-    post:
-      operationId: resume_report
-      parameters:
-      - in: path
-        name: report_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: This endpoint is for resuming individual paused reports.
-  /reports/{report_id}/cancel:
-    post:
-      operationId: cancel_report
-      parameters:
-      - in: path
-        name: report_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: This endpoint is for cancelling individual paused reports.
-  /checks:
-    get:
-      operationId: list_checks
-      parameters:
-      - in: query
+      - description: The id of the applicant the motion captures belong to.
+        in: query
         name: applicant_id
         required: true
         schema:
@@ -1151,43 +703,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_checks_200_response'
-          description: An array of checks
+                $ref: '#/components/schemas/list_motion_captures_200_response'
+          description: An array of motion captures
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
-      summary: Retrieve Checks
-    post:
-      operationId: create_check
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/check'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/check'
-          description: Created
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Create a check
-  /checks/{check_id}:
+      summary: List motion captures
+  /motion_captures/{motion_capture_id}:
     get:
-      operationId: find_check
+      operationId: find_motion_capture
       parameters:
-      - in: path
-        name: check_id
+      - description: The motion capture's unique identifier.
+        in: path
+        name: motion_capture_id
         required: true
         schema:
           type: string
@@ -1196,40 +727,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/check'
-          description: Check object
+                $ref: '#/components/schemas/motion_capture'
+          description: A motion capture
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
-      summary: Retrieve a Check
-  /checks/{check_id}/resume:
-    post:
-      operationId: resume_check
-      parameters:
-      - in: path
-        name: check_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Resume a Check
-  /checks/{check_id}/download:
+      summary: Retrieve motion capture
+  /motion_captures/{motion_capture_id}/download:
     get:
-      operationId: download_check
+      description: Motion captures are downloaded using this endpoint.
+      operationId: download_motion_capture
       parameters:
-      - in: path
-        name: check_id
+      - description: The motion capture's unique identifier.
+        in: path
+        name: motion_capture_id
         required: true
         schema:
           type: string
@@ -1240,14 +754,320 @@ paths:
               schema:
                 format: binary
                 type: string
-          description: The check PDF binary data
+          description: The motion capture's binary data.
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
-      summary: Download raw data for a check
+      summary: Download motion capture
+  /motion_captures/{motion_capture_id}/frame:
+    get:
+      description: "Instead of the whole capture binary, a single frame can be downloaded\
+        \ using this endpoint. Returns the binary data representing the frame."
+      operationId: frame_motion_capture
+      parameters:
+      - description: The motion capture's unique identifier.
+        in: path
+        name: motion_capture_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: binary
+                type: string
+          description: The motion capture frame's binary data.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Download motion capture frame
+  /watchlist_monitors:
+    get:
+      operationId: list_watchlist_monitors
+      parameters:
+      - description: "The id of the applicant the watchlist monitors belong to. If\
+          \ omitted, all monitors for the account will be listed."
+        in: query
+        name: applicant_id
+        required: true
+        schema:
+          type: string
+      - description: Whether to also include deleted (inactive) monitors.
+        in: query
+        name: include_deleted
+        schema:
+          default: false
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/watchlist_monitor'
+                type: array
+          description: An array of watchlist monitors
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: List all available monitors for an applicant
+    post:
+      operationId: create_watchlist_monitor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/watchlist_monitor'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/watchlist_monitor'
+          description: Created watchlist monitor
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Creates a new monitor for the applicant
+  /watchlist_monitors/{monitor_id}:
+    delete:
+      operationId: destroy_watchlist_monitor
+      parameters:
+      - in: path
+        name: monitor_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Deactivates the given monitor
+    get:
+      operationId: find_watchlist_monitor
+      parameters:
+      - description: The watchlist monitor's unique identifier.
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/watchlist_monitor'
+          description: A watchlist monitor
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Retrieves a single monitor
+  /watchlist_monitors/{monitor_id}/matches:
+    get:
+      operationId: list_watchlist_monitor_matches
+      parameters:
+      - in: path
+        name: monitor_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/list_watchlist_monitor_matches_200_response_inner'
+                type: array
+          description: An array of watchlist monitors
+      summary: "List match IDs on this monitor, as well as their enabled/disabled\
+        \ status"
+    patch:
+      operationId: update_monitor_match
+      parameters:
+      - in: path
+        name: monitor_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_monitor_match_request'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Update the enabled status of the given match
+  /watchlist_monitors/{monitor_id}/new_report:
+    post:
+      operationId: force_new_record_creation
+      parameters:
+      - in: path
+        name: monitor_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/applicant'
+          description: Created
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Force new report creation (BETA)
+  /id_photos:
+    get:
+      operationId: list_id_photos
+      parameters:
+      - description: The id of the applicant the ID photos belong to.
+        in: query
+        name: applicant_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list_id_photos_200_response'
+          description: An array of ID photos
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: List ID photos
+    post:
+      description: |
+        You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form. Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
+      operationId: upload_id_photo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/upload_id_photo_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/id_photo'
+          description: The ID photo
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Upload ID photo
+  /id_photos/{id_photo_id}:
+    get:
+      operationId: find_id_photo
+      parameters:
+      - description: The ID photo's unique identifier.
+        in: path
+        name: id_photo_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/id_photo'
+          description: A ID photo
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Retrieve ID photo
+  /id_photos/{id_photo_id}/download:
+    get:
+      description: ID photos are downloaded using this endpoint.
+      operationId: download_id_photo
+      parameters:
+      - description: The ID photo's unique identifier.
+        in: path
+        name: id_photo_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: binary
+                type: string
+          description: The ID photo's binary data.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Download ID photo
+  /ping:
+    get:
+      operationId: ping
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Regional base URL is operational
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Run a health check on the Onfido API
   /webhooks:
     get:
       operationId: list_webhooks
@@ -1377,52 +1197,6 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Resends webhooks
-  /extractions:
-    post:
-      operationId: extract
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/extract_request'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/extraction'
-          description: Extraction result
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error_1'
-          description: Unprocessable Entity
-      summary: Extract information from a document
-  /results_feedback:
-    post:
-      operationId: post_results_feedback
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/results_feedback'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/results_feedback'
-          description: Created feedback
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unexpected error
-      summary: Create Feedback on checks and reports (ALPHA)
   /addresses/pick:
     get:
       operationId: find_addresses
@@ -1469,23 +1243,249 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Generate a SDK token
-  /ping:
-    get:
-      operationId: ping
+  /extractions:
+    post:
+      operationId: extract
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/extract_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/extraction'
+          description: Extraction result
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_1'
+          description: Unprocessable Entity
+      summary: Extract information from a document
+  /results_feedback:
+    post:
+      operationId: post_results_feedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/results_feedback'
+        required: true
       responses:
         "200":
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-          description: Regional base URL is operational
+                $ref: '#/components/schemas/results_feedback'
+          description: Created feedback
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
-      summary: Run a health check on the Onfido API
+      summary: Create Feedback on checks and reports (ALPHA)
+  /checks:
+    get:
+      operationId: list_checks
+      parameters:
+      - in: query
+        name: applicant_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list_checks_200_response'
+          description: An array of checks
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Retrieve Checks
+    post:
+      operationId: create_check
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/check'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check'
+          description: Created
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Create a check
+  /checks/{check_id}:
+    get:
+      operationId: find_check
+      parameters:
+      - in: path
+        name: check_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check'
+          description: Check object
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Retrieve a Check
+  /checks/{check_id}/resume:
+    post:
+      operationId: resume_check
+      parameters:
+      - in: path
+        name: check_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Resume a Check
+  /checks/{check_id}/download:
+    get:
+      operationId: download_check
+      parameters:
+      - in: path
+        name: check_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: binary
+                type: string
+          description: The check PDF binary data
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Download raw data for a check
+  /reports:
+    get:
+      operationId: list_reports
+      parameters:
+      - in: query
+        name: check_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list_reports_200_response'
+          description: List of Reports
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: All the reports belonging to a particular check can be listed from
+        this endpoint.
+  /reports/{report_id}:
+    get:
+      operationId: find_report
+      parameters:
+      - in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/report'
+          description: Report object
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: A single report can be retrieved using this endpoint with the corresponding
+        unique identifier.
+  /reports/{report_id}/resume:
+    post:
+      operationId: resume_report
+      parameters:
+      - in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: This endpoint is for resuming individual paused reports.
+  /reports/{report_id}/cancel:
+    post:
+      operationId: cancel_report
+      parameters:
+      - in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: This endpoint is for cancelling individual paused reports.
 components:
   responses:
     default_error:
@@ -1756,131 +1756,6 @@ components:
             type: object
           type: array
       type: object
-    motion_capture:
-      example:
-        download_href: download_href
-        file_name: file_name
-        file_type: file_type
-        created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
-        href: href
-        file_size: 0
-      properties:
-        id:
-          description: The unique identifier for the motion capture.
-          type: string
-        created_at:
-          description: The date and time at which the motion capture was uploaded.
-          format: date-time
-          type: string
-        href:
-          description: The uri of this resource.
-          type: string
-        download_href:
-          description: The uri that can be used to download the motion capture.
-          type: string
-        file_name:
-          description: The name of the uploaded file.
-          type: string
-        file_size:
-          description: The size of the file in bytes.
-          type: integer
-        file_type:
-          description: The file type of the uploaded file.
-          type: string
-      type: object
-    id_photo:
-      example:
-        download_href: download_href
-        file_name: file_name
-        file_type: file_type
-        created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
-        href: href
-        file_size: 0
-      properties:
-        id:
-          description: The unique identifier for the photo.
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time at which the photo was uploaded.
-          format: date-time
-          readOnly: true
-          type: string
-        href:
-          description: The uri of this resource.
-          readOnly: true
-          type: string
-        download_href:
-          description: The uri that can be used to download the photo.
-          readOnly: true
-          type: string
-        file_name:
-          description: The name of the uploaded file.
-          readOnly: true
-          type: string
-        file_type:
-          description: The file type of the uploaded file.
-          readOnly: true
-          type: string
-        file_size:
-          description: The size of the file in bytes.
-          type: integer
-      type: object
-    watchlist_monitor:
-      example:
-        applicant_id: applicant_id
-        sandbox: false
-        created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
-        report_name: watchlist_standard
-        deleted_at: 2000-01-23T04:56:07.000+00:00
-        tags:
-        - tags
-        - tags
-      properties:
-        id:
-          description: The unique identifier for the monitor.
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time at which the monitor was created.
-          format: date-time
-          readOnly: true
-          type: string
-        deleted_at:
-          description: "The date and time at which the monitor was deleted. If the\
-            \ monitor is still active, this field will be null."
-          format: date-time
-          readOnly: true
-          type: string
-        applicant_id:
-          description: The ID for the applicant associated with the monitor.
-          type: string
-        report_name:
-          description: The name of the report type the monitor creates. Can be either
-            "watchlist_standard" or "watchlist_aml".
-          enum:
-          - watchlist_standard
-          - watchlist_aml
-          type: string
-        tags:
-          description: A list of tags associated with this monitor. These tags will
-            be applied to each check this monitor creates.
-          items:
-            type: string
-          type: array
-        sandbox:
-          default: false
-          description: Indicates whether the object was created in the sandbox or
-            not.
-          readOnly: true
-          type: boolean
-      required:
-      - applicant_id
-      - report_name
-      type: object
     workflow_run:
       example:
         workflow_id: workflow_id
@@ -1996,53 +1871,342 @@ components:
           format: date-time
           type: string
       type: object
-    report:
-      discriminator:
-        mapping:
-          document: '#/components/schemas/document_report'
-          document_video: '#/components/schemas/document_video_report'
-          document_video_with_address_information: '#/components/schemas/document_video_with_address_information'
-          document_with_address_information: '#/components/schemas/document_with_address_information_report'
-          document_with_driving_licence_information: '#/components/schemas/document_with_driving_licence_information_report'
-          document_with_driver_verification: '#/components/schemas/document_with_driver_verification_report'
-          facial_similarity_photo: '#/components/schemas/facial_similarity_photo_report'
-          facial_similarity_photo_fully_auto: '#/components/schemas/facial_similarity_photo_fully_auto_report'
-          facial_similarity_video: '#/components/schemas/facial_similarity_video_report'
-          facial_similarity_motion: '#/components/schemas/facial_similarity_motion_report'
-          known_faces: '#/components/schemas/known_faces_report'
-          identity_enhanced: '#/components/schemas/identity_enhanced_report'
-          watchlist_aml: '#/components/schemas/watchlist_aml_report'
-          watchlist_enhanced: '#/components/schemas/watchlist_enhanced_report'
-          watchlist_standard: '#/components/schemas/watchlist_standard_report'
-          watchlist_peps_only: '#/components/schemas/watchlist_peps_only_report'
-          watchlist_sanctions_only: '#/components/schemas/watchlist_sanctions_only_report'
-          proof_of_address: '#/components/schemas/proof_of_address_report'
-          us_driving_licence: '#/components/schemas/us_driving_licence_report'
-          device_intelligence: '#/components/schemas/device_intelligence_report'
-          india_pan: '#/components/schemas/india_pan_report'
-        propertyName: name
-      oneOf:
-      - $ref: '#/components/schemas/document_report'
-      - $ref: '#/components/schemas/document_video_report'
-      - $ref: '#/components/schemas/document_video_with_address_information'
-      - $ref: '#/components/schemas/document_with_address_information_report'
-      - $ref: '#/components/schemas/document_with_driving_licence_information_report'
-      - $ref: '#/components/schemas/document_with_driver_verification_report'
-      - $ref: '#/components/schemas/facial_similarity_photo_report'
-      - $ref: '#/components/schemas/facial_similarity_photo_fully_auto_report'
-      - $ref: '#/components/schemas/facial_similarity_video_report'
-      - $ref: '#/components/schemas/facial_similarity_motion_report'
-      - $ref: '#/components/schemas/known_faces_report'
-      - $ref: '#/components/schemas/identity_enhanced_report'
-      - $ref: '#/components/schemas/watchlist_aml_report'
-      - $ref: '#/components/schemas/watchlist_enhanced_report'
-      - $ref: '#/components/schemas/watchlist_standard_report'
-      - $ref: '#/components/schemas/watchlist_peps_only_report'
-      - $ref: '#/components/schemas/watchlist_sanctions_only_report'
-      - $ref: '#/components/schemas/proof_of_address_report'
-      - $ref: '#/components/schemas/us_driving_licence_report'
-      - $ref: '#/components/schemas/device_intelligence_report'
-      - $ref: '#/components/schemas/india_pan_report'
+    motion_capture:
+      example:
+        download_href: download_href
+        file_name: file_name
+        file_type: file_type
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        href: href
+        file_size: 0
+      properties:
+        id:
+          description: The unique identifier for the motion capture.
+          type: string
+        created_at:
+          description: The date and time at which the motion capture was uploaded.
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource.
+          type: string
+        download_href:
+          description: The uri that can be used to download the motion capture.
+          type: string
+        file_name:
+          description: The name of the uploaded file.
+          type: string
+        file_size:
+          description: The size of the file in bytes.
+          type: integer
+        file_type:
+          description: The file type of the uploaded file.
+          type: string
+      type: object
+    watchlist_monitor:
+      example:
+        applicant_id: applicant_id
+        sandbox: false
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        report_name: watchlist_standard
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        tags:
+        - tags
+        - tags
+      properties:
+        id:
+          description: The unique identifier for the monitor.
+          readOnly: true
+          type: string
+        created_at:
+          description: The date and time at which the monitor was created.
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_at:
+          description: "The date and time at which the monitor was deleted. If the\
+            \ monitor is still active, this field will be null."
+          format: date-time
+          readOnly: true
+          type: string
+        applicant_id:
+          description: The ID for the applicant associated with the monitor.
+          type: string
+        report_name:
+          description: The name of the report type the monitor creates. Can be either
+            "watchlist_standard" or "watchlist_aml".
+          enum:
+          - watchlist_standard
+          - watchlist_aml
+          type: string
+        tags:
+          description: A list of tags associated with this monitor. These tags will
+            be applied to each check this monitor creates.
+          items:
+            type: string
+          type: array
+        sandbox:
+          default: false
+          description: Indicates whether the object was created in the sandbox or
+            not.
+          readOnly: true
+          type: boolean
+      required:
+      - applicant_id
+      - report_name
+      type: object
+    id_photo:
+      example:
+        download_href: download_href
+        file_name: file_name
+        file_type: file_type
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        href: href
+        file_size: 0
+      properties:
+        id:
+          description: The unique identifier for the photo.
+          readOnly: true
+          type: string
+        created_at:
+          description: The date and time at which the photo was uploaded.
+          format: date-time
+          readOnly: true
+          type: string
+        href:
+          description: The uri of this resource.
+          readOnly: true
+          type: string
+        download_href:
+          description: The uri that can be used to download the photo.
+          readOnly: true
+          type: string
+        file_name:
+          description: The name of the uploaded file.
+          readOnly: true
+          type: string
+        file_type:
+          description: The file type of the uploaded file.
+          readOnly: true
+          type: string
+        file_size:
+          description: The size of the file in bytes.
+          type: integer
+      type: object
+    webhook:
+      example:
+        payload_version: 0
+        environments:
+        - environments
+        - environments
+        id: id
+        href: href
+        url: url
+        enabled: true
+        events:
+        - audit_log.created
+        - audit_log.created
+        token: token
+      properties:
+        id:
+          description: The unique identifier of the webhook.
+          readOnly: true
+          type: string
+        url:
+          description: The url that will listen to notifications (must be https).
+          type: string
+        enabled:
+          description: Determine if the webhook is active.
+          type: boolean
+        events:
+          description: |
+            The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.
+          items:
+            enum:
+            - audit_log.created
+            - watchlist_monitor.matches_updated
+            - workflow_run.completed
+            - workflow_task.started
+            - workflow_task.completed
+            - check.started
+            - check.reopened
+            - check.withdrawn
+            - check.completed
+            - check.form_completed
+            - report.withdrawn
+            - report.resumed
+            - report.cancelled
+            - report.awaiting_approval
+            - report.completed
+            type: string
+          type: array
+        token:
+          description: Webhook secret token used to sign the webhook's payload.
+          readOnly: true
+          type: string
+        href:
+          description: The API endpoint to retrieve the webhook.
+          readOnly: true
+          type: string
+        environments:
+          description: |
+            The environments from which the webhook will receive events. Allowed values are “sandbox” and “live”. If the environments parameter is omitted the webhook will receive events from both environments.
+          items:
+            type: string
+          type: array
+        payload_version:
+          description: Webhook version used to control the payload object when sending
+            webhooks.
+          type: integer
+      required:
+      - url
+      type: object
+    webhook_resend:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/webhook_resend_data_inner'
+          type: array
+      required:
+      - event
+      - resource_id
+      - resource_type
+      type: object
+    address:
+      example:
+        building_name: building_name
+        country: country
+        town: town
+        flat_number: flat_number
+        street: street
+        postcode: postcode
+        state: state
+        line3: line3
+        line2: line2
+        building_number: building_number
+        line1: line1
+        sub_street: sub_street
+      properties:
+        flat_number:
+          description: The flat number of this address
+          type: string
+        building_number:
+          description: The building number of this address
+          type: string
+        building_name:
+          description: The building name of this address
+          type: string
+        street:
+          description: The street of the applicant's address
+          type: string
+        sub_street:
+          description: The sub-street of the applicant's address
+          type: string
+        town:
+          description: The town of the applicant's address
+          type: string
+        postcode:
+          description: The postcode or ZIP of the applicant's address
+          type: string
+        country:
+          description: "The 3 character ISO country code of this address. For example,\
+            \ GBR is the country code for the United Kingdom"
+          type: string
+        state:
+          description: "The address state. US states must use the USPS abbreviation\
+            \ (see also ISO 3166-2:US), for example AK, CA, or TX."
+          type: string
+        line1:
+          description: Line 1 of the applicant's address
+          pattern: "/^[^!$%^*=<>]*$/"
+          type: string
+        line2:
+          description: Line 2 of the applicant's address
+          pattern: "/^[^!$%^*=<>]*$/"
+          type: string
+        line3:
+          description: Line 3 of the applicant's address
+          pattern: "/^[^!$%^*=<>]*$/"
+          type: string
+      required:
+      - country
+      - postcode
+      type: object
+    extraction:
+      example:
+        extracted_data:
+          gender: Male
+          date_of_birth: 2000-01-23
+          address_1: address_1
+          address_2: address_2
+          address_3: address_3
+          address_4: address_4
+          address_5: address_5
+          widow_name: widow_name
+          spouse_name: spouse_name
+          mrz_line1: mrz_line1
+          mrz_line3: mrz_line3
+          mrz_line2: mrz_line2
+          issuing_country: issuing_country
+          issuing_state: issuing_state
+          first_name: first_name
+          document_type: document_type
+          document_number: document_number
+          issuing_date: 2000-01-23
+          expiry_date: 2000-01-23
+          last_name: last_name
+          alias_name: alias_name
+          place_of_birth: place_of_birth
+          full_name: full_name
+          nationality: nationality
+          mrz_line_1: mrz_line_1
+          date_of_expiry: 2000-01-23
+          mrz_line_2: mrz_line_2
+          mrz_line_3: mrz_line_3
+          issuing_authority: issuing_authority
+          personal_number: personal_number
+        document_classification:
+          issuing_country: issuing_country
+          subtype: full
+          issuing_state: issuing_state
+          version: version
+          document_type: document_type
+        document_id: document_id
+      properties:
+        document_id:
+          description: The unique identifier of the uploaded document.
+          type: string
+        document_classification:
+          $ref: '#/components/schemas/extraction_document_classification'
+        extracted_data:
+          $ref: '#/components/schemas/extraction_extracted_data'
+      type: object
+    results_feedback:
+      example:
+        feedback_notes: feedback_notes
+        report_id: report_id
+        check_id: check_id
+        expected_result: clear
+      properties:
+        expected_result:
+          description: The expected result for the check or report.
+          enum:
+          - clear
+          - consider
+          type: string
+        check_id:
+          description: The ID of the check (only if report_id is not provided).
+          type: string
+        report_id:
+          description: The ID of the check (only if check_id is not provided).
+          type: string
+        feedback_notes:
+          description: Any additional information or feedback.
+          type: string
+      type: object
     check:
       example:
         document_ids:
@@ -2213,217 +2377,53 @@ components:
           readOnly: true
           type: boolean
       type: object
-    webhook:
-      example:
-        payload_version: 0
-        environments:
-        - environments
-        - environments
-        id: id
-        href: href
-        url: url
-        enabled: true
-        events:
-        - audit_log.created
-        - audit_log.created
-        token: token
-      properties:
-        id:
-          description: The unique identifier of the webhook.
-          readOnly: true
-          type: string
-        url:
-          description: The url that will listen to notifications (must be https).
-          type: string
-        enabled:
-          description: Determine if the webhook is active.
-          type: boolean
-        events:
-          description: |
-            The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.
-          items:
-            enum:
-            - audit_log.created
-            - watchlist_monitor.matches_updated
-            - workflow_run.completed
-            - workflow_task.started
-            - workflow_task.completed
-            - check.started
-            - check.reopened
-            - check.withdrawn
-            - check.completed
-            - check.form_completed
-            - report.withdrawn
-            - report.resumed
-            - report.cancelled
-            - report.awaiting_approval
-            - report.completed
-            type: string
-          type: array
-        token:
-          description: Webhook secret token used to sign the webhook's payload.
-          readOnly: true
-          type: string
-        href:
-          description: The API endpoint to retrieve the webhook.
-          readOnly: true
-          type: string
-        environments:
-          description: |
-            The environments from which the webhook will receive events. Allowed values are “sandbox” and “live”. If the environments parameter is omitted the webhook will receive events from both environments.
-          items:
-            type: string
-          type: array
-        payload_version:
-          description: Webhook version used to control the payload object when sending
-            webhooks.
-          type: integer
-      required:
-      - url
-      type: object
-    webhook_resend:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/webhook_resend_data_inner'
-          type: array
-      required:
-      - event
-      - resource_id
-      - resource_type
-      type: object
-    extraction:
-      example:
-        extracted_data:
-          gender: Male
-          date_of_birth: 2000-01-23
-          address_1: address_1
-          address_2: address_2
-          address_3: address_3
-          address_4: address_4
-          address_5: address_5
-          widow_name: widow_name
-          spouse_name: spouse_name
-          mrz_line1: mrz_line1
-          mrz_line3: mrz_line3
-          mrz_line2: mrz_line2
-          issuing_country: issuing_country
-          issuing_state: issuing_state
-          first_name: first_name
-          document_type: document_type
-          document_number: document_number
-          issuing_date: 2000-01-23
-          expiry_date: 2000-01-23
-          last_name: last_name
-          alias_name: alias_name
-          place_of_birth: place_of_birth
-          full_name: full_name
-          nationality: nationality
-          mrz_line_1: mrz_line_1
-          date_of_expiry: 2000-01-23
-          mrz_line_2: mrz_line_2
-          mrz_line_3: mrz_line_3
-          issuing_authority: issuing_authority
-          personal_number: personal_number
-        document_classification:
-          issuing_country: issuing_country
-          subtype: full
-          issuing_state: issuing_state
-          version: version
-          document_type: document_type
-        document_id: document_id
-      properties:
-        document_id:
-          description: The unique identifier of the uploaded document.
-          type: string
-        document_classification:
-          $ref: '#/components/schemas/extraction_document_classification'
-        extracted_data:
-          $ref: '#/components/schemas/extraction_extracted_data'
-      type: object
-    results_feedback:
-      example:
-        feedback_notes: feedback_notes
-        report_id: report_id
-        check_id: check_id
-        expected_result: clear
-      properties:
-        expected_result:
-          description: The expected result for the check or report.
-          enum:
-          - clear
-          - consider
-          type: string
-        check_id:
-          description: The ID of the check (only if report_id is not provided).
-          type: string
-        report_id:
-          description: The ID of the check (only if check_id is not provided).
-          type: string
-        feedback_notes:
-          description: Any additional information or feedback.
-          type: string
-      type: object
-    address:
-      example:
-        building_name: building_name
-        country: country
-        town: town
-        flat_number: flat_number
-        street: street
-        postcode: postcode
-        state: state
-        line3: line3
-        line2: line2
-        building_number: building_number
-        line1: line1
-        sub_street: sub_street
-      properties:
-        flat_number:
-          description: The flat number of this address
-          type: string
-        building_number:
-          description: The building number of this address
-          type: string
-        building_name:
-          description: The building name of this address
-          type: string
-        street:
-          description: The street of the applicant's address
-          type: string
-        sub_street:
-          description: The sub-street of the applicant's address
-          type: string
-        town:
-          description: The town of the applicant's address
-          type: string
-        postcode:
-          description: The postcode or ZIP of the applicant's address
-          type: string
-        country:
-          description: "The 3 character ISO country code of this address. For example,\
-            \ GBR is the country code for the United Kingdom"
-          type: string
-        state:
-          description: "The address state. US states must use the USPS abbreviation\
-            \ (see also ISO 3166-2:US), for example AK, CA, or TX."
-          type: string
-        line1:
-          description: Line 1 of the applicant's address
-          pattern: "/^[^!$%^*=<>]*$/"
-          type: string
-        line2:
-          description: Line 2 of the applicant's address
-          pattern: "/^[^!$%^*=<>]*$/"
-          type: string
-        line3:
-          description: Line 3 of the applicant's address
-          pattern: "/^[^!$%^*=<>]*$/"
-          type: string
-      required:
-      - country
-      - postcode
-      type: object
+    report:
+      discriminator:
+        mapping:
+          document: '#/components/schemas/document_report'
+          document_video: '#/components/schemas/document_video_report'
+          document_video_with_address_information: '#/components/schemas/document_video_with_address_information'
+          document_with_address_information: '#/components/schemas/document_with_address_information_report'
+          document_with_driving_licence_information: '#/components/schemas/document_with_driving_licence_information_report'
+          document_with_driver_verification: '#/components/schemas/document_with_driver_verification_report'
+          facial_similarity_photo: '#/components/schemas/facial_similarity_photo_report'
+          facial_similarity_photo_fully_auto: '#/components/schemas/facial_similarity_photo_fully_auto_report'
+          facial_similarity_video: '#/components/schemas/facial_similarity_video_report'
+          facial_similarity_motion: '#/components/schemas/facial_similarity_motion_report'
+          known_faces: '#/components/schemas/known_faces_report'
+          identity_enhanced: '#/components/schemas/identity_enhanced_report'
+          watchlist_aml: '#/components/schemas/watchlist_aml_report'
+          watchlist_enhanced: '#/components/schemas/watchlist_enhanced_report'
+          watchlist_standard: '#/components/schemas/watchlist_standard_report'
+          watchlist_peps_only: '#/components/schemas/watchlist_peps_only_report'
+          watchlist_sanctions_only: '#/components/schemas/watchlist_sanctions_only_report'
+          proof_of_address: '#/components/schemas/proof_of_address_report'
+          us_driving_licence: '#/components/schemas/us_driving_licence_report'
+          device_intelligence: '#/components/schemas/device_intelligence_report'
+          india_pan: '#/components/schemas/india_pan_report'
+        propertyName: name
+      oneOf:
+      - $ref: '#/components/schemas/document_report'
+      - $ref: '#/components/schemas/document_video_report'
+      - $ref: '#/components/schemas/document_video_with_address_information'
+      - $ref: '#/components/schemas/document_with_address_information_report'
+      - $ref: '#/components/schemas/document_with_driving_licence_information_report'
+      - $ref: '#/components/schemas/document_with_driver_verification_report'
+      - $ref: '#/components/schemas/facial_similarity_photo_report'
+      - $ref: '#/components/schemas/facial_similarity_photo_fully_auto_report'
+      - $ref: '#/components/schemas/facial_similarity_video_report'
+      - $ref: '#/components/schemas/facial_similarity_motion_report'
+      - $ref: '#/components/schemas/known_faces_report'
+      - $ref: '#/components/schemas/identity_enhanced_report'
+      - $ref: '#/components/schemas/watchlist_aml_report'
+      - $ref: '#/components/schemas/watchlist_enhanced_report'
+      - $ref: '#/components/schemas/watchlist_standard_report'
+      - $ref: '#/components/schemas/watchlist_peps_only_report'
+      - $ref: '#/components/schemas/watchlist_sanctions_only_report'
+      - $ref: '#/components/schemas/proof_of_address_report'
+      - $ref: '#/components/schemas/us_driving_licence_report'
+      - $ref: '#/components/schemas/device_intelligence_report'
+      - $ref: '#/components/schemas/india_pan_report'
     id_number:
       example:
         type: ssn
@@ -3411,92 +3411,6 @@ components:
             $ref: '#/components/schemas/live_video'
           type: array
       type: object
-    list_motion_captures_200_response:
-      example:
-        motion_captures:
-        - download_href: download_href
-          file_name: file_name
-          file_type: file_type
-          created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
-          href: href
-          file_size: 0
-        - download_href: download_href
-          file_name: file_name
-          file_type: file_type
-          created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
-          href: href
-          file_size: 0
-      properties:
-        motion_captures:
-          items:
-            $ref: '#/components/schemas/motion_capture'
-          type: array
-      type: object
-    list_id_photos_200_response:
-      example:
-        live_photos:
-        - download_href: download_href
-          file_name: file_name
-          file_type: file_type
-          created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
-          href: href
-          file_size: 0
-        - download_href: download_href
-          file_name: file_name
-          file_type: file_type
-          created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
-          href: href
-          file_size: 0
-      properties:
-        live_photos:
-          items:
-            $ref: '#/components/schemas/id_photo'
-          type: array
-      type: object
-    upload_id_photo_request:
-      allOf:
-      - $ref: '#/components/schemas/id_photo'
-      - properties:
-          applicant_id:
-            description: The ID of the applicant whose ID photo is being uploaded.
-            type: string
-          file:
-            description: The file to be uploaded.
-            format: binary
-            type: string
-        required:
-        - applicant_id
-        - file
-        type: object
-    list_watchlist_monitor_matches_200_response_inner:
-      example:
-        id: id
-        status: true
-      properties:
-        id:
-          description: Monitor ID
-          type: string
-        status:
-          description: Monitor status
-          type: boolean
-      type: object
-    update_monitor_match_request:
-      properties:
-        enable:
-          items:
-            description: Match ID to enable.
-            type: string
-          type: array
-        disable:
-          items:
-            description: Match ID to disable.
-            type: string
-          type: array
-      type: object
     create_workflow_run_request:
       properties:
         workflow_id:
@@ -3554,16 +3468,208 @@ components:
           description: The Task completion payload.
           type: object
       type: object
-    list_reports_200_response:
+    list_motion_captures_200_response:
       example:
-        reports:
-        - null
-        - null
+        motion_captures:
+        - download_href: download_href
+          file_name: file_name
+          file_type: file_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          href: href
+          file_size: 0
+        - download_href: download_href
+          file_name: file_name
+          file_type: file_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          href: href
+          file_size: 0
       properties:
-        reports:
+        motion_captures:
           items:
-            $ref: '#/components/schemas/report'
+            $ref: '#/components/schemas/motion_capture'
           type: array
+      type: object
+    list_watchlist_monitor_matches_200_response_inner:
+      example:
+        id: id
+        status: true
+      properties:
+        id:
+          description: Monitor ID
+          type: string
+        status:
+          description: Monitor status
+          type: boolean
+      type: object
+    update_monitor_match_request:
+      properties:
+        enable:
+          items:
+            description: Match ID to enable.
+            type: string
+          type: array
+        disable:
+          items:
+            description: Match ID to disable.
+            type: string
+          type: array
+      type: object
+    list_id_photos_200_response:
+      example:
+        live_photos:
+        - download_href: download_href
+          file_name: file_name
+          file_type: file_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          href: href
+          file_size: 0
+        - download_href: download_href
+          file_name: file_name
+          file_type: file_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          href: href
+          file_size: 0
+      properties:
+        live_photos:
+          items:
+            $ref: '#/components/schemas/id_photo'
+          type: array
+      type: object
+    upload_id_photo_request:
+      allOf:
+      - $ref: '#/components/schemas/id_photo'
+      - properties:
+          applicant_id:
+            description: The ID of the applicant whose ID photo is being uploaded.
+            type: string
+          file:
+            description: The file to be uploaded.
+            format: binary
+            type: string
+        required:
+        - applicant_id
+        - file
+        type: object
+    list_webhooks_200_response:
+      example:
+        webhooks:
+        - payload_version: 0
+          environments:
+          - environments
+          - environments
+          id: id
+          href: href
+          url: url
+          enabled: true
+          events:
+          - audit_log.created
+          - audit_log.created
+          token: token
+        - payload_version: 0
+          environments:
+          - environments
+          - environments
+          id: id
+          href: href
+          url: url
+          enabled: true
+          events:
+          - audit_log.created
+          - audit_log.created
+          token: token
+      properties:
+        webhooks:
+          items:
+            $ref: '#/components/schemas/webhook'
+          type: array
+      type: object
+    find_addresses_200_response:
+      example:
+        addresses:
+        - building_name: building_name
+          country: country
+          town: town
+          flat_number: flat_number
+          street: street
+          postcode: postcode
+          state: state
+          line3: line3
+          line2: line2
+          building_number: building_number
+          line1: line1
+          sub_street: sub_street
+        - building_name: building_name
+          country: country
+          town: town
+          flat_number: flat_number
+          street: street
+          postcode: postcode
+          state: state
+          line3: line3
+          line2: line2
+          building_number: building_number
+          line1: line1
+          sub_street: sub_street
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/address'
+          type: array
+      type: object
+    generate_sdk_token_request:
+      properties:
+        applicant_id:
+          description: The unique identifier of the applicant
+          type: string
+        referrer:
+          description: The referrer URL pattern
+          type: string
+        application_id:
+          description: The application ID (iOS or Android)
+          type: string
+        cross_device_url:
+          description: The URL to be used by the Web SDK for the cross device flow.
+          type: string
+      required:
+      - applicant_id
+      type: object
+    generate_sdk_token_200_response:
+      example:
+        token: token
+      properties:
+        token:
+          description: The generated SDK token
+          type: string
+      type: object
+    extract_request:
+      properties:
+        document_id:
+          description: The unique identifier of the uploaded document to run extraction
+            on
+          type: string
+      required:
+      - document_id
+      type: object
+    ErrorProperties_1:
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+      title: ErrorProperties
+      type: object
+    Error_1:
+      properties:
+        document_id:
+          description: The unique identifier of the uploaded document
+          type: string
+        error:
+          $ref: '#/components/schemas/ErrorProperties_1'
+      title: Error
       type: object
     list_checks_200_response:
       example:
@@ -3640,122 +3746,16 @@ components:
             $ref: '#/components/schemas/check'
           type: array
       type: object
-    list_webhooks_200_response:
+    list_reports_200_response:
       example:
-        webhooks:
-        - payload_version: 0
-          environments:
-          - environments
-          - environments
-          id: id
-          href: href
-          url: url
-          enabled: true
-          events:
-          - audit_log.created
-          - audit_log.created
-          token: token
-        - payload_version: 0
-          environments:
-          - environments
-          - environments
-          id: id
-          href: href
-          url: url
-          enabled: true
-          events:
-          - audit_log.created
-          - audit_log.created
-          token: token
+        reports:
+        - null
+        - null
       properties:
-        webhooks:
+        reports:
           items:
-            $ref: '#/components/schemas/webhook'
+            $ref: '#/components/schemas/report'
           type: array
-      type: object
-    extract_request:
-      properties:
-        document_id:
-          description: The unique identifier of the uploaded document to run extraction
-            on
-          type: string
-      required:
-      - document_id
-      type: object
-    ErrorProperties_1:
-      properties:
-        type:
-          type: string
-        message:
-          type: string
-      title: ErrorProperties
-      type: object
-    Error_1:
-      properties:
-        document_id:
-          description: The unique identifier of the uploaded document
-          type: string
-        error:
-          $ref: '#/components/schemas/ErrorProperties_1'
-      title: Error
-      type: object
-    find_addresses_200_response:
-      example:
-        addresses:
-        - building_name: building_name
-          country: country
-          town: town
-          flat_number: flat_number
-          street: street
-          postcode: postcode
-          state: state
-          line3: line3
-          line2: line2
-          building_number: building_number
-          line1: line1
-          sub_street: sub_street
-        - building_name: building_name
-          country: country
-          town: town
-          flat_number: flat_number
-          street: street
-          postcode: postcode
-          state: state
-          line3: line3
-          line2: line2
-          building_number: building_number
-          line1: line1
-          sub_street: sub_street
-      properties:
-        addresses:
-          items:
-            $ref: '#/components/schemas/address'
-          type: array
-      type: object
-    generate_sdk_token_request:
-      properties:
-        applicant_id:
-          description: The unique identifier of the applicant
-          type: string
-        referrer:
-          description: The referrer URL pattern
-          type: string
-        application_id:
-          description: The application ID (iOS or Android)
-          type: string
-        cross_device_url:
-          description: The URL to be used by the Web SDK for the cross device flow.
-          type: string
-      required:
-      - applicant_id
-      type: object
-    generate_sdk_token_200_response:
-      example:
-        token: token
-      properties:
-        token:
-          description: The generated SDK token
-          type: string
       type: object
     workflow_run_error:
       description: Error object. Only set when the Workflow Run status is 'error'.

@@ -28,6 +28,9 @@ components:
 externalDocs:
   url: https://documentation.onfido.com
 paths:
+  #
+  # CORE RESOURCES
+  #
   # Applicants
   /applicants:
     $ref: paths/applicants.yaml#/applicants
@@ -58,32 +61,7 @@ paths:
     $ref: paths/live_videos.yaml#/live_video
   /live_videos/{live_video_id}/frame:
     $ref: paths/live_videos.yaml#/frame
-  # Motion Captures
-  /motion_captures:
-    $ref: paths/motion_captures.yaml#/motion_captures
-  /motion_captures/{motion_capture_id}:
-    $ref: paths/motion_captures.yaml#/motion_capture
-  /motion_captures/{motion_capture_id}/download:
-    $ref: paths/motion_captures.yaml#/download
-  /motion_captures/{motion_capture_id}/frame:
-    $ref: paths/motion_captures.yaml#/frame
-  # ID Photos
-  /id_photos:
-    $ref: paths/id_photos.yaml#/id_photos
-  /id_photos/{id_photo_id}:
-    $ref: paths/id_photos.yaml#/id_photo
-  /id_photos/{id_photo_id}/download:
-    $ref: paths/id_photos.yaml#/download
-  # Monitors
-  /watchlist_monitors:
-    $ref: paths/watchlist_monitors.yaml#/watchlist_monitors
-  /watchlist_monitors/{monitor_id}:
-    $ref: paths/watchlist_monitors.yaml#/watchlist_monitor
-  /watchlist_monitors/{monitor_id}/matches:
-    $ref: paths/watchlist_monitors.yaml#/matches
-  /watchlist_monitors/{monitor_id}/new_report:
-    $ref: paths/watchlist_monitors.yaml#/new_report
-  # Workflow Runs
+  # Workflow Runs and Tasks
   /workflow_runs:
     $ref: paths/workflow_runs.yaml#/workflow_runs
   /workflow_runs/{workflow_run_id}:
@@ -96,15 +74,56 @@ paths:
     $ref: paths/workflow_runs.yaml#/complete_task
   /workflow_runs/{workflow_run_id}/signed_evidence_file:
     $ref: paths/workflow_runs.yaml#/signed_evidence_file
-  # Reports
-  /reports:
-    $ref: paths/reports.yaml#/reports
-  /reports/{report_id}:
-    $ref: paths/reports.yaml#/report
-  /reports/{report_id}/resume:
-    $ref: paths/reports.yaml#/resume
-  /reports/{report_id}/cancel:
-    $ref: paths/reports.yaml#/cancel
+  # Motion Captures
+  /motion_captures:
+    $ref: paths/motion_captures.yaml#/motion_captures
+  /motion_captures/{motion_capture_id}:
+    $ref: paths/motion_captures.yaml#/motion_capture
+  /motion_captures/{motion_capture_id}/download:
+    $ref: paths/motion_captures.yaml#/download
+  /motion_captures/{motion_capture_id}/frame:
+    $ref: paths/motion_captures.yaml#/frame
+  # Monitors
+  /watchlist_monitors:
+    $ref: paths/watchlist_monitors.yaml#/watchlist_monitors
+  /watchlist_monitors/{monitor_id}:
+    $ref: paths/watchlist_monitors.yaml#/watchlist_monitor
+  /watchlist_monitors/{monitor_id}/matches:
+    $ref: paths/watchlist_monitors.yaml#/matches
+  /watchlist_monitors/{monitor_id}/new_report:
+    $ref: paths/watchlist_monitors.yaml#/new_report
+  # ID Photos
+  /id_photos:
+    $ref: paths/id_photos.yaml#/id_photos
+  /id_photos/{id_photo_id}:
+    $ref: paths/id_photos.yaml#/id_photo
+  /id_photos/{id_photo_id}/download:
+    $ref: paths/id_photos.yaml#/download
+  #
+  # OTHER ENDPOINTS
+  #
+  # Ping
+  /ping:
+    $ref: paths/ping.yaml#/ping
+  # Webhooks
+  /webhooks:
+    $ref: paths/webhooks.yaml#/webhooks
+  /webhooks/{webhook_id}:
+    $ref: paths/webhooks.yaml#/webhook
+  /webhooks/resend:
+    $ref: paths/webhooks.yaml#/webhooks_resend
+  # Address Picker
+  /addresses/pick:
+    $ref: paths/addresses.yaml#/pick
+  # Generate SDK Tokens
+  /sdk_token:
+    $ref: paths/sdk_tokens.yaml#/sdk_token
+  # Autofill
+  /extractions:
+    $ref: paths/extractions.yaml#/extractions
+  # Fraud reporting (ALPHA)
+  /results_feedback:
+    $ref: paths/results_feedback.yaml#/results_feedback
   # Checks
   /checks:
     $ref: paths/checks.yaml#/checks
@@ -114,25 +133,12 @@ paths:
     $ref: paths/checks.yaml#/resume
   /checks/{check_id}/download:
     $ref: paths/checks.yaml#/download
-  # Webhooks
-  /webhooks:
-    $ref: paths/webhooks.yaml#/webhooks
-  /webhooks/{webhook_id}:
-    $ref: paths/webhooks.yaml#/webhook
-  /webhooks/resend:
-    $ref: paths/webhooks.yaml#/webhooks_resend
-  # Extractions
-  /extractions:
-    $ref: paths/extractions.yaml#/extractions
-  # Results Feedback
-  /results_feedback:
-    $ref: paths/results_feedback.yaml#/results_feedback
-  # Address Picker
-  /addresses/pick:
-    $ref: paths/addresses.yaml#/pick
-  # SDK Tokens
-  /sdk_token:
-    $ref: paths/sdk_tokens.yaml#/sdk_token
-  # Ping
-  /ping:
-    $ref: paths/ping.yaml#/ping
+  # Reports
+  /reports:
+    $ref: paths/reports.yaml#/reports
+  /reports/{report_id}:
+    $ref: paths/reports.yaml#/report
+  /reports/{report_id}/resume:
+    $ref: paths/reports.yaml#/resume
+  /reports/{report_id}/cancel:
+    $ref: paths/reports.yaml#/cancel
