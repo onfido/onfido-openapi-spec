@@ -118,6 +118,9 @@ paths:
   # Generate SDK Tokens
   /sdk_token:
     $ref: paths/sdk_tokens.yaml#/sdk_token
+  # Repeat attempts
+  /repeat_attempts/{report_id}:
+    $ref: paths/repeat_attempts.yaml#/repeat_attempts
   # Autofill
   /extractions:
     $ref: paths/extractions.yaml#/extractions

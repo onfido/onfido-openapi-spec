@@ -1,0 +1,57 @@
+type: object
+properties:
+  report_id:
+    type: string
+    description: The unique identifier of the completed Document report.
+  repeat_attempts:
+    type: array
+    description: >
+      An array of repeat attempt objects. If no repeat attempts were found, the array will be empty.
+      The number of objects returned can increase over time if more matches are received.
+    items:
+      type: object
+      properties:
+        report_id:
+          type: string
+          description: The unique identifier of the matching Document report.
+        applicant_id:
+          type: string
+          description: The unique identifier of the applicant for the matching Document report.
+        date_of_birth:
+          type: string
+          enum:
+            - match
+            - mismatch
+          description: Whether the dates of birth are exactly the same or are different.
+        names:
+          type: string
+          enum:
+            - match
+            - mismatch
+          description: Whether the names are exactly the same or are different.
+        result:
+          type: string
+          enum:
+            - clear
+            - consider
+          description: The report result of this attempt.
+        created_at:
+          type: string
+          format: date-time
+          description: When the matching report was created.
+        completed_at:
+          type: string
+          format: date-time
+          description: When the matching report was completed.
+  attempts_count:
+    type: integer
+    description: The total number of attempts using the same document, including the current report under assessment.
+  attempts_clear_rate:
+    format: float
+    type: number
+    minimum: 0
+    maximum: 1
+    description: A number between 0 and 1 which indicates the proportion of attempts that have been cleared, including the current report under assessment.
+  unique_mismatches_count:
+    type: integer
+    description: The number of unique entries in the repeat_attempts field for which at least one of the fields is a mismatch.

@@ -1243,6 +1243,29 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Generate a SDK token
+  /repeat_attempts/{report_id}:
+    get:
+      operationId: list_repeat_attempts
+      parameters:
+      - in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repeat_attempts'
+          description: Repeat attempts object
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Returns all repeat attempts for a given Document report.
   /extractions:
     post:
       operationId: extract
@@ -2134,6 +2157,54 @@ components:
       required:
       - country
       - postcode
+      type: object
+    repeat_attempts:
+      example:
+        attempts_clear_rate: 0.6027456
+        report_id: report_id
+        repeat_attempts:
+        - result: clear
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          names: match
+          applicant_id: applicant_id
+          report_id: report_id
+          date_of_birth: match
+          created_at: 2000-01-23T04:56:07.000+00:00
+        - result: clear
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          names: match
+          applicant_id: applicant_id
+          report_id: report_id
+          date_of_birth: match
+          created_at: 2000-01-23T04:56:07.000+00:00
+        attempts_count: 0
+        unique_mismatches_count: 1
+      properties:
+        report_id:
+          description: The unique identifier of the completed Document report.
+          type: string
+        repeat_attempts:
+          description: |
+            An array of repeat attempt objects. If no repeat attempts were found, the array will be empty. The number of objects returned can increase over time if more matches are received.
+          items:
+            $ref: '#/components/schemas/repeat_attempts_repeat_attempts_inner'
+          type: array
+        attempts_count:
+          description: "The total number of attempts using the same document, including\
+            \ the current report under assessment."
+          type: integer
+        attempts_clear_rate:
+          description: "A number between 0 and 1 which indicates the proportion of\
+            \ attempts that have been cleared, including the current report under\
+            \ assessment."
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        unique_mismatches_count:
+          description: The number of unique entries in the repeat_attempts field for
+            which at least one of the fields is a mismatch.
+          type: integer
       type: object
     extraction:
       example:
@@ -3821,6 +3892,50 @@ components:
           description: The events that should retrigger webhooks. Accepts values check.completed.
           enum:
           - check.completed
+          type: string
+      type: object
+    repeat_attempts_repeat_attempts_inner:
+      example:
+        result: clear
+        completed_at: 2000-01-23T04:56:07.000+00:00
+        names: match
+        applicant_id: applicant_id
+        report_id: report_id
+        date_of_birth: match
+        created_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        report_id:
+          description: The unique identifier of the matching Document report.
+          type: string
+        applicant_id:
+          description: The unique identifier of the applicant for the matching Document
+            report.
+          type: string
+        date_of_birth:
+          description: Whether the dates of birth are exactly the same or are different.
+          enum:
+          - match
+          - mismatch
+          type: string
+        names:
+          description: Whether the names are exactly the same or are different.
+          enum:
+          - match
+          - mismatch
+          type: string
+        result:
+          description: The report result of this attempt.
+          enum:
+          - clear
+          - consider
+          type: string
+        created_at:
+          description: When the matching report was created.
+          format: date-time
+          type: string
+        completed_at:
+          description: When the matching report was completed.
+          format: date-time
           type: string
       type: object
     extraction_document_classification:
