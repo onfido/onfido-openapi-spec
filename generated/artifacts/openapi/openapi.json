@@ -2307,12 +2307,12 @@
           },
           "first_name" : {
             "description" : "The applicant's first name",
-            "pattern" : "^[^!#$%*=<>;{}\"]*$",
+            "pattern" : "/^[^!#$%*=<>;{}\"]*$/",
             "type" : "string"
           },
           "last_name" : {
             "description" : "The applicant's surname",
-            "pattern" : "^[^!#$%*=<>;{}\"]*$",
+            "pattern" : "/^[^!#$%*=<>;{}\"]*$/",
             "type" : "string"
           },
           "email" : {
@@ -2405,7 +2405,7 @@
           },
           "issuing_country" : {
             "description" : "The issuing country of the document, a 3-letter ISO code.",
-            "pattern" : "^[A-Z]{3}$",
+            "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           },
           "applicant_id" : {
@@ -2722,6 +2722,32 @@
         "type" : "object"
       },
       "report" : {
+        "discriminator" : {
+          "mapping" : {
+            "document" : "#/components/schemas/document_report",
+            "document_video" : "#/components/schemas/document_video_report",
+            "document_video_with_address_information" : "#/components/schemas/document_video_with_address_information",
+            "document_with_address_information" : "#/components/schemas/document_with_address_information_report",
+            "document_with_driving_licence_information" : "#/components/schemas/document_with_driving_licence_information_report",
+            "document_with_driver_verification" : "#/components/schemas/document_with_driver_verification_report",
+            "facial_similarity_photo" : "#/components/schemas/facial_similarity_photo_report",
+            "facial_similarity_photo_fully_auto" : "#/components/schemas/facial_similarity_photo_fully_auto_report",
+            "facial_similarity_video" : "#/components/schemas/facial_similarity_video_report",
+            "facial_similarity_motion" : "#/components/schemas/facial_similarity_motion_report",
+            "known_faces" : "#/components/schemas/known_faces_report",
+            "identity_enhanced" : "#/components/schemas/identity_enhanced_report",
+            "watchlist_aml" : "#/components/schemas/watchlist_aml_report",
+            "watchlist_enhanced" : "#/components/schemas/watchlist_enhanced_report",
+            "watchlist_standard" : "#/components/schemas/watchlist_standard_report",
+            "watchlist_peps_only" : "#/components/schemas/watchlist_peps_only_report",
+            "watchlist_sanctions_only" : "#/components/schemas/watchlist_sanctions_only_report",
+            "proof_of_address" : "#/components/schemas/proof_of_address_report",
+            "us_driving_licence" : "#/components/schemas/us_driving_licence_report",
+            "device_intelligence" : "#/components/schemas/device_intelligence_report",
+            "india_pan" : "#/components/schemas/india_pan_report"
+          },
+          "propertyName" : "name"
+        },
         "oneOf" : [ {
           "$ref" : "#/components/schemas/document_report"
         }, {
@@ -3027,17 +3053,17 @@
           },
           "line1" : {
             "description" : "Line 1 of the applicant's address",
-            "pattern" : "^[^!$%^*=<>]*$",
+            "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           },
           "line2" : {
             "description" : "Line 2 of the applicant's address",
-            "pattern" : "^[^!$%^*=<>]*$",
+            "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           },
           "line3" : {
             "description" : "Line 3 of the applicant's address",
-            "pattern" : "^[^!$%^*=<>]*$",
+            "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           }
         },
@@ -3070,7 +3096,7 @@
           },
           "country_of_residence" : {
             "description" : "The applicant's country of residence in 3-letter ISO code.",
-            "pattern" : "^[A-Z]{3}$",
+            "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           }
         },
@@ -3079,14 +3105,6 @@
       "document_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "document" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3104,14 +3122,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "document_video", "no_value" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/document_breakdown"
             },
@@ -3125,14 +3135,6 @@
       "document_video_with_address_information" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "document_video_with_address_information", "no_value" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3150,14 +3152,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "document_with_address_information", "no_value" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/document_breakdown"
             },
@@ -3171,14 +3165,6 @@
       "document_with_driving_licence_information_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "document_with_driving_licence_information", "no_value" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3196,14 +3182,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "document_with_driver_verification", "no_value" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/document_breakdown"
             },
@@ -3219,14 +3197,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "facial_similarity_photo" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/facial_similarity_photo_breakdown"
             }
@@ -3237,14 +3207,6 @@
       "facial_similarity_photo_fully_auto_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "facial_similarity_photo_fully_auto", "no_value" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3259,14 +3221,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "facial_similarity_video" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/facial_similarity_video_breakdown"
             }
@@ -3279,14 +3233,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "facial_similarity_motion" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/facial_similarity_motion_breakdown"
             }
@@ -3297,14 +3243,6 @@
       "known_faces_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "known_faces" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3322,14 +3260,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "identity_enhanced" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/identity_enhanced_breakdown"
             },
@@ -3343,14 +3273,6 @@
       "watchlist_aml_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "watchlist_aml" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3368,14 +3290,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "watchlist_enhanced" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/watchlist_enhanced_breakdown"
             },
@@ -3389,14 +3303,6 @@
       "watchlist_standard_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "watchlist_standard" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3414,14 +3320,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "watchlist_peps_only" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/watchlist_standard_breakdown"
             },
@@ -3435,14 +3333,6 @@
       "watchlist_sanctions_only_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "watchlist_sanctions_only" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3460,14 +3350,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "proof_of_address" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/proof_of_address_breakdown"
             },
@@ -3481,14 +3363,6 @@
       "us_driving_licence_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "us_driving_licence" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3506,14 +3380,6 @@
           "$ref" : "#/components/schemas/report_common"
         }, {
           "properties" : {
-            "name" : {
-              "enum" : [ "device_intelligence" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
-        }, {
-          "properties" : {
             "breakdown" : {
               "$ref" : "#/components/schemas/device_intelligence_breakdown"
             }
@@ -3524,14 +3390,6 @@
       "india_pan_report" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "name" : {
-              "enum" : [ "india_pan" ],
-              "type" : "string"
-            }
-          },
-          "type" : "object"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3594,6 +3452,7 @@
           },
           "name" : {
             "description" : "The name of the report type.",
+            "enum" : [ "document", "document_video", "document_video_with_address_information", "document_with_address_information", "document_with_driving_licence_information", "document_with_driver_verification", "facial_similarity_photo", "facial_similarity_photo_fully_auto", "facial_similarity_video", "facial_similarity_motion", "known_faces", "identity_enhanced", "watchlist_aml", "watchlist_enhanced", "watchlist_standard", "watchlist_peps_only", "watchlist_sanctions_only", "proof_of_address", "us_driving_licence", "device_intelligence", "india_pan" ],
             "type" : "string"
           },
           "breakdown" : {
@@ -4620,7 +4479,7 @@
         "properties" : {
           "issuing_country" : {
             "description" : "Document country in 3-letter ISO code.",
-            "pattern" : "^[A-Z]{3}$",
+            "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           },
           "document_type" : {
@@ -4695,7 +4554,7 @@
           },
           "nationality" : {
             "description" : "Nationality in 3-letter ISO code.",
-            "pattern" : "^[A-Z]{3}$",
+            "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           },
           "mrz_line1" : {
@@ -4748,7 +4607,7 @@
           },
           "issuing_country" : {
             "description" : "Document country in 3-letter ISO code.",
-            "pattern" : "^[A-Z]{3}$",
+            "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           },
           "document_type" : {

@@ -1560,11 +1560,11 @@ components:
           type: string
         first_name:
           description: The applicant's first name
-          pattern: "^[^!#$%*=<>;{}\"]*$"
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
           type: string
         last_name:
           description: The applicant's surname
-          pattern: "^[^!#$%*=<>;{}\"]*$"
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
           type: string
         email:
           description: "The applicant's email address. Required if doing a US check,\
@@ -1658,7 +1658,7 @@ components:
           type: string
         issuing_country:
           description: "The issuing country of the document, a 3-letter ISO code."
-          pattern: "^[A-Z]{3}$"
+          pattern: "/^[A-Z]{3}$/"
           type: string
         applicant_id:
           description: The ID of the applicant whose document is being uploaded.
@@ -1997,6 +1997,30 @@ components:
           type: string
       type: object
     report:
+      discriminator:
+        mapping:
+          document: '#/components/schemas/document_report'
+          document_video: '#/components/schemas/document_video_report'
+          document_video_with_address_information: '#/components/schemas/document_video_with_address_information'
+          document_with_address_information: '#/components/schemas/document_with_address_information_report'
+          document_with_driving_licence_information: '#/components/schemas/document_with_driving_licence_information_report'
+          document_with_driver_verification: '#/components/schemas/document_with_driver_verification_report'
+          facial_similarity_photo: '#/components/schemas/facial_similarity_photo_report'
+          facial_similarity_photo_fully_auto: '#/components/schemas/facial_similarity_photo_fully_auto_report'
+          facial_similarity_video: '#/components/schemas/facial_similarity_video_report'
+          facial_similarity_motion: '#/components/schemas/facial_similarity_motion_report'
+          known_faces: '#/components/schemas/known_faces_report'
+          identity_enhanced: '#/components/schemas/identity_enhanced_report'
+          watchlist_aml: '#/components/schemas/watchlist_aml_report'
+          watchlist_enhanced: '#/components/schemas/watchlist_enhanced_report'
+          watchlist_standard: '#/components/schemas/watchlist_standard_report'
+          watchlist_peps_only: '#/components/schemas/watchlist_peps_only_report'
+          watchlist_sanctions_only: '#/components/schemas/watchlist_sanctions_only_report'
+          proof_of_address: '#/components/schemas/proof_of_address_report'
+          us_driving_licence: '#/components/schemas/us_driving_licence_report'
+          device_intelligence: '#/components/schemas/device_intelligence_report'
+          india_pan: '#/components/schemas/india_pan_report'
+        propertyName: name
       oneOf:
       - $ref: '#/components/schemas/document_report'
       - $ref: '#/components/schemas/document_video_report'
@@ -2386,15 +2410,15 @@ components:
           type: string
         line1:
           description: Line 1 of the applicant's address
-          pattern: "^[^!$%^*=<>]*$"
+          pattern: "/^[^!$%^*=<>]*$/"
           type: string
         line2:
           description: Line 2 of the applicant's address
-          pattern: "^[^!$%^*=<>]*$"
+          pattern: "/^[^!$%^*=<>]*$/"
           type: string
         line3:
           description: Line 3 of the applicant's address
-          pattern: "^[^!$%^*=<>]*$"
+          pattern: "/^[^!$%^*=<>]*$/"
           type: string
       required:
       - country
@@ -2437,337 +2461,21 @@ components:
           type: string
         country_of_residence:
           description: The applicant's country of residence in 3-letter ISO code.
-          pattern: "^[A-Z]{3}$"
+          pattern: "/^[A-Z]{3}$/"
           type: string
       type: object
     document_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - document
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
-      example:
-        result: clear
-        documents:
-        - id: id
-        - id: id
-        breakdown:
-          visual_authenticity:
-            result: result
-            breakdown:
-              template:
-                result: result
-                properties: "{}"
-              other:
-                result: result
-                properties: "{}"
-              fonts:
-                result: result
-                properties: "{}"
-              digital_tampering:
-                result: result
-                properties: "{}"
-              picture_face_integrity:
-                result: result
-                properties: "{}"
-              face_detection:
-                result: result
-                properties: "{}"
-              original_document_present:
-                result: result
-                properties:
-                  scan: scan
-                  document_on_printed_paper: document_on_printed_paper
-                  screenshot: screenshot
-                  photo_of_screen: photo_of_screen
-              security_features:
-                result: result
-                properties: "{}"
-          compromised_document:
-            result: result
-            breakdown:
-              document_database:
-                result: result
-                properties: "{}"
-              repeat_attempts:
-                result: result
-                properties: "{}"
-          age_validation:
-            result: result
-            breakdown:
-              minimum_accepted_age:
-                result: result
-                properties: "{}"
-          issuing_authority:
-            result: result
-            breakdown:
-              nfc_active_authentication:
-                result: result
-                properties: "{}"
-              nfc_passive_authentication:
-                result: result
-                properties: "{}"
-          data_consistency:
-            result: result
-            breakdown:
-              document_numbers:
-                result: result
-                properties: "{}"
-              gender:
-                result: result
-                properties: "{}"
-              nationality:
-                result: result
-                properties: "{}"
-              date_of_expiry:
-                result: result
-                properties: "{}"
-              issuing_country:
-                result: result
-                properties: "{}"
-              date_of_birth:
-                result: result
-                properties: "{}"
-              last_name:
-                result: result
-                properties: "{}"
-              multiple_data_sources_present:
-                result: result
-                properties: "{}"
-              first_name:
-                result: result
-                properties: "{}"
-              document_type:
-                result: result
-                properties: "{}"
-          data_comparison:
-            result: result
-            breakdown:
-              document_numbers:
-                result: result
-                properties: "{}"
-              gender:
-                result: result
-                properties: "{}"
-              issuing_country:
-                result: result
-                properties: "{}"
-              date_of_expiry:
-                result: result
-                properties: "{}"
-              date_of_birth:
-                result: result
-                properties: "{}"
-              last_name:
-                result: result
-                properties: "{}"
-              first_name:
-                result: result
-                properties: "{}"
-              document_type:
-                result: result
-                properties: "{}"
-          police_record:
-            result: result
-          data_validation:
-            result: result
-            breakdown:
-              document_numbers:
-                result: result
-                properties: "{}"
-              gender:
-                result: result
-                properties: "{}"
-              mrz:
-                result: result
-                properties: "{}"
-              document_expiration:
-                result: result
-                properties: "{}"
-              date_of_birth:
-                result: result
-                properties: "{}"
-              expiry_date:
-                result: result
-                properties: "{}"
-              barcode:
-                result: result
-                properties: "{}"
-          image_integrity:
-            result: result
-            breakdown:
-              colour_picture:
-                result: result
-                properties: "{}"
-              supported_document:
-                result: result
-                properties: "{}"
-              conclusive_document_quality:
-                result: result
-                properties:
-                  missing_back: missing_back
-                  punctured_document: punctured_document
-                  watermarks_digital_text_overlay: watermarks_digital_text_overlay
-                  digital_document: digital_document
-                  corner_removed: corner_removed
-                  obscured_data_points: obscured_data_points
-                  abnormal_document_features: abnormal_document_features
-                  obscured_security_features: obscured_security_features
-              image_quality:
-                result: result
-                properties:
-                  incorrect_side: incorrect_side
-                  glare_on_photo: glare_on_photo
-                  other_photo_issue: other_photo_issue
-                  cut_off_document: cut_off_document
-                  covered_photo: covered_photo
-                  two_documents_uploaded: two_documents_uploaded
-                  blurred_photo: blurred_photo
-                  no_document_in_image: no_document_in_image
-                  damaged_document: damaged_document
-                  dark_photo: dark_photo
-        name: document
-        created_at: 2000-01-23T04:56:07.000+00:00
-        sub_result: clear
-        check_id: check_id
-        id: id
-        href: href
-        properties:
-          gender: gender
-          date_of_birth: 2000-01-23
-          categorisation: categorisation
-          widow_name: widow_name
-          extracted_data:
-            document_number: document_number
-            gender: gender
-            date_of_birth: 2000-01-23
-            last_name: last_name
-            middle_name: middle_name
-            alias_name: alias_name
-            widow_name: widow_name
-            spouse_name: spouse_name
-            mrz_line1: mrz_line1
-            full_name: full_name
-            mrz_line3: mrz_line3
-            nationality: nationality
-            date_of_expiry: 2000-01-23
-            mrz_line2: mrz_line2
-            issuing_authority: issuing_authority
-            address_line_1: address_line_1
-            address_line_3: address_line_3
-            address_line_2: address_line_2
-            address_line_5: address_line_5
-            first_name: first_name
-            address_line_4: address_line_4
-          mrz_line1: mrz_line1
-          spouse_name: spouse_name
-          real_id_compliance: real_id_compliance
-          address_lines:
-            street_address: street_address
-            country: country
-            country_code: country_code
-            city: city
-            state: state
-            postal_code: postal_code
-          driving_licence_information:
-            codes: codes
-            obtainment_date: 2000-01-23
-            expiry_date: 2000-01-23
-            category: category
-          mrz_line3: mrz_line3
-          issuing_country: issuing_country
-          mrz_line2: mrz_line2
-          issuing_state: issuing_state
-          first_name: first_name
-          barcode:
-          - document_number: document_number
-            issuing_date: 2000-01-23
-            gender: gender
-            date_of_birth: 2000-01-23
-            last_name: last_name
-            middle_name: middle_name
-            real_id_classification: real_id_classification
-            date_of_expiry: 2000-01-23
-            issuing_country: issuing_country
-            address_line_1: address_line_1
-            address_line_3: address_line_3
-            address_line_2: address_line_2
-            issuing_state: issuing_state
-            address_line_5: address_line_5
-            first_name: first_name
-            address_line_4: address_line_4
-            class: class
-            document_type: document_type
-          - document_number: document_number
-            issuing_date: 2000-01-23
-            gender: gender
-            date_of_birth: 2000-01-23
-            last_name: last_name
-            middle_name: middle_name
-            real_id_classification: real_id_classification
-            date_of_expiry: 2000-01-23
-            issuing_country: issuing_country
-            address_line_1: address_line_1
-            address_line_3: address_line_3
-            address_line_2: address_line_2
-            issuing_state: issuing_state
-            address_line_5: address_line_5
-            first_name: first_name
-            address_line_4: address_line_4
-            class: class
-            document_type: document_type
-          document_type: document_type
-          document_numbers:
-          - type: type
-            value: value
-          - type: type
-            value: value
-          address: address
-          issuing_date: 2000-01-23
-          last_name: last_name
-          nfc:
-            document_number: document_number
-            address: address
-            gender: gender
-            issuing_date: 2000-01-23
-            date_of_birth: 2000-01-23
-            place_of_birth: place_of_birth
-            full_name: full_name
-            nationality: nationality
-            issuing_country: issuing_country
-            date_of_expiry: 2000-01-23
-            issuing_authority: issuing_authority
-            personal_number: personal_number
-            document_type: document_type
-          document_classification:
-            issuing_country: issuing_country
-            issuing_state: issuing_state
-            document_type: document_type
-          alias_name: alias_name
-          place_of_birth: place_of_birth
-          nationality: nationality
-          date_of_expiry: 2000-01-23
-          issuing_authority: issuing_authority
-        status: awaiting_data
     document_video_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - document_video
-            - no_value
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -2778,13 +2486,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - document_video_with_address_information
-            - no_value
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
@@ -2793,13 +2494,6 @@ components:
     document_with_address_information_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - document_with_address_information
-            - no_value
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -2810,13 +2504,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - document_with_driving_licence_information
-            - no_value
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
@@ -2825,13 +2512,6 @@ components:
     document_with_driver_verification_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - document_with_driver_verification
-            - no_value
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -2842,25 +2522,12 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - facial_similarity_photo
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_breakdown'
         type: object
     facial_similarity_photo_fully_auto_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - facial_similarity_photo_fully_auto
-            - no_value
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown'
@@ -2869,12 +2536,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - facial_similarity_video
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_video_breakdown'
         type: object
@@ -2882,24 +2543,12 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - facial_similarity_motion
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_motion_breakdown'
         type: object
     known_faces_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - known_faces
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/known_faces_breakdown'
@@ -2910,12 +2559,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - identity_enhanced
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/identity_enhanced_breakdown'
           properties:
@@ -2924,12 +2567,6 @@ components:
     watchlist_aml_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - watchlist_aml
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_aml_breakdown'
@@ -2940,12 +2577,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - watchlist_enhanced
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_enhanced_breakdown'
           properties:
@@ -2954,12 +2585,6 @@ components:
     watchlist_standard_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - watchlist_standard
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
@@ -2970,12 +2595,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - watchlist_peps_only
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
           properties:
@@ -2984,12 +2603,6 @@ components:
     watchlist_sanctions_only_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - watchlist_sanctions_only
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
@@ -3000,12 +2613,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - proof_of_address
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/proof_of_address_breakdown'
           properties:
@@ -3014,12 +2621,6 @@ components:
     us_driving_licence_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - us_driving_licence
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/us_driving_licence_breakdown'
@@ -3030,24 +2631,12 @@ components:
       allOf:
       - $ref: '#/components/schemas/report_common'
       - properties:
-          name:
-            enum:
-            - device_intelligence
-            type: string
-        type: object
-      - properties:
           breakdown:
             $ref: '#/components/schemas/device_intelligence_breakdown'
         type: object
     india_pan_report:
       allOf:
       - $ref: '#/components/schemas/report_common'
-      - properties:
-          name:
-            enum:
-            - india_pan
-            type: string
-        type: object
       - properties:
           breakdown:
             $ref: '#/components/schemas/india_pan_report_allOf_breakdown'
@@ -3111,6 +2700,28 @@ components:
           type: array
         name:
           description: The name of the report type.
+          enum:
+          - document
+          - document_video
+          - document_video_with_address_information
+          - document_with_address_information
+          - document_with_driving_licence_information
+          - document_with_driver_verification
+          - facial_similarity_photo
+          - facial_similarity_photo_fully_auto
+          - facial_similarity_video
+          - facial_similarity_motion
+          - known_faces
+          - identity_enhanced
+          - watchlist_aml
+          - watchlist_enhanced
+          - watchlist_standard
+          - watchlist_peps_only
+          - watchlist_sanctions_only
+          - proof_of_address
+          - us_driving_licence
+          - device_intelligence
+          - india_pan
           type: string
         breakdown:
           description: The details of the report. This is specific to each type of
@@ -3125,181 +2736,6 @@ components:
       - name
       type: object
     document_breakdown:
-      example:
-        visual_authenticity:
-          result: result
-          breakdown:
-            template:
-              result: result
-              properties: "{}"
-            other:
-              result: result
-              properties: "{}"
-            fonts:
-              result: result
-              properties: "{}"
-            digital_tampering:
-              result: result
-              properties: "{}"
-            picture_face_integrity:
-              result: result
-              properties: "{}"
-            face_detection:
-              result: result
-              properties: "{}"
-            original_document_present:
-              result: result
-              properties:
-                scan: scan
-                document_on_printed_paper: document_on_printed_paper
-                screenshot: screenshot
-                photo_of_screen: photo_of_screen
-            security_features:
-              result: result
-              properties: "{}"
-        compromised_document:
-          result: result
-          breakdown:
-            document_database:
-              result: result
-              properties: "{}"
-            repeat_attempts:
-              result: result
-              properties: "{}"
-        age_validation:
-          result: result
-          breakdown:
-            minimum_accepted_age:
-              result: result
-              properties: "{}"
-        issuing_authority:
-          result: result
-          breakdown:
-            nfc_active_authentication:
-              result: result
-              properties: "{}"
-            nfc_passive_authentication:
-              result: result
-              properties: "{}"
-        data_consistency:
-          result: result
-          breakdown:
-            document_numbers:
-              result: result
-              properties: "{}"
-            gender:
-              result: result
-              properties: "{}"
-            nationality:
-              result: result
-              properties: "{}"
-            date_of_expiry:
-              result: result
-              properties: "{}"
-            issuing_country:
-              result: result
-              properties: "{}"
-            date_of_birth:
-              result: result
-              properties: "{}"
-            last_name:
-              result: result
-              properties: "{}"
-            multiple_data_sources_present:
-              result: result
-              properties: "{}"
-            first_name:
-              result: result
-              properties: "{}"
-            document_type:
-              result: result
-              properties: "{}"
-        data_comparison:
-          result: result
-          breakdown:
-            document_numbers:
-              result: result
-              properties: "{}"
-            gender:
-              result: result
-              properties: "{}"
-            issuing_country:
-              result: result
-              properties: "{}"
-            date_of_expiry:
-              result: result
-              properties: "{}"
-            date_of_birth:
-              result: result
-              properties: "{}"
-            last_name:
-              result: result
-              properties: "{}"
-            first_name:
-              result: result
-              properties: "{}"
-            document_type:
-              result: result
-              properties: "{}"
-        police_record:
-          result: result
-        data_validation:
-          result: result
-          breakdown:
-            document_numbers:
-              result: result
-              properties: "{}"
-            gender:
-              result: result
-              properties: "{}"
-            mrz:
-              result: result
-              properties: "{}"
-            document_expiration:
-              result: result
-              properties: "{}"
-            date_of_birth:
-              result: result
-              properties: "{}"
-            expiry_date:
-              result: result
-              properties: "{}"
-            barcode:
-              result: result
-              properties: "{}"
-        image_integrity:
-          result: result
-          breakdown:
-            colour_picture:
-              result: result
-              properties: "{}"
-            supported_document:
-              result: result
-              properties: "{}"
-            conclusive_document_quality:
-              result: result
-              properties:
-                missing_back: missing_back
-                punctured_document: punctured_document
-                watermarks_digital_text_overlay: watermarks_digital_text_overlay
-                digital_document: digital_document
-                corner_removed: corner_removed
-                obscured_data_points: obscured_data_points
-                abnormal_document_features: abnormal_document_features
-                obscured_security_features: obscured_security_features
-            image_quality:
-              result: result
-              properties:
-                incorrect_side: incorrect_side
-                glare_on_photo: glare_on_photo
-                other_photo_issue: other_photo_issue
-                cut_off_document: cut_off_document
-                covered_photo: covered_photo
-                two_documents_uploaded: two_documents_uploaded
-                blurred_photo: blurred_photo
-                no_document_in_image: no_document_in_image
-                damaged_document: damaged_document
-                dark_photo: dark_photo
       properties:
         data_comparison:
           $ref: '#/components/schemas/document_breakdown_data_comparison'
@@ -3321,122 +2757,6 @@ components:
           $ref: '#/components/schemas/document_breakdown_issuing_authority'
       type: object
     document_properties:
-      example:
-        gender: gender
-        date_of_birth: 2000-01-23
-        categorisation: categorisation
-        widow_name: widow_name
-        extracted_data:
-          document_number: document_number
-          gender: gender
-          date_of_birth: 2000-01-23
-          last_name: last_name
-          middle_name: middle_name
-          alias_name: alias_name
-          widow_name: widow_name
-          spouse_name: spouse_name
-          mrz_line1: mrz_line1
-          full_name: full_name
-          mrz_line3: mrz_line3
-          nationality: nationality
-          date_of_expiry: 2000-01-23
-          mrz_line2: mrz_line2
-          issuing_authority: issuing_authority
-          address_line_1: address_line_1
-          address_line_3: address_line_3
-          address_line_2: address_line_2
-          address_line_5: address_line_5
-          first_name: first_name
-          address_line_4: address_line_4
-        mrz_line1: mrz_line1
-        spouse_name: spouse_name
-        real_id_compliance: real_id_compliance
-        address_lines:
-          street_address: street_address
-          country: country
-          country_code: country_code
-          city: city
-          state: state
-          postal_code: postal_code
-        driving_licence_information:
-          codes: codes
-          obtainment_date: 2000-01-23
-          expiry_date: 2000-01-23
-          category: category
-        mrz_line3: mrz_line3
-        issuing_country: issuing_country
-        mrz_line2: mrz_line2
-        issuing_state: issuing_state
-        first_name: first_name
-        barcode:
-        - document_number: document_number
-          issuing_date: 2000-01-23
-          gender: gender
-          date_of_birth: 2000-01-23
-          last_name: last_name
-          middle_name: middle_name
-          real_id_classification: real_id_classification
-          date_of_expiry: 2000-01-23
-          issuing_country: issuing_country
-          address_line_1: address_line_1
-          address_line_3: address_line_3
-          address_line_2: address_line_2
-          issuing_state: issuing_state
-          address_line_5: address_line_5
-          first_name: first_name
-          address_line_4: address_line_4
-          class: class
-          document_type: document_type
-        - document_number: document_number
-          issuing_date: 2000-01-23
-          gender: gender
-          date_of_birth: 2000-01-23
-          last_name: last_name
-          middle_name: middle_name
-          real_id_classification: real_id_classification
-          date_of_expiry: 2000-01-23
-          issuing_country: issuing_country
-          address_line_1: address_line_1
-          address_line_3: address_line_3
-          address_line_2: address_line_2
-          issuing_state: issuing_state
-          address_line_5: address_line_5
-          first_name: first_name
-          address_line_4: address_line_4
-          class: class
-          document_type: document_type
-        document_type: document_type
-        document_numbers:
-        - type: type
-          value: value
-        - type: type
-          value: value
-        address: address
-        issuing_date: 2000-01-23
-        last_name: last_name
-        nfc:
-          document_number: document_number
-          address: address
-          gender: gender
-          issuing_date: 2000-01-23
-          date_of_birth: 2000-01-23
-          place_of_birth: place_of_birth
-          full_name: full_name
-          nationality: nationality
-          issuing_country: issuing_country
-          date_of_expiry: 2000-01-23
-          issuing_authority: issuing_authority
-          personal_number: personal_number
-          document_type: document_type
-        document_classification:
-          issuing_country: issuing_country
-          issuing_state: issuing_state
-          document_type: document_type
-        alias_name: alias_name
-        place_of_birth: place_of_birth
-        nationality: nationality
-        date_of_expiry: 2000-01-23
-        issuing_authority: issuing_authority
       properties:
         date_of_birth:
           format: date
@@ -3697,8 +3017,6 @@ components:
           $ref: '#/components/schemas/device_intelligence_breakdown_properties'
       type: object
     report_document:
-      example:
-        id: id
       properties:
         id:
           description: ID of uploaded document to use.
@@ -3707,17 +3025,6 @@ components:
       - id
       type: object
     document_IQ_reasons:
-      example:
-        incorrect_side: incorrect_side
-        glare_on_photo: glare_on_photo
-        other_photo_issue: other_photo_issue
-        cut_off_document: cut_off_document
-        covered_photo: covered_photo
-        two_documents_uploaded: two_documents_uploaded
-        blurred_photo: blurred_photo
-        no_document_in_image: no_document_in_image
-        damaged_document: damaged_document
-        dark_photo: dark_photo
       properties:
         dark_photo:
           description: When an image of the document is too dark to be able to see
@@ -3760,15 +3067,6 @@ components:
           type: string
       type: object
     document_CDQ_reasons:
-      example:
-        missing_back: missing_back
-        punctured_document: punctured_document
-        watermarks_digital_text_overlay: watermarks_digital_text_overlay
-        digital_document: digital_document
-        corner_removed: corner_removed
-        obscured_data_points: obscured_data_points
-        abnormal_document_features: abnormal_document_features
-        obscured_security_features: obscured_security_features
       properties:
         obscured_data_points:
           description: When data points are obscured to the point that we cannot confirm
@@ -3805,11 +3103,6 @@ components:
           type: string
       type: object
     document_ODP_reasons:
-      example:
-        scan: scan
-        document_on_printed_paper: document_on_printed_paper
-        screenshot: screenshot
-        photo_of_screen: photo_of_screen
       properties:
         photo_of_screen:
           description: When the applicant's document is on a physical screen or device.
@@ -4264,610 +3557,8 @@ components:
     list_reports_200_response:
       example:
         reports:
-        - result: clear
-          documents:
-          - id: id
-          - id: id
-          breakdown:
-            visual_authenticity:
-              result: result
-              breakdown:
-                template:
-                  result: result
-                  properties: "{}"
-                other:
-                  result: result
-                  properties: "{}"
-                fonts:
-                  result: result
-                  properties: "{}"
-                digital_tampering:
-                  result: result
-                  properties: "{}"
-                picture_face_integrity:
-                  result: result
-                  properties: "{}"
-                face_detection:
-                  result: result
-                  properties: "{}"
-                original_document_present:
-                  result: result
-                  properties:
-                    scan: scan
-                    document_on_printed_paper: document_on_printed_paper
-                    screenshot: screenshot
-                    photo_of_screen: photo_of_screen
-                security_features:
-                  result: result
-                  properties: "{}"
-            compromised_document:
-              result: result
-              breakdown:
-                document_database:
-                  result: result
-                  properties: "{}"
-                repeat_attempts:
-                  result: result
-                  properties: "{}"
-            age_validation:
-              result: result
-              breakdown:
-                minimum_accepted_age:
-                  result: result
-                  properties: "{}"
-            issuing_authority:
-              result: result
-              breakdown:
-                nfc_active_authentication:
-                  result: result
-                  properties: "{}"
-                nfc_passive_authentication:
-                  result: result
-                  properties: "{}"
-            data_consistency:
-              result: result
-              breakdown:
-                document_numbers:
-                  result: result
-                  properties: "{}"
-                gender:
-                  result: result
-                  properties: "{}"
-                nationality:
-                  result: result
-                  properties: "{}"
-                date_of_expiry:
-                  result: result
-                  properties: "{}"
-                issuing_country:
-                  result: result
-                  properties: "{}"
-                date_of_birth:
-                  result: result
-                  properties: "{}"
-                last_name:
-                  result: result
-                  properties: "{}"
-                multiple_data_sources_present:
-                  result: result
-                  properties: "{}"
-                first_name:
-                  result: result
-                  properties: "{}"
-                document_type:
-                  result: result
-                  properties: "{}"
-            data_comparison:
-              result: result
-              breakdown:
-                document_numbers:
-                  result: result
-                  properties: "{}"
-                gender:
-                  result: result
-                  properties: "{}"
-                issuing_country:
-                  result: result
-                  properties: "{}"
-                date_of_expiry:
-                  result: result
-                  properties: "{}"
-                date_of_birth:
-                  result: result
-                  properties: "{}"
-                last_name:
-                  result: result
-                  properties: "{}"
-                first_name:
-                  result: result
-                  properties: "{}"
-                document_type:
-                  result: result
-                  properties: "{}"
-            police_record:
-              result: result
-            data_validation:
-              result: result
-              breakdown:
-                document_numbers:
-                  result: result
-                  properties: "{}"
-                gender:
-                  result: result
-                  properties: "{}"
-                mrz:
-                  result: result
-                  properties: "{}"
-                document_expiration:
-                  result: result
-                  properties: "{}"
-                date_of_birth:
-                  result: result
-                  properties: "{}"
-                expiry_date:
-                  result: result
-                  properties: "{}"
-                barcode:
-                  result: result
-                  properties: "{}"
-            image_integrity:
-              result: result
-              breakdown:
-                colour_picture:
-                  result: result
-                  properties: "{}"
-                supported_document:
-                  result: result
-                  properties: "{}"
-                conclusive_document_quality:
-                  result: result
-                  properties:
-                    missing_back: missing_back
-                    punctured_document: punctured_document
-                    watermarks_digital_text_overlay: watermarks_digital_text_overlay
-                    digital_document: digital_document
-                    corner_removed: corner_removed
-                    obscured_data_points: obscured_data_points
-                    abnormal_document_features: abnormal_document_features
-                    obscured_security_features: obscured_security_features
-                image_quality:
-                  result: result
-                  properties:
-                    incorrect_side: incorrect_side
-                    glare_on_photo: glare_on_photo
-                    other_photo_issue: other_photo_issue
-                    cut_off_document: cut_off_document
-                    covered_photo: covered_photo
-                    two_documents_uploaded: two_documents_uploaded
-                    blurred_photo: blurred_photo
-                    no_document_in_image: no_document_in_image
-                    damaged_document: damaged_document
-                    dark_photo: dark_photo
-          name: document
-          created_at: 2000-01-23T04:56:07.000+00:00
-          sub_result: clear
-          check_id: check_id
-          id: id
-          href: href
-          properties:
-            gender: gender
-            date_of_birth: 2000-01-23
-            categorisation: categorisation
-            widow_name: widow_name
-            extracted_data:
-              document_number: document_number
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              alias_name: alias_name
-              widow_name: widow_name
-              spouse_name: spouse_name
-              mrz_line1: mrz_line1
-              full_name: full_name
-              mrz_line3: mrz_line3
-              nationality: nationality
-              date_of_expiry: 2000-01-23
-              mrz_line2: mrz_line2
-              issuing_authority: issuing_authority
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-            mrz_line1: mrz_line1
-            spouse_name: spouse_name
-            real_id_compliance: real_id_compliance
-            address_lines:
-              street_address: street_address
-              country: country
-              country_code: country_code
-              city: city
-              state: state
-              postal_code: postal_code
-            driving_licence_information:
-              codes: codes
-              obtainment_date: 2000-01-23
-              expiry_date: 2000-01-23
-              category: category
-            mrz_line3: mrz_line3
-            issuing_country: issuing_country
-            mrz_line2: mrz_line2
-            issuing_state: issuing_state
-            first_name: first_name
-            barcode:
-            - document_number: document_number
-              issuing_date: 2000-01-23
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              real_id_classification: real_id_classification
-              date_of_expiry: 2000-01-23
-              issuing_country: issuing_country
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              issuing_state: issuing_state
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-              class: class
-              document_type: document_type
-            - document_number: document_number
-              issuing_date: 2000-01-23
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              real_id_classification: real_id_classification
-              date_of_expiry: 2000-01-23
-              issuing_country: issuing_country
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              issuing_state: issuing_state
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-              class: class
-              document_type: document_type
-            document_type: document_type
-            document_numbers:
-            - type: type
-              value: value
-            - type: type
-              value: value
-            address: address
-            issuing_date: 2000-01-23
-            last_name: last_name
-            nfc:
-              document_number: document_number
-              address: address
-              gender: gender
-              issuing_date: 2000-01-23
-              date_of_birth: 2000-01-23
-              place_of_birth: place_of_birth
-              full_name: full_name
-              nationality: nationality
-              issuing_country: issuing_country
-              date_of_expiry: 2000-01-23
-              issuing_authority: issuing_authority
-              personal_number: personal_number
-              document_type: document_type
-            document_classification:
-              issuing_country: issuing_country
-              issuing_state: issuing_state
-              document_type: document_type
-            alias_name: alias_name
-            place_of_birth: place_of_birth
-            nationality: nationality
-            date_of_expiry: 2000-01-23
-            issuing_authority: issuing_authority
-          status: awaiting_data
-        - result: clear
-          documents:
-          - id: id
-          - id: id
-          breakdown:
-            visual_authenticity:
-              result: result
-              breakdown:
-                template:
-                  result: result
-                  properties: "{}"
-                other:
-                  result: result
-                  properties: "{}"
-                fonts:
-                  result: result
-                  properties: "{}"
-                digital_tampering:
-                  result: result
-                  properties: "{}"
-                picture_face_integrity:
-                  result: result
-                  properties: "{}"
-                face_detection:
-                  result: result
-                  properties: "{}"
-                original_document_present:
-                  result: result
-                  properties:
-                    scan: scan
-                    document_on_printed_paper: document_on_printed_paper
-                    screenshot: screenshot
-                    photo_of_screen: photo_of_screen
-                security_features:
-                  result: result
-                  properties: "{}"
-            compromised_document:
-              result: result
-              breakdown:
-                document_database:
-                  result: result
-                  properties: "{}"
-                repeat_attempts:
-                  result: result
-                  properties: "{}"
-            age_validation:
-              result: result
-              breakdown:
-                minimum_accepted_age:
-                  result: result
-                  properties: "{}"
-            issuing_authority:
-              result: result
-              breakdown:
-                nfc_active_authentication:
-                  result: result
-                  properties: "{}"
-                nfc_passive_authentication:
-                  result: result
-                  properties: "{}"
-            data_consistency:
-              result: result
-              breakdown:
-                document_numbers:
-                  result: result
-                  properties: "{}"
-                gender:
-                  result: result
-                  properties: "{}"
-                nationality:
-                  result: result
-                  properties: "{}"
-                date_of_expiry:
-                  result: result
-                  properties: "{}"
-                issuing_country:
-                  result: result
-                  properties: "{}"
-                date_of_birth:
-                  result: result
-                  properties: "{}"
-                last_name:
-                  result: result
-                  properties: "{}"
-                multiple_data_sources_present:
-                  result: result
-                  properties: "{}"
-                first_name:
-                  result: result
-                  properties: "{}"
-                document_type:
-                  result: result
-                  properties: "{}"
-            data_comparison:
-              result: result
-              breakdown:
-                document_numbers:
-                  result: result
-                  properties: "{}"
-                gender:
-                  result: result
-                  properties: "{}"
-                issuing_country:
-                  result: result
-                  properties: "{}"
-                date_of_expiry:
-                  result: result
-                  properties: "{}"
-                date_of_birth:
-                  result: result
-                  properties: "{}"
-                last_name:
-                  result: result
-                  properties: "{}"
-                first_name:
-                  result: result
-                  properties: "{}"
-                document_type:
-                  result: result
-                  properties: "{}"
-            police_record:
-              result: result
-            data_validation:
-              result: result
-              breakdown:
-                document_numbers:
-                  result: result
-                  properties: "{}"
-                gender:
-                  result: result
-                  properties: "{}"
-                mrz:
-                  result: result
-                  properties: "{}"
-                document_expiration:
-                  result: result
-                  properties: "{}"
-                date_of_birth:
-                  result: result
-                  properties: "{}"
-                expiry_date:
-                  result: result
-                  properties: "{}"
-                barcode:
-                  result: result
-                  properties: "{}"
-            image_integrity:
-              result: result
-              breakdown:
-                colour_picture:
-                  result: result
-                  properties: "{}"
-                supported_document:
-                  result: result
-                  properties: "{}"
-                conclusive_document_quality:
-                  result: result
-                  properties:
-                    missing_back: missing_back
-                    punctured_document: punctured_document
-                    watermarks_digital_text_overlay: watermarks_digital_text_overlay
-                    digital_document: digital_document
-                    corner_removed: corner_removed
-                    obscured_data_points: obscured_data_points
-                    abnormal_document_features: abnormal_document_features
-                    obscured_security_features: obscured_security_features
-                image_quality:
-                  result: result
-                  properties:
-                    incorrect_side: incorrect_side
-                    glare_on_photo: glare_on_photo
-                    other_photo_issue: other_photo_issue
-                    cut_off_document: cut_off_document
-                    covered_photo: covered_photo
-                    two_documents_uploaded: two_documents_uploaded
-                    blurred_photo: blurred_photo
-                    no_document_in_image: no_document_in_image
-                    damaged_document: damaged_document
-                    dark_photo: dark_photo
-          name: document
-          created_at: 2000-01-23T04:56:07.000+00:00
-          sub_result: clear
-          check_id: check_id
-          id: id
-          href: href
-          properties:
-            gender: gender
-            date_of_birth: 2000-01-23
-            categorisation: categorisation
-            widow_name: widow_name
-            extracted_data:
-              document_number: document_number
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              alias_name: alias_name
-              widow_name: widow_name
-              spouse_name: spouse_name
-              mrz_line1: mrz_line1
-              full_name: full_name
-              mrz_line3: mrz_line3
-              nationality: nationality
-              date_of_expiry: 2000-01-23
-              mrz_line2: mrz_line2
-              issuing_authority: issuing_authority
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-            mrz_line1: mrz_line1
-            spouse_name: spouse_name
-            real_id_compliance: real_id_compliance
-            address_lines:
-              street_address: street_address
-              country: country
-              country_code: country_code
-              city: city
-              state: state
-              postal_code: postal_code
-            driving_licence_information:
-              codes: codes
-              obtainment_date: 2000-01-23
-              expiry_date: 2000-01-23
-              category: category
-            mrz_line3: mrz_line3
-            issuing_country: issuing_country
-            mrz_line2: mrz_line2
-            issuing_state: issuing_state
-            first_name: first_name
-            barcode:
-            - document_number: document_number
-              issuing_date: 2000-01-23
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              real_id_classification: real_id_classification
-              date_of_expiry: 2000-01-23
-              issuing_country: issuing_country
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              issuing_state: issuing_state
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-              class: class
-              document_type: document_type
-            - document_number: document_number
-              issuing_date: 2000-01-23
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              real_id_classification: real_id_classification
-              date_of_expiry: 2000-01-23
-              issuing_country: issuing_country
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              issuing_state: issuing_state
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-              class: class
-              document_type: document_type
-            document_type: document_type
-            document_numbers:
-            - type: type
-              value: value
-            - type: type
-              value: value
-            address: address
-            issuing_date: 2000-01-23
-            last_name: last_name
-            nfc:
-              document_number: document_number
-              address: address
-              gender: gender
-              issuing_date: 2000-01-23
-              date_of_birth: 2000-01-23
-              place_of_birth: place_of_birth
-              full_name: full_name
-              nationality: nationality
-              issuing_country: issuing_country
-              date_of_expiry: 2000-01-23
-              issuing_authority: issuing_authority
-              personal_number: personal_number
-              document_type: document_type
-            document_classification:
-              issuing_country: issuing_country
-              issuing_state: issuing_state
-              document_type: document_type
-            alias_name: alias_name
-            place_of_birth: place_of_birth
-            nationality: nationality
-            date_of_expiry: 2000-01-23
-            issuing_authority: issuing_authority
-          status: awaiting_data
+        - null
+        - null
       properties:
         reports:
           items:
@@ -4992,9 +3683,6 @@ components:
       - document_id
       type: object
     ErrorProperties_1:
-      example:
-        type: type
-        message: message
       properties:
         type:
           type: string
@@ -5003,11 +3691,6 @@ components:
       title: ErrorProperties
       type: object
     Error_1:
-      example:
-        document_id: document_id
-        error:
-          type: type
-          message: message
       properties:
         document_id:
           description: The unique identifier of the uploaded document
@@ -5150,7 +3833,7 @@ components:
       properties:
         issuing_country:
           description: Document country in 3-letter ISO code.
-          pattern: "^[A-Z]{3}$"
+          pattern: "/^[A-Z]{3}$/"
           type: string
         document_type:
           description: Type of document.
@@ -5243,7 +3926,7 @@ components:
           type: string
         nationality:
           description: Nationality in 3-letter ISO code.
-          pattern: "^[A-Z]{3}$"
+          pattern: "/^[A-Z]{3}$/"
           type: string
         mrz_line1:
           description: Line 1 of the MRZ code.
@@ -5283,7 +3966,7 @@ components:
           type: string
         issuing_country:
           description: Document country in 3-letter ISO code.
-          pattern: "^[A-Z]{3}$"
+          pattern: "/^[A-Z]{3}$/"
           type: string
         document_type:
           description: Type of document.
@@ -5381,9 +4064,6 @@ components:
           $ref: '#/components/schemas/india_pan_report_allOf_properties_device'
       type: object
     document_breakdown_data_comparison_breakdown_issuing_country:
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5391,31 +4071,6 @@ components:
           type: object
       type: object
     document_breakdown_data_comparison_breakdown:
-      example:
-        document_numbers:
-          result: result
-          properties: "{}"
-        gender:
-          result: result
-          properties: "{}"
-        issuing_country:
-          result: result
-          properties: "{}"
-        date_of_expiry:
-          result: result
-          properties: "{}"
-        date_of_birth:
-          result: result
-          properties: "{}"
-        last_name:
-          result: result
-          properties: "{}"
-        first_name:
-          result: result
-          properties: "{}"
-        document_type:
-          result: result
-          properties: "{}"
       properties:
         issuing_country:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -5437,33 +4092,6 @@ components:
     document_breakdown_data_comparison:
       description: Asserts whether data on the document is consistent with data provided
         when creating an applicant through the API.
-      example:
-        result: result
-        breakdown:
-          document_numbers:
-            result: result
-            properties: "{}"
-          gender:
-            result: result
-            properties: "{}"
-          issuing_country:
-            result: result
-            properties: "{}"
-          date_of_expiry:
-            result: result
-            properties: "{}"
-          date_of_birth:
-            result: result
-            properties: "{}"
-          last_name:
-            result: result
-            properties: "{}"
-          first_name:
-            result: result
-            properties: "{}"
-          document_type:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -5472,9 +4100,6 @@ components:
       type: object
     document_breakdown_data_validation_breakdown_document_expiration:
       description: "If this is flagged, the document has expired."
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5483,9 +4108,6 @@ components:
       type: object
     document_breakdown_data_validation_breakdown_expiry_date:
       description: "If this is flagged, the expiration date has the incorrect format."
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5493,28 +4115,6 @@ components:
           type: object
       type: object
     document_breakdown_data_validation_breakdown:
-      example:
-        document_numbers:
-          result: result
-          properties: "{}"
-        gender:
-          result: result
-          properties: "{}"
-        mrz:
-          result: result
-          properties: "{}"
-        document_expiration:
-          result: result
-          properties: "{}"
-        date_of_birth:
-          result: result
-          properties: "{}"
-        expiry_date:
-          result: result
-          properties: "{}"
-        barcode:
-          result: result
-          properties: "{}"
       properties:
         gender:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -5533,30 +4133,6 @@ components:
       type: object
     document_breakdown_data_validation:
       description: Asserts whether algorithmically validatable elements are correct.
-      example:
-        result: result
-        breakdown:
-          document_numbers:
-            result: result
-            properties: "{}"
-          gender:
-            result: result
-            properties: "{}"
-          mrz:
-            result: result
-            properties: "{}"
-          document_expiration:
-            result: result
-            properties: "{}"
-          date_of_birth:
-            result: result
-            properties: "{}"
-          expiry_date:
-            result: result
-            properties: "{}"
-          barcode:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -5565,19 +4141,6 @@ components:
       type: object
     document_breakdown_image_integrity_breakdown_image_quality:
       description: Asserts whether the quality of the image was sufficient for processing.
-      example:
-        result: result
-        properties:
-          incorrect_side: incorrect_side
-          glare_on_photo: glare_on_photo
-          other_photo_issue: other_photo_issue
-          cut_off_document: cut_off_document
-          covered_photo: covered_photo
-          two_documents_uploaded: two_documents_uploaded
-          blurred_photo: blurred_photo
-          no_document_in_image: no_document_in_image
-          damaged_document: damaged_document
-          dark_photo: dark_photo
       properties:
         result:
           type: string
@@ -5586,9 +4149,6 @@ components:
       type: object
     document_breakdown_image_integrity_breakdown_supported_document:
       description: Asserts whether the submitted document is supported.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5597,9 +4157,6 @@ components:
       type: object
     document_breakdown_image_integrity_breakdown_colour_picture:
       description: Asserts whether the image was a colour one.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5609,17 +4166,6 @@ components:
     document_breakdown_image_integrity_breakdown_conclusive_document_quality:
       description: Asserts if the document was of enough quality to be able to perform
         a fraud inspection.
-      example:
-        result: result
-        properties:
-          missing_back: missing_back
-          punctured_document: punctured_document
-          watermarks_digital_text_overlay: watermarks_digital_text_overlay
-          digital_document: digital_document
-          corner_removed: corner_removed
-          obscured_data_points: obscured_data_points
-          abnormal_document_features: abnormal_document_features
-          obscured_security_features: obscured_security_features
       properties:
         result:
           type: string
@@ -5627,37 +4173,6 @@ components:
           $ref: '#/components/schemas/document_CDQ_reasons'
       type: object
     document_breakdown_image_integrity_breakdown:
-      example:
-        colour_picture:
-          result: result
-          properties: "{}"
-        supported_document:
-          result: result
-          properties: "{}"
-        conclusive_document_quality:
-          result: result
-          properties:
-            missing_back: missing_back
-            punctured_document: punctured_document
-            watermarks_digital_text_overlay: watermarks_digital_text_overlay
-            digital_document: digital_document
-            corner_removed: corner_removed
-            obscured_data_points: obscured_data_points
-            abnormal_document_features: abnormal_document_features
-            obscured_security_features: obscured_security_features
-        image_quality:
-          result: result
-          properties:
-            incorrect_side: incorrect_side
-            glare_on_photo: glare_on_photo
-            other_photo_issue: other_photo_issue
-            cut_off_document: cut_off_document
-            covered_photo: covered_photo
-            two_documents_uploaded: two_documents_uploaded
-            blurred_photo: blurred_photo
-            no_document_in_image: no_document_in_image
-            damaged_document: damaged_document
-            dark_photo: dark_photo
       properties:
         image_quality:
           $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown_image_quality'
@@ -5670,39 +4185,6 @@ components:
       type: object
     document_breakdown_image_integrity:
       description: Asserts if the document is of sufficient quality to verify.
-      example:
-        result: result
-        breakdown:
-          colour_picture:
-            result: result
-            properties: "{}"
-          supported_document:
-            result: result
-            properties: "{}"
-          conclusive_document_quality:
-            result: result
-            properties:
-              missing_back: missing_back
-              punctured_document: punctured_document
-              watermarks_digital_text_overlay: watermarks_digital_text_overlay
-              digital_document: digital_document
-              corner_removed: corner_removed
-              obscured_data_points: obscured_data_points
-              abnormal_document_features: abnormal_document_features
-              obscured_security_features: obscured_security_features
-          image_quality:
-            result: result
-            properties:
-              incorrect_side: incorrect_side
-              glare_on_photo: glare_on_photo
-              other_photo_issue: other_photo_issue
-              cut_off_document: cut_off_document
-              covered_photo: covered_photo
-              two_documents_uploaded: two_documents_uploaded
-              blurred_photo: blurred_photo
-              no_document_in_image: no_document_in_image
-              damaged_document: damaged_document
-              dark_photo: dark_photo
       properties:
         result:
           type: string
@@ -5711,9 +4193,6 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_fonts:
       description: Fonts in the document don't match the expected ones.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5723,9 +4202,6 @@ components:
     document_breakdown_visual_authenticity_breakdown_picture_face_integrity:
       description: The pictures of the person identified on the document show signs
         of tampering or alteration.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5735,9 +4211,6 @@ components:
     document_breakdown_visual_authenticity_breakdown_template:
       description: The document doesn't match the expected template for the document
         type and country it is from.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5746,9 +4219,6 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_security_features:
       description: Security features expected on the document are missing or wrong.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5757,13 +4227,6 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_original_document_present:
       description: The document was not present when the photo was taken.
-      example:
-        result: result
-        properties:
-          scan: scan
-          document_on_printed_paper: document_on_printed_paper
-          screenshot: screenshot
-          photo_of_screen: photo_of_screen
       properties:
         result:
           type: string
@@ -5772,9 +4235,6 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_digital_tampering:
       description: Indication of digital tampering in the image.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5785,9 +4245,6 @@ components:
       description: "This sub-breakdown is returned for backward compatibility reasons.\
         \ Its value will be consider when at least one of the other breakdowns is\
         \ consider, and clear when all the other breakdowns are clear."
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5796,9 +4253,6 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_face_detection:
       description: No face was detected on the document.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -5806,35 +4260,6 @@ components:
           type: object
       type: object
     document_breakdown_visual_authenticity_breakdown:
-      example:
-        template:
-          result: result
-          properties: "{}"
-        other:
-          result: result
-          properties: "{}"
-        fonts:
-          result: result
-          properties: "{}"
-        digital_tampering:
-          result: result
-          properties: "{}"
-        picture_face_integrity:
-          result: result
-          properties: "{}"
-        face_detection:
-          result: result
-          properties: "{}"
-        original_document_present:
-          result: result
-          properties:
-            scan: scan
-            document_on_printed_paper: document_on_printed_paper
-            screenshot: screenshot
-            photo_of_screen: photo_of_screen
-        security_features:
-          result: result
-          properties: "{}"
       properties:
         fonts:
           $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_fonts'
@@ -5856,37 +4281,6 @@ components:
     document_breakdown_visual_authenticity:
       description: "Asserts whether visual, non-textual, elements are correct given\
         \ the type of document."
-      example:
-        result: result
-        breakdown:
-          template:
-            result: result
-            properties: "{}"
-          other:
-            result: result
-            properties: "{}"
-          fonts:
-            result: result
-            properties: "{}"
-          digital_tampering:
-            result: result
-            properties: "{}"
-          picture_face_integrity:
-            result: result
-            properties: "{}"
-          face_detection:
-            result: result
-            properties: "{}"
-          original_document_present:
-            result: result
-            properties:
-              scan: scan
-              document_on_printed_paper: document_on_printed_paper
-              screenshot: screenshot
-              photo_of_screen: photo_of_screen
-          security_features:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -5894,37 +4288,6 @@ components:
           $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown'
       type: object
     document_breakdown_data_consistency_breakdown:
-      example:
-        document_numbers:
-          result: result
-          properties: "{}"
-        gender:
-          result: result
-          properties: "{}"
-        nationality:
-          result: result
-          properties: "{}"
-        date_of_expiry:
-          result: result
-          properties: "{}"
-        issuing_country:
-          result: result
-          properties: "{}"
-        date_of_birth:
-          result: result
-          properties: "{}"
-        last_name:
-          result: result
-          properties: "{}"
-        multiple_data_sources_present:
-          result: result
-          properties: "{}"
-        first_name:
-          result: result
-          properties: "{}"
-        document_type:
-          result: result
-          properties: "{}"
       properties:
         date_of_expiry:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -5950,39 +4313,6 @@ components:
     document_breakdown_data_consistency:
       description: Asserts whether data represented in multiple places on the document
         is consistent.
-      example:
-        result: result
-        breakdown:
-          document_numbers:
-            result: result
-            properties: "{}"
-          gender:
-            result: result
-            properties: "{}"
-          nationality:
-            result: result
-            properties: "{}"
-          date_of_expiry:
-            result: result
-            properties: "{}"
-          issuing_country:
-            result: result
-            properties: "{}"
-          date_of_birth:
-            result: result
-            properties: "{}"
-          last_name:
-            result: result
-            properties: "{}"
-          multiple_data_sources_present:
-            result: result
-            properties: "{}"
-          first_name:
-            result: result
-            properties: "{}"
-          document_type:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -5992,20 +4322,11 @@ components:
     document_breakdown_police_record:
       description: "Asserts whether the document had been identified as lost, stolen\
         \ or otherwise compromised."
-      example:
-        result: result
       properties:
         result:
           type: string
       type: object
     document_breakdown_compromised_document_breakdown:
-      example:
-        document_database:
-          result: result
-          properties: "{}"
-        repeat_attempts:
-          result: result
-          properties: "{}"
       properties:
         document_database:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -6015,15 +4336,6 @@ components:
     document_breakdown_compromised_document:
       description: Asserts whether the image of the document has been found in our
         internal database or if it was used in a suspicious way.
-      example:
-        result: result
-        breakdown:
-          document_database:
-            result: result
-            properties: "{}"
-          repeat_attempts:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -6031,10 +4343,6 @@ components:
           $ref: '#/components/schemas/document_breakdown_compromised_document_breakdown'
       type: object
     document_breakdown_age_validation_breakdown:
-      example:
-        minimum_accepted_age:
-          result: result
-          properties: "{}"
       properties:
         minimum_accepted_age:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -6042,12 +4350,6 @@ components:
     document_breakdown_age_validation:
       description: Asserts whether the age calculated from the document's date of
         birth data point is greater than or equal to the minimum accepted age.
-      example:
-        result: result
-        breakdown:
-          minimum_accepted_age:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -6056,9 +4358,6 @@ components:
       type: object
     document_breakdown_issuing_authority_breakdown_nfc_active_authentication:
       description: Asserts whether the document NFC chip is original or cloned.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -6067,9 +4366,6 @@ components:
       type: object
     document_breakdown_issuing_authority_breakdown_nfc_passive_authentication:
       description: Asserts whether the document NFC chip data was tampered.
-      example:
-        result: result
-        properties: "{}"
       properties:
         result:
           type: string
@@ -6077,13 +4373,6 @@ components:
           type: object
       type: object
     document_breakdown_issuing_authority_breakdown:
-      example:
-        nfc_active_authentication:
-          result: result
-          properties: "{}"
-        nfc_passive_authentication:
-          result: result
-          properties: "{}"
       properties:
         nfc_active_authentication:
           $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown_nfc_active_authentication'
@@ -6093,15 +4382,6 @@ components:
     document_breakdown_issuing_authority:
       description: Asserts whether data on the document matches the issuing authority
         data.
-      example:
-        result: result
-        breakdown:
-          nfc_active_authentication:
-            result: result
-            properties: "{}"
-          nfc_passive_authentication:
-            result: result
-            properties: "{}"
       properties:
         result:
           type: string
@@ -6109,9 +4389,6 @@ components:
           $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown'
       type: object
     document_properties_document_numbers_inner:
-      example:
-        type: type
-        value: value
       properties:
         value:
           type: string
@@ -6119,13 +4396,6 @@ components:
           type: string
       type: object
     document_properties_address_lines:
-      example:
-        street_address: street_address
-        country: country
-        country_code: country_code
-        city: city
-        state: state
-        postal_code: postal_code
       properties:
         street_address:
           type: string
@@ -6141,25 +4411,6 @@ components:
           type: string
       type: object
     document_properties_barcode_inner:
-      example:
-        document_number: document_number
-        issuing_date: 2000-01-23
-        gender: gender
-        date_of_birth: 2000-01-23
-        last_name: last_name
-        middle_name: middle_name
-        real_id_classification: real_id_classification
-        date_of_expiry: 2000-01-23
-        issuing_country: issuing_country
-        address_line_1: address_line_1
-        address_line_3: address_line_3
-        address_line_2: address_line_2
-        issuing_state: issuing_state
-        address_line_5: address_line_5
-        first_name: first_name
-        address_line_4: address_line_4
-        class: class
-        document_type: document_type
       properties:
         first_name:
           type: string
@@ -6202,20 +4453,6 @@ components:
           type: string
       type: object
     document_properties_nfc:
-      example:
-        document_number: document_number
-        address: address
-        gender: gender
-        issuing_date: 2000-01-23
-        date_of_birth: 2000-01-23
-        place_of_birth: place_of_birth
-        full_name: full_name
-        nationality: nationality
-        issuing_country: issuing_country
-        date_of_expiry: 2000-01-23
-        issuing_authority: issuing_authority
-        personal_number: personal_number
-        document_type: document_type
       properties:
         document_type:
           type: string
@@ -6248,11 +4485,6 @@ components:
           type: string
       type: object
     document_properties_driving_licence_information:
-      example:
-        codes: codes
-        obtainment_date: 2000-01-23
-        expiry_date: 2000-01-23
-        category: category
       properties:
         category:
           type: string
@@ -6266,10 +4498,6 @@ components:
           type: string
       type: object
     document_properties_document_classification:
-      example:
-        issuing_country: issuing_country
-        issuing_state: issuing_state
-        document_type: document_type
       properties:
         issuing_country:
           type: string
@@ -6279,28 +4507,6 @@ components:
           type: string
       type: object
     document_properties_extracted_data:
-      example:
-        document_number: document_number
-        gender: gender
-        date_of_birth: 2000-01-23
-        last_name: last_name
-        middle_name: middle_name
-        alias_name: alias_name
-        widow_name: widow_name
-        spouse_name: spouse_name
-        mrz_line1: mrz_line1
-        full_name: full_name
-        mrz_line3: mrz_line3
-        nationality: nationality
-        date_of_expiry: 2000-01-23
-        mrz_line2: mrz_line2
-        issuing_authority: issuing_authority
-        address_line_1: address_line_1
-        address_line_3: address_line_3
-        address_line_2: address_line_2
-        address_line_5: address_line_5
-        first_name: first_name
-        address_line_4: address_line_4
       properties:
         document_number:
           type: string

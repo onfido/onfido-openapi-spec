@@ -8,7 +8,7 @@ properties:
     properties:
       issuing_country:
         type: string
-        pattern: '^[A-Z]{3}$'
+        pattern: '/^[A-Z]{3}$/'
         description: Document country in 3-letter ISO code.
       document_type:
         type: string
@@ -70,7 +70,7 @@ properties:
         description: Date of expiry in YYYY-MM-DD format.
       nationality:
         type: string
-        pattern: '^[A-Z]{3}$'
+        pattern: '/^[A-Z]{3}$/'
         description: Nationality in 3-letter ISO code.
       mrz_line1:
         type: string
@@ -110,7 +110,7 @@ properties:
         description: Issuing authority.
       issuing_country:
         type: string
-        pattern: '^[A-Z]{3}$'
+        pattern: '/^[A-Z]{3}$/'
         description: Document country in 3-letter ISO code.
       document_type:
         type: string

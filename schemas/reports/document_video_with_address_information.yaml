@@ -2,11 +2,6 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
-      name:
-        type: string
-        enum: [document_video_with_address_information, no_value]
-  - type: object
-    properties:
       breakdown:
         $ref: document_breakdown.yaml
       properties:

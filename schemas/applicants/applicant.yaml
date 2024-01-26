@@ -20,11 +20,11 @@ properties:
     readOnly: true
   first_name:
     type: string
-    pattern: '^[^!#$%*=<>;{}"]*$'
+    pattern: '/^[^!#$%*=<>;{}"]*$/'
     description: The applicant's first name
   last_name:
     type: string
-    pattern: '^[^!#$%*=<>;{}"]*$'
+    pattern: '/^[^!#$%*=<>;{}"]*$/'
     description: The applicant's surname
   email:
     type: string

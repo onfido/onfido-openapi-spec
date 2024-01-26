@@ -5,5 +5,5 @@ properties:
     description: The applicant's ip address.
   country_of_residence:
     type: string
-    pattern: '^[A-Z]{3}$'
+    pattern: '/^[A-Z]{3}$/'
     description: The applicant's country of residence in 3-letter ISO code.

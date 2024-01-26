@@ -2,10 +2,5 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
-      name:
-        type: string
-        enum: [device_intelligence]
-  - type: object
-    properties:
       breakdown:
         $ref: device_intelligence_breakdown.yaml

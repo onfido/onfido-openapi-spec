@@ -2,10 +2,5 @@ allOf:
   - $ref: report_common.yaml
   - type: object
     properties:
-      name:
-        type: string
-        enum: [facial_similarity_video]
-  - type: object
-    properties:
       breakdown:
         $ref: facial_similarity_video_breakdown.yaml
