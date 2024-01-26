@@ -3,7 +3,7 @@ properties:
   face_comparison:
     type: object
     readOnly: true
-    description: Asserts whether the face in the document matches the face in the live video.
+    description: Asserts whether the face in the document matches the face in the motion capture.
     properties:
       result:
         type: string
@@ -26,7 +26,7 @@ properties:
                   document_id:
                     type: string
                     format: uuid
-                    description: The UUID for the document containing the extracted face that was used for face matching. 
+                    description: The UUID for the document containing the extracted face that was used for face matching.
   image_integrity:
     type: object
     readOnly: true
@@ -39,7 +39,7 @@ properties:
         properties:
           face_detected:
             type: object
-            description: Asserts a single face of good enough quality has been found in both the document image and the live video.
+            description: Asserts a single face of good enough quality has been found in both the document image and in the motion capture.
             properties:
               result:
                 type: string
@@ -47,7 +47,7 @@ properties:
                 type: object
           source_integrity:
             type: object
-            description: Asserts whether the live video is trustworthy - e.g. not from a fake webcam.
+            description: Asserts whether the motion capture is trustworthy - e.g. not from a fake webcam.
             properties:
               result:
                 type: string
@@ -56,7 +56,7 @@ properties:
   visual_authenticity:
     type: object
     readOnly: true
-    description: Asserts whether the person in the live video is real (not a spoof) and live.
+    description: Asserts whether the person in the motion capture is real (not a spoof) and live.
     properties:
       result:
         type: string
@@ -73,7 +73,7 @@ properties:
                 type: object
           spoofing_detection:
             type: object
-            description: Asserts whether the live video is not a spoof (such as videos of digital screens).
+            description: Asserts whether the motion capture is not a spoof (such as videos of digital screens).
             properties:
               result:
                 type: string

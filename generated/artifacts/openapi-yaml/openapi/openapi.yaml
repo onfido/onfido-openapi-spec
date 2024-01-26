@@ -2852,11 +2852,11 @@ components:
     facial_similarity_motion_breakdown:
       properties:
         face_comparison:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_face_comparison'
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_face_comparison'
         image_integrity:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity'
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity'
         visual_authenticity:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity'
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity'
       type: object
     known_faces_breakdown:
       properties:
@@ -4754,6 +4754,77 @@ components:
           type: string
         breakdown:
           $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown'
+      readOnly: true
+      type: object
+    facial_similarity_motion_breakdown_face_comparison:
+      description: Asserts whether the face in the document matches the face in the
+        motion capture.
+      properties:
+        result:
+          type: string
+        breakdown:
+          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown'
+      readOnly: true
+      type: object
+    facial_similarity_motion_breakdown_image_integrity_breakdown_face_detected:
+      description: Asserts a single face of good enough quality has been found in
+        both the document image and in the motion capture.
+      properties:
+        result:
+          type: string
+        properties:
+          type: object
+      type: object
+    facial_similarity_motion_breakdown_image_integrity_breakdown_source_integrity:
+      description: Asserts whether the motion capture is trustworthy - e.g. not from
+        a fake webcam.
+      properties:
+        result:
+          type: string
+        properties:
+          $ref: '#/components/schemas/video_reasons'
+      type: object
+    facial_similarity_motion_breakdown_image_integrity_breakdown:
+      properties:
+        face_detected:
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown_face_detected'
+        source_integrity:
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown_source_integrity'
+      type: object
+    facial_similarity_motion_breakdown_image_integrity:
+      description: Asserts whether the quality and integrity of the uploaded files
+        were sufficient to perform a face comparison.
+      properties:
+        result:
+          type: string
+        breakdown:
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown'
+      readOnly: true
+      type: object
+    facial_similarity_motion_breakdown_visual_authenticity_breakdown_spoofing_detection:
+      description: Asserts whether the motion capture is not a spoof (such as videos
+        of digital screens).
+      properties:
+        result:
+          type: string
+        properties:
+          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties'
+      type: object
+    facial_similarity_motion_breakdown_visual_authenticity_breakdown:
+      properties:
+        liveness_detected:
+          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected'
+        spoofing_detection:
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown_spoofing_detection'
+      type: object
+    facial_similarity_motion_breakdown_visual_authenticity:
+      description: Asserts whether the person in the motion capture is real (not a
+        spoof) and live.
+      properties:
+        result:
+          type: string
+        breakdown:
+          $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown'
       readOnly: true
       type: object
     known_faces_breakdown_previously_seen_faces:
