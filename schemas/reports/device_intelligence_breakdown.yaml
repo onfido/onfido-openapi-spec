@@ -126,4 +126,6 @@ properties:
             description: Region location of the IP address.
           country:
             type: string
+            allOf:
+              - $ref: ../countries/country_codes.yaml
             description: Country location of the IP address in a three letter format.

@@ -10,17 +10,7 @@ For our latest stable release that is officially supported please use [v1.0.0](h
 
 ### How to build client libraries yourself
 
-To build python client library for instance, run:
-
-```sh
-docker run --rm -v "$PWD:/local" openapitools/openapi-generator-cli:latest \
-  generate -i /local/openapi.yaml -g python -o /local/generated/artifacts/python \
-  --additional-properties=packageName=onfido,useOneOfDiscriminatorLookup=true
-```
-
-The list of available generators (with options) is avaliable in [OpenAPI documentation](https://openapi-generator.tech/docs/generators/).
-
-Please find out [here](https://openapi-generator.tech/) more information about openapi-generator-cli.
+Please find out in [OpenAPI documentation](https://openapi-generator.tech) the list of available client generators and more information about openapi-generator-cli to generate client libraries in [several programming languages](https://openapi-generator.tech/docs/generators/#client-generators).
 
 ### Swagger Editor documentation and Postman collection
 

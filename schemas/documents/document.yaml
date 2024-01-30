@@ -46,7 +46,8 @@ properties:
     description: The side of the document, if applicable. The possible values are front and back
   issuing_country:
     type: string
-    pattern: '/^[A-Z]{3}$/'
+    allOf:
+      - $ref: ../countries/country_codes.yaml
     description: The issuing country of the document, a 3-letter ISO code.
   applicant_id:
     type: string

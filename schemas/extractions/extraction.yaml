@@ -8,7 +8,8 @@ properties:
     properties:
       issuing_country:
         type: string
-        pattern: '/^[A-Z]{3}$/'
+        allOf:
+          - $ref: ../countries/country_codes.yaml
         description: Document country in 3-letter ISO code.
       document_type:
         type: string
@@ -110,7 +111,8 @@ properties:
         description: Issuing authority.
       issuing_country:
         type: string
-        pattern: '/^[A-Z]{3}$/'
+        allOf:
+          - $ref: ../countries/country_codes.yaml
         description: Document country in 3-letter ISO code.
       document_type:
         type: string

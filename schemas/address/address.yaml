@@ -26,6 +26,8 @@ properties:
     description: The postcode or ZIP of the applicant's address
   country:
     type: string
+    allOf:
+      - $ref: ../countries/country_codes.yaml
     description: The 3 character ISO country code of this address. For example, GBR is the country code for the United Kingdom
   state:
     type: string

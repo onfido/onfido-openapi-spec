@@ -92,7 +92,7 @@
         "200":
           description: The check PDF binary data
           content:
-            "*/*":
+            application/pdf:
               schema:
                 type: string
                 format: binary
