@@ -5545,12 +5545,18 @@ components:
           description: The SDK version that was used.
           type: string
         sdk_source:
-          description: "The SDK used to upload the media.\tonfido-android-sdk, onfido-ios-sdk,\
-            \ onfido-web-sdk"
+          description: The SDK used to upload the media.
+          enum:
+          - onfido-android-sdk
+          - onfido-ios-sdk
+          - onfido-web-sdk
           type: string
         authentication_type:
-          description: "The token used to authenticate the request.\tsdk_token, mobile_token,\
-            \ api_token"
+          description: The token used to authenticate the request.
+          enum:
+          - sdk_token
+          - mobile_token
+          - api_token
           type: string
         raw_model:
           description: The model as set by the phone manufacturer (for Android and
@@ -5596,6 +5602,10 @@ components:
           description: Whether there is highly suspicious traffic related to the IP
             address. The risk depends on the overall ratio of clear checks on a given
             IP.
+          enum:
+          - NOT_ENOUGH_DATA
+          - HIGH_RISK
+          - LOW_RISK
           type: string
         device_fingerprint_reuse:
           description: The number of times the device was used to create a report
@@ -5610,10 +5620,16 @@ components:
         document_capture:
           description: Whether the document media were live captured from the device
             camera.
+          enum:
+          - live
+          - unknown_method
           type: string
         biometric_capture:
           description: Whether the biometric media were live captured from the device
             camera.
+          enum:
+          - live
+          - unknown_method
           type: string
       type: object
     device_intelligence_breakdown_properties_ip:
