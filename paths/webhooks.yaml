@@ -8,7 +8,12 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/webhooks/webhooks_list.yaml
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: ../schemas/webhooks/webhook.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -88,5 +93,23 @@
       responses:
         "204":
           description: Webhook deleted
+        default:
+          $ref: ../responses/default_error.yaml
+
+  webhooks_resend:
+    post:
+      summary: Resends webhooks
+      operationId: resend_webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/webhooks/webhook_resend.yaml
+      responses:
+        '204':
+          description: Webhooks are resent for the respective checks
+        '422':
+          description: Request was received but it could not be processed
         default:
           $ref: ../responses/default_error.yaml

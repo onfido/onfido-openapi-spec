@@ -11,7 +11,7 @@ properties:
     items:
       type: object
       properties:
-        value: 
+        value:
           type: string
         type:
           type: string
@@ -25,21 +25,21 @@ properties:
     type: string
   last_name:
     type: string
-  nationality: 
-    type: string 
+  nationality:
+    type: string
   issuing_state:
     type: string
   issuing_date:
     type: string
     format: date
   categorisation:
-    type: string 
+    type: string
   mrz_line1:
     type: string
   mrz_line2:
     type: string
   mrz_line3:
-    type: string 
+    type: string
   address:
     type: string
   place_of_birth:
@@ -58,15 +58,15 @@ properties:
     type: object
     properties:
       street_address:
-        type: string 
+        type: string
       state:
         type: string
       postal_code:
         type: string
       country:
         type: string
-      city: 
-        type: string 
+      city:
+        type: string
       country_code:
         type: string
   barcode:
@@ -78,12 +78,12 @@ properties:
           type: string
         middle_name:
           type: string
-        last_name:  
-          type: string 
+        last_name:
+          type: string
         document_type:
-          type: string 
+          type: string
         date_of_expiry:
-          type: string 
+          type: string
           format: date
         date_of_birth:
           type: string
@@ -92,25 +92,25 @@ properties:
           type: string
           format: date
         address_line_1:
-          type: string 
+          type: string
         address_line_2:
-          type: string 
+          type: string
         address_line_3:
-          type: string 
+          type: string
         address_line_4:
-          type: string 
+          type: string
         address_line_5:
-          type: string 
+          type: string
         issuing_state:
           type: string
         class:
           type: string
         gender:
-          type: string 
+          type: string
         issuing_country:
           type: string
         document_number:
-          type: string 
+          type: string
         real_id_classification:
           type: string
   nfc:
@@ -199,9 +199,9 @@ properties:
       mrz_line2:
         type: string
       mrz_line3:
-        type: string 
-      nationality: 
-        type: string 
+        type: string
+      nationality:
+        type: string
       address_line_1:
         type: string
       address_line_2:
@@ -213,4 +213,4 @@ properties:
       address_line_5:
         type: string
       issuing_authority:
-        type: string 
+        type: string

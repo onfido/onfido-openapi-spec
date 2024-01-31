@@ -3,6 +3,6 @@ allOf:
   - type: object
     properties:
       breakdown:
-        $ref: right_to_work_breakdown.yaml
+        $ref: watchlist_aml_breakdown.yaml
       properties:
-        $ref: right_to_work_properties.yaml
+        $ref: watchlist_aml_properties.yaml

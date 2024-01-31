@@ -14,7 +14,12 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/reports/reports_list.yaml
+                type: object
+                properties:
+                  reports:
+                    type: array
+                    items:
+                      $ref: ../schemas/reports/report.yaml
         default:
           $ref: ../responses/default_error.yaml
 

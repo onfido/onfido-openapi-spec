@@ -1,6 +1,0 @@
-    type: object
-    properties:
-      webhooks:
-        type: array
-        items:
-          $ref: webhook.yaml

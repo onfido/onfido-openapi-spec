@@ -15,7 +15,12 @@
           content:
             application/json:
               schema:
-                $ref: ../schemas/live_photos/live_photos_list.yaml
+                type: object
+                properties:
+                  live_photos:
+                    type: array
+                    items:
+                      $ref: ../schemas/live_photos/live_photo.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -32,21 +37,24 @@
         content:
           multipart/form-data:
             schema:
-              type: object
-              required:
-                - applicant_id
-                - file
-              properties:
-                applicant_id:
-                  type: string
-                file:
-                  type: string
-                  format: binary
-                  description: The file to be uploaded.
-                advanced_validation:
-                  type: boolean
-                  description: Validates that the live photo contains exactly one face.
-                  default: true
+              allOf:
+                - $ref: ../schemas/live_photos/live_photo.yaml
+                - object:
+                  required:
+                    - applicant_id
+                    - file
+                  properties:
+                    applicant_id:
+                      type: string
+                      description: The ID of the applicant whose live photo is being uploaded.
+                    file:
+                      type: string
+                      format: binary
+                      description: The file to be uploaded.
+                    advanced_validation:
+                      type: boolean
+                      description: Validates that the live photo contains exactly one face.
+                      default: true
       responses:
         "201":
           description: The Live Photo
@@ -65,7 +73,7 @@
         - name: live_photo_id
           in: path
           required: true
-          description: The live photo’s unique identifier.
+          description: The live photo's unique identifier.
           schema:
             type: string
       responses:
@@ -87,7 +95,7 @@
         - name: live_photo_id
           in: path
           required: true
-          description: The live photo’s unique identifier.
+          description: The live photo's unique identifier.
           schema:
             type: string
       responses:

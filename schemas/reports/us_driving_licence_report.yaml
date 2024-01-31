@@ -1,0 +1,8 @@
+allOf:
+  - $ref: report_common.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: us_driving_licence_breakdown.yaml
+      properties:
+        $ref: document_properties.yaml

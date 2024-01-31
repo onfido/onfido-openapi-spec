@@ -1,0 +1,17 @@
+type: object
+properties:
+  expected_result:
+    type: string
+    enum:
+      - clear
+      - consider
+    description: The expected result for the check or report.
+  check_id:
+    type: string
+    description: The ID of the check (only if report_id is not provided).
+  report_id:
+    type: string
+    description: The ID of the check (only if check_id is not provided).
+  feedback_notes:
+    type: string
+    description: Any additional information or feedback.

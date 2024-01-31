@@ -1,0 +1,19 @@
+  results_feedback:
+    post:
+      summary: Create Feedback on checks and reports (ALPHA)
+      operationId: post_results_feedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/results_feedback/results_feedback.yaml
+      responses:
+        "200":
+          description: Created feedback
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/results_feedback/results_feedback.yaml
+        default:
+          $ref: ../responses/default_error.yaml

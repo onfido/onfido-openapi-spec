@@ -1,57 +1,56 @@
-    type: object
-    # first_name and last_name are not required here so that it can be reused for updating an applicant.
-    properties:
-      id:
-        type: string
-        readOnly: true
-        description: The unique identifier for the applicant. Read-only.
-      created_at:
-        type: string
-        format: date-time
-        readOnly: true
-        description: The date and time when this applicant was created. Read-only.
-      delete_at:
-        type: string
-        format: date-time
-        readOnly: true
-        description: The date and time when this applicant is scheduled to be deleted. Read-only.
-      href:
-        type: string
-        readOnly: true
-        description: The uri of this resource. Read-only.
-      sandbox:
-        type: boolean
-        readOnly: true
-        description: Read-only.
-      first_name:
-        type: string
-        description: The applicant’s first name
-      last_name:
-        type: string
-        description: The applicant’s surname
-      email:
-        type: string
-        description: The applicant’s email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.
-      dob:
-        type: string
-        format: date
-        description: The applicant’s date of birth
-      address:
-        $ref: ../address/address.yaml
-      id_numbers:
-        type: array
-        items:
-          $ref: id_number.yaml
-      phone_number:
-        type: string
-        description: The applicant’s phone number
-      consents:
-        type: array
-        items:
-          type: object
-          additionalProperties: true
-          description: The applicant’s consents  
-      location:
-        $ref: ../location/location.yaml
-    
-            
+type: object
+properties:
+  id:
+    type: string
+    description: The unique identifier for the applicant.
+    readOnly: true
+  created_at:
+    type: string
+    format: date-time
+    description: The date and time when this applicant was created.
+    readOnly: true
+  delete_at:
+    type: string
+    format: date-time
+    description: The date and time when this applicant is scheduled to be deleted.
+    readOnly: true
+  href:
+    type: string
+    description: The uri of this resource.
+    readOnly: true
+  first_name:
+    type: string
+    pattern: '/^[^!#$%*=<>;{}"]*$/'
+    description: The applicant's first name
+  last_name:
+    type: string
+    pattern: '/^[^!#$%*=<>;{}"]*$/'
+    description: The applicant's surname
+  email:
+    type: string
+    description: The applicant's email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.
+  dob:
+    type: string
+    format: date
+    description: The applicant's date of birth
+  address:
+    $ref: ../address/address.yaml
+  id_numbers:
+    type: array
+    items:
+      $ref: id_number.yaml
+  sandbox:
+    type: boolean
+    readOnly: true
+  phone_number:
+    type: string
+    description: The applicant's phone number
+  location:
+    $ref: ../location/location.yaml
+  consents:
+    type: array
+    items:
+      type: object
+      additionalProperties: true
+      description: The applicant's consents
+    writeOnly: true

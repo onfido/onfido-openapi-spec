@@ -1,6 +1,0 @@
-    type: object
-    properties:
-      addresses:
-        type: array
-        items:
-          $ref: address.yaml

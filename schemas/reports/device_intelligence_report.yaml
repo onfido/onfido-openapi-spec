@@ -1,0 +1,6 @@
+allOf:
+  - $ref: report_common.yaml
+  - type: object
+    properties:
+      breakdown:
+        $ref: device_intelligence_breakdown.yaml

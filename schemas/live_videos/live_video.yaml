@@ -22,3 +22,9 @@
       file_type:
         type: string
         description: The file type of the uploaded file.
+      challenge:
+        type: array
+        description: Challenge the end user was asked to perform during the video recording.
+        items:
+          type: object
+          additionalProperties: true

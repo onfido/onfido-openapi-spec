@@ -3,4 +3,4 @@ allOf:
   - type: object
     properties:
       breakdown:
-        $ref: photo_fully_auto_breakdown.yaml
+        $ref: facial_similarity_photo_fully_auto_breakdown.yaml
