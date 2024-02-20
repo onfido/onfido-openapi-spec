@@ -53,7 +53,7 @@ properties:
   issuing_authority:
     type: string
   real_id_compliance:
-    type: string
+    type: boolean
   address_lines:
     type: object
     properties:
