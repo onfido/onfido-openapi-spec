@@ -1,5 +1,8 @@
+required:
+  - id
+  - name
 allOf:
-  - $ref: report_common.yaml
+  - $ref: definitions.yaml#/common
   - type: object
     properties:
       breakdown:
@@ -46,7 +49,7 @@ allOf:
                 description: Normalised data for passenger cars
                 properties:
                   is_qualified:
-                    description: Whether they are qualified for a passenger car, such as a “B” class in the UK 
+                    description: Whether they are qualified for a passenger car, such as a “B” class in the UK
                     type: boolean
                   obtainment_date:
                     description: Date the class qualification was obtained

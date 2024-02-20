@@ -2147,14 +2147,17 @@ components:
           type: string
         line1:
           description: Line 1 of the applicant's address
+          nullable: true
           pattern: "/^[^!$%^*=<>]*$/"
           type: string
         line2:
           description: Line 2 of the applicant's address
+          nullable: true
           pattern: "/^[^!$%^*=<>]*$/"
           type: string
         line3:
           description: Line 3 of the applicant's address
+          nullable: true
           pattern: "/^[^!$%^*=<>]*$/"
           type: string
       required:
@@ -2221,9 +2224,6 @@ components:
           address_5: address_5
           widow_name: widow_name
           spouse_name: spouse_name
-          mrz_line1: mrz_line1
-          mrz_line3: mrz_line3
-          mrz_line2: mrz_line2
           issuing_country: issuing_country
           issuing_state: issuing_state
           first_name: first_name
@@ -4236,9 +4236,6 @@ components:
         address_5: address_5
         widow_name: widow_name
         spouse_name: spouse_name
-        mrz_line1: mrz_line1
-        mrz_line3: mrz_line3
-        mrz_line2: mrz_line2
         issuing_country: issuing_country
         issuing_state: issuing_state
         first_name: first_name
@@ -4301,20 +4298,11 @@ components:
           description: Nationality in 3-letter ISO code.
           pattern: "/^[A-Z]{3}$/"
           type: string
-        mrz_line1:
-          description: Line 1 of the MRZ code.
-          type: string
         mrz_line_1:
           description: Line 1 of the MRZ code.
           type: string
-        mrz_line2:
-          description: Line 2 of the MRZ code.
-          type: string
         mrz_line_2:
           description: Line 2 of the MRZ code.
-          type: string
-        mrz_line3:
-          description: Line 3 of the MRZ code.
           type: string
         mrz_line_3:
           description: Line 3 of the MRZ code.

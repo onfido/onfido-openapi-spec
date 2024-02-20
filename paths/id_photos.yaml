@@ -16,8 +16,11 @@
             application/json:
               schema:
                 type: object
+                title: ID Photos list
+                required:
+                  - id_photos
                 properties:
-                  live_photos:
+                  id_photos:
                     type: array
                     items:
                       $ref: ../schemas/id_photos/id_photo.yaml
@@ -35,20 +38,8 @@
         content:
           multipart/form-data:
             schema:
-              allOf:
-                - $ref: ../schemas/id_photos/id_photo.yaml
-                - object:
-                  required:
-                    - applicant_id
-                    - file
-                  properties:
-                    applicant_id:
-                      type: string
-                      description: The ID of the applicant whose ID photo is being uploaded.
-                    file:
-                      type: string
-                      format: binary
-                      description: The file to be uploaded.
+              $ref: ../schemas/id_photos/id_photo_uploader.yaml
+
       responses:
         "201":
           description: The ID photo

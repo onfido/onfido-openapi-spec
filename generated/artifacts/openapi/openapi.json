@@ -2862,16 +2862,19 @@
           },
           "line1" : {
             "description" : "Line 1 of the applicant's address",
+            "nullable" : true,
             "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           },
           "line2" : {
             "description" : "Line 2 of the applicant's address",
+            "nullable" : true,
             "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           },
           "line3" : {
             "description" : "Line 3 of the applicant's address",
+            "nullable" : true,
             "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           }
@@ -4675,24 +4678,12 @@
             "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           },
-          "mrz_line1" : {
-            "description" : "Line 1 of the MRZ code.",
-            "type" : "string"
-          },
           "mrz_line_1" : {
             "description" : "Line 1 of the MRZ code.",
             "type" : "string"
           },
-          "mrz_line2" : {
-            "description" : "Line 2 of the MRZ code.",
-            "type" : "string"
-          },
           "mrz_line_2" : {
             "description" : "Line 2 of the MRZ code.",
-            "type" : "string"
-          },
-          "mrz_line3" : {
-            "description" : "Line 3 of the MRZ code.",
             "type" : "string"
           },
           "mrz_line_3" : {

@@ -41,6 +41,7 @@
             application/json:
               schema:
                 type: array
+                title: Watchlist monitors
                 items:
                   $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
         default:
@@ -99,8 +100,10 @@
             application/json:
               schema:
                 type: array
+                title: Watchlist monitor matches
                 items:
                   type: object
+                  title: Watchlist monitor match
                   properties:
                     id:
                       type: string
@@ -110,7 +113,7 @@
                       description: Monitor status
 
     patch:
-      summary: Update the enabled status of the given match
+      summary: Update the status of the given matches.
       operationId: update_monitor_match
       parameters:
         - name: monitor_id
@@ -154,6 +157,11 @@
       responses:
         "201":
           description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: Link to the newly generated report.
           content:
             application/json:
               schema:

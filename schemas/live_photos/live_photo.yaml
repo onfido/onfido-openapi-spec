@@ -1,30 +1,4 @@
-type: object
-properties:
-  id:
-    type: string
-    description: The unique identifier for the photo.
-    readOnly: true
-  created_at:
-    type: string
-    format: date-time
-    description: The date and time at which the photo was uploaded.
-    readOnly: true
-  href:
-    type: string
-    description: The uri of this resource.
-    readOnly: true
-  download_href:
-    type: string
-    description: The uri that can be used to download the photo.
-    readOnly: true
-  file_name:
-    type: string
-    description: The name of the uploaded file.
-    readOnly: true
-  file_type:
-    type: string
-    description: The file type of the uploaded file.
-    readOnly: true
-  file_size:
-    type: integer
-    description: The size of the file in bytes.
+required:
+  - id
+allOf:
+  - $ref: definitions.yaml#/read_only

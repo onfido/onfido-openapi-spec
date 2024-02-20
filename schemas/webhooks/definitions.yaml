@@ -1,0 +1,56 @@
+common:
+  type: object
+  properties:
+    url:
+      type: string
+      description: The url that will listen to notifications (must be https).
+    enabled:
+      type: boolean
+      description: Determine if the webhook is active.
+    events:
+      type: array
+      description: >
+        The events that will be published to the webhook.
+        If the events parameter is omitted all the events will be subscribed.
+      items:
+        enum:
+          - audit_log.created
+          - watchlist_monitor.matches_updated
+          - workflow_run.completed
+          - workflow_task.started
+          - workflow_task.completed
+          - check.started
+          - check.reopened
+          - check.withdrawn
+          - check.completed
+          - check.form_completed
+          - report.withdrawn
+          - report.resumed
+          - report.cancelled
+          - report.awaiting_approval
+          - report.completed
+        type: string
+    environments:
+      type: array
+      description: >
+        The environments from which the webhook will receive events.
+        Allowed values are “sandbox” and “live”.
+        If the environments parameter is omitted the webhook will receive events from both environments.
+      items:
+        type: string
+    payload_version:
+      type: integer
+      description: Webhook version used to control the payload object when sending webhooks.
+
+read_only:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier of the webhook.
+    token:
+      type: string
+      description: Webhook secret token used to sign the webhook's payload.
+    href:
+      type: string
+      description: The API endpoint to retrieve the webhook.

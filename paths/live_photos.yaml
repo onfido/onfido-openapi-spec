@@ -16,6 +16,9 @@
             application/json:
               schema:
                 type: object
+                title: Live Photos list
+                required:
+                  - live_photos
                 properties:
                   live_photos:
                     type: array
@@ -37,24 +40,7 @@
         content:
           multipart/form-data:
             schema:
-              allOf:
-                - $ref: ../schemas/live_photos/live_photo.yaml
-                - object:
-                  required:
-                    - applicant_id
-                    - file
-                  properties:
-                    applicant_id:
-                      type: string
-                      description: The ID of the applicant whose live photo is being uploaded.
-                    file:
-                      type: string
-                      format: binary
-                      description: The file to be uploaded.
-                    advanced_validation:
-                      type: boolean
-                      description: Validates that the live photo contains exactly one face.
-                      default: true
+              $ref: ../schemas/live_photos/live_photo_uploader.yaml
       responses:
         "201":
           description: The Live Photo

@@ -1,0 +1,64 @@
+common:
+  type: object
+  properties:
+    file_type:
+      type: string
+      enum:
+        - jpg
+        - png
+        - pdf
+      description: The file type of the uploaded file
+    type:
+      type: string
+      description: The type of document
+    side:
+      type: string
+      enum:
+        - front
+        - back
+      description: The side of the document, if applicable. The possible values are front and back
+    issuing_country:
+      type: string
+      allOf:
+        - $ref: ../countries/country_codes.yaml
+      description: The issuing country of the document, a 3-letter ISO code.
+    applicant_id:
+      type: string
+      description: The ID of the applicant whose document is being uploaded.
+
+write_only:
+  type: object
+  properties:
+    file:
+      type: string
+      format: binary
+      description: The file to be uploaded.
+    validate_image_quality:
+      type: boolean
+      description: Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.
+    location:
+      $ref: ../location/location.yaml
+
+read_only:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier for the document
+    created_at:
+      type: string
+      format: date-time
+      description: The date and time at which the document was uploaded
+    href:
+      type: string
+      description: The uri of this resource
+    download_href:
+      type: string
+      description: The uri that can be used to download the document
+    file_name:
+      type: string
+      description: The name of the uploaded file
+    file_size:
+      type: integer
+      description: The size of the file in bytes
+      readOnly: true

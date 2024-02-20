@@ -7,33 +7,7 @@
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - workflow_id
-                - applicant_id
-              properties:
-                workflow_id:
-                  type: string
-                  description: The unique identifier for the Workflow.
-                applicant_id:
-                  type: string
-                  description: The unique identifier for the Applicant.
-                custom_data:
-                  type: object
-                  description: Optional object with custom input data to be used in the Workflow Run.
-                tags:
-                  type: array
-                  minItems: 1
-                  maxItems: 30
-                  description: Tags or labels to assign to the workflow run.
-                  uniqueItems: true
-                  items:
-                    type: string
-                    minLength: 1
-                    maxLength: 128
-                link:
-                  type: object
-                  description: Optional object for the configuration of the Workflow Run link.
+              $ref: ../schemas/workflow_runs/workflow_run_builder.yaml
       responses:
         "201":
           description: A Workflow Run object.
@@ -130,8 +104,10 @@
             application/json:
               schema:
                 type: array
+                title: Tasks
                 items:
                   type: object
+                  title: Task
                   properties:
                     id:
                       type: string

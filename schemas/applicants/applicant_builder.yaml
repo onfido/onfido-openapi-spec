@@ -1,0 +1,3 @@
+allOf:
+  - $ref: definitions.yaml#/common
+  - $ref: definitions.yaml#/write_only
