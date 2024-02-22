@@ -7,14 +7,14 @@
         content:
           application/json:
             schema:
-              $ref: '../schemas/applicants/applicant_builder.yaml'
+              $ref: ../schemas/applicants/applicant_builder.yaml
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '../schemas/applicants/applicant.yaml'
+                $ref: ../schemas/applicants/applicant.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -54,7 +54,7 @@
                   applicants:
                     type: array
                     items:
-                      $ref: '../schemas/applicants/applicant.yaml'
+                      $ref: ../schemas/applicants/applicant.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -74,7 +74,7 @@
           content:
             application/json:
               schema:
-                $ref: '../schemas/applicants/applicant.yaml'
+                $ref: ../schemas/applicants/applicant.yaml
         default:
           $ref: ../responses/default_error.yaml
 
@@ -98,14 +98,14 @@
         content:
           application/json:
             schema:
-              $ref: '../schemas/applicants/applicant_builder.yaml'
+              $ref: ../schemas/applicants/applicant_builder.yaml
       responses:
         "200":
           description: Applicant Object
           content:
             application/json:
               schema:
-                $ref: '../schemas/applicants/applicant.yaml'
+                $ref: ../schemas/applicants/applicant.yaml
         default:
           $ref: ../responses/default_error.yaml
 

@@ -1242,7 +1242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/generate_sdk_token_200_response'
+                $ref: '#/components/schemas/SDK_token'
           description: Generated
         default:
           content:
@@ -4660,13 +4660,14 @@ components:
       required:
       - applicant_id
       type: object
-    generate_sdk_token_200_response:
+    SDK_token:
       example:
         token: token
       properties:
         token:
           description: The generated SDK token
           type: string
+      title: SDK token
       type: object
     extract_request:
       properties:
