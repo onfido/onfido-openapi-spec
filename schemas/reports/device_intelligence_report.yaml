@@ -2,7 +2,7 @@ required:
   - id
   - name
 allOf:
-  - $ref: definitions.yaml#/common
+  - $ref: definitions.yaml#/report_shared
   - type: object
     properties:
       breakdown:

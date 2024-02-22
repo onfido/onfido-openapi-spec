@@ -1,5 +1,5 @@
 required:
   - id
 allOf:
-  - $ref: definitions.yaml#/common
-  - $ref: definitions.yaml#/read_only
+  - $ref: definitions.yaml#/applicant_shared
+  - $ref: definitions.yaml#/applicant_response

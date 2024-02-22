@@ -3,5 +3,5 @@ required:
   - file
   - type
 allOf:
-  - $ref: definitions.yaml#/common
-  - $ref: definitions.yaml#/write_only
+  - $ref: definitions.yaml#/document_shared
+  - $ref: definitions.yaml#/document_request

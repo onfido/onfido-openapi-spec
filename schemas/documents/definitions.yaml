@@ -1,4 +1,4 @@
-common:
+document_shared:
   type: object
   properties:
     file_type:
@@ -26,7 +26,7 @@ common:
       type: string
       description: The ID of the applicant whose document is being uploaded.
 
-write_only:
+document_request:
   type: object
   properties:
     file:
@@ -39,7 +39,7 @@ write_only:
     location:
       $ref: ../location/location.yaml
 
-read_only:
+document_response:
   type: object
   properties:
     id:
@@ -61,4 +61,3 @@ read_only:
     file_size:
       type: integer
       description: The size of the file in bytes
-      readOnly: true

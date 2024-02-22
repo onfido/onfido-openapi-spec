@@ -3,5 +3,5 @@ required:
   - workflow_id
   - applicant_id
 allOf:
-  - $ref: definitions.yaml#/common
-  - $ref: definitions.yaml#/read_only
+  - $ref: definitions.yaml#/workflow_run_shared
+  - $ref: definitions.yaml#/workflow_run_response

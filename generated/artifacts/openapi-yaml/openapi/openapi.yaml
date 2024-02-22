@@ -1534,8 +1534,8 @@ components:
   schemas:
     applicant:
       allOf:
-      - $ref: '#/components/schemas/common'
-      - $ref: '#/components/schemas/read_only'
+      - $ref: '#/components/schemas/applicant_shared'
+      - $ref: '#/components/schemas/applicant_response'
       example:
         address:
           building_name: building_name
@@ -1574,12 +1574,12 @@ components:
       - id
     applicant_builder:
       allOf:
-      - $ref: '#/components/schemas/common'
-      - $ref: '#/components/schemas/write_only'
+      - $ref: '#/components/schemas/applicant_shared'
+      - $ref: '#/components/schemas/applicant_request'
     document:
       allOf:
-      - $ref: '#/components/schemas/common_1'
-      - $ref: '#/components/schemas/read_only_1'
+      - $ref: '#/components/schemas/document_shared'
+      - $ref: '#/components/schemas/document_response'
       example:
         side: front
         download_href: download_href
@@ -1596,15 +1596,15 @@ components:
       - id
     document_uploader:
       allOf:
-      - $ref: '#/components/schemas/common_1'
-      - $ref: '#/components/schemas/write_only_1'
+      - $ref: '#/components/schemas/document_shared'
+      - $ref: '#/components/schemas/document_request'
       required:
       - applicant_id
       - file
       - type
     live_photo:
       allOf:
-      - $ref: '#/components/schemas/read_only_2'
+      - $ref: '#/components/schemas/live_photo_response'
       example:
         download_href: download_href
         file_name: file_name
@@ -1617,7 +1617,7 @@ components:
       - id
     live_photo_uploader:
       allOf:
-      - $ref: '#/components/schemas/write_only_2'
+      - $ref: '#/components/schemas/live_photo_request'
       required:
       - applicant_id
       - file
@@ -1666,8 +1666,8 @@ components:
       type: object
     workflow_run:
       allOf:
-      - $ref: '#/components/schemas/common_2'
-      - $ref: '#/components/schemas/read_only_3'
+      - $ref: '#/components/schemas/workflow_run_shared'
+      - $ref: '#/components/schemas/workflow_run_response'
       example:
         workflow_id: workflow_id
         reasons:
@@ -1702,8 +1702,8 @@ components:
       - workflow_id
     workflow_run_builder:
       allOf:
-      - $ref: '#/components/schemas/common_2'
-      - $ref: '#/components/schemas/write_only_3'
+      - $ref: '#/components/schemas/workflow_run_shared'
+      - $ref: '#/components/schemas/workflow_run_request'
       required:
       - applicant_id
       - workflow_id
@@ -1826,7 +1826,7 @@ components:
       type: object
     id_photo:
       allOf:
-      - $ref: '#/components/schemas/read_only_2'
+      - $ref: '#/components/schemas/id_photo_response'
       example:
         download_href: download_href
         file_name: file_name
@@ -1839,14 +1839,14 @@ components:
       - id
     id_photo_uploader:
       allOf:
-      - $ref: '#/components/schemas/write_only_4'
+      - $ref: '#/components/schemas/id_photo_request'
       required:
       - applicant_id
       - file
     webhook:
       allOf:
-      - $ref: '#/components/schemas/common_3'
-      - $ref: '#/components/schemas/read_only_4'
+      - $ref: '#/components/schemas/webhook_shared'
+      - $ref: '#/components/schemas/webhook_response'
       example:
         payload_version: 0
         environments:
@@ -1865,7 +1865,7 @@ components:
       - url
     webhook_builder:
       allOf:
-      - $ref: '#/components/schemas/common_3'
+      - $ref: '#/components/schemas/webhook_shared'
       required:
       - url
     webhook_resend:
@@ -2063,8 +2063,8 @@ components:
       type: object
     check:
       allOf:
-      - $ref: '#/components/schemas/common_4'
-      - $ref: '#/components/schemas/read_only_5'
+      - $ref: '#/components/schemas/check_shared'
+      - $ref: '#/components/schemas/read_only'
       example:
         sandbox: true
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -2090,8 +2090,8 @@ components:
       - id
     check_builder:
       allOf:
-      - $ref: '#/components/schemas/common_4'
-      - $ref: '#/components/schemas/write_only_5'
+      - $ref: '#/components/schemas/check_shared'
+      - $ref: '#/components/schemas/write_only'
       required:
       - applicant_id
     report:
@@ -2141,7 +2141,7 @@ components:
       - $ref: '#/components/schemas/us_driving_licence_report'
       - $ref: '#/components/schemas/device_intelligence_report'
       - $ref: '#/components/schemas/india_pan_report'
-    common:
+    applicant_shared:
       properties:
         first_name:
           description: The applicant's first name
@@ -2171,7 +2171,7 @@ components:
         location:
           $ref: '#/components/schemas/location'
       type: object
-    read_only:
+    applicant_response:
       properties:
         id:
           description: The unique identifier for the applicant.
@@ -2190,14 +2190,14 @@ components:
         sandbox:
           type: boolean
       type: object
-    write_only:
+    applicant_request:
       properties:
         consents:
           items:
             $ref: '#/components/schemas/Applicant_consent'
           type: array
       type: object
-    common_1:
+    document_shared:
       properties:
         file_type:
           description: The file type of the uploaded file
@@ -2225,7 +2225,7 @@ components:
           description: The ID of the applicant whose document is being uploaded.
           type: string
       type: object
-    read_only_1:
+    document_response:
       properties:
         id:
           description: The unique identifier for the document
@@ -2245,10 +2245,9 @@ components:
           type: string
         file_size:
           description: The size of the file in bytes
-          readOnly: true
           type: integer
       type: object
-    write_only_1:
+    document_request:
       properties:
         file:
           description: The file to be uploaded.
@@ -2261,7 +2260,7 @@ components:
         location:
           $ref: '#/components/schemas/location'
       type: object
-    read_only_2:
+    live_photo_response:
       properties:
         id:
           description: The unique identifier for the photo.
@@ -2286,7 +2285,7 @@ components:
           description: The size of the file in bytes.
           type: integer
       type: object
-    write_only_2:
+    live_photo_request:
       properties:
         applicant_id:
           description: The ID of the applicant whose live photo is being uploaded.
@@ -2300,7 +2299,7 @@ components:
           description: Validates that the live photo contains exactly one face.
           type: boolean
       type: object
-    common_2:
+    workflow_run_shared:
       properties:
         applicant_id:
           description: The unique identifier for the Applicant.
@@ -2318,7 +2317,7 @@ components:
           type: array
           uniqueItems: true
         link:
-          $ref: '#/components/schemas/common_2_link'
+          $ref: '#/components/schemas/workflow_run_shared_link'
         created_at:
           description: The date and time when the Workflow Run was created.
           format: date-time
@@ -2328,7 +2327,7 @@ components:
           format: date-time
           type: string
       type: object
-    read_only_3:
+    workflow_run_response:
       properties:
         id:
           description: The unique identifier for the Workflow Run.
@@ -2362,16 +2361,41 @@ components:
             type: string
           type: array
         error:
-          $ref: '#/components/schemas/read_only_3_error'
+          $ref: '#/components/schemas/workflow_run_response_error'
       type: object
-    write_only_3:
+    workflow_run_request:
       properties:
         custom_data:
           additionalProperties: true
           description: Object with Custom Input Data to be used in the Workflow Run.
           type: object
       type: object
-    write_only_4:
+    id_photo_response:
+      properties:
+        id:
+          description: The unique identifier for the photo.
+          type: string
+        created_at:
+          description: The date and time at which the photo was uploaded.
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource.
+          type: string
+        download_href:
+          description: The uri that can be used to download the photo.
+          type: string
+        file_name:
+          description: The name of the uploaded file.
+          type: string
+        file_type:
+          description: The file type of the uploaded file.
+          type: string
+        file_size:
+          description: The size of the file in bytes.
+          type: integer
+      type: object
+    id_photo_request:
       properties:
         applicant_id:
           description: The ID of the applicant whose ID photo is being uploaded.
@@ -2381,7 +2405,7 @@ components:
           format: binary
           type: string
       type: object
-    common_3:
+    webhook_shared:
       properties:
         url:
           description: The url that will listen to notifications (must be https).
@@ -2422,7 +2446,7 @@ components:
             webhooks.
           type: integer
       type: object
-    read_only_4:
+    webhook_response:
       properties:
         id:
           description: The unique identifier of the webhook.
@@ -2687,7 +2711,7 @@ components:
       - ZMB
       - ZWE
       type: string
-    common_4:
+    check_shared:
       properties:
         webhook_ids:
           description: An array of webhook ids describing which webhooks to trigger
@@ -2712,7 +2736,7 @@ components:
             \ to this URI when the applicant has submitted their data."
           type: string
       type: object
-    read_only_5:
+    read_only:
       properties:
         id:
           description: The unique identifier for the check.
@@ -2758,7 +2782,7 @@ components:
             not.
           type: boolean
       type: object
-    write_only_5:
+    write_only:
       properties:
         report_names:
           description: An array of report names (strings).
@@ -2772,31 +2796,26 @@ components:
           items:
             type: string
           type: array
-          writeOnly: true
         asynchronous:
           default: true
           description: |
             Defaults to `true`. If set to `false`, you will only receive a response when all reports in your check have completed.
           type: boolean
-          writeOnly: true
         suppress_form_emails:
           description: |
             For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.
           type: boolean
-          writeOnly: true
         consider:
           description: Array of names of particular reports to return consider as
             their results. This is a feature available in sandbox testing
           items:
             type: string
           type: array
-          writeOnly: true
         us_driving_licence:
           additionalProperties: true
           description: An object that contains all accepted fields for the Driver's
             License Data Verification report.
           type: object
-          writeOnly: true
       type: object
     report_name:
       enum:
@@ -2823,7 +2842,7 @@ components:
       type: string
     document_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3138,7 +3157,7 @@ components:
       - name
     document_video_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3150,7 +3169,7 @@ components:
       - name
     document_video_with_address_information:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3162,7 +3181,7 @@ components:
       - name
     document_with_address_information_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3174,7 +3193,7 @@ components:
       - name
     document_with_driving_licence_information_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3186,7 +3205,7 @@ components:
       - name
     document_with_driver_verification_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3198,7 +3217,7 @@ components:
       - name
     facial_similarity_photo_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_breakdown'
@@ -3208,7 +3227,7 @@ components:
       - name
     facial_similarity_photo_fully_auto_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown'
@@ -3218,7 +3237,7 @@ components:
       - name
     facial_similarity_video_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_video_breakdown'
@@ -3228,7 +3247,7 @@ components:
       - name
     facial_similarity_motion_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_motion_breakdown'
@@ -3238,7 +3257,7 @@ components:
       - name
     known_faces_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/known_faces_breakdown'
@@ -3250,7 +3269,7 @@ components:
       - name
     identity_enhanced_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/identity_enhanced_breakdown'
@@ -3262,7 +3281,7 @@ components:
       - name
     watchlist_aml_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_aml_breakdown'
@@ -3274,7 +3293,7 @@ components:
       - name
     watchlist_enhanced_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_enhanced_breakdown'
@@ -3286,7 +3305,7 @@ components:
       - name
     watchlist_standard_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
@@ -3298,7 +3317,7 @@ components:
       - name
     watchlist_peps_only_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
@@ -3310,7 +3329,7 @@ components:
       - name
     watchlist_sanctions_only_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
@@ -3322,7 +3341,7 @@ components:
       - name
     proof_of_address_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/proof_of_address_breakdown'
@@ -3334,7 +3353,7 @@ components:
       - name
     us_driving_licence_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/us_driving_licence_breakdown'
@@ -3346,7 +3365,7 @@ components:
       - name
     device_intelligence_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/device_intelligence_breakdown'
@@ -3356,7 +3375,7 @@ components:
       - name
     india_pan_report:
       allOf:
-      - $ref: '#/components/schemas/common_5'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/india_pan_report_allOf_breakdown'
@@ -3407,7 +3426,7 @@ components:
           description: The applicant's country of residence in 3-letter ISO code.
           example: GBR
       type: object
-    common_5:
+    report_shared:
       properties:
         id:
           description: The unique identifier for the report. Read-only.
@@ -5577,7 +5596,7 @@ components:
       - name
       title: Applicant consent
       type: object
-    common_2_link:
+    workflow_run_shared_link:
       description: Object for the configuration of the Workflow Run link.
       example:
         expires_at: 2000-01-23T04:56:07.000+00:00
@@ -5616,7 +5635,7 @@ components:
           - nl_NL
           type: string
       type: object
-    read_only_3_error:
+    workflow_run_response_error:
       description: Error object. Only set when the Workflow Run status is 'error'.
       example:
         type: type

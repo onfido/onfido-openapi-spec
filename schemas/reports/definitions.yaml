@@ -1,4 +1,4 @@
-common:
+report_shared:
   properties:
     id:
       type: string

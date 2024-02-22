@@ -1,4 +1,4 @@
-common:
+webhook_shared:
   type: object
   properties:
     url:
@@ -42,7 +42,7 @@ common:
       type: integer
       description: Webhook version used to control the payload object when sending webhooks.
 
-read_only:
+webhook_response:
   type: object
   properties:
     id:

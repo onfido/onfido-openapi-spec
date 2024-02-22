@@ -1,4 +1,4 @@
-write_only:
+id_photo_request:
   type: object
   properties:
     applicant_id:
@@ -9,7 +9,7 @@ write_only:
       format: binary
       description: The file to be uploaded.
 
-read_only:
+id_photo_response:
   type: object
   properties:
     id:

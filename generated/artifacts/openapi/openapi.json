@@ -2330,44 +2330,44 @@
     "schemas" : {
       "applicant" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common"
+          "$ref" : "#/components/schemas/applicant_shared"
         }, {
-          "$ref" : "#/components/schemas/read_only"
+          "$ref" : "#/components/schemas/applicant_response"
         } ],
         "required" : [ "id" ]
       },
       "applicant_builder" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common"
+          "$ref" : "#/components/schemas/applicant_shared"
         }, {
-          "$ref" : "#/components/schemas/write_only"
+          "$ref" : "#/components/schemas/applicant_request"
         } ]
       },
       "document" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_1"
+          "$ref" : "#/components/schemas/document_shared"
         }, {
-          "$ref" : "#/components/schemas/read_only_1"
+          "$ref" : "#/components/schemas/document_response"
         } ],
         "required" : [ "id" ]
       },
       "document_uploader" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_1"
+          "$ref" : "#/components/schemas/document_shared"
         }, {
-          "$ref" : "#/components/schemas/write_only_1"
+          "$ref" : "#/components/schemas/document_request"
         } ],
         "required" : [ "applicant_id", "file", "type" ]
       },
       "live_photo" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/read_only_2"
+          "$ref" : "#/components/schemas/live_photo_response"
         } ],
         "required" : [ "id" ]
       },
       "live_photo_uploader" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/write_only_2"
+          "$ref" : "#/components/schemas/live_photo_request"
         } ],
         "required" : [ "applicant_id", "file" ]
       },
@@ -2415,17 +2415,17 @@
       },
       "workflow_run" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_2"
+          "$ref" : "#/components/schemas/workflow_run_shared"
         }, {
-          "$ref" : "#/components/schemas/read_only_3"
+          "$ref" : "#/components/schemas/workflow_run_response"
         } ],
         "required" : [ "applicant_id", "id", "workflow_id" ]
       },
       "workflow_run_builder" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_2"
+          "$ref" : "#/components/schemas/workflow_run_shared"
         }, {
-          "$ref" : "#/components/schemas/write_only_3"
+          "$ref" : "#/components/schemas/workflow_run_request"
         } ],
         "required" : [ "applicant_id", "workflow_id" ]
       },
@@ -2542,27 +2542,27 @@
       },
       "id_photo" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/read_only_2"
+          "$ref" : "#/components/schemas/id_photo_response"
         } ],
         "required" : [ "id" ]
       },
       "id_photo_uploader" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/write_only_4"
+          "$ref" : "#/components/schemas/id_photo_request"
         } ],
         "required" : [ "applicant_id", "file" ]
       },
       "webhook" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_3"
+          "$ref" : "#/components/schemas/webhook_shared"
         }, {
-          "$ref" : "#/components/schemas/read_only_4"
+          "$ref" : "#/components/schemas/webhook_response"
         } ],
         "required" : [ "id", "url" ]
       },
       "webhook_builder" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_3"
+          "$ref" : "#/components/schemas/webhook_shared"
         } ],
         "required" : [ "url" ]
       },
@@ -2711,17 +2711,17 @@
       },
       "check" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_4"
+          "$ref" : "#/components/schemas/check_shared"
         }, {
-          "$ref" : "#/components/schemas/read_only_5"
+          "$ref" : "#/components/schemas/read_only"
         } ],
         "required" : [ "id" ]
       },
       "check_builder" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_4"
+          "$ref" : "#/components/schemas/check_shared"
         }, {
-          "$ref" : "#/components/schemas/write_only_5"
+          "$ref" : "#/components/schemas/write_only"
         } ],
         "required" : [ "applicant_id" ]
       },
@@ -2796,7 +2796,7 @@
           "$ref" : "#/components/schemas/india_pan_report"
         } ]
       },
-      "common" : {
+      "applicant_shared" : {
         "properties" : {
           "first_name" : {
             "description" : "The applicant's first name",
@@ -2836,7 +2836,7 @@
         },
         "type" : "object"
       },
-      "read_only" : {
+      "applicant_response" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the applicant.",
@@ -2862,7 +2862,7 @@
         },
         "type" : "object"
       },
-      "write_only" : {
+      "applicant_request" : {
         "properties" : {
           "consents" : {
             "items" : {
@@ -2873,7 +2873,7 @@
         },
         "type" : "object"
       },
-      "common_1" : {
+      "document_shared" : {
         "properties" : {
           "file_type" : {
             "description" : "The file type of the uploaded file",
@@ -2903,7 +2903,7 @@
         },
         "type" : "object"
       },
-      "read_only_1" : {
+      "document_response" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the document",
@@ -2928,13 +2928,12 @@
           },
           "file_size" : {
             "description" : "The size of the file in bytes",
-            "readOnly" : true,
             "type" : "integer"
           }
         },
         "type" : "object"
       },
-      "write_only_1" : {
+      "document_request" : {
         "properties" : {
           "file" : {
             "description" : "The file to be uploaded.",
@@ -2951,7 +2950,7 @@
         },
         "type" : "object"
       },
-      "read_only_2" : {
+      "live_photo_response" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the photo.",
@@ -2985,7 +2984,7 @@
         },
         "type" : "object"
       },
-      "write_only_2" : {
+      "live_photo_request" : {
         "properties" : {
           "applicant_id" : {
             "description" : "The ID of the applicant whose live photo is being uploaded.",
@@ -3004,7 +3003,7 @@
         },
         "type" : "object"
       },
-      "common_2" : {
+      "workflow_run_shared" : {
         "properties" : {
           "applicant_id" : {
             "description" : "The unique identifier for the Applicant.",
@@ -3026,7 +3025,7 @@
             "uniqueItems" : true
           },
           "link" : {
-            "$ref" : "#/components/schemas/common_2_link"
+            "$ref" : "#/components/schemas/workflow_run_shared_link"
           },
           "created_at" : {
             "description" : "The date and time when the Workflow Run was created.",
@@ -3041,7 +3040,7 @@
         },
         "type" : "object"
       },
-      "read_only_3" : {
+      "workflow_run_response" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the Workflow Run.",
@@ -3072,12 +3071,12 @@
             "type" : "array"
           },
           "error" : {
-            "$ref" : "#/components/schemas/read_only_3_error"
+            "$ref" : "#/components/schemas/workflow_run_response_error"
           }
         },
         "type" : "object"
       },
-      "write_only_3" : {
+      "workflow_run_request" : {
         "properties" : {
           "custom_data" : {
             "additionalProperties" : true,
@@ -3087,7 +3086,41 @@
         },
         "type" : "object"
       },
-      "write_only_4" : {
+      "id_photo_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the photo.",
+            "type" : "string"
+          },
+          "created_at" : {
+            "description" : "The date and time at which the photo was uploaded.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The uri of this resource.",
+            "type" : "string"
+          },
+          "download_href" : {
+            "description" : "The uri that can be used to download the photo.",
+            "type" : "string"
+          },
+          "file_name" : {
+            "description" : "The name of the uploaded file.",
+            "type" : "string"
+          },
+          "file_type" : {
+            "description" : "The file type of the uploaded file.",
+            "type" : "string"
+          },
+          "file_size" : {
+            "description" : "The size of the file in bytes.",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "id_photo_request" : {
         "properties" : {
           "applicant_id" : {
             "description" : "The ID of the applicant whose ID photo is being uploaded.",
@@ -3101,7 +3134,7 @@
         },
         "type" : "object"
       },
-      "common_3" : {
+      "webhook_shared" : {
         "properties" : {
           "url" : {
             "description" : "The url that will listen to notifications (must be https).",
@@ -3133,7 +3166,7 @@
         },
         "type" : "object"
       },
-      "read_only_4" : {
+      "webhook_response" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier of the webhook.",
@@ -3154,7 +3187,7 @@
         "enum" : [ "ABW", "AFG", "AGO", "AIA", "ALA", "ALB", "AND", "ARE", "ARG", "ARM", "ASM", "ATA", "ATF", "ATG", "AUS", "AUT", "AZE", "BDI", "BEL", "BEN", "BES", "BFA", "BGD", "BGR", "BHR", "BHS", "BIH", "BLM", "BLR", "BLZ", "BMU", "BOL", "BRA", "BRB", "BRN", "BTN", "BVT", "BWA", "CAF", "CAN", "CCK", "CHE", "CHL", "CHN", "CIV", "CMR", "COD", "COG", "COK", "COL", "COM", "CPV", "CRI", "CUB", "CUW", "CXR", "CYM", "CYP", "CZE", "DEU", "DJI", "DMA", "DNK", "DOM", "DZA", "ECU", "EGY", "ERI", "ESH", "ESP", "EST", "ETH", "FIN", "FJI", "FLK", "FRA", "FRO", "FSM", "GAB", "GBR", "GEO", "GGY", "GHA", "GIB", "GIN", "GLP", "GMB", "GNB", "GNQ", "GRC", "GRD", "GRL", "GTM", "GUF", "GUM", "GUY", "HKG", "HMD", "HND", "HRV", "HTI", "HUN", "IDN", "IMN", "IND", "IOT", "IRL", "IRN", "IRQ", "ISL", "ISR", "ITA", "JAM", "JEY", "JOR", "JPN", "KAZ", "KEN", "KGZ", "KHM", "KIR", "KNA", "KOR", "KWT", "LAO", "LBN", "LBR", "LBY", "LCA", "LIE", "LKA", "LSO", "LTU", "LUX", "LVA", "MAC", "MAF", "MAR", "MCO", "MDA", "MDG", "MDV", "MEX", "MHL", "MKD", "MLI", "MLT", "MMR", "MNE", "MNG", "MNP", "MOZ", "MRT", "MSR", "MTQ", "MUS", "MWI", "MYS", "MYT", "NAM", "NCL", "NER", "NFK", "NGA", "NIC", "NIU", "NLD", "NOR", "NPL", "NRU", "NZL", "OMN", "PAK", "PAN", "PCN", "PER", "PHL", "PLW", "PNG", "POL", "PRI", "PRK", "PRT", "PRY", "PSE", "PYF", "QAT", "REU", "RKS", "ROU", "RUS", "RWA", "SAU", "SDN", "SEN", "SGP", "SGS", "SHN", "SJM", "SLB", "SLE", "SLV", "SMR", "SOM", "SPM", "SRB", "SSD", "STP", "SUR", "SVK", "SVN", "SWE", "SWZ", "SXM", "SYC", "SYR", "TCA", "TCD", "TGO", "THA", "TJK", "TKL", "TKM", "TLS", "TON", "TTO", "TUN", "TUR", "TUV", "TWN", "TZA", "UGA", "UKR", "UMI", "URY", "USA", "UZB", "VAT", "VCT", "VEN", "VGB", "VIR", "VNM", "VUT", "WLF", "WSM", "YEM", "ZAF", "ZMB", "ZWE" ],
         "type" : "string"
       },
-      "common_4" : {
+      "check_shared" : {
         "properties" : {
           "webhook_ids" : {
             "description" : "An array of webhook ids describing which webhooks to trigger for this check.",
@@ -3185,7 +3218,7 @@
         },
         "type" : "object"
       },
-      "read_only_5" : {
+      "read_only" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the check.",
@@ -3232,7 +3265,7 @@
         },
         "type" : "object"
       },
-      "write_only_5" : {
+      "write_only" : {
         "properties" : {
           "report_names" : {
             "description" : "An array of report names (strings).",
@@ -3246,33 +3279,28 @@
             "items" : {
               "type" : "string"
             },
-            "type" : "array",
-            "writeOnly" : true
+            "type" : "array"
           },
           "asynchronous" : {
             "default" : true,
             "description" : "Defaults to `true`. If set to `false`, you will only receive a response when all reports in your check have completed.\n",
-            "type" : "boolean",
-            "writeOnly" : true
+            "type" : "boolean"
           },
           "suppress_form_emails" : {
             "description" : "For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.\n",
-            "type" : "boolean",
-            "writeOnly" : true
+            "type" : "boolean"
           },
           "consider" : {
             "description" : "Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing",
             "items" : {
               "type" : "string"
             },
-            "type" : "array",
-            "writeOnly" : true
+            "type" : "array"
           },
           "us_driving_licence" : {
             "additionalProperties" : true,
             "description" : "An object that contains all accepted fields for the Driver's License Data Verification report.",
-            "type" : "object",
-            "writeOnly" : true
+            "type" : "object"
           }
         },
         "type" : "object"
@@ -3283,7 +3311,7 @@
       },
       "document_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3299,7 +3327,7 @@
       },
       "document_video_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3315,7 +3343,7 @@
       },
       "document_video_with_address_information" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3331,7 +3359,7 @@
       },
       "document_with_address_information_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3347,7 +3375,7 @@
       },
       "document_with_driving_licence_information_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3363,7 +3391,7 @@
       },
       "document_with_driver_verification_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3379,7 +3407,7 @@
       },
       "facial_similarity_photo_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3392,7 +3420,7 @@
       },
       "facial_similarity_photo_fully_auto_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3405,7 +3433,7 @@
       },
       "facial_similarity_video_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3418,7 +3446,7 @@
       },
       "facial_similarity_motion_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3431,7 +3459,7 @@
       },
       "known_faces_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3447,7 +3475,7 @@
       },
       "identity_enhanced_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3463,7 +3491,7 @@
       },
       "watchlist_aml_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3479,7 +3507,7 @@
       },
       "watchlist_enhanced_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3495,7 +3523,7 @@
       },
       "watchlist_standard_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3511,7 +3539,7 @@
       },
       "watchlist_peps_only_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3527,7 +3555,7 @@
       },
       "watchlist_sanctions_only_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3543,7 +3571,7 @@
       },
       "proof_of_address_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3559,7 +3587,7 @@
       },
       "us_driving_licence_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3575,7 +3603,7 @@
       },
       "device_intelligence_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3588,7 +3616,7 @@
       },
       "india_pan_report" : {
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common_5"
+          "$ref" : "#/components/schemas/report_shared"
         }, {
           "properties" : {
             "breakdown" : {
@@ -3636,7 +3664,7 @@
         },
         "type" : "object"
       },
-      "common_5" : {
+      "report_shared" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the report. Read-only.",
@@ -4789,7 +4817,7 @@
         "title" : "Applicant consent",
         "type" : "object"
       },
-      "common_2_link" : {
+      "workflow_run_shared_link" : {
         "description" : "Object for the configuration of the Workflow Run link.",
         "properties" : {
           "url" : {
@@ -4817,7 +4845,7 @@
         },
         "type" : "object"
       },
-      "read_only_3_error" : {
+      "workflow_run_response_error" : {
         "description" : "Error object. Only set when the Workflow Run status is 'error'.",
         "properties" : {
           "type" : {

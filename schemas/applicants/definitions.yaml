@@ -1,4 +1,4 @@
-common:
+applicant_shared:
   type: object
   properties:
     first_name:
@@ -28,7 +28,7 @@ common:
     location:
       $ref: ../location/location.yaml
 
-write_only:
+applicant_request:
   type: object
   properties:
     consents:
@@ -50,7 +50,7 @@ write_only:
           - granted
         description: The applicant's consents
 
-read_only:
+applicant_response:
   type: object
   properties:
     id:

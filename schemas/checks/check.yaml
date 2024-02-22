@@ -1,5 +1,5 @@
 required:
   - id
 allOf:
-  - $ref: definitions.yaml#/common
+  - $ref: definitions.yaml#/check_shared
   - $ref: definitions.yaml#/read_only
