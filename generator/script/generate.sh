@@ -26,7 +26,7 @@ do
 
     ( cat generator/configuration/common.yaml && echo &&
       cat generator/configuration/${GENERATOR}.yaml ) | \
-        API_VERSION=1.6.0 GENERATOR=${GENERATOR} envsubst >| \
+        GENERATOR=${GENERATOR} envsubst >| \
         ${GENERATED_CONFIG_FILE}
 
     echo "Configuration for generator ${GENERATOR} built."
