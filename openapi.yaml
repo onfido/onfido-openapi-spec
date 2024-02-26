@@ -5,6 +5,7 @@ info:
   version: 3.6.0
   contact:
     name: Onfido
+    url: https://onfido.com
     email: engineering@onfido.com
   license:
     name: MIT

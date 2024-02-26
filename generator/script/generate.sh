@@ -35,8 +35,4 @@ do
   fi
 done
 
-pwd
-ls *
-head ./schemas/workflow_runs/workflow_run_builder.yaml
-
 ${OPENAPI_GENERATOR_COMMAND} batch --clean ${GENERATED_CONFIG_FILES}

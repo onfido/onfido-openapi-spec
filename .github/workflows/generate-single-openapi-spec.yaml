@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
 jobs:
-  build-single-files:
+  build-single-spec:
     runs-on: ubuntu-latest
     container:
       image: openapitools/openapi-generator-cli:v7.3.0
@@ -17,9 +17,34 @@ jobs:
       - name: Install pre-requisites
         run: |
           apt-get update
-          apt-get install gettext-base
+          apt-get install -yqq \
+            gettext-base
       - name: Build single-file Onfido OpenAPI defintions
         run: |
           ./generator/script/generate.sh \
             generator/configuration/openapi.yaml \
             generator/configuration/openapi-yaml.yaml
+      - name: Store generated artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+          path: generated/artifacts
+  commit-single-spec:
+    runs-on: ubuntu-latest
+    needs: build-single-spec
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+          path: generated/artifacts
+      - name: Commit single-file Onfido OpenAPI defintions
+        if: github.event_name == 'push'
+        run: |
+          git --version
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git diff
+          git status --porcelain && git add generated/artifacts && \
+          git commit -m "Update single file spec" && \
+          git push
