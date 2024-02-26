@@ -1,0 +1,6 @@
+required:
+  - workflow_id
+  - applicant_id
+allOf:
+  - $ref: definitions.yaml#/workflow_run_shared
+  - $ref: definitions.yaml#/workflow_run_request
