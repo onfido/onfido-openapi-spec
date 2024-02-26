@@ -15,6 +15,7 @@
             application/json:
               schema:
                 type: object
+                title: Addresses
                 properties:
                   addresses:
                     type: array

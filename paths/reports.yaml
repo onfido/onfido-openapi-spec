@@ -15,6 +15,9 @@
             application/json:
               schema:
                 type: object
+                title: Reports list
+                required:
+                  - reports
                 properties:
                   reports:
                     type: array

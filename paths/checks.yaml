@@ -15,6 +15,9 @@
             application/json:
               schema:
                 type: object
+                title: Checks list
+                required:
+                  - checks
                 properties:
                   checks:
                     type: array
@@ -31,7 +34,7 @@
         content:
           application/json:
             schema:
-              $ref: ../schemas/checks/check.yaml
+              $ref: ../schemas/checks/check_builder.yaml
       responses:
         "201":
           description: Created

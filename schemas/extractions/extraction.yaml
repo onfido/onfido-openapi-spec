@@ -73,21 +73,12 @@ properties:
         type: string
         pattern: '/^[A-Z]{3}$/'
         description: Nationality in 3-letter ISO code.
-      mrz_line1:
-        type: string
-        description: Line 1 of the MRZ code.
       mrz_line_1:
         type: string
         description: Line 1 of the MRZ code.
-      mrz_line2:
-        type: string
-        description: Line 2 of the MRZ code.
       mrz_line_2:
         type: string
         description: Line 2 of the MRZ code.
-      mrz_line3:
-        type: string
-        description: Line 3 of the MRZ code.
       mrz_line_3:
         type: string
         description: Line 3 of the MRZ code.

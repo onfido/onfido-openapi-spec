@@ -7,7 +7,7 @@
         content:
           application/json:
             schema:
-              $ref: ../schemas/applicants/applicant.yaml
+              $ref: ../schemas/applicants/applicant_builder.yaml
       responses:
         "201":
           description: Created
@@ -47,6 +47,9 @@
             application/json:
               schema:
                 type: object
+                title: Applicants list
+                required:
+                  - applicants
                 properties:
                   applicants:
                     type: array
@@ -95,7 +98,7 @@
         content:
           application/json:
             schema:
-              $ref: ../schemas/applicants/applicant.yaml
+              $ref: ../schemas/applicants/applicant_builder.yaml
       responses:
         "200":
           description: Applicant Object

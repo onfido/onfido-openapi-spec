@@ -3,7 +3,7 @@ info:
   contact:
     email: engineering@onfido.com
     name: Onfido
-  description: The Onfido API is used to submit check requests.
+  description: The Onfido API
   license:
     name: MIT
   title: Onfido API v3.6
@@ -49,7 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_applicants_200_response'
+                $ref: '#/components/schemas/Applicants_list'
           description: A list of applicants
         default:
           content:
@@ -64,7 +64,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/applicant'
+              $ref: '#/components/schemas/applicant_builder'
         required: true
       responses:
         "201":
@@ -136,7 +136,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/applicant'
+              $ref: '#/components/schemas/applicant_builder'
         required: true
       responses:
         "200":
@@ -187,7 +187,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_documents_200_response'
+                $ref: '#/components/schemas/Documents_list'
           description: List of Documents
         default:
           content:
@@ -204,7 +204,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/upload_document_request'
+              $ref: '#/components/schemas/document_uploader'
         required: true
       responses:
         "201":
@@ -307,7 +307,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_live_photos_200_response'
+                $ref: '#/components/schemas/Live_Photos_list'
           description: An array of live photos
         default:
           content:
@@ -324,7 +324,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/upload_live_photo_request'
+              $ref: '#/components/schemas/live_photo_uploader'
         required: true
       responses:
         "201":
@@ -405,7 +405,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_live_videos_200_response'
+                $ref: '#/components/schemas/Liveo_Videos_list'
           description: An array of live videos
         default:
           content:
@@ -530,7 +530,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/create_workflow_run_request'
+              $ref: '#/components/schemas/workflow_run_builder'
         required: true
       responses:
         "201":
@@ -588,7 +588,8 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/list_tasks_200_response_inner'
+                  $ref: '#/components/schemas/Task'
+                title: Tasks
                 type: array
           description: "An array of subset Task objects that were already started\
             \ or completed, ordered by the created_at field, in ascending order."
@@ -703,7 +704,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_motion_captures_200_response'
+                $ref: '#/components/schemas/Motion_Captures_list'
           description: An array of motion captures
         default:
           content:
@@ -813,6 +814,7 @@ paths:
               schema:
                 items:
                   $ref: '#/components/schemas/watchlist_monitor'
+                title: Watchlist monitors
                 type: array
           description: An array of watchlist monitors
         default:
@@ -901,7 +903,8 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/list_watchlist_monitor_matches_200_response_inner'
+                  $ref: '#/components/schemas/Watchlist_monitor_match'
+                title: Watchlist monitor matches
                 type: array
           description: An array of watchlist monitors
       summary: "List match IDs on this monitor, as well as their enabled/disabled\
@@ -929,7 +932,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
-      summary: Update the enabled status of the given match
+      summary: Update the status of the given matches.
   /watchlist_monitors/{monitor_id}/new_report:
     post:
       operationId: force_new_record_creation
@@ -946,6 +949,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/applicant'
           description: Created
+          headers:
+            Location:
+              description: Link to the newly generated report.
+              schema:
+                type: string
         default:
           content:
             application/json:
@@ -968,7 +976,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_id_photos_200_response'
+                $ref: '#/components/schemas/ID_Photos_list'
           description: An array of ID photos
         default:
           content:
@@ -985,7 +993,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/upload_id_photo_request'
+              $ref: '#/components/schemas/id_photo_uploader'
         required: true
       responses:
         "201":
@@ -1076,7 +1084,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_webhooks_200_response'
+                $ref: '#/components/schemas/Webhooks_list'
           description: A list of webhooks
         default:
           content:
@@ -1091,7 +1099,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhook'
+              $ref: '#/components/schemas/webhook_builder'
         required: true
       responses:
         "201":
@@ -1211,7 +1219,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/find_addresses_200_response'
+                $ref: '#/components/schemas/Addresses'
           description: A list of addresses
         default:
           content:
@@ -1234,7 +1242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/generate_sdk_token_200_response'
+                $ref: '#/components/schemas/SDK_token'
           description: Generated
         default:
           content:
@@ -1326,7 +1334,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_checks_200_response'
+                $ref: '#/components/schemas/Checks_list'
           description: An array of checks
         default:
           content:
@@ -1341,7 +1349,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/check'
+              $ref: '#/components/schemas/check_builder'
         required: true
       responses:
         "201":
@@ -1437,7 +1445,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/list_reports_200_response'
+                $ref: '#/components/schemas/Reports_list'
           description: List of Reports
         default:
           content:
@@ -1525,6 +1533,9 @@ components:
       description: Unprocessable Entity
   schemas:
     applicant:
+      allOf:
+      - $ref: '#/components/schemas/applicant_shared'
+      - $ref: '#/components/schemas/applicant_response'
       example:
         address:
           building_name: building_name
@@ -1540,8 +1551,8 @@ components:
           line1: line1
           sub_street: sub_street
         sandbox: true
-        created_at: 2000-01-23T04:56:07.000+00:00
         last_name: last_name
+        created_at: 2000-01-23T04:56:07.000+00:00
         id_numbers:
         - type: ssn
           state_code: state_code
@@ -1550,9 +1561,6 @@ components:
           state_code: state_code
           value: value
         dob: 2000-01-23
-        consents:
-        - key: ""
-        - key: ""
         delete_at: 2000-01-23T04:56:07.000+00:00
         phone_number: phone_number
         location:
@@ -1562,143 +1570,41 @@ components:
         href: href
         first_name: first_name
         email: email
-      properties:
-        id:
-          description: The unique identifier for the applicant.
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time when this applicant was created.
-          format: date-time
-          readOnly: true
-          type: string
-        delete_at:
-          description: The date and time when this applicant is scheduled to be deleted.
-          format: date-time
-          readOnly: true
-          type: string
-        href:
-          description: The uri of this resource.
-          readOnly: true
-          type: string
-        first_name:
-          description: The applicant's first name
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
-          type: string
-        last_name:
-          description: The applicant's surname
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
-          type: string
-        email:
-          description: "The applicant's email address. Required if doing a US check,\
-            \ or a UK check for which `applicant_provides_data` is `true`."
-          type: string
-        dob:
-          description: The applicant's date of birth
-          format: date
-          type: string
-        address:
-          $ref: '#/components/schemas/address'
-        id_numbers:
-          items:
-            $ref: '#/components/schemas/id_number'
-          type: array
-        sandbox:
-          readOnly: true
-          type: boolean
-        phone_number:
-          description: The applicant's phone number
-          type: string
-        location:
-          $ref: '#/components/schemas/location'
-        consents:
-          items:
-            additionalProperties: true
-            description: The applicant's consents
-            type: object
-          type: array
-          writeOnly: true
-      type: object
+      required:
+      - id
+    applicant_builder:
+      allOf:
+      - $ref: '#/components/schemas/applicant_shared'
+      - $ref: '#/components/schemas/applicant_request'
     document:
+      allOf:
+      - $ref: '#/components/schemas/document_shared'
+      - $ref: '#/components/schemas/document_response'
       example:
         side: front
         download_href: download_href
-        file_name: file_name
-        created_at: 2000-01-23T04:56:07.000+00:00
-        type: type
-        file_size: 0
         applicant_id: applicant_id
         issuing_country: issuing_country
-        validate_image_quality: true
         file_type: jpg
-        location:
-          country_of_residence: GBR
-          ip_address: ip_address
+        file_name: file_name
+        created_at: 2000-01-23T04:56:07.000+00:00
         id: id
         href: href
-      properties:
-        id:
-          description: The unique identifier for the document
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time at which the document was uploaded
-          format: date-time
-          readOnly: true
-          type: string
-        href:
-          description: The uri of this resource
-          readOnly: true
-          type: string
-        download_href:
-          description: The uri that can be used to download the document
-          readOnly: true
-          type: string
-        file_name:
-          description: The name of the uploaded file
-          readOnly: true
-          type: string
-        file_type:
-          description: The file type of the uploaded file
-          enum:
-          - jpg
-          - png
-          - pdf
-          type: string
-        file_size:
-          description: The size of the file in bytes
-          readOnly: true
-          type: integer
-        type:
-          description: The type of document
-          type: string
-        side:
-          description: "The side of the document, if applicable. The possible values\
-            \ are front and back"
-          enum:
-          - front
-          - back
-          type: string
-        issuing_country:
-          allOf:
-          - $ref: '#/components/schemas/country_codes'
-          description: "The issuing country of the document, a 3-letter ISO code."
-          type: string
-        applicant_id:
-          description: The ID of the applicant whose document is being uploaded.
-          type: string
-        validate_image_quality:
-          description: Defaults to false. When true the submitted image will undergo
-            an image quality validation which may take up to 5 seconds.
-          type: boolean
-          writeOnly: true
-        location:
-          $ref: '#/components/schemas/location'
+        type: type
+        file_size: 0
+      required:
+      - id
+    document_uploader:
+      allOf:
+      - $ref: '#/components/schemas/document_shared'
+      - $ref: '#/components/schemas/document_request'
       required:
       - applicant_id
+      - file
       - type
-      type: object
     live_photo:
+      allOf:
+      - $ref: '#/components/schemas/live_photo_response'
       example:
         download_href: download_href
         file_name: file_name
@@ -1707,36 +1613,14 @@ components:
         id: id
         href: href
         file_size: 0
-      properties:
-        id:
-          description: The unique identifier for the photo.
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time at which the photo was uploaded.
-          format: date-time
-          readOnly: true
-          type: string
-        href:
-          description: The uri of this resource.
-          readOnly: true
-          type: string
-        download_href:
-          description: The uri that can be used to download the photo.
-          readOnly: true
-          type: string
-        file_name:
-          description: The name of the uploaded file.
-          readOnly: true
-          type: string
-        file_type:
-          description: The file type of the uploaded file.
-          readOnly: true
-          type: string
-        file_size:
-          description: The size of the file in bytes.
-          type: integer
-      type: object
+      required:
+      - id
+    live_photo_uploader:
+      allOf:
+      - $ref: '#/components/schemas/live_photo_request'
+      required:
+      - applicant_id
+      - file
     live_video:
       example:
         download_href: download_href
@@ -1781,6 +1665,9 @@ components:
           type: array
       type: object
     workflow_run:
+      allOf:
+      - $ref: '#/components/schemas/workflow_run_shared'
+      - $ref: '#/components/schemas/workflow_run_response'
       example:
         workflow_id: workflow_id
         reasons:
@@ -1799,6 +1686,9 @@ components:
         tags:
         - tags
         - tags
+        - tags
+        - tags
+        - tags
         output: "{}"
         applicant_id: applicant_id
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -1806,65 +1696,17 @@ components:
         workflow_version_id: 0
         dashboard_url: dashboard_url
         status: awaiting_input
-      properties:
-        id:
-          description: The unique identifier for the Workflow Run.
-          type: string
-        applicant_id:
-          description: The unique identifier for the Applicant.
-          type: string
-        workflow_id:
-          description: The unique identifier for the Workflow.
-          type: string
-        workflow_version_id:
-          description: The identifier for the Workflow version.
-          type: integer
-        dashboard_url:
-          description: The URL for viewing the Workflow Run results on your Onfido
-            Dashboard.
-          type: string
-        status:
-          description: The status of the Workflow Run.
-          enum:
-          - awaiting_input
-          - processing
-          - abandoned
-          - error
-          - approved
-          - review
-          - declined
-          type: string
-        output:
-          description: Output object contains all of the properties configured on
-            the Workflow version.
-          type: object
-        reasons:
-          description: The reasons the Workflow Run outcome was reached. Configurable
-            when creating the Workflow version.
-          items:
-            type: string
-          type: array
-        error:
-          $ref: '#/components/schemas/workflow_run_error'
-        tags:
-          description: Tags or labels assigned to the workflow run.
-          items:
-            type: string
-          type: array
-        link:
-          $ref: '#/components/schemas/workflow_run_link'
-        created_at:
-          description: The date and time when the Workflow Run was created.
-          format: date-time
-          type: string
-        updated_at:
-          description: The date and time when the Workflow Run was last updated.
-          format: date-time
-          type: string
+      required:
+      - applicant_id
+      - id
+      - workflow_id
+    workflow_run_builder:
+      allOf:
+      - $ref: '#/components/schemas/workflow_run_shared'
+      - $ref: '#/components/schemas/workflow_run_request'
       required:
       - applicant_id
       - workflow_id
-      type: object
     task:
       example:
         output: "{}"
@@ -1885,6 +1727,7 @@ components:
           type: object
         output:
           description: Output object with the fields produced by the Task execution.
+          nullable: true
           type: object
         created_at:
           description: The date and time when the Task was created.
@@ -1982,6 +1825,8 @@ components:
       - report_name
       type: object
     id_photo:
+      allOf:
+      - $ref: '#/components/schemas/id_photo_response'
       example:
         download_href: download_href
         file_name: file_name
@@ -1990,37 +1835,18 @@ components:
         id: id
         href: href
         file_size: 0
-      properties:
-        id:
-          description: The unique identifier for the photo.
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time at which the photo was uploaded.
-          format: date-time
-          readOnly: true
-          type: string
-        href:
-          description: The uri of this resource.
-          readOnly: true
-          type: string
-        download_href:
-          description: The uri that can be used to download the photo.
-          readOnly: true
-          type: string
-        file_name:
-          description: The name of the uploaded file.
-          readOnly: true
-          type: string
-        file_type:
-          description: The file type of the uploaded file.
-          readOnly: true
-          type: string
-        file_size:
-          description: The size of the file in bytes.
-          type: integer
-      type: object
+      required:
+      - id
+    id_photo_uploader:
+      allOf:
+      - $ref: '#/components/schemas/id_photo_request'
+      required:
+      - applicant_id
+      - file
     webhook:
+      allOf:
+      - $ref: '#/components/schemas/webhook_shared'
+      - $ref: '#/components/schemas/webhook_response'
       example:
         payload_version: 0
         environments:
@@ -2034,60 +1860,14 @@ components:
         - audit_log.created
         - audit_log.created
         token: token
-      properties:
-        id:
-          description: The unique identifier of the webhook.
-          readOnly: true
-          type: string
-        url:
-          description: The url that will listen to notifications (must be https).
-          type: string
-        enabled:
-          description: Determine if the webhook is active.
-          type: boolean
-        events:
-          description: |
-            The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.
-          items:
-            enum:
-            - audit_log.created
-            - watchlist_monitor.matches_updated
-            - workflow_run.completed
-            - workflow_task.started
-            - workflow_task.completed
-            - check.started
-            - check.reopened
-            - check.withdrawn
-            - check.completed
-            - check.form_completed
-            - report.withdrawn
-            - report.resumed
-            - report.cancelled
-            - report.awaiting_approval
-            - report.completed
-            type: string
-          type: array
-        token:
-          description: Webhook secret token used to sign the webhook's payload.
-          readOnly: true
-          type: string
-        href:
-          description: The API endpoint to retrieve the webhook.
-          readOnly: true
-          type: string
-        environments:
-          description: |
-            The environments from which the webhook will receive events. Allowed values are “sandbox” and “live”. If the environments parameter is omitted the webhook will receive events from both environments.
-          items:
-            type: string
-          type: array
-        payload_version:
-          description: Webhook version used to control the payload object when sending
-            webhooks.
-          type: integer
+      required:
+      - id
+      - url
+    webhook_builder:
+      allOf:
+      - $ref: '#/components/schemas/webhook_shared'
       required:
       - url
-      type: object
     webhook_resend:
       properties:
         data:
@@ -2147,14 +1927,17 @@ components:
           type: string
         line1:
           description: Line 1 of the applicant's address
+          nullable: true
           pattern: "/^[^!$%^*=<>]*$/"
           type: string
         line2:
           description: Line 2 of the applicant's address
+          nullable: true
           pattern: "/^[^!$%^*=<>]*$/"
           type: string
         line3:
           description: Line 3 of the applicant's address
+          nullable: true
           pattern: "/^[^!$%^*=<>]*$/"
           type: string
       required:
@@ -2221,9 +2004,6 @@ components:
           address_5: address_5
           widow_name: widow_name
           spouse_name: spouse_name
-          mrz_line1: mrz_line1
-          mrz_line3: mrz_line3
-          mrz_line2: mrz_line2
           issuing_country: issuing_country
           issuing_state: issuing_state
           first_name: first_name
@@ -2282,18 +2062,12 @@ components:
           type: string
       type: object
     check:
+      allOf:
+      - $ref: '#/components/schemas/check_shared'
+      - $ref: '#/components/schemas/read_only'
       example:
-        document_ids:
-        - document_ids
-        - document_ids
-        us_driving_licence:
-          key: ""
-        suppress_form_emails: true
         sandbox: true
         created_at: 2000-01-23T04:56:07.000+00:00
-        report_names:
-        - document
-        - document
         results_uri: results_uri
         report_ids:
         - report_ids
@@ -2307,150 +2081,19 @@ components:
         - webhook_ids
         - webhook_ids
         applicant_id: applicant_id
-        asynchronous: true
+        redirect_uri: redirect_uri
         id: id
         href: href
-        redirect_uri: redirect_uri
-        consider:
-        - consider
-        - consider
         applicant_provides_data: true
         status: in_progress
-      properties:
-        id:
-          description: The unique identifier for the check.
-          readOnly: true
-          type: string
-        created_at:
-          description: The date and time when this check was created.
-          format: date-time
-          readOnly: true
-          type: string
-        webhook_ids:
-          description: An array of webhook ids describing which webhooks to trigger
-            for this check.
-          items:
-            type: string
-          type: array
-        href:
-          description: The uri of this resource.
-          readOnly: true
-          type: string
-        applicant_id:
-          description: The ID of the applicant to do the check on.
-          type: string
-        report_names:
-          description: An array of report names (strings).
-          items:
-            enum:
-            - document
-            - document_video
-            - document_video_with_address
-            - document_with_address_information
-            - document_with_driving_licence_information
-            - document_with_driver_verification
-            - facial_similarity_photo
-            - facial_similarity_photo_fully_auto
-            - facial_similarity_video
-            - facial_similarity_motion
-            - known_faces
-            - identity_enhanced
-            - watchlist_aml
-            - watchlist_enhanced
-            - watchlist_standard
-            - watchlist_peps_only
-            - watchlist_sanctions_only
-            - proof_of_address
-            - us_driving_licence
-            - device_intelligence
-            type: string
-          type: array
-          writeOnly: true
-        document_ids:
-          description: "Optional. An array of document ids, for use with Document\
-            \ reports only. If omitted, the Document report will use the most recently\
-            \ uploaded document by default."
-          items:
-            type: string
-          type: array
-          writeOnly: true
-        applicant_provides_data:
-          description: |
-            Send an applicant form to applicant to complete to proceed with check. Defaults to false.
-          type: boolean
-        asynchronous:
-          default: true
-          description: |
-            Defaults to `true`. If set to `false`, you will only receive a response when all reports in your check have completed.
-          type: boolean
-          writeOnly: true
-        status:
-          description: The current state of the check in the checking process.
-          enum:
-          - in_progress
-          - awaiting_applicant
-          - complete
-          - withdrawn
-          - paused
-          - reopened
-          readOnly: true
-          type: string
-        tags:
-          description: Array of tags being assigned to this check.
-          items:
-            type: string
-          type: array
-        result:
-          description: "The overall result of the check, based on the results of the\
-            \ constituent reports."
-          enum:
-          - clear
-          - consider
-          readOnly: true
-          type: string
-        form_uri:
-          description: "A link to the applicant form, if `applicant_provides_data`\
-            \ is `true`."
-          readOnly: true
-          type: string
-        suppress_form_emails:
-          description: |
-            For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.
-          type: boolean
-          writeOnly: true
-        redirect_uri:
-          description: "For checks where `applicant_provides_data` is `true`, redirect\
-            \ to this URI when the applicant has submitted their data."
-          type: string
-        results_uri:
-          description: A link to the corresponding results page on the Onfido dashboard.
-          readOnly: true
-          type: string
-        report_ids:
-          description: An array of report ids.
-          items:
-            type: string
-          readOnly: true
-          type: array
-        consider:
-          description: Array of names of particular reports to return consider as
-            their results. This is a feature available in sandbox testing
-          items:
-            type: string
-          type: array
-          writeOnly: true
-        us_driving_licence:
-          additionalProperties: true
-          description: An object that contains all accepted fields for the Driver's
-            License Data Verification report.
-          type: object
-          writeOnly: true
-        sandbox:
-          description: Indicates whether the object was created in the sandbox or
-            not.
-          readOnly: true
-          type: boolean
-      type: object
+      required:
+      - id
+    check_builder:
+      allOf:
+      - $ref: '#/components/schemas/check_shared'
+      - $ref: '#/components/schemas/write_only'
+      required:
+      - applicant_id
     report:
       discriminator:
         mapping:
@@ -2498,46 +2141,322 @@ components:
       - $ref: '#/components/schemas/us_driving_licence_report'
       - $ref: '#/components/schemas/device_intelligence_report'
       - $ref: '#/components/schemas/india_pan_report'
-    id_number:
-      example:
-        type: ssn
-        state_code: state_code
-        value: value
+    applicant_shared:
       properties:
-        type:
-          description: Type of ID number.
-          enum:
-          - ssn
-          - social_insurance
-          - tax_id
-          - identity_card
-          - driving_licence
-          - share_code
-          - voter_id
-          - passport
-          - other
+        first_name:
+          description: The applicant's first name
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
           type: string
-        value:
-          description: Value of ID number
+        last_name:
+          description: The applicant's surname
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
           type: string
-        state_code:
-          description: Two letter code of issuing state (state-issued driving licenses
-            only)
+        email:
+          description: "The applicant's email address. Required if doing a US check,\
+            \ or a UK check for which `applicant_provides_data` is `true`."
           type: string
+        dob:
+          description: The applicant's date of birth
+          format: date
+          type: string
+        address:
+          $ref: '#/components/schemas/address'
+        id_numbers:
+          items:
+            $ref: '#/components/schemas/id_number'
+          type: array
+        phone_number:
+          description: The applicant's phone number
+          type: string
+        location:
+          $ref: '#/components/schemas/location'
       type: object
-    location:
-      example:
-        country_of_residence: GBR
-        ip_address: ip_address
+    applicant_response:
       properties:
-        ip_address:
-          description: The applicant's ip address.
+        id:
+          description: The unique identifier for the applicant.
           type: string
-        country_of_residence:
+        created_at:
+          description: The date and time when this applicant was created.
+          format: date-time
+          type: string
+        delete_at:
+          description: The date and time when this applicant is scheduled to be deleted.
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource.
+          type: string
+        sandbox:
+          type: boolean
+      type: object
+    applicant_request:
+      properties:
+        consents:
+          items:
+            $ref: '#/components/schemas/Applicant_consent'
+          type: array
+      type: object
+    document_shared:
+      properties:
+        file_type:
+          description: The file type of the uploaded file
+          enum:
+          - jpg
+          - png
+          - pdf
+          type: string
+        type:
+          description: The type of document
+          type: string
+        side:
+          description: "The side of the document, if applicable. The possible values\
+            \ are front and back"
+          enum:
+          - front
+          - back
+          type: string
+        issuing_country:
           allOf:
           - $ref: '#/components/schemas/country_codes'
-          description: The applicant's country of residence in 3-letter ISO code.
-          example: GBR
+          description: "The issuing country of the document, a 3-letter ISO code."
+          type: string
+        applicant_id:
+          description: The ID of the applicant whose document is being uploaded.
+          type: string
+      type: object
+    document_response:
+      properties:
+        id:
+          description: The unique identifier for the document
+          type: string
+        created_at:
+          description: The date and time at which the document was uploaded
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource
+          type: string
+        download_href:
+          description: The uri that can be used to download the document
+          type: string
+        file_name:
+          description: The name of the uploaded file
+          type: string
+        file_size:
+          description: The size of the file in bytes
+          type: integer
+      type: object
+    document_request:
+      properties:
+        file:
+          description: The file to be uploaded.
+          format: binary
+          type: string
+        validate_image_quality:
+          description: Defaults to false. When true the submitted image will undergo
+            an image quality validation which may take up to 5 seconds.
+          type: boolean
+        location:
+          $ref: '#/components/schemas/location'
+      type: object
+    live_photo_response:
+      properties:
+        id:
+          description: The unique identifier for the photo.
+          type: string
+        created_at:
+          description: The date and time at which the photo was uploaded.
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource.
+          type: string
+        download_href:
+          description: The uri that can be used to download the photo.
+          type: string
+        file_name:
+          description: The name of the uploaded file.
+          type: string
+        file_type:
+          description: The file type of the uploaded file.
+          type: string
+        file_size:
+          description: The size of the file in bytes.
+          type: integer
+      type: object
+    live_photo_request:
+      properties:
+        applicant_id:
+          description: The ID of the applicant whose live photo is being uploaded.
+          type: string
+        file:
+          description: The file to be uploaded.
+          format: binary
+          type: string
+        advanced_validation:
+          default: true
+          description: Validates that the live photo contains exactly one face.
+          type: boolean
+      type: object
+    workflow_run_shared:
+      properties:
+        applicant_id:
+          description: The unique identifier for the Applicant.
+          type: string
+        workflow_id:
+          description: The unique identifier for the Workflow.
+          type: string
+        tags:
+          description: Tags or labels assigned to the workflow run.
+          items:
+            maxLength: 128
+            minLength: 1
+            type: string
+          maxItems: 30
+          type: array
+          uniqueItems: true
+        link:
+          $ref: '#/components/schemas/workflow_run_shared_link'
+        created_at:
+          description: The date and time when the Workflow Run was created.
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when the Workflow Run was last updated.
+          format: date-time
+          type: string
+      type: object
+    workflow_run_response:
+      properties:
+        id:
+          description: The unique identifier for the Workflow Run.
+          type: string
+        workflow_version_id:
+          description: The identifier for the Workflow version.
+          type: integer
+        dashboard_url:
+          description: The URL for viewing the Workflow Run results on your Onfido
+            Dashboard.
+          type: string
+        status:
+          description: The status of the Workflow Run.
+          enum:
+          - awaiting_input
+          - processing
+          - abandoned
+          - error
+          - approved
+          - review
+          - declined
+          type: string
+        output:
+          description: Output object contains all of the properties configured on
+            the Workflow version.
+          type: object
+        reasons:
+          description: The reasons the Workflow Run outcome was reached. Configurable
+            when creating the Workflow version.
+          items:
+            type: string
+          type: array
+        error:
+          $ref: '#/components/schemas/workflow_run_response_error'
+      type: object
+    workflow_run_request:
+      properties:
+        custom_data:
+          additionalProperties: true
+          description: Object with Custom Input Data to be used in the Workflow Run.
+          type: object
+      type: object
+    id_photo_response:
+      properties:
+        id:
+          description: The unique identifier for the photo.
+          type: string
+        created_at:
+          description: The date and time at which the photo was uploaded.
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource.
+          type: string
+        download_href:
+          description: The uri that can be used to download the photo.
+          type: string
+        file_name:
+          description: The name of the uploaded file.
+          type: string
+        file_type:
+          description: The file type of the uploaded file.
+          type: string
+        file_size:
+          description: The size of the file in bytes.
+          type: integer
+      type: object
+    id_photo_request:
+      properties:
+        applicant_id:
+          description: The ID of the applicant whose ID photo is being uploaded.
+          type: string
+        file:
+          description: The file to be uploaded.
+          format: binary
+          type: string
+      type: object
+    webhook_shared:
+      properties:
+        url:
+          description: The url that will listen to notifications (must be https).
+          type: string
+        enabled:
+          description: Determine if the webhook is active.
+          type: boolean
+        events:
+          description: |
+            The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.
+          items:
+            enum:
+            - audit_log.created
+            - watchlist_monitor.matches_updated
+            - workflow_run.completed
+            - workflow_task.started
+            - workflow_task.completed
+            - check.started
+            - check.reopened
+            - check.withdrawn
+            - check.completed
+            - check.form_completed
+            - report.withdrawn
+            - report.resumed
+            - report.cancelled
+            - report.awaiting_approval
+            - report.completed
+            type: string
+          type: array
+        environments:
+          description: |
+            The environments from which the webhook will receive events. Allowed values are “sandbox” and “live”. If the environments parameter is omitted the webhook will receive events from both environments.
+          items:
+            type: string
+          type: array
+        payload_version:
+          description: Webhook version used to control the payload object when sending
+            webhooks.
+          type: integer
+      type: object
+    webhook_response:
+      properties:
+        id:
+          description: The unique identifier of the webhook.
+          type: string
+        token:
+          description: Webhook secret token used to sign the webhook's payload.
+          type: string
+        href:
+          description: The API endpoint to retrieve the webhook.
+          type: string
       type: object
     country_codes:
       enum:
@@ -2792,200 +2711,733 @@ components:
       - ZMB
       - ZWE
       type: string
+    check_shared:
+      properties:
+        webhook_ids:
+          description: An array of webhook ids describing which webhooks to trigger
+            for this check.
+          items:
+            type: string
+          type: array
+        applicant_id:
+          description: The ID of the applicant to do the check on.
+          type: string
+        applicant_provides_data:
+          description: |
+            Send an applicant form to applicant to complete to proceed with check. Defaults to false.
+          type: boolean
+        tags:
+          description: Array of tags being assigned to this check.
+          items:
+            type: string
+          type: array
+        redirect_uri:
+          description: "For checks where `applicant_provides_data` is `true`, redirect\
+            \ to this URI when the applicant has submitted their data."
+          type: string
+      type: object
+    read_only:
+      properties:
+        id:
+          description: The unique identifier for the check.
+          type: string
+        created_at:
+          description: The date and time when this check was created.
+          format: date-time
+          type: string
+        href:
+          description: The uri of this resource.
+          type: string
+        status:
+          description: The current state of the check in the checking process.
+          enum:
+          - in_progress
+          - awaiting_applicant
+          - complete
+          - withdrawn
+          - paused
+          - reopened
+          type: string
+        result:
+          description: "The overall result of the check, based on the results of the\
+            \ constituent reports."
+          enum:
+          - clear
+          - consider
+          type: string
+        form_uri:
+          description: "A link to the applicant form, if `applicant_provides_data`\
+            \ is `true`."
+          type: string
+        results_uri:
+          description: A link to the corresponding results page on the Onfido dashboard.
+          type: string
+        report_ids:
+          description: An array of report ids.
+          items:
+            type: string
+          type: array
+        sandbox:
+          description: Indicates whether the object was created in the sandbox or
+            not.
+          type: boolean
+      type: object
+    write_only:
+      properties:
+        report_names:
+          description: An array of report names (strings).
+          items:
+            $ref: '#/components/schemas/report_name'
+          type: array
+        document_ids:
+          description: "Optional. An array of document ids, for use with Document\
+            \ reports only. If omitted, the Document report will use the most recently\
+            \ uploaded document by default."
+          items:
+            type: string
+          type: array
+        asynchronous:
+          default: true
+          description: |
+            Defaults to `true`. If set to `false`, you will only receive a response when all reports in your check have completed.
+          type: boolean
+        suppress_form_emails:
+          description: |
+            For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.
+          type: boolean
+        consider:
+          description: Array of names of particular reports to return consider as
+            their results. This is a feature available in sandbox testing
+          items:
+            type: string
+          type: array
+        us_driving_licence:
+          additionalProperties: true
+          description: An object that contains all accepted fields for the Driver's
+            License Data Verification report.
+          type: object
+      type: object
+    report_name:
+      enum:
+      - document
+      - document_video
+      - document_video_with_address
+      - document_with_address_information
+      - document_with_driving_licence_information
+      - document_with_driver_verification
+      - facial_similarity_photo
+      - facial_similarity_photo_fully_auto
+      - facial_similarity_video
+      - facial_similarity_motion
+      - known_faces
+      - identity_enhanced
+      - watchlist_aml
+      - watchlist_enhanced
+      - watchlist_standard
+      - watchlist_peps_only
+      - watchlist_sanctions_only
+      - proof_of_address
+      - us_driving_licence
+      - device_intelligence
+      type: string
     document_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
+      example:
+        result: clear
+        documents:
+        - id: id
+        - id: id
+        breakdown:
+          visual_authenticity:
+            result: result
+            breakdown:
+              template:
+                result: result
+                properties: "{}"
+              other:
+                result: result
+                properties: "{}"
+              fonts:
+                result: result
+                properties: "{}"
+              digital_tampering:
+                result: result
+                properties: "{}"
+              picture_face_integrity:
+                result: result
+                properties: "{}"
+              face_detection:
+                result: result
+                properties: "{}"
+              original_document_present:
+                result: result
+                properties:
+                  scan: scan
+                  document_on_printed_paper: document_on_printed_paper
+                  screenshot: screenshot
+                  photo_of_screen: photo_of_screen
+              security_features:
+                result: result
+                properties: "{}"
+          compromised_document:
+            result: result
+            breakdown:
+              document_database:
+                result: result
+                properties: "{}"
+              repeat_attempts:
+                result: result
+                properties: "{}"
+          age_validation:
+            result: result
+            breakdown:
+              minimum_accepted_age:
+                result: result
+                properties: "{}"
+          issuing_authority:
+            result: result
+            breakdown:
+              nfc_active_authentication:
+                result: result
+                properties: "{}"
+              nfc_passive_authentication:
+                result: result
+                properties: "{}"
+          data_consistency:
+            result: result
+            breakdown:
+              document_numbers:
+                result: result
+                properties: "{}"
+              gender:
+                result: result
+                properties: "{}"
+              nationality:
+                result: result
+                properties: "{}"
+              date_of_expiry:
+                result: result
+                properties: "{}"
+              issuing_country:
+                result: result
+                properties: "{}"
+              date_of_birth:
+                result: result
+                properties: "{}"
+              last_name:
+                result: result
+                properties: "{}"
+              multiple_data_sources_present:
+                result: result
+                properties: "{}"
+              first_name:
+                result: result
+                properties: "{}"
+              document_type:
+                result: result
+                properties: "{}"
+          data_comparison:
+            result: result
+            breakdown:
+              document_numbers:
+                result: result
+                properties: "{}"
+              gender:
+                result: result
+                properties: "{}"
+              issuing_country:
+                result: result
+                properties: "{}"
+              date_of_expiry:
+                result: result
+                properties: "{}"
+              date_of_birth:
+                result: result
+                properties: "{}"
+              last_name:
+                result: result
+                properties: "{}"
+              first_name:
+                result: result
+                properties: "{}"
+              document_type:
+                result: result
+                properties: "{}"
+          police_record:
+            result: result
+          data_validation:
+            result: result
+            breakdown:
+              document_numbers:
+                result: result
+                properties: "{}"
+              gender:
+                result: result
+                properties: "{}"
+              mrz:
+                result: result
+                properties: "{}"
+              document_expiration:
+                result: result
+                properties: "{}"
+              date_of_birth:
+                result: result
+                properties: "{}"
+              expiry_date:
+                result: result
+                properties: "{}"
+              barcode:
+                result: result
+                properties: "{}"
+          image_integrity:
+            result: result
+            breakdown:
+              colour_picture:
+                result: result
+                properties: "{}"
+              supported_document:
+                result: result
+                properties: "{}"
+              conclusive_document_quality:
+                result: result
+                properties:
+                  missing_back: missing_back
+                  punctured_document: punctured_document
+                  watermarks_digital_text_overlay: watermarks_digital_text_overlay
+                  digital_document: digital_document
+                  corner_removed: corner_removed
+                  obscured_data_points: obscured_data_points
+                  abnormal_document_features: abnormal_document_features
+                  obscured_security_features: obscured_security_features
+              image_quality:
+                result: result
+                properties:
+                  incorrect_side: incorrect_side
+                  glare_on_photo: glare_on_photo
+                  other_photo_issue: other_photo_issue
+                  cut_off_document: cut_off_document
+                  covered_photo: covered_photo
+                  two_documents_uploaded: two_documents_uploaded
+                  blurred_photo: blurred_photo
+                  no_document_in_image: no_document_in_image
+                  damaged_document: damaged_document
+                  dark_photo: dark_photo
+        name: document
+        created_at: 2000-01-23T04:56:07.000+00:00
+        sub_result: clear
+        check_id: check_id
+        id: id
+        href: href
+        properties:
+          gender: gender
+          date_of_birth: 2000-01-23
+          categorisation: categorisation
+          widow_name: widow_name
+          extracted_data:
+            document_number: document_number
+            gender: gender
+            date_of_birth: 2000-01-23
+            last_name: last_name
+            middle_name: middle_name
+            alias_name: alias_name
+            widow_name: widow_name
+            spouse_name: spouse_name
+            mrz_line1: mrz_line1
+            full_name: full_name
+            mrz_line3: mrz_line3
+            nationality: nationality
+            date_of_expiry: 2000-01-23
+            mrz_line2: mrz_line2
+            issuing_authority: issuing_authority
+            address_line_1: address_line_1
+            address_line_3: address_line_3
+            address_line_2: address_line_2
+            address_line_5: address_line_5
+            first_name: first_name
+            address_line_4: address_line_4
+          mrz_line1: mrz_line1
+          spouse_name: spouse_name
+          real_id_compliance: true
+          address_lines:
+            street_address: street_address
+            country: country
+            country_code: country_code
+            city: city
+            state: state
+            postal_code: postal_code
+          driving_licence_information:
+            codes: codes
+            obtainment_date: 2000-01-23
+            expiry_date: 2000-01-23
+            category: category
+          mrz_line3: mrz_line3
+          issuing_country: issuing_country
+          mrz_line2: mrz_line2
+          issuing_state: issuing_state
+          first_name: first_name
+          barcode:
+          - document_number: document_number
+            issuing_date: 2000-01-23
+            gender: gender
+            date_of_birth: 2000-01-23
+            last_name: last_name
+            middle_name: middle_name
+            real_id_classification: real_id_classification
+            date_of_expiry: 2000-01-23
+            issuing_country: issuing_country
+            address_line_1: address_line_1
+            address_line_3: address_line_3
+            address_line_2: address_line_2
+            issuing_state: issuing_state
+            address_line_5: address_line_5
+            first_name: first_name
+            address_line_4: address_line_4
+            class: class
+            document_type: document_type
+          - document_number: document_number
+            issuing_date: 2000-01-23
+            gender: gender
+            date_of_birth: 2000-01-23
+            last_name: last_name
+            middle_name: middle_name
+            real_id_classification: real_id_classification
+            date_of_expiry: 2000-01-23
+            issuing_country: issuing_country
+            address_line_1: address_line_1
+            address_line_3: address_line_3
+            address_line_2: address_line_2
+            issuing_state: issuing_state
+            address_line_5: address_line_5
+            first_name: first_name
+            address_line_4: address_line_4
+            class: class
+            document_type: document_type
+          document_type: document_type
+          document_numbers:
+          - type: type
+            value: value
+          - type: type
+            value: value
+          address: address
+          issuing_date: 2000-01-23
+          last_name: last_name
+          nfc:
+            document_number: document_number
+            address: address
+            gender: gender
+            issuing_date: 2000-01-23
+            date_of_birth: 2000-01-23
+            place_of_birth: place_of_birth
+            full_name: full_name
+            nationality: nationality
+            issuing_country: issuing_country
+            date_of_expiry: 2000-01-23
+            issuing_authority: issuing_authority
+            personal_number: personal_number
+            document_type: document_type
+          document_classification:
+            issuing_country: issuing_country
+            issuing_state: issuing_state
+            document_type: document_type
+          alias_name: alias_name
+          place_of_birth: place_of_birth
+          nationality: nationality
+          date_of_expiry: 2000-01-23
+          issuing_authority: issuing_authority
+        status: awaiting_data
+      required:
+      - id
+      - name
     document_video_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
+      required:
+      - id
+      - name
     document_video_with_address_information:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
+      required:
+      - id
+      - name
     document_with_address_information_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
+      required:
+      - id
+      - name
     document_with_driving_licence_information_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
+      required:
+      - id
+      - name
     document_with_driver_verification_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
           properties:
             $ref: '#/components/schemas/document_with_driver_verification_report_allOf_properties'
         type: object
+      required:
+      - id
+      - name
     facial_similarity_photo_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_breakdown'
         type: object
+      required:
+      - id
+      - name
     facial_similarity_photo_fully_auto_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown'
         type: object
+      required:
+      - id
+      - name
     facial_similarity_video_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_video_breakdown'
         type: object
+      required:
+      - id
+      - name
     facial_similarity_motion_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_motion_breakdown'
         type: object
+      required:
+      - id
+      - name
     known_faces_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/known_faces_breakdown'
           properties:
             $ref: '#/components/schemas/known_faces_properties'
         type: object
+      required:
+      - id
+      - name
     identity_enhanced_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/identity_enhanced_breakdown'
           properties:
             $ref: '#/components/schemas/identity_enhanced_properties'
         type: object
+      required:
+      - id
+      - name
     watchlist_aml_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_aml_breakdown'
           properties:
             $ref: '#/components/schemas/watchlist_aml_properties'
         type: object
+      required:
+      - id
+      - name
     watchlist_enhanced_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_enhanced_breakdown'
           properties:
             $ref: '#/components/schemas/watchlist_enhanced_properties'
         type: object
+      required:
+      - id
+      - name
     watchlist_standard_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
           properties:
             $ref: '#/components/schemas/watchlist_standard_properties'
         type: object
+      required:
+      - id
+      - name
     watchlist_peps_only_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
           properties:
             $ref: '#/components/schemas/watchlist_standard_properties'
         type: object
+      required:
+      - id
+      - name
     watchlist_sanctions_only_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/watchlist_standard_breakdown'
           properties:
             $ref: '#/components/schemas/watchlist_standard_properties'
         type: object
+      required:
+      - id
+      - name
     proof_of_address_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/proof_of_address_breakdown'
           properties:
             $ref: '#/components/schemas/proof_of_address_properties'
         type: object
+      required:
+      - id
+      - name
     us_driving_licence_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/us_driving_licence_breakdown'
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
+      required:
+      - id
+      - name
     device_intelligence_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/device_intelligence_breakdown'
         type: object
+      required:
+      - id
+      - name
     india_pan_report:
       allOf:
-      - $ref: '#/components/schemas/report_common'
+      - $ref: '#/components/schemas/report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/india_pan_report_allOf_breakdown'
           properties:
             $ref: '#/components/schemas/india_pan_report_allOf_properties'
         type: object
-    report_common:
+      required:
+      - id
+      - name
+    id_number:
+      example:
+        type: ssn
+        state_code: state_code
+        value: value
+      properties:
+        type:
+          description: Type of ID number.
+          enum:
+          - ssn
+          - social_insurance
+          - tax_id
+          - identity_card
+          - driving_licence
+          - share_code
+          - voter_id
+          - passport
+          - other
+          type: string
+        value:
+          description: Value of ID number
+          type: string
+        state_code:
+          description: Two letter code of issuing state (state-issued driving licenses
+            only)
+          type: string
+      type: object
+    location:
+      example:
+        country_of_residence: GBR
+        ip_address: ip_address
+      properties:
+        ip_address:
+          description: The applicant's ip address.
+          type: string
+        country_of_residence:
+          allOf:
+          - $ref: '#/components/schemas/country_codes'
+          description: The applicant's country of residence in 3-letter ISO code.
+          example: GBR
+      type: object
+    report_shared:
       properties:
         id:
           description: The unique identifier for the report. Read-only.
-          readOnly: true
           type: string
         created_at:
           description: The date and time at which the report was first initiated.
             Read-only.
           format: date-time
-          readOnly: true
           type: string
         href:
           description: The API endpoint to retrieve the report. Read-only.
-          readOnly: true
           type: string
         status:
           description: The current state of the report in the checking process. Read-only.
@@ -2995,7 +3447,6 @@ components:
           - cancelled
           - complete
           - withdrawn
-          readOnly: true
           type: string
         result:
           description: The result of the report. Read-only.
@@ -3003,8 +3454,6 @@ components:
           - clear
           - consider
           - unidentified
-          - null
-          readOnly: true
           type: string
         sub_result:
           description: "The sub_result of the report. It gives a more detailed result\
@@ -3014,11 +3463,9 @@ components:
           - rejected
           - suspected
           - caution
-          readOnly: true
           type: string
         check_id:
           description: The ID of the check to which the report belongs. Read-only.
-          readOnly: true
           type: string
         documents:
           description: "Array of objects with document ids that were used in the Onfido\
@@ -3058,12 +3505,183 @@ components:
         properties:
           additionalProperties: true
           description: "The properties associated with the report, if any. Read-only."
-          readOnly: true
           type: object
-      required:
-      - name
-      type: object
     document_breakdown:
+      example:
+        visual_authenticity:
+          result: result
+          breakdown:
+            template:
+              result: result
+              properties: "{}"
+            other:
+              result: result
+              properties: "{}"
+            fonts:
+              result: result
+              properties: "{}"
+            digital_tampering:
+              result: result
+              properties: "{}"
+            picture_face_integrity:
+              result: result
+              properties: "{}"
+            face_detection:
+              result: result
+              properties: "{}"
+            original_document_present:
+              result: result
+              properties:
+                scan: scan
+                document_on_printed_paper: document_on_printed_paper
+                screenshot: screenshot
+                photo_of_screen: photo_of_screen
+            security_features:
+              result: result
+              properties: "{}"
+        compromised_document:
+          result: result
+          breakdown:
+            document_database:
+              result: result
+              properties: "{}"
+            repeat_attempts:
+              result: result
+              properties: "{}"
+        age_validation:
+          result: result
+          breakdown:
+            minimum_accepted_age:
+              result: result
+              properties: "{}"
+        issuing_authority:
+          result: result
+          breakdown:
+            nfc_active_authentication:
+              result: result
+              properties: "{}"
+            nfc_passive_authentication:
+              result: result
+              properties: "{}"
+        data_consistency:
+          result: result
+          breakdown:
+            document_numbers:
+              result: result
+              properties: "{}"
+            gender:
+              result: result
+              properties: "{}"
+            nationality:
+              result: result
+              properties: "{}"
+            date_of_expiry:
+              result: result
+              properties: "{}"
+            issuing_country:
+              result: result
+              properties: "{}"
+            date_of_birth:
+              result: result
+              properties: "{}"
+            last_name:
+              result: result
+              properties: "{}"
+            multiple_data_sources_present:
+              result: result
+              properties: "{}"
+            first_name:
+              result: result
+              properties: "{}"
+            document_type:
+              result: result
+              properties: "{}"
+        data_comparison:
+          result: result
+          breakdown:
+            document_numbers:
+              result: result
+              properties: "{}"
+            gender:
+              result: result
+              properties: "{}"
+            issuing_country:
+              result: result
+              properties: "{}"
+            date_of_expiry:
+              result: result
+              properties: "{}"
+            date_of_birth:
+              result: result
+              properties: "{}"
+            last_name:
+              result: result
+              properties: "{}"
+            first_name:
+              result: result
+              properties: "{}"
+            document_type:
+              result: result
+              properties: "{}"
+        police_record:
+          result: result
+        data_validation:
+          result: result
+          breakdown:
+            document_numbers:
+              result: result
+              properties: "{}"
+            gender:
+              result: result
+              properties: "{}"
+            mrz:
+              result: result
+              properties: "{}"
+            document_expiration:
+              result: result
+              properties: "{}"
+            date_of_birth:
+              result: result
+              properties: "{}"
+            expiry_date:
+              result: result
+              properties: "{}"
+            barcode:
+              result: result
+              properties: "{}"
+        image_integrity:
+          result: result
+          breakdown:
+            colour_picture:
+              result: result
+              properties: "{}"
+            supported_document:
+              result: result
+              properties: "{}"
+            conclusive_document_quality:
+              result: result
+              properties:
+                missing_back: missing_back
+                punctured_document: punctured_document
+                watermarks_digital_text_overlay: watermarks_digital_text_overlay
+                digital_document: digital_document
+                corner_removed: corner_removed
+                obscured_data_points: obscured_data_points
+                abnormal_document_features: abnormal_document_features
+                obscured_security_features: obscured_security_features
+            image_quality:
+              result: result
+              properties:
+                incorrect_side: incorrect_side
+                glare_on_photo: glare_on_photo
+                other_photo_issue: other_photo_issue
+                cut_off_document: cut_off_document
+                covered_photo: covered_photo
+                two_documents_uploaded: two_documents_uploaded
+                blurred_photo: blurred_photo
+                no_document_in_image: no_document_in_image
+                damaged_document: damaged_document
+                dark_photo: dark_photo
       properties:
         data_comparison:
           $ref: '#/components/schemas/document_breakdown_data_comparison'
@@ -3085,6 +3703,122 @@ components:
           $ref: '#/components/schemas/document_breakdown_issuing_authority'
       type: object
     document_properties:
+      example:
+        gender: gender
+        date_of_birth: 2000-01-23
+        categorisation: categorisation
+        widow_name: widow_name
+        extracted_data:
+          document_number: document_number
+          gender: gender
+          date_of_birth: 2000-01-23
+          last_name: last_name
+          middle_name: middle_name
+          alias_name: alias_name
+          widow_name: widow_name
+          spouse_name: spouse_name
+          mrz_line1: mrz_line1
+          full_name: full_name
+          mrz_line3: mrz_line3
+          nationality: nationality
+          date_of_expiry: 2000-01-23
+          mrz_line2: mrz_line2
+          issuing_authority: issuing_authority
+          address_line_1: address_line_1
+          address_line_3: address_line_3
+          address_line_2: address_line_2
+          address_line_5: address_line_5
+          first_name: first_name
+          address_line_4: address_line_4
+        mrz_line1: mrz_line1
+        spouse_name: spouse_name
+        real_id_compliance: true
+        address_lines:
+          street_address: street_address
+          country: country
+          country_code: country_code
+          city: city
+          state: state
+          postal_code: postal_code
+        driving_licence_information:
+          codes: codes
+          obtainment_date: 2000-01-23
+          expiry_date: 2000-01-23
+          category: category
+        mrz_line3: mrz_line3
+        issuing_country: issuing_country
+        mrz_line2: mrz_line2
+        issuing_state: issuing_state
+        first_name: first_name
+        barcode:
+        - document_number: document_number
+          issuing_date: 2000-01-23
+          gender: gender
+          date_of_birth: 2000-01-23
+          last_name: last_name
+          middle_name: middle_name
+          real_id_classification: real_id_classification
+          date_of_expiry: 2000-01-23
+          issuing_country: issuing_country
+          address_line_1: address_line_1
+          address_line_3: address_line_3
+          address_line_2: address_line_2
+          issuing_state: issuing_state
+          address_line_5: address_line_5
+          first_name: first_name
+          address_line_4: address_line_4
+          class: class
+          document_type: document_type
+        - document_number: document_number
+          issuing_date: 2000-01-23
+          gender: gender
+          date_of_birth: 2000-01-23
+          last_name: last_name
+          middle_name: middle_name
+          real_id_classification: real_id_classification
+          date_of_expiry: 2000-01-23
+          issuing_country: issuing_country
+          address_line_1: address_line_1
+          address_line_3: address_line_3
+          address_line_2: address_line_2
+          issuing_state: issuing_state
+          address_line_5: address_line_5
+          first_name: first_name
+          address_line_4: address_line_4
+          class: class
+          document_type: document_type
+        document_type: document_type
+        document_numbers:
+        - type: type
+          value: value
+        - type: type
+          value: value
+        address: address
+        issuing_date: 2000-01-23
+        last_name: last_name
+        nfc:
+          document_number: document_number
+          address: address
+          gender: gender
+          issuing_date: 2000-01-23
+          date_of_birth: 2000-01-23
+          place_of_birth: place_of_birth
+          full_name: full_name
+          nationality: nationality
+          issuing_country: issuing_country
+          date_of_expiry: 2000-01-23
+          issuing_authority: issuing_authority
+          personal_number: personal_number
+          document_type: document_type
+        document_classification:
+          issuing_country: issuing_country
+          issuing_state: issuing_state
+          document_type: document_type
+        alias_name: alias_name
+        place_of_birth: place_of_birth
+        nationality: nationality
+        date_of_expiry: 2000-01-23
+        issuing_authority: issuing_authority
       properties:
         date_of_birth:
           format: date
@@ -3134,7 +3868,7 @@ components:
         issuing_authority:
           type: string
         real_id_compliance:
-          type: string
+          type: boolean
         address_lines:
           $ref: '#/components/schemas/document_properties_address_lines'
         barcode:
@@ -3345,6 +4079,8 @@ components:
           $ref: '#/components/schemas/device_intelligence_breakdown_properties'
       type: object
     report_document:
+      example:
+        id: id
       properties:
         id:
           description: ID of uploaded document to use.
@@ -3353,6 +4089,17 @@ components:
       - id
       type: object
     document_IQ_reasons:
+      example:
+        incorrect_side: incorrect_side
+        glare_on_photo: glare_on_photo
+        other_photo_issue: other_photo_issue
+        cut_off_document: cut_off_document
+        covered_photo: covered_photo
+        two_documents_uploaded: two_documents_uploaded
+        blurred_photo: blurred_photo
+        no_document_in_image: no_document_in_image
+        damaged_document: damaged_document
+        dark_photo: dark_photo
       properties:
         dark_photo:
           description: When an image of the document is too dark to be able to see
@@ -3395,6 +4142,15 @@ components:
           type: string
       type: object
     document_CDQ_reasons:
+      example:
+        missing_back: missing_back
+        punctured_document: punctured_document
+        watermarks_digital_text_overlay: watermarks_digital_text_overlay
+        digital_document: digital_document
+        corner_removed: corner_removed
+        obscured_data_points: obscured_data_points
+        abnormal_document_features: abnormal_document_features
+        obscured_security_features: obscured_security_features
       properties:
         obscured_data_points:
           description: When data points are obscured to the point that we cannot confirm
@@ -3431,6 +4187,11 @@ components:
           type: string
       type: object
     document_ODP_reasons:
+      example:
+        scan: scan
+        document_on_printed_paper: document_on_printed_paper
+        screenshot: screenshot
+        photo_of_screen: photo_of_screen
       properties:
         photo_of_screen:
           description: When the applicant's document is on a physical screen or device.
@@ -3509,7 +4270,7 @@ components:
             fake webcam.
           type: string
       type: object
-    list_applicants_200_response:
+    Applicants_list:
       example:
         applicants:
         - address:
@@ -3526,8 +4287,8 @@ components:
             line1: line1
             sub_street: sub_street
           sandbox: true
-          created_at: 2000-01-23T04:56:07.000+00:00
           last_name: last_name
+          created_at: 2000-01-23T04:56:07.000+00:00
           id_numbers:
           - type: ssn
             state_code: state_code
@@ -3536,9 +4297,6 @@ components:
             state_code: state_code
             value: value
           dob: 2000-01-23
-          consents:
-          - key: ""
-          - key: ""
           delete_at: 2000-01-23T04:56:07.000+00:00
           phone_number: phone_number
           location:
@@ -3562,8 +4320,8 @@ components:
             line1: line1
             sub_street: sub_street
           sandbox: true
-          created_at: 2000-01-23T04:56:07.000+00:00
           last_name: last_name
+          created_at: 2000-01-23T04:56:07.000+00:00
           id_numbers:
           - type: ssn
             state_code: state_code
@@ -3572,9 +4330,6 @@ components:
             state_code: state_code
             value: value
           dob: 2000-01-23
-          consents:
-          - key: ""
-          - key: ""
           delete_at: 2000-01-23T04:56:07.000+00:00
           phone_number: phone_number
           location:
@@ -3589,6 +4344,9 @@ components:
           items:
             $ref: '#/components/schemas/applicant'
           type: array
+      required:
+      - applicants
+      title: Applicants list
       type: object
     ErrorProperties:
       example:
@@ -3618,57 +4376,41 @@ components:
           $ref: '#/components/schemas/ErrorProperties'
       title: Error
       type: object
-    list_documents_200_response:
+    Documents_list:
       example:
         documents:
         - side: front
           download_href: download_href
-          file_name: file_name
-          created_at: 2000-01-23T04:56:07.000+00:00
-          type: type
-          file_size: 0
           applicant_id: applicant_id
           issuing_country: issuing_country
-          validate_image_quality: true
           file_type: jpg
-          location:
-            country_of_residence: GBR
-            ip_address: ip_address
+          file_name: file_name
+          created_at: 2000-01-23T04:56:07.000+00:00
           id: id
           href: href
+          type: type
+          file_size: 0
         - side: front
           download_href: download_href
-          file_name: file_name
-          created_at: 2000-01-23T04:56:07.000+00:00
-          type: type
-          file_size: 0
           applicant_id: applicant_id
           issuing_country: issuing_country
-          validate_image_quality: true
           file_type: jpg
-          location:
-            country_of_residence: GBR
-            ip_address: ip_address
+          file_name: file_name
+          created_at: 2000-01-23T04:56:07.000+00:00
           id: id
           href: href
+          type: type
+          file_size: 0
       properties:
         documents:
           items:
             $ref: '#/components/schemas/document'
           type: array
+      required:
+      - documents
+      title: Documents list
       type: object
-    upload_document_request:
-      allOf:
-      - $ref: '#/components/schemas/document'
-      - properties:
-          file:
-            description: The file to be uploaded.
-            format: binary
-            type: string
-        required:
-        - file
-        type: object
-    list_live_photos_200_response:
+    Live_Photos_list:
       example:
         live_photos:
         - download_href: download_href
@@ -3690,27 +4432,11 @@ components:
           items:
             $ref: '#/components/schemas/live_photo'
           type: array
+      required:
+      - live_photos
+      title: Live Photos list
       type: object
-    upload_live_photo_request:
-      allOf:
-      - $ref: '#/components/schemas/live_photo'
-      - properties:
-          applicant_id:
-            description: The ID of the applicant whose live photo is being uploaded.
-            type: string
-          file:
-            description: The file to be uploaded.
-            format: binary
-            type: string
-          advanced_validation:
-            default: true
-            description: Validates that the live photo contains exactly one face.
-            type: boolean
-        required:
-        - applicant_id
-        - file
-        type: object
-    list_live_videos_200_response:
+    Liveo_Videos_list:
       example:
         live_videos:
         - download_href: download_href
@@ -3738,37 +4464,11 @@ components:
           items:
             $ref: '#/components/schemas/live_video'
           type: array
-      type: object
-    create_workflow_run_request:
-      properties:
-        workflow_id:
-          description: The unique identifier for the Workflow.
-          type: string
-        applicant_id:
-          description: The unique identifier for the Applicant.
-          type: string
-        custom_data:
-          description: Optional object with custom input data to be used in the Workflow
-            Run.
-          type: object
-        tags:
-          description: Tags or labels to assign to the workflow run.
-          items:
-            maxLength: 128
-            minLength: 1
-            type: string
-          maxItems: 30
-          minItems: 1
-          type: array
-          uniqueItems: true
-        link:
-          description: Optional object for the configuration of the Workflow Run link.
-          type: object
       required:
-      - applicant_id
-      - workflow_id
+      - live_videos
+      title: Liveo Videos list
       type: object
-    list_tasks_200_response_inner:
+    Task:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -3789,6 +4489,7 @@ components:
           description: The date and time when the Task was last updated.
           format: date-time
           type: string
+      title: Task
       type: object
     complete_task_request:
       properties:
@@ -3796,7 +4497,7 @@ components:
           description: The Task completion payload.
           type: object
       type: object
-    list_motion_captures_200_response:
+    Motion_Captures_list:
       example:
         motion_captures:
         - download_href: download_href
@@ -3818,8 +4519,11 @@ components:
           items:
             $ref: '#/components/schemas/motion_capture'
           type: array
+      required:
+      - motion_captures
+      title: Motion Captures list
       type: object
-    list_watchlist_monitor_matches_200_response_inner:
+    Watchlist_monitor_match:
       example:
         id: id
         status: true
@@ -3830,6 +4534,7 @@ components:
         status:
           description: Monitor status
           type: boolean
+      title: Watchlist monitor match
       type: object
     update_monitor_match_request:
       properties:
@@ -3844,9 +4549,9 @@ components:
             type: string
           type: array
       type: object
-    list_id_photos_200_response:
+    ID_Photos_list:
       example:
-        live_photos:
+        id_photos:
         - download_href: download_href
           file_name: file_name
           file_type: file_type
@@ -3862,27 +4567,15 @@ components:
           href: href
           file_size: 0
       properties:
-        live_photos:
+        id_photos:
           items:
             $ref: '#/components/schemas/id_photo'
           type: array
+      required:
+      - id_photos
+      title: ID Photos list
       type: object
-    upload_id_photo_request:
-      allOf:
-      - $ref: '#/components/schemas/id_photo'
-      - properties:
-          applicant_id:
-            description: The ID of the applicant whose ID photo is being uploaded.
-            type: string
-          file:
-            description: The file to be uploaded.
-            format: binary
-            type: string
-        required:
-        - applicant_id
-        - file
-        type: object
-    list_webhooks_200_response:
+    Webhooks_list:
       example:
         webhooks:
         - payload_version: 0
@@ -3914,8 +4607,9 @@ components:
           items:
             $ref: '#/components/schemas/webhook'
           type: array
+      title: Webhooks list
       type: object
-    find_addresses_200_response:
+    Addresses:
       example:
         addresses:
         - building_name: building_name
@@ -3947,6 +4641,7 @@ components:
           items:
             $ref: '#/components/schemas/address'
           type: array
+      title: Addresses
       type: object
     generate_sdk_token_request:
       properties:
@@ -3965,13 +4660,14 @@ components:
       required:
       - applicant_id
       type: object
-    generate_sdk_token_200_response:
+    SDK_token:
       example:
         token: token
       properties:
         token:
           description: The generated SDK token
           type: string
+      title: SDK token
       type: object
     extract_request:
       properties:
@@ -3983,6 +4679,9 @@ components:
       - document_id
       type: object
     ErrorProperties_1:
+      example:
+        type: type
+        message: message
       properties:
         type:
           type: string
@@ -3991,6 +4690,11 @@ components:
       title: ErrorProperties
       type: object
     Error_1:
+      example:
+        document_id: document_id
+        error:
+          type: type
+          message: message
       properties:
         document_id:
           description: The unique identifier of the uploaded document
@@ -3999,20 +4703,11 @@ components:
           $ref: '#/components/schemas/ErrorProperties_1'
       title: Error
       type: object
-    list_checks_200_response:
+    Checks_list:
       example:
         checks:
-        - document_ids:
-          - document_ids
-          - document_ids
-          us_driving_licence:
-            key: ""
-          suppress_form_emails: true
-          sandbox: true
+        - sandbox: true
           created_at: 2000-01-23T04:56:07.000+00:00
-          report_names:
-          - document
-          - document
           results_uri: results_uri
           report_ids:
           - report_ids
@@ -4026,26 +4721,13 @@ components:
           - webhook_ids
           - webhook_ids
           applicant_id: applicant_id
-          asynchronous: true
+          redirect_uri: redirect_uri
           id: id
           href: href
-          redirect_uri: redirect_uri
-          consider:
-          - consider
-          - consider
           applicant_provides_data: true
           status: in_progress
-        - document_ids:
-          - document_ids
-          - document_ids
-          us_driving_licence:
-            key: ""
-          suppress_form_emails: true
-          sandbox: true
+        - sandbox: true
           created_at: 2000-01-23T04:56:07.000+00:00
-          report_names:
-          - document
-          - document
           results_uri: results_uri
           report_ids:
           - report_ids
@@ -4059,13 +4741,9 @@ components:
           - webhook_ids
           - webhook_ids
           applicant_id: applicant_id
-          asynchronous: true
+          redirect_uri: redirect_uri
           id: id
           href: href
-          redirect_uri: redirect_uri
-          consider:
-          - consider
-          - consider
           applicant_provides_data: true
           status: in_progress
       properties:
@@ -4073,69 +4751,625 @@ components:
           items:
             $ref: '#/components/schemas/check'
           type: array
+      required:
+      - checks
+      title: Checks list
       type: object
-    list_reports_200_response:
+    Reports_list:
       example:
         reports:
-        - null
-        - null
+        - result: clear
+          documents:
+          - id: id
+          - id: id
+          breakdown:
+            visual_authenticity:
+              result: result
+              breakdown:
+                template:
+                  result: result
+                  properties: "{}"
+                other:
+                  result: result
+                  properties: "{}"
+                fonts:
+                  result: result
+                  properties: "{}"
+                digital_tampering:
+                  result: result
+                  properties: "{}"
+                picture_face_integrity:
+                  result: result
+                  properties: "{}"
+                face_detection:
+                  result: result
+                  properties: "{}"
+                original_document_present:
+                  result: result
+                  properties:
+                    scan: scan
+                    document_on_printed_paper: document_on_printed_paper
+                    screenshot: screenshot
+                    photo_of_screen: photo_of_screen
+                security_features:
+                  result: result
+                  properties: "{}"
+            compromised_document:
+              result: result
+              breakdown:
+                document_database:
+                  result: result
+                  properties: "{}"
+                repeat_attempts:
+                  result: result
+                  properties: "{}"
+            age_validation:
+              result: result
+              breakdown:
+                minimum_accepted_age:
+                  result: result
+                  properties: "{}"
+            issuing_authority:
+              result: result
+              breakdown:
+                nfc_active_authentication:
+                  result: result
+                  properties: "{}"
+                nfc_passive_authentication:
+                  result: result
+                  properties: "{}"
+            data_consistency:
+              result: result
+              breakdown:
+                document_numbers:
+                  result: result
+                  properties: "{}"
+                gender:
+                  result: result
+                  properties: "{}"
+                nationality:
+                  result: result
+                  properties: "{}"
+                date_of_expiry:
+                  result: result
+                  properties: "{}"
+                issuing_country:
+                  result: result
+                  properties: "{}"
+                date_of_birth:
+                  result: result
+                  properties: "{}"
+                last_name:
+                  result: result
+                  properties: "{}"
+                multiple_data_sources_present:
+                  result: result
+                  properties: "{}"
+                first_name:
+                  result: result
+                  properties: "{}"
+                document_type:
+                  result: result
+                  properties: "{}"
+            data_comparison:
+              result: result
+              breakdown:
+                document_numbers:
+                  result: result
+                  properties: "{}"
+                gender:
+                  result: result
+                  properties: "{}"
+                issuing_country:
+                  result: result
+                  properties: "{}"
+                date_of_expiry:
+                  result: result
+                  properties: "{}"
+                date_of_birth:
+                  result: result
+                  properties: "{}"
+                last_name:
+                  result: result
+                  properties: "{}"
+                first_name:
+                  result: result
+                  properties: "{}"
+                document_type:
+                  result: result
+                  properties: "{}"
+            police_record:
+              result: result
+            data_validation:
+              result: result
+              breakdown:
+                document_numbers:
+                  result: result
+                  properties: "{}"
+                gender:
+                  result: result
+                  properties: "{}"
+                mrz:
+                  result: result
+                  properties: "{}"
+                document_expiration:
+                  result: result
+                  properties: "{}"
+                date_of_birth:
+                  result: result
+                  properties: "{}"
+                expiry_date:
+                  result: result
+                  properties: "{}"
+                barcode:
+                  result: result
+                  properties: "{}"
+            image_integrity:
+              result: result
+              breakdown:
+                colour_picture:
+                  result: result
+                  properties: "{}"
+                supported_document:
+                  result: result
+                  properties: "{}"
+                conclusive_document_quality:
+                  result: result
+                  properties:
+                    missing_back: missing_back
+                    punctured_document: punctured_document
+                    watermarks_digital_text_overlay: watermarks_digital_text_overlay
+                    digital_document: digital_document
+                    corner_removed: corner_removed
+                    obscured_data_points: obscured_data_points
+                    abnormal_document_features: abnormal_document_features
+                    obscured_security_features: obscured_security_features
+                image_quality:
+                  result: result
+                  properties:
+                    incorrect_side: incorrect_side
+                    glare_on_photo: glare_on_photo
+                    other_photo_issue: other_photo_issue
+                    cut_off_document: cut_off_document
+                    covered_photo: covered_photo
+                    two_documents_uploaded: two_documents_uploaded
+                    blurred_photo: blurred_photo
+                    no_document_in_image: no_document_in_image
+                    damaged_document: damaged_document
+                    dark_photo: dark_photo
+          name: document
+          created_at: 2000-01-23T04:56:07.000+00:00
+          sub_result: clear
+          check_id: check_id
+          id: id
+          href: href
+          properties:
+            gender: gender
+            date_of_birth: 2000-01-23
+            categorisation: categorisation
+            widow_name: widow_name
+            extracted_data:
+              document_number: document_number
+              gender: gender
+              date_of_birth: 2000-01-23
+              last_name: last_name
+              middle_name: middle_name
+              alias_name: alias_name
+              widow_name: widow_name
+              spouse_name: spouse_name
+              mrz_line1: mrz_line1
+              full_name: full_name
+              mrz_line3: mrz_line3
+              nationality: nationality
+              date_of_expiry: 2000-01-23
+              mrz_line2: mrz_line2
+              issuing_authority: issuing_authority
+              address_line_1: address_line_1
+              address_line_3: address_line_3
+              address_line_2: address_line_2
+              address_line_5: address_line_5
+              first_name: first_name
+              address_line_4: address_line_4
+            mrz_line1: mrz_line1
+            spouse_name: spouse_name
+            real_id_compliance: true
+            address_lines:
+              street_address: street_address
+              country: country
+              country_code: country_code
+              city: city
+              state: state
+              postal_code: postal_code
+            driving_licence_information:
+              codes: codes
+              obtainment_date: 2000-01-23
+              expiry_date: 2000-01-23
+              category: category
+            mrz_line3: mrz_line3
+            issuing_country: issuing_country
+            mrz_line2: mrz_line2
+            issuing_state: issuing_state
+            first_name: first_name
+            barcode:
+            - document_number: document_number
+              issuing_date: 2000-01-23
+              gender: gender
+              date_of_birth: 2000-01-23
+              last_name: last_name
+              middle_name: middle_name
+              real_id_classification: real_id_classification
+              date_of_expiry: 2000-01-23
+              issuing_country: issuing_country
+              address_line_1: address_line_1
+              address_line_3: address_line_3
+              address_line_2: address_line_2
+              issuing_state: issuing_state
+              address_line_5: address_line_5
+              first_name: first_name
+              address_line_4: address_line_4
+              class: class
+              document_type: document_type
+            - document_number: document_number
+              issuing_date: 2000-01-23
+              gender: gender
+              date_of_birth: 2000-01-23
+              last_name: last_name
+              middle_name: middle_name
+              real_id_classification: real_id_classification
+              date_of_expiry: 2000-01-23
+              issuing_country: issuing_country
+              address_line_1: address_line_1
+              address_line_3: address_line_3
+              address_line_2: address_line_2
+              issuing_state: issuing_state
+              address_line_5: address_line_5
+              first_name: first_name
+              address_line_4: address_line_4
+              class: class
+              document_type: document_type
+            document_type: document_type
+            document_numbers:
+            - type: type
+              value: value
+            - type: type
+              value: value
+            address: address
+            issuing_date: 2000-01-23
+            last_name: last_name
+            nfc:
+              document_number: document_number
+              address: address
+              gender: gender
+              issuing_date: 2000-01-23
+              date_of_birth: 2000-01-23
+              place_of_birth: place_of_birth
+              full_name: full_name
+              nationality: nationality
+              issuing_country: issuing_country
+              date_of_expiry: 2000-01-23
+              issuing_authority: issuing_authority
+              personal_number: personal_number
+              document_type: document_type
+            document_classification:
+              issuing_country: issuing_country
+              issuing_state: issuing_state
+              document_type: document_type
+            alias_name: alias_name
+            place_of_birth: place_of_birth
+            nationality: nationality
+            date_of_expiry: 2000-01-23
+            issuing_authority: issuing_authority
+          status: awaiting_data
+        - result: clear
+          documents:
+          - id: id
+          - id: id
+          breakdown:
+            visual_authenticity:
+              result: result
+              breakdown:
+                template:
+                  result: result
+                  properties: "{}"
+                other:
+                  result: result
+                  properties: "{}"
+                fonts:
+                  result: result
+                  properties: "{}"
+                digital_tampering:
+                  result: result
+                  properties: "{}"
+                picture_face_integrity:
+                  result: result
+                  properties: "{}"
+                face_detection:
+                  result: result
+                  properties: "{}"
+                original_document_present:
+                  result: result
+                  properties:
+                    scan: scan
+                    document_on_printed_paper: document_on_printed_paper
+                    screenshot: screenshot
+                    photo_of_screen: photo_of_screen
+                security_features:
+                  result: result
+                  properties: "{}"
+            compromised_document:
+              result: result
+              breakdown:
+                document_database:
+                  result: result
+                  properties: "{}"
+                repeat_attempts:
+                  result: result
+                  properties: "{}"
+            age_validation:
+              result: result
+              breakdown:
+                minimum_accepted_age:
+                  result: result
+                  properties: "{}"
+            issuing_authority:
+              result: result
+              breakdown:
+                nfc_active_authentication:
+                  result: result
+                  properties: "{}"
+                nfc_passive_authentication:
+                  result: result
+                  properties: "{}"
+            data_consistency:
+              result: result
+              breakdown:
+                document_numbers:
+                  result: result
+                  properties: "{}"
+                gender:
+                  result: result
+                  properties: "{}"
+                nationality:
+                  result: result
+                  properties: "{}"
+                date_of_expiry:
+                  result: result
+                  properties: "{}"
+                issuing_country:
+                  result: result
+                  properties: "{}"
+                date_of_birth:
+                  result: result
+                  properties: "{}"
+                last_name:
+                  result: result
+                  properties: "{}"
+                multiple_data_sources_present:
+                  result: result
+                  properties: "{}"
+                first_name:
+                  result: result
+                  properties: "{}"
+                document_type:
+                  result: result
+                  properties: "{}"
+            data_comparison:
+              result: result
+              breakdown:
+                document_numbers:
+                  result: result
+                  properties: "{}"
+                gender:
+                  result: result
+                  properties: "{}"
+                issuing_country:
+                  result: result
+                  properties: "{}"
+                date_of_expiry:
+                  result: result
+                  properties: "{}"
+                date_of_birth:
+                  result: result
+                  properties: "{}"
+                last_name:
+                  result: result
+                  properties: "{}"
+                first_name:
+                  result: result
+                  properties: "{}"
+                document_type:
+                  result: result
+                  properties: "{}"
+            police_record:
+              result: result
+            data_validation:
+              result: result
+              breakdown:
+                document_numbers:
+                  result: result
+                  properties: "{}"
+                gender:
+                  result: result
+                  properties: "{}"
+                mrz:
+                  result: result
+                  properties: "{}"
+                document_expiration:
+                  result: result
+                  properties: "{}"
+                date_of_birth:
+                  result: result
+                  properties: "{}"
+                expiry_date:
+                  result: result
+                  properties: "{}"
+                barcode:
+                  result: result
+                  properties: "{}"
+            image_integrity:
+              result: result
+              breakdown:
+                colour_picture:
+                  result: result
+                  properties: "{}"
+                supported_document:
+                  result: result
+                  properties: "{}"
+                conclusive_document_quality:
+                  result: result
+                  properties:
+                    missing_back: missing_back
+                    punctured_document: punctured_document
+                    watermarks_digital_text_overlay: watermarks_digital_text_overlay
+                    digital_document: digital_document
+                    corner_removed: corner_removed
+                    obscured_data_points: obscured_data_points
+                    abnormal_document_features: abnormal_document_features
+                    obscured_security_features: obscured_security_features
+                image_quality:
+                  result: result
+                  properties:
+                    incorrect_side: incorrect_side
+                    glare_on_photo: glare_on_photo
+                    other_photo_issue: other_photo_issue
+                    cut_off_document: cut_off_document
+                    covered_photo: covered_photo
+                    two_documents_uploaded: two_documents_uploaded
+                    blurred_photo: blurred_photo
+                    no_document_in_image: no_document_in_image
+                    damaged_document: damaged_document
+                    dark_photo: dark_photo
+          name: document
+          created_at: 2000-01-23T04:56:07.000+00:00
+          sub_result: clear
+          check_id: check_id
+          id: id
+          href: href
+          properties:
+            gender: gender
+            date_of_birth: 2000-01-23
+            categorisation: categorisation
+            widow_name: widow_name
+            extracted_data:
+              document_number: document_number
+              gender: gender
+              date_of_birth: 2000-01-23
+              last_name: last_name
+              middle_name: middle_name
+              alias_name: alias_name
+              widow_name: widow_name
+              spouse_name: spouse_name
+              mrz_line1: mrz_line1
+              full_name: full_name
+              mrz_line3: mrz_line3
+              nationality: nationality
+              date_of_expiry: 2000-01-23
+              mrz_line2: mrz_line2
+              issuing_authority: issuing_authority
+              address_line_1: address_line_1
+              address_line_3: address_line_3
+              address_line_2: address_line_2
+              address_line_5: address_line_5
+              first_name: first_name
+              address_line_4: address_line_4
+            mrz_line1: mrz_line1
+            spouse_name: spouse_name
+            real_id_compliance: true
+            address_lines:
+              street_address: street_address
+              country: country
+              country_code: country_code
+              city: city
+              state: state
+              postal_code: postal_code
+            driving_licence_information:
+              codes: codes
+              obtainment_date: 2000-01-23
+              expiry_date: 2000-01-23
+              category: category
+            mrz_line3: mrz_line3
+            issuing_country: issuing_country
+            mrz_line2: mrz_line2
+            issuing_state: issuing_state
+            first_name: first_name
+            barcode:
+            - document_number: document_number
+              issuing_date: 2000-01-23
+              gender: gender
+              date_of_birth: 2000-01-23
+              last_name: last_name
+              middle_name: middle_name
+              real_id_classification: real_id_classification
+              date_of_expiry: 2000-01-23
+              issuing_country: issuing_country
+              address_line_1: address_line_1
+              address_line_3: address_line_3
+              address_line_2: address_line_2
+              issuing_state: issuing_state
+              address_line_5: address_line_5
+              first_name: first_name
+              address_line_4: address_line_4
+              class: class
+              document_type: document_type
+            - document_number: document_number
+              issuing_date: 2000-01-23
+              gender: gender
+              date_of_birth: 2000-01-23
+              last_name: last_name
+              middle_name: middle_name
+              real_id_classification: real_id_classification
+              date_of_expiry: 2000-01-23
+              issuing_country: issuing_country
+              address_line_1: address_line_1
+              address_line_3: address_line_3
+              address_line_2: address_line_2
+              issuing_state: issuing_state
+              address_line_5: address_line_5
+              first_name: first_name
+              address_line_4: address_line_4
+              class: class
+              document_type: document_type
+            document_type: document_type
+            document_numbers:
+            - type: type
+              value: value
+            - type: type
+              value: value
+            address: address
+            issuing_date: 2000-01-23
+            last_name: last_name
+            nfc:
+              document_number: document_number
+              address: address
+              gender: gender
+              issuing_date: 2000-01-23
+              date_of_birth: 2000-01-23
+              place_of_birth: place_of_birth
+              full_name: full_name
+              nationality: nationality
+              issuing_country: issuing_country
+              date_of_expiry: 2000-01-23
+              issuing_authority: issuing_authority
+              personal_number: personal_number
+              document_type: document_type
+            document_classification:
+              issuing_country: issuing_country
+              issuing_state: issuing_state
+              document_type: document_type
+            alias_name: alias_name
+            place_of_birth: place_of_birth
+            nationality: nationality
+            date_of_expiry: 2000-01-23
+            issuing_authority: issuing_authority
+          status: awaiting_data
       properties:
         reports:
           items:
             $ref: '#/components/schemas/report'
           type: array
-      type: object
-    workflow_run_error:
-      description: Error object. Only set when the Workflow Run status is 'error'.
-      example:
-        type: type
-        message: message
-      properties:
-        type:
-          description: The type of error.
-          type: string
-        message:
-          description: A textual description of the error.
-          type: string
-      type: object
-    workflow_run_link:
-      description: Object for the configuration of the Workflow Run link.
-      example:
-        expires_at: 2000-01-23T04:56:07.000+00:00
-        expired_redirect_url: expired_redirect_url
-        completed_redirect_url: completed_redirect_url
-        language: en_US
-        url: url
-      properties:
-        url:
-          description: Link to access the Workflow Run without the need to integrate
-            with Onfido's SDKs.
-          type: string
-        completed_redirect_url:
-          description: "When the interactive section of the Workflow Run has completed\
-            \ successfully, the user will be redirected to this URL instead of seeing\
-            \ the default Onfido 'thank you' page."
-          type: string
-        expired_redirect_url:
-          description: "When the link has expired, the user will be immediately redirected\
-            \ to this URL instead of seeing the default Onfido error message."
-          type: string
-        expires_at:
-          description: Date and time when the link will expire.
-          format: date-time
-          type: string
-        language:
-          description: The code for the language when the workflow run is acessed
-            using the link.
-          enum:
-          - en_US
-          - de_DE
-          - es_ES
-          - fr_FR
-          - it_IT
-          - pt_PT
-          - nl_NL
-          type: string
+      required:
+      - reports
+      title: Reports list
       type: object
     webhook_resend_data_inner:
       properties:
@@ -4236,9 +5470,6 @@ components:
         address_5: address_5
         widow_name: widow_name
         spouse_name: spouse_name
-        mrz_line1: mrz_line1
-        mrz_line3: mrz_line3
-        mrz_line2: mrz_line2
         issuing_country: issuing_country
         issuing_state: issuing_state
         first_name: first_name
@@ -4301,20 +5532,11 @@ components:
           description: Nationality in 3-letter ISO code.
           pattern: "/^[A-Z]{3}$/"
           type: string
-        mrz_line1:
-          description: Line 1 of the MRZ code.
-          type: string
         mrz_line_1:
           description: Line 1 of the MRZ code.
           type: string
-        mrz_line2:
-          description: Line 2 of the MRZ code.
-          type: string
         mrz_line_2:
           description: Line 2 of the MRZ code.
-          type: string
-        mrz_line3:
-          description: Line 3 of the MRZ code.
           type: string
         mrz_line_3:
           description: Line 3 of the MRZ code.
@@ -4359,6 +5581,74 @@ components:
           description: The owner's unique identification number.
           type: string
       type: object
+    Applicant_consent:
+      description: The applicant's consents
+      properties:
+        name:
+          enum:
+          - privacy_notices_read
+          - ssn_verification
+          - phone_number_verification
+          type: string
+        granted:
+          type: boolean
+      required:
+      - granted
+      - name
+      title: Applicant consent
+      type: object
+    workflow_run_shared_link:
+      description: Object for the configuration of the Workflow Run link.
+      example:
+        expires_at: 2000-01-23T04:56:07.000+00:00
+        expired_redirect_url: expired_redirect_url
+        completed_redirect_url: completed_redirect_url
+        language: en_US
+        url: url
+      properties:
+        url:
+          description: Link to access the Workflow Run without the need to integrate
+            with Onfido's SDKs.
+          type: string
+        completed_redirect_url:
+          description: "When the interactive section of the Workflow Run has completed\
+            \ successfully, the user will be redirected to this URL instead of seeing\
+            \ the default Onfido 'thank you' page."
+          type: string
+        expired_redirect_url:
+          description: "When the link has expired, the user will be immediately redirected\
+            \ to this URL instead of seeing the default Onfido error message."
+          type: string
+        expires_at:
+          description: Date and time when the link will expire.
+          format: date-time
+          type: string
+        language:
+          description: The code for the language when the workflow run is acessed
+            using the link.
+          enum:
+          - en_US
+          - de_DE
+          - es_ES
+          - fr_FR
+          - it_IT
+          - pt_PT
+          - nl_NL
+          type: string
+      type: object
+    workflow_run_response_error:
+      description: Error object. Only set when the Workflow Run status is 'error'.
+      example:
+        type: type
+        message: message
+      properties:
+        type:
+          description: The type of error.
+          type: string
+        message:
+          description: A textual description of the error.
+          type: string
+      type: object
     document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner:
       properties:
         category:
@@ -4373,6 +5663,23 @@ components:
           type: string
         expiry_date:
           description: Category expiry date
+          format: date
+          type: string
+      type: object
+    document_with_driver_verification_report_allOf_properties_allOf_passenger_vehicle:
+      description: Normalised data for passenger cars
+      properties:
+        is_qualified:
+          description: "Whether they are qualified for a passenger car, such as a\
+            \ “B” class in the UK"
+          type: boolean
+        obtainment_date:
+          description: Date the class qualification was obtained
+          format: date
+          type: string
+        expiry_date:
+          description: "Date the class qualification expires, which may be different\
+            \ to doc expiry"
           format: date
           type: string
       type: object
@@ -4400,6 +5707,8 @@ components:
             items:
               $ref: '#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner'
             type: array
+          passenger_vehicle:
+            $ref: '#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_passenger_vehicle'
         type: object
     india_pan_report_allOf_breakdown_device_breakdown_pan_valid:
       properties:
@@ -4438,6 +5747,9 @@ components:
           $ref: '#/components/schemas/india_pan_report_allOf_properties_device'
       type: object
     document_breakdown_data_comparison_breakdown_issuing_country:
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4445,6 +5757,31 @@ components:
           type: object
       type: object
     document_breakdown_data_comparison_breakdown:
+      example:
+        document_numbers:
+          result: result
+          properties: "{}"
+        gender:
+          result: result
+          properties: "{}"
+        issuing_country:
+          result: result
+          properties: "{}"
+        date_of_expiry:
+          result: result
+          properties: "{}"
+        date_of_birth:
+          result: result
+          properties: "{}"
+        last_name:
+          result: result
+          properties: "{}"
+        first_name:
+          result: result
+          properties: "{}"
+        document_type:
+          result: result
+          properties: "{}"
       properties:
         issuing_country:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -4466,6 +5803,33 @@ components:
     document_breakdown_data_comparison:
       description: Asserts whether data on the document is consistent with data provided
         when creating an applicant through the API.
+      example:
+        result: result
+        breakdown:
+          document_numbers:
+            result: result
+            properties: "{}"
+          gender:
+            result: result
+            properties: "{}"
+          issuing_country:
+            result: result
+            properties: "{}"
+          date_of_expiry:
+            result: result
+            properties: "{}"
+          date_of_birth:
+            result: result
+            properties: "{}"
+          last_name:
+            result: result
+            properties: "{}"
+          first_name:
+            result: result
+            properties: "{}"
+          document_type:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4474,6 +5838,9 @@ components:
       type: object
     document_breakdown_data_validation_breakdown_document_expiration:
       description: "If this is flagged, the document has expired."
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4482,6 +5849,9 @@ components:
       type: object
     document_breakdown_data_validation_breakdown_expiry_date:
       description: "If this is flagged, the expiration date has the incorrect format."
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4489,6 +5859,28 @@ components:
           type: object
       type: object
     document_breakdown_data_validation_breakdown:
+      example:
+        document_numbers:
+          result: result
+          properties: "{}"
+        gender:
+          result: result
+          properties: "{}"
+        mrz:
+          result: result
+          properties: "{}"
+        document_expiration:
+          result: result
+          properties: "{}"
+        date_of_birth:
+          result: result
+          properties: "{}"
+        expiry_date:
+          result: result
+          properties: "{}"
+        barcode:
+          result: result
+          properties: "{}"
       properties:
         gender:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -4507,6 +5899,30 @@ components:
       type: object
     document_breakdown_data_validation:
       description: Asserts whether algorithmically validatable elements are correct.
+      example:
+        result: result
+        breakdown:
+          document_numbers:
+            result: result
+            properties: "{}"
+          gender:
+            result: result
+            properties: "{}"
+          mrz:
+            result: result
+            properties: "{}"
+          document_expiration:
+            result: result
+            properties: "{}"
+          date_of_birth:
+            result: result
+            properties: "{}"
+          expiry_date:
+            result: result
+            properties: "{}"
+          barcode:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4515,6 +5931,19 @@ components:
       type: object
     document_breakdown_image_integrity_breakdown_image_quality:
       description: Asserts whether the quality of the image was sufficient for processing.
+      example:
+        result: result
+        properties:
+          incorrect_side: incorrect_side
+          glare_on_photo: glare_on_photo
+          other_photo_issue: other_photo_issue
+          cut_off_document: cut_off_document
+          covered_photo: covered_photo
+          two_documents_uploaded: two_documents_uploaded
+          blurred_photo: blurred_photo
+          no_document_in_image: no_document_in_image
+          damaged_document: damaged_document
+          dark_photo: dark_photo
       properties:
         result:
           type: string
@@ -4523,6 +5952,9 @@ components:
       type: object
     document_breakdown_image_integrity_breakdown_supported_document:
       description: Asserts whether the submitted document is supported.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4531,6 +5963,9 @@ components:
       type: object
     document_breakdown_image_integrity_breakdown_colour_picture:
       description: Asserts whether the image was a colour one.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4540,6 +5975,17 @@ components:
     document_breakdown_image_integrity_breakdown_conclusive_document_quality:
       description: Asserts if the document was of enough quality to be able to perform
         a fraud inspection.
+      example:
+        result: result
+        properties:
+          missing_back: missing_back
+          punctured_document: punctured_document
+          watermarks_digital_text_overlay: watermarks_digital_text_overlay
+          digital_document: digital_document
+          corner_removed: corner_removed
+          obscured_data_points: obscured_data_points
+          abnormal_document_features: abnormal_document_features
+          obscured_security_features: obscured_security_features
       properties:
         result:
           type: string
@@ -4547,6 +5993,37 @@ components:
           $ref: '#/components/schemas/document_CDQ_reasons'
       type: object
     document_breakdown_image_integrity_breakdown:
+      example:
+        colour_picture:
+          result: result
+          properties: "{}"
+        supported_document:
+          result: result
+          properties: "{}"
+        conclusive_document_quality:
+          result: result
+          properties:
+            missing_back: missing_back
+            punctured_document: punctured_document
+            watermarks_digital_text_overlay: watermarks_digital_text_overlay
+            digital_document: digital_document
+            corner_removed: corner_removed
+            obscured_data_points: obscured_data_points
+            abnormal_document_features: abnormal_document_features
+            obscured_security_features: obscured_security_features
+        image_quality:
+          result: result
+          properties:
+            incorrect_side: incorrect_side
+            glare_on_photo: glare_on_photo
+            other_photo_issue: other_photo_issue
+            cut_off_document: cut_off_document
+            covered_photo: covered_photo
+            two_documents_uploaded: two_documents_uploaded
+            blurred_photo: blurred_photo
+            no_document_in_image: no_document_in_image
+            damaged_document: damaged_document
+            dark_photo: dark_photo
       properties:
         image_quality:
           $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown_image_quality'
@@ -4559,6 +6036,39 @@ components:
       type: object
     document_breakdown_image_integrity:
       description: Asserts if the document is of sufficient quality to verify.
+      example:
+        result: result
+        breakdown:
+          colour_picture:
+            result: result
+            properties: "{}"
+          supported_document:
+            result: result
+            properties: "{}"
+          conclusive_document_quality:
+            result: result
+            properties:
+              missing_back: missing_back
+              punctured_document: punctured_document
+              watermarks_digital_text_overlay: watermarks_digital_text_overlay
+              digital_document: digital_document
+              corner_removed: corner_removed
+              obscured_data_points: obscured_data_points
+              abnormal_document_features: abnormal_document_features
+              obscured_security_features: obscured_security_features
+          image_quality:
+            result: result
+            properties:
+              incorrect_side: incorrect_side
+              glare_on_photo: glare_on_photo
+              other_photo_issue: other_photo_issue
+              cut_off_document: cut_off_document
+              covered_photo: covered_photo
+              two_documents_uploaded: two_documents_uploaded
+              blurred_photo: blurred_photo
+              no_document_in_image: no_document_in_image
+              damaged_document: damaged_document
+              dark_photo: dark_photo
       properties:
         result:
           type: string
@@ -4567,6 +6077,9 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_fonts:
       description: Fonts in the document don't match the expected ones.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4576,6 +6089,9 @@ components:
     document_breakdown_visual_authenticity_breakdown_picture_face_integrity:
       description: The pictures of the person identified on the document show signs
         of tampering or alteration.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4585,6 +6101,9 @@ components:
     document_breakdown_visual_authenticity_breakdown_template:
       description: The document doesn't match the expected template for the document
         type and country it is from.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4593,6 +6112,9 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_security_features:
       description: Security features expected on the document are missing or wrong.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4601,6 +6123,13 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_original_document_present:
       description: The document was not present when the photo was taken.
+      example:
+        result: result
+        properties:
+          scan: scan
+          document_on_printed_paper: document_on_printed_paper
+          screenshot: screenshot
+          photo_of_screen: photo_of_screen
       properties:
         result:
           type: string
@@ -4609,6 +6138,9 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_digital_tampering:
       description: Indication of digital tampering in the image.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4619,6 +6151,9 @@ components:
       description: "This sub-breakdown is returned for backward compatibility reasons.\
         \ Its value will be consider when at least one of the other breakdowns is\
         \ consider, and clear when all the other breakdowns are clear."
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4627,6 +6162,9 @@ components:
       type: object
     document_breakdown_visual_authenticity_breakdown_face_detection:
       description: No face was detected on the document.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4634,6 +6172,35 @@ components:
           type: object
       type: object
     document_breakdown_visual_authenticity_breakdown:
+      example:
+        template:
+          result: result
+          properties: "{}"
+        other:
+          result: result
+          properties: "{}"
+        fonts:
+          result: result
+          properties: "{}"
+        digital_tampering:
+          result: result
+          properties: "{}"
+        picture_face_integrity:
+          result: result
+          properties: "{}"
+        face_detection:
+          result: result
+          properties: "{}"
+        original_document_present:
+          result: result
+          properties:
+            scan: scan
+            document_on_printed_paper: document_on_printed_paper
+            screenshot: screenshot
+            photo_of_screen: photo_of_screen
+        security_features:
+          result: result
+          properties: "{}"
       properties:
         fonts:
           $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_fonts'
@@ -4655,6 +6222,37 @@ components:
     document_breakdown_visual_authenticity:
       description: "Asserts whether visual, non-textual, elements are correct given\
         \ the type of document."
+      example:
+        result: result
+        breakdown:
+          template:
+            result: result
+            properties: "{}"
+          other:
+            result: result
+            properties: "{}"
+          fonts:
+            result: result
+            properties: "{}"
+          digital_tampering:
+            result: result
+            properties: "{}"
+          picture_face_integrity:
+            result: result
+            properties: "{}"
+          face_detection:
+            result: result
+            properties: "{}"
+          original_document_present:
+            result: result
+            properties:
+              scan: scan
+              document_on_printed_paper: document_on_printed_paper
+              screenshot: screenshot
+              photo_of_screen: photo_of_screen
+          security_features:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4662,6 +6260,37 @@ components:
           $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown'
       type: object
     document_breakdown_data_consistency_breakdown:
+      example:
+        document_numbers:
+          result: result
+          properties: "{}"
+        gender:
+          result: result
+          properties: "{}"
+        nationality:
+          result: result
+          properties: "{}"
+        date_of_expiry:
+          result: result
+          properties: "{}"
+        issuing_country:
+          result: result
+          properties: "{}"
+        date_of_birth:
+          result: result
+          properties: "{}"
+        last_name:
+          result: result
+          properties: "{}"
+        multiple_data_sources_present:
+          result: result
+          properties: "{}"
+        first_name:
+          result: result
+          properties: "{}"
+        document_type:
+          result: result
+          properties: "{}"
       properties:
         date_of_expiry:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -4687,6 +6316,39 @@ components:
     document_breakdown_data_consistency:
       description: Asserts whether data represented in multiple places on the document
         is consistent.
+      example:
+        result: result
+        breakdown:
+          document_numbers:
+            result: result
+            properties: "{}"
+          gender:
+            result: result
+            properties: "{}"
+          nationality:
+            result: result
+            properties: "{}"
+          date_of_expiry:
+            result: result
+            properties: "{}"
+          issuing_country:
+            result: result
+            properties: "{}"
+          date_of_birth:
+            result: result
+            properties: "{}"
+          last_name:
+            result: result
+            properties: "{}"
+          multiple_data_sources_present:
+            result: result
+            properties: "{}"
+          first_name:
+            result: result
+            properties: "{}"
+          document_type:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4696,11 +6358,20 @@ components:
     document_breakdown_police_record:
       description: "Asserts whether the document had been identified as lost, stolen\
         \ or otherwise compromised."
+      example:
+        result: result
       properties:
         result:
           type: string
       type: object
     document_breakdown_compromised_document_breakdown:
+      example:
+        document_database:
+          result: result
+          properties: "{}"
+        repeat_attempts:
+          result: result
+          properties: "{}"
       properties:
         document_database:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -4710,6 +6381,15 @@ components:
     document_breakdown_compromised_document:
       description: Asserts whether the image of the document has been found in our
         internal database or if it was used in a suspicious way.
+      example:
+        result: result
+        breakdown:
+          document_database:
+            result: result
+            properties: "{}"
+          repeat_attempts:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4717,6 +6397,10 @@ components:
           $ref: '#/components/schemas/document_breakdown_compromised_document_breakdown'
       type: object
     document_breakdown_age_validation_breakdown:
+      example:
+        minimum_accepted_age:
+          result: result
+          properties: "{}"
       properties:
         minimum_accepted_age:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -4724,6 +6408,12 @@ components:
     document_breakdown_age_validation:
       description: Asserts whether the age calculated from the document's date of
         birth data point is greater than or equal to the minimum accepted age.
+      example:
+        result: result
+        breakdown:
+          minimum_accepted_age:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4732,6 +6422,9 @@ components:
       type: object
     document_breakdown_issuing_authority_breakdown_nfc_active_authentication:
       description: Asserts whether the document NFC chip is original or cloned.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4740,6 +6433,9 @@ components:
       type: object
     document_breakdown_issuing_authority_breakdown_nfc_passive_authentication:
       description: Asserts whether the document NFC chip data was tampered.
+      example:
+        result: result
+        properties: "{}"
       properties:
         result:
           type: string
@@ -4747,6 +6443,13 @@ components:
           type: object
       type: object
     document_breakdown_issuing_authority_breakdown:
+      example:
+        nfc_active_authentication:
+          result: result
+          properties: "{}"
+        nfc_passive_authentication:
+          result: result
+          properties: "{}"
       properties:
         nfc_active_authentication:
           $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown_nfc_active_authentication'
@@ -4756,6 +6459,15 @@ components:
     document_breakdown_issuing_authority:
       description: Asserts whether data on the document matches the issuing authority
         data.
+      example:
+        result: result
+        breakdown:
+          nfc_active_authentication:
+            result: result
+            properties: "{}"
+          nfc_passive_authentication:
+            result: result
+            properties: "{}"
       properties:
         result:
           type: string
@@ -4763,6 +6475,9 @@ components:
           $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown'
       type: object
     document_properties_document_numbers_inner:
+      example:
+        type: type
+        value: value
       properties:
         value:
           type: string
@@ -4770,6 +6485,13 @@ components:
           type: string
       type: object
     document_properties_address_lines:
+      example:
+        street_address: street_address
+        country: country
+        country_code: country_code
+        city: city
+        state: state
+        postal_code: postal_code
       properties:
         street_address:
           type: string
@@ -4785,6 +6507,25 @@ components:
           type: string
       type: object
     document_properties_barcode_inner:
+      example:
+        document_number: document_number
+        issuing_date: 2000-01-23
+        gender: gender
+        date_of_birth: 2000-01-23
+        last_name: last_name
+        middle_name: middle_name
+        real_id_classification: real_id_classification
+        date_of_expiry: 2000-01-23
+        issuing_country: issuing_country
+        address_line_1: address_line_1
+        address_line_3: address_line_3
+        address_line_2: address_line_2
+        issuing_state: issuing_state
+        address_line_5: address_line_5
+        first_name: first_name
+        address_line_4: address_line_4
+        class: class
+        document_type: document_type
       properties:
         first_name:
           type: string
@@ -4827,6 +6568,20 @@ components:
           type: string
       type: object
     document_properties_nfc:
+      example:
+        document_number: document_number
+        address: address
+        gender: gender
+        issuing_date: 2000-01-23
+        date_of_birth: 2000-01-23
+        place_of_birth: place_of_birth
+        full_name: full_name
+        nationality: nationality
+        issuing_country: issuing_country
+        date_of_expiry: 2000-01-23
+        issuing_authority: issuing_authority
+        personal_number: personal_number
+        document_type: document_type
       properties:
         document_type:
           type: string
@@ -4859,6 +6614,11 @@ components:
           type: string
       type: object
     document_properties_driving_licence_information:
+      example:
+        codes: codes
+        obtainment_date: 2000-01-23
+        expiry_date: 2000-01-23
+        category: category
       properties:
         category:
           type: string
@@ -4872,6 +6632,10 @@ components:
           type: string
       type: object
     document_properties_document_classification:
+      example:
+        issuing_country: issuing_country
+        issuing_state: issuing_state
+        document_type: document_type
       properties:
         issuing_country:
           type: string
@@ -4881,6 +6645,28 @@ components:
           type: string
       type: object
     document_properties_extracted_data:
+      example:
+        document_number: document_number
+        gender: gender
+        date_of_birth: 2000-01-23
+        last_name: last_name
+        middle_name: middle_name
+        alias_name: alias_name
+        widow_name: widow_name
+        spouse_name: spouse_name
+        mrz_line1: mrz_line1
+        full_name: full_name
+        mrz_line3: mrz_line3
+        nationality: nationality
+        date_of_expiry: 2000-01-23
+        mrz_line2: mrz_line2
+        issuing_authority: issuing_authority
+        address_line_1: address_line_1
+        address_line_3: address_line_3
+        address_line_2: address_line_2
+        address_line_5: address_line_5
+        first_name: first_name
+        address_line_4: address_line_4
       properties:
         document_number:
           type: string

@@ -1,0 +1,5 @@
+required:
+  - applicant_id
+  - file
+allOf:
+  - $ref: definitions.yaml#/id_photo_request

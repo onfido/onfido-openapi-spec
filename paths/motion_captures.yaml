@@ -16,6 +16,9 @@
             application/json:
               schema:
                 type: object
+                title: Motion Captures list
+                required:
+                  - motion_captures
                 properties:
                   motion_captures:
                     type: array

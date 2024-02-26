@@ -16,6 +16,9 @@
             application/json:
               schema:
                 type: object
+                title: Documents list
+                required:
+                  - documents
                 properties:
                   documents:
                     type: array
@@ -35,16 +38,7 @@
         content:
           multipart/form-data:
             schema:
-              allOf:
-                - $ref: ../schemas/documents/document.yaml
-                - object:
-                  required:
-                    - file
-                  properties:
-                    file:
-                      type: string
-                      format: binary
-                      description: The file to be uploaded.
+              $ref: ../schemas/documents/document_uploader.yaml
       responses:
         "201":
           description: A document

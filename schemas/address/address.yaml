@@ -34,13 +34,16 @@ properties:
     description: The address state. US states must use the USPS abbreviation (see also ISO 3166-2:US), for example AK, CA, or TX.
   line1:
     type: string
+    nullable: true
     pattern: '/^[^!$%^*=<>]*$/'
     description: Line 1 of the applicant's address
   line2:
     type: string
+    nullable: true
     pattern: '/^[^!$%^*=<>]*$/'
     description: Line 2 of the applicant's address
   line3:
     type: string
+    nullable: true
     pattern: '/^[^!$%^*=<>]*$/'
     description: Line 3 of the applicant's address

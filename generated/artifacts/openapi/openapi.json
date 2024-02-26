@@ -5,7 +5,7 @@
       "email" : "engineering@onfido.com",
       "name" : "Onfido"
     },
-    "description" : "The Onfido API is used to submit check requests.",
+    "description" : "The Onfido API",
     "license" : {
       "name" : "MIT"
     },
@@ -61,7 +61,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_applicants_200_response"
+                  "$ref" : "#/components/schemas/Applicants_list"
                 }
               }
             },
@@ -86,7 +86,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/applicant"
+                "$ref" : "#/components/schemas/applicant_builder"
               }
             }
           },
@@ -194,7 +194,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/applicant"
+                "$ref" : "#/components/schemas/applicant_builder"
               }
             }
           },
@@ -271,7 +271,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_documents_200_response"
+                  "$ref" : "#/components/schemas/Documents_list"
                 }
               }
             },
@@ -297,7 +297,7 @@
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/upload_document_request"
+                "$ref" : "#/components/schemas/document_uploader"
               }
             }
           },
@@ -455,7 +455,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_live_photos_200_response"
+                  "$ref" : "#/components/schemas/Live_Photos_list"
                 }
               }
             },
@@ -481,7 +481,7 @@
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/upload_live_photo_request"
+                "$ref" : "#/components/schemas/live_photo_uploader"
               }
             }
           },
@@ -605,7 +605,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_live_videos_200_response"
+                  "$ref" : "#/components/schemas/Liveo_Videos_list"
                 }
               }
             },
@@ -778,7 +778,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/create_workflow_run_request"
+                "$ref" : "#/components/schemas/workflow_run_builder"
               }
             }
           },
@@ -864,8 +864,9 @@
               "application/json" : {
                 "schema" : {
                   "items" : {
-                    "$ref" : "#/components/schemas/list_tasks_200_response_inner"
+                    "$ref" : "#/components/schemas/Task"
                   },
+                  "title" : "Tasks",
                   "type" : "array"
                 }
               }
@@ -1034,7 +1035,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_motion_captures_200_response"
+                  "$ref" : "#/components/schemas/Motion_Captures_list"
                 }
               }
             },
@@ -1197,6 +1198,7 @@
                   "items" : {
                     "$ref" : "#/components/schemas/watchlist_monitor"
                   },
+                  "title" : "Watchlist monitors",
                   "type" : "array"
                 }
               }
@@ -1334,8 +1336,9 @@
               "application/json" : {
                 "schema" : {
                   "items" : {
-                    "$ref" : "#/components/schemas/list_watchlist_monitor_matches_200_response_inner"
+                    "$ref" : "#/components/schemas/Watchlist_monitor_match"
                   },
+                  "title" : "Watchlist monitor matches",
                   "type" : "array"
                 }
               }
@@ -1380,7 +1383,7 @@
             "description" : "Unexpected error"
           }
         },
-        "summary" : "Update the enabled status of the given match"
+        "summary" : "Update the status of the given matches."
       }
     },
     "/watchlist_monitors/{monitor_id}/new_report" : {
@@ -1403,7 +1406,15 @@
                 }
               }
             },
-            "description" : "Created"
+            "description" : "Created",
+            "headers" : {
+              "Location" : {
+                "description" : "Link to the newly generated report.",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
           },
           "default" : {
             "content" : {
@@ -1436,7 +1447,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_id_photos_200_response"
+                  "$ref" : "#/components/schemas/ID_Photos_list"
                 }
               }
             },
@@ -1462,7 +1473,7 @@
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/upload_id_photo_request"
+                "$ref" : "#/components/schemas/id_photo_uploader"
               }
             }
           },
@@ -1605,7 +1616,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_webhooks_200_response"
+                  "$ref" : "#/components/schemas/Webhooks_list"
                 }
               }
             },
@@ -1630,7 +1641,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/webhook"
+                "$ref" : "#/components/schemas/webhook_builder"
               }
             }
           },
@@ -1818,7 +1829,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/find_addresses_200_response"
+                  "$ref" : "#/components/schemas/Addresses"
                 }
               }
             },
@@ -1856,7 +1867,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/generate_sdk_token_200_response"
+                  "$ref" : "#/components/schemas/SDK_token"
                 }
               }
             },
@@ -2004,7 +2015,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_checks_200_response"
+                  "$ref" : "#/components/schemas/Checks_list"
                 }
               }
             },
@@ -2029,7 +2040,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/check"
+                "$ref" : "#/components/schemas/check_builder"
               }
             }
           },
@@ -2178,7 +2189,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/list_reports_200_response"
+                  "$ref" : "#/components/schemas/Reports_list"
                 }
               }
             },
@@ -2318,189 +2329,47 @@
     },
     "schemas" : {
       "applicant" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier for the applicant.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "created_at" : {
-            "description" : "The date and time when this applicant was created.",
-            "format" : "date-time",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "delete_at" : {
-            "description" : "The date and time when this applicant is scheduled to be deleted.",
-            "format" : "date-time",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "href" : {
-            "description" : "The uri of this resource.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "first_name" : {
-            "description" : "The applicant's first name",
-            "pattern" : "/^[^!#$%*=<>;{}\"]*$/",
-            "type" : "string"
-          },
-          "last_name" : {
-            "description" : "The applicant's surname",
-            "pattern" : "/^[^!#$%*=<>;{}\"]*$/",
-            "type" : "string"
-          },
-          "email" : {
-            "description" : "The applicant's email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.",
-            "type" : "string"
-          },
-          "dob" : {
-            "description" : "The applicant's date of birth",
-            "format" : "date",
-            "type" : "string"
-          },
-          "address" : {
-            "$ref" : "#/components/schemas/address"
-          },
-          "id_numbers" : {
-            "items" : {
-              "$ref" : "#/components/schemas/id_number"
-            },
-            "type" : "array"
-          },
-          "sandbox" : {
-            "readOnly" : true,
-            "type" : "boolean"
-          },
-          "phone_number" : {
-            "description" : "The applicant's phone number",
-            "type" : "string"
-          },
-          "location" : {
-            "$ref" : "#/components/schemas/location"
-          },
-          "consents" : {
-            "items" : {
-              "additionalProperties" : true,
-              "description" : "The applicant's consents",
-              "type" : "object"
-            },
-            "type" : "array",
-            "writeOnly" : true
-          }
-        },
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/applicant_shared"
+        }, {
+          "$ref" : "#/components/schemas/applicant_response"
+        } ],
+        "required" : [ "id" ]
+      },
+      "applicant_builder" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/applicant_shared"
+        }, {
+          "$ref" : "#/components/schemas/applicant_request"
+        } ]
       },
       "document" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier for the document",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "created_at" : {
-            "description" : "The date and time at which the document was uploaded",
-            "format" : "date-time",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "href" : {
-            "description" : "The uri of this resource",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "download_href" : {
-            "description" : "The uri that can be used to download the document",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_name" : {
-            "description" : "The name of the uploaded file",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_type" : {
-            "description" : "The file type of the uploaded file",
-            "enum" : [ "jpg", "png", "pdf" ],
-            "type" : "string"
-          },
-          "file_size" : {
-            "description" : "The size of the file in bytes",
-            "readOnly" : true,
-            "type" : "integer"
-          },
-          "type" : {
-            "description" : "The type of document",
-            "type" : "string"
-          },
-          "side" : {
-            "description" : "The side of the document, if applicable. The possible values are front and back",
-            "enum" : [ "front", "back" ],
-            "type" : "string"
-          },
-          "issuing_country" : {
-            "allOf" : [ {
-              "$ref" : "#/components/schemas/country_codes"
-            } ],
-            "description" : "The issuing country of the document, a 3-letter ISO code.",
-            "type" : "string"
-          },
-          "applicant_id" : {
-            "description" : "The ID of the applicant whose document is being uploaded.",
-            "type" : "string"
-          },
-          "validate_image_quality" : {
-            "description" : "Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.",
-            "type" : "boolean",
-            "writeOnly" : true
-          },
-          "location" : {
-            "$ref" : "#/components/schemas/location"
-          }
-        },
-        "required" : [ "applicant_id", "type" ],
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/document_shared"
+        }, {
+          "$ref" : "#/components/schemas/document_response"
+        } ],
+        "required" : [ "id" ]
+      },
+      "document_uploader" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/document_shared"
+        }, {
+          "$ref" : "#/components/schemas/document_request"
+        } ],
+        "required" : [ "applicant_id", "file", "type" ]
       },
       "live_photo" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier for the photo.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "created_at" : {
-            "description" : "The date and time at which the photo was uploaded.",
-            "format" : "date-time",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "href" : {
-            "description" : "The uri of this resource.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "download_href" : {
-            "description" : "The uri that can be used to download the photo.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_name" : {
-            "description" : "The name of the uploaded file.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_type" : {
-            "description" : "The file type of the uploaded file.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_size" : {
-            "description" : "The size of the file in bytes.",
-            "type" : "integer"
-          }
-        },
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/live_photo_response"
+        } ],
+        "required" : [ "id" ]
+      },
+      "live_photo_uploader" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/live_photo_request"
+        } ],
+        "required" : [ "applicant_id", "file" ]
       },
       "live_video" : {
         "properties" : {
@@ -2545,69 +2414,20 @@
         "type" : "object"
       },
       "workflow_run" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier for the Workflow Run.",
-            "type" : "string"
-          },
-          "applicant_id" : {
-            "description" : "The unique identifier for the Applicant.",
-            "type" : "string"
-          },
-          "workflow_id" : {
-            "description" : "The unique identifier for the Workflow.",
-            "type" : "string"
-          },
-          "workflow_version_id" : {
-            "description" : "The identifier for the Workflow version.",
-            "type" : "integer"
-          },
-          "dashboard_url" : {
-            "description" : "The URL for viewing the Workflow Run results on your Onfido Dashboard.",
-            "type" : "string"
-          },
-          "status" : {
-            "description" : "The status of the Workflow Run.",
-            "enum" : [ "awaiting_input", "processing", "abandoned", "error", "approved", "review", "declined" ],
-            "type" : "string"
-          },
-          "output" : {
-            "description" : "Output object contains all of the properties configured on the Workflow version.",
-            "type" : "object"
-          },
-          "reasons" : {
-            "description" : "The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow version.",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "error" : {
-            "$ref" : "#/components/schemas/workflow_run_error"
-          },
-          "tags" : {
-            "description" : "Tags or labels assigned to the workflow run.",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "link" : {
-            "$ref" : "#/components/schemas/workflow_run_link"
-          },
-          "created_at" : {
-            "description" : "The date and time when the Workflow Run was created.",
-            "format" : "date-time",
-            "type" : "string"
-          },
-          "updated_at" : {
-            "description" : "The date and time when the Workflow Run was last updated.",
-            "format" : "date-time",
-            "type" : "string"
-          }
-        },
-        "required" : [ "applicant_id", "workflow_id" ],
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/workflow_run_shared"
+        }, {
+          "$ref" : "#/components/schemas/workflow_run_response"
+        } ],
+        "required" : [ "applicant_id", "id", "workflow_id" ]
+      },
+      "workflow_run_builder" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/workflow_run_shared"
+        }, {
+          "$ref" : "#/components/schemas/workflow_run_request"
+        } ],
+        "required" : [ "applicant_id", "workflow_id" ]
       },
       "task" : {
         "properties" : {
@@ -2625,6 +2445,7 @@
           },
           "output" : {
             "description" : "Output object with the fields produced by the Task execution.",
+            "nullable" : true,
             "type" : "object"
           },
           "created_at" : {
@@ -2720,92 +2541,30 @@
         "type" : "object"
       },
       "id_photo" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier for the photo.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "created_at" : {
-            "description" : "The date and time at which the photo was uploaded.",
-            "format" : "date-time",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "href" : {
-            "description" : "The uri of this resource.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "download_href" : {
-            "description" : "The uri that can be used to download the photo.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_name" : {
-            "description" : "The name of the uploaded file.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_type" : {
-            "description" : "The file type of the uploaded file.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "file_size" : {
-            "description" : "The size of the file in bytes.",
-            "type" : "integer"
-          }
-        },
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/id_photo_response"
+        } ],
+        "required" : [ "id" ]
+      },
+      "id_photo_uploader" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/id_photo_request"
+        } ],
+        "required" : [ "applicant_id", "file" ]
       },
       "webhook" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier of the webhook.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "url" : {
-            "description" : "The url that will listen to notifications (must be https).",
-            "type" : "string"
-          },
-          "enabled" : {
-            "description" : "Determine if the webhook is active.",
-            "type" : "boolean"
-          },
-          "events" : {
-            "description" : "The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.\n",
-            "items" : {
-              "enum" : [ "audit_log.created", "watchlist_monitor.matches_updated", "workflow_run.completed", "workflow_task.started", "workflow_task.completed", "check.started", "check.reopened", "check.withdrawn", "check.completed", "check.form_completed", "report.withdrawn", "report.resumed", "report.cancelled", "report.awaiting_approval", "report.completed" ],
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "token" : {
-            "description" : "Webhook secret token used to sign the webhook's payload.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "href" : {
-            "description" : "The API endpoint to retrieve the webhook.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "environments" : {
-            "description" : "The environments from which the webhook will receive events. Allowed values are “sandbox” and “live”. If the environments parameter is omitted the webhook will receive events from both environments.\n",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "payload_version" : {
-            "description" : "Webhook version used to control the payload object when sending webhooks.",
-            "type" : "integer"
-          }
-        },
-        "required" : [ "url" ],
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/webhook_shared"
+        }, {
+          "$ref" : "#/components/schemas/webhook_response"
+        } ],
+        "required" : [ "id", "url" ]
+      },
+      "webhook_builder" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/webhook_shared"
+        } ],
+        "required" : [ "url" ]
       },
       "webhook_resend" : {
         "properties" : {
@@ -2862,16 +2621,19 @@
           },
           "line1" : {
             "description" : "Line 1 of the applicant's address",
+            "nullable" : true,
             "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           },
           "line2" : {
             "description" : "Line 2 of the applicant's address",
+            "nullable" : true,
             "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           },
           "line3" : {
             "description" : "Line 3 of the applicant's address",
+            "nullable" : true,
             "pattern" : "/^[^!$%^*=<>]*$/",
             "type" : "string"
           }
@@ -2948,128 +2710,20 @@
         "type" : "object"
       },
       "check" : {
-        "properties" : {
-          "id" : {
-            "description" : "The unique identifier for the check.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "created_at" : {
-            "description" : "The date and time when this check was created.",
-            "format" : "date-time",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "webhook_ids" : {
-            "description" : "An array of webhook ids describing which webhooks to trigger for this check.",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "href" : {
-            "description" : "The uri of this resource.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "applicant_id" : {
-            "description" : "The ID of the applicant to do the check on.",
-            "type" : "string"
-          },
-          "report_names" : {
-            "description" : "An array of report names (strings).",
-            "items" : {
-              "enum" : [ "document", "document_video", "document_video_with_address", "document_with_address_information", "document_with_driving_licence_information", "document_with_driver_verification", "facial_similarity_photo", "facial_similarity_photo_fully_auto", "facial_similarity_video", "facial_similarity_motion", "known_faces", "identity_enhanced", "watchlist_aml", "watchlist_enhanced", "watchlist_standard", "watchlist_peps_only", "watchlist_sanctions_only", "proof_of_address", "us_driving_licence", "device_intelligence" ],
-              "type" : "string"
-            },
-            "type" : "array",
-            "writeOnly" : true
-          },
-          "document_ids" : {
-            "description" : "Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "writeOnly" : true
-          },
-          "applicant_provides_data" : {
-            "description" : "Send an applicant form to applicant to complete to proceed with check. Defaults to false.\n",
-            "type" : "boolean"
-          },
-          "asynchronous" : {
-            "default" : true,
-            "description" : "Defaults to `true`. If set to `false`, you will only receive a response when all reports in your check have completed.\n",
-            "type" : "boolean",
-            "writeOnly" : true
-          },
-          "status" : {
-            "description" : "The current state of the check in the checking process.",
-            "enum" : [ "in_progress", "awaiting_applicant", "complete", "withdrawn", "paused", "reopened" ],
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "tags" : {
-            "description" : "Array of tags being assigned to this check.",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array"
-          },
-          "result" : {
-            "description" : "The overall result of the check, based on the results of the constituent reports.",
-            "enum" : [ "clear", "consider" ],
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "form_uri" : {
-            "description" : "A link to the applicant form, if `applicant_provides_data` is `true`.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "suppress_form_emails" : {
-            "description" : "For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.\n",
-            "type" : "boolean",
-            "writeOnly" : true
-          },
-          "redirect_uri" : {
-            "description" : "For checks where `applicant_provides_data` is `true`, redirect to this URI when the applicant has submitted their data.",
-            "type" : "string"
-          },
-          "results_uri" : {
-            "description" : "A link to the corresponding results page on the Onfido dashboard.",
-            "readOnly" : true,
-            "type" : "string"
-          },
-          "report_ids" : {
-            "description" : "An array of report ids.",
-            "items" : {
-              "type" : "string"
-            },
-            "readOnly" : true,
-            "type" : "array"
-          },
-          "consider" : {
-            "description" : "Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing",
-            "items" : {
-              "type" : "string"
-            },
-            "type" : "array",
-            "writeOnly" : true
-          },
-          "us_driving_licence" : {
-            "additionalProperties" : true,
-            "description" : "An object that contains all accepted fields for the Driver's License Data Verification report.",
-            "type" : "object",
-            "writeOnly" : true
-          },
-          "sandbox" : {
-            "description" : "Indicates whether the object was created in the sandbox or not.",
-            "readOnly" : true,
-            "type" : "boolean"
-          }
-        },
-        "type" : "object"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/check_shared"
+        }, {
+          "$ref" : "#/components/schemas/read_only"
+        } ],
+        "required" : [ "id" ]
+      },
+      "check_builder" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/check_shared"
+        }, {
+          "$ref" : "#/components/schemas/write_only"
+        } ],
+        "required" : [ "applicant_id" ]
       },
       "report" : {
         "discriminator" : {
@@ -3142,6 +2796,840 @@
           "$ref" : "#/components/schemas/india_pan_report"
         } ]
       },
+      "applicant_shared" : {
+        "properties" : {
+          "first_name" : {
+            "description" : "The applicant's first name",
+            "pattern" : "/^[^!#$%*=<>;{}\"]*$/",
+            "type" : "string"
+          },
+          "last_name" : {
+            "description" : "The applicant's surname",
+            "pattern" : "/^[^!#$%*=<>;{}\"]*$/",
+            "type" : "string"
+          },
+          "email" : {
+            "description" : "The applicant's email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.",
+            "type" : "string"
+          },
+          "dob" : {
+            "description" : "The applicant's date of birth",
+            "format" : "date",
+            "type" : "string"
+          },
+          "address" : {
+            "$ref" : "#/components/schemas/address"
+          },
+          "id_numbers" : {
+            "items" : {
+              "$ref" : "#/components/schemas/id_number"
+            },
+            "type" : "array"
+          },
+          "phone_number" : {
+            "description" : "The applicant's phone number",
+            "type" : "string"
+          },
+          "location" : {
+            "$ref" : "#/components/schemas/location"
+          }
+        },
+        "type" : "object"
+      },
+      "applicant_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the applicant.",
+            "type" : "string"
+          },
+          "created_at" : {
+            "description" : "The date and time when this applicant was created.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "delete_at" : {
+            "description" : "The date and time when this applicant is scheduled to be deleted.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The uri of this resource.",
+            "type" : "string"
+          },
+          "sandbox" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "applicant_request" : {
+        "properties" : {
+          "consents" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Applicant_consent"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "document_shared" : {
+        "properties" : {
+          "file_type" : {
+            "description" : "The file type of the uploaded file",
+            "enum" : [ "jpg", "png", "pdf" ],
+            "type" : "string"
+          },
+          "type" : {
+            "description" : "The type of document",
+            "type" : "string"
+          },
+          "side" : {
+            "description" : "The side of the document, if applicable. The possible values are front and back",
+            "enum" : [ "front", "back" ],
+            "type" : "string"
+          },
+          "issuing_country" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/country_codes"
+            } ],
+            "description" : "The issuing country of the document, a 3-letter ISO code.",
+            "type" : "string"
+          },
+          "applicant_id" : {
+            "description" : "The ID of the applicant whose document is being uploaded.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "document_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the document",
+            "type" : "string"
+          },
+          "created_at" : {
+            "description" : "The date and time at which the document was uploaded",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The uri of this resource",
+            "type" : "string"
+          },
+          "download_href" : {
+            "description" : "The uri that can be used to download the document",
+            "type" : "string"
+          },
+          "file_name" : {
+            "description" : "The name of the uploaded file",
+            "type" : "string"
+          },
+          "file_size" : {
+            "description" : "The size of the file in bytes",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "document_request" : {
+        "properties" : {
+          "file" : {
+            "description" : "The file to be uploaded.",
+            "format" : "binary",
+            "type" : "string"
+          },
+          "validate_image_quality" : {
+            "description" : "Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.",
+            "type" : "boolean"
+          },
+          "location" : {
+            "$ref" : "#/components/schemas/location"
+          }
+        },
+        "type" : "object"
+      },
+      "live_photo_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the photo.",
+            "type" : "string"
+          },
+          "created_at" : {
+            "description" : "The date and time at which the photo was uploaded.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The uri of this resource.",
+            "type" : "string"
+          },
+          "download_href" : {
+            "description" : "The uri that can be used to download the photo.",
+            "type" : "string"
+          },
+          "file_name" : {
+            "description" : "The name of the uploaded file.",
+            "type" : "string"
+          },
+          "file_type" : {
+            "description" : "The file type of the uploaded file.",
+            "type" : "string"
+          },
+          "file_size" : {
+            "description" : "The size of the file in bytes.",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "live_photo_request" : {
+        "properties" : {
+          "applicant_id" : {
+            "description" : "The ID of the applicant whose live photo is being uploaded.",
+            "type" : "string"
+          },
+          "file" : {
+            "description" : "The file to be uploaded.",
+            "format" : "binary",
+            "type" : "string"
+          },
+          "advanced_validation" : {
+            "default" : true,
+            "description" : "Validates that the live photo contains exactly one face.",
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "workflow_run_shared" : {
+        "properties" : {
+          "applicant_id" : {
+            "description" : "The unique identifier for the Applicant.",
+            "type" : "string"
+          },
+          "workflow_id" : {
+            "description" : "The unique identifier for the Workflow.",
+            "type" : "string"
+          },
+          "tags" : {
+            "description" : "Tags or labels assigned to the workflow run.",
+            "items" : {
+              "maxLength" : 128,
+              "minLength" : 1,
+              "type" : "string"
+            },
+            "maxItems" : 30,
+            "type" : "array",
+            "uniqueItems" : true
+          },
+          "link" : {
+            "$ref" : "#/components/schemas/workflow_run_shared_link"
+          },
+          "created_at" : {
+            "description" : "The date and time when the Workflow Run was created.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "updated_at" : {
+            "description" : "The date and time when the Workflow Run was last updated.",
+            "format" : "date-time",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "workflow_run_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the Workflow Run.",
+            "type" : "string"
+          },
+          "workflow_version_id" : {
+            "description" : "The identifier for the Workflow version.",
+            "type" : "integer"
+          },
+          "dashboard_url" : {
+            "description" : "The URL for viewing the Workflow Run results on your Onfido Dashboard.",
+            "type" : "string"
+          },
+          "status" : {
+            "description" : "The status of the Workflow Run.",
+            "enum" : [ "awaiting_input", "processing", "abandoned", "error", "approved", "review", "declined" ],
+            "type" : "string"
+          },
+          "output" : {
+            "description" : "Output object contains all of the properties configured on the Workflow version.",
+            "type" : "object"
+          },
+          "reasons" : {
+            "description" : "The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow version.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/workflow_run_response_error"
+          }
+        },
+        "type" : "object"
+      },
+      "workflow_run_request" : {
+        "properties" : {
+          "custom_data" : {
+            "additionalProperties" : true,
+            "description" : "Object with Custom Input Data to be used in the Workflow Run.",
+            "type" : "object"
+          }
+        },
+        "type" : "object"
+      },
+      "id_photo_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the photo.",
+            "type" : "string"
+          },
+          "created_at" : {
+            "description" : "The date and time at which the photo was uploaded.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The uri of this resource.",
+            "type" : "string"
+          },
+          "download_href" : {
+            "description" : "The uri that can be used to download the photo.",
+            "type" : "string"
+          },
+          "file_name" : {
+            "description" : "The name of the uploaded file.",
+            "type" : "string"
+          },
+          "file_type" : {
+            "description" : "The file type of the uploaded file.",
+            "type" : "string"
+          },
+          "file_size" : {
+            "description" : "The size of the file in bytes.",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "id_photo_request" : {
+        "properties" : {
+          "applicant_id" : {
+            "description" : "The ID of the applicant whose ID photo is being uploaded.",
+            "type" : "string"
+          },
+          "file" : {
+            "description" : "The file to be uploaded.",
+            "format" : "binary",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "webhook_shared" : {
+        "properties" : {
+          "url" : {
+            "description" : "The url that will listen to notifications (must be https).",
+            "type" : "string"
+          },
+          "enabled" : {
+            "description" : "Determine if the webhook is active.",
+            "type" : "boolean"
+          },
+          "events" : {
+            "description" : "The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.\n",
+            "items" : {
+              "enum" : [ "audit_log.created", "watchlist_monitor.matches_updated", "workflow_run.completed", "workflow_task.started", "workflow_task.completed", "check.started", "check.reopened", "check.withdrawn", "check.completed", "check.form_completed", "report.withdrawn", "report.resumed", "report.cancelled", "report.awaiting_approval", "report.completed" ],
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "environments" : {
+            "description" : "The environments from which the webhook will receive events. Allowed values are “sandbox” and “live”. If the environments parameter is omitted the webhook will receive events from both environments.\n",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "payload_version" : {
+            "description" : "Webhook version used to control the payload object when sending webhooks.",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "webhook_response" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier of the webhook.",
+            "type" : "string"
+          },
+          "token" : {
+            "description" : "Webhook secret token used to sign the webhook's payload.",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The API endpoint to retrieve the webhook.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "country_codes" : {
+        "enum" : [ "ABW", "AFG", "AGO", "AIA", "ALA", "ALB", "AND", "ARE", "ARG", "ARM", "ASM", "ATA", "ATF", "ATG", "AUS", "AUT", "AZE", "BDI", "BEL", "BEN", "BES", "BFA", "BGD", "BGR", "BHR", "BHS", "BIH", "BLM", "BLR", "BLZ", "BMU", "BOL", "BRA", "BRB", "BRN", "BTN", "BVT", "BWA", "CAF", "CAN", "CCK", "CHE", "CHL", "CHN", "CIV", "CMR", "COD", "COG", "COK", "COL", "COM", "CPV", "CRI", "CUB", "CUW", "CXR", "CYM", "CYP", "CZE", "DEU", "DJI", "DMA", "DNK", "DOM", "DZA", "ECU", "EGY", "ERI", "ESH", "ESP", "EST", "ETH", "FIN", "FJI", "FLK", "FRA", "FRO", "FSM", "GAB", "GBR", "GEO", "GGY", "GHA", "GIB", "GIN", "GLP", "GMB", "GNB", "GNQ", "GRC", "GRD", "GRL", "GTM", "GUF", "GUM", "GUY", "HKG", "HMD", "HND", "HRV", "HTI", "HUN", "IDN", "IMN", "IND", "IOT", "IRL", "IRN", "IRQ", "ISL", "ISR", "ITA", "JAM", "JEY", "JOR", "JPN", "KAZ", "KEN", "KGZ", "KHM", "KIR", "KNA", "KOR", "KWT", "LAO", "LBN", "LBR", "LBY", "LCA", "LIE", "LKA", "LSO", "LTU", "LUX", "LVA", "MAC", "MAF", "MAR", "MCO", "MDA", "MDG", "MDV", "MEX", "MHL", "MKD", "MLI", "MLT", "MMR", "MNE", "MNG", "MNP", "MOZ", "MRT", "MSR", "MTQ", "MUS", "MWI", "MYS", "MYT", "NAM", "NCL", "NER", "NFK", "NGA", "NIC", "NIU", "NLD", "NOR", "NPL", "NRU", "NZL", "OMN", "PAK", "PAN", "PCN", "PER", "PHL", "PLW", "PNG", "POL", "PRI", "PRK", "PRT", "PRY", "PSE", "PYF", "QAT", "REU", "RKS", "ROU", "RUS", "RWA", "SAU", "SDN", "SEN", "SGP", "SGS", "SHN", "SJM", "SLB", "SLE", "SLV", "SMR", "SOM", "SPM", "SRB", "SSD", "STP", "SUR", "SVK", "SVN", "SWE", "SWZ", "SXM", "SYC", "SYR", "TCA", "TCD", "TGO", "THA", "TJK", "TKL", "TKM", "TLS", "TON", "TTO", "TUN", "TUR", "TUV", "TWN", "TZA", "UGA", "UKR", "UMI", "URY", "USA", "UZB", "VAT", "VCT", "VEN", "VGB", "VIR", "VNM", "VUT", "WLF", "WSM", "YEM", "ZAF", "ZMB", "ZWE" ],
+        "type" : "string"
+      },
+      "check_shared" : {
+        "properties" : {
+          "webhook_ids" : {
+            "description" : "An array of webhook ids describing which webhooks to trigger for this check.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "applicant_id" : {
+            "description" : "The ID of the applicant to do the check on.",
+            "type" : "string"
+          },
+          "applicant_provides_data" : {
+            "description" : "Send an applicant form to applicant to complete to proceed with check. Defaults to false.\n",
+            "type" : "boolean"
+          },
+          "tags" : {
+            "description" : "Array of tags being assigned to this check.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "redirect_uri" : {
+            "description" : "For checks where `applicant_provides_data` is `true`, redirect to this URI when the applicant has submitted their data.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "read_only" : {
+        "properties" : {
+          "id" : {
+            "description" : "The unique identifier for the check.",
+            "type" : "string"
+          },
+          "created_at" : {
+            "description" : "The date and time when this check was created.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "The uri of this resource.",
+            "type" : "string"
+          },
+          "status" : {
+            "description" : "The current state of the check in the checking process.",
+            "enum" : [ "in_progress", "awaiting_applicant", "complete", "withdrawn", "paused", "reopened" ],
+            "type" : "string"
+          },
+          "result" : {
+            "description" : "The overall result of the check, based on the results of the constituent reports.",
+            "enum" : [ "clear", "consider" ],
+            "type" : "string"
+          },
+          "form_uri" : {
+            "description" : "A link to the applicant form, if `applicant_provides_data` is `true`.",
+            "type" : "string"
+          },
+          "results_uri" : {
+            "description" : "A link to the corresponding results page on the Onfido dashboard.",
+            "type" : "string"
+          },
+          "report_ids" : {
+            "description" : "An array of report ids.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "sandbox" : {
+            "description" : "Indicates whether the object was created in the sandbox or not.",
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "write_only" : {
+        "properties" : {
+          "report_names" : {
+            "description" : "An array of report names (strings).",
+            "items" : {
+              "$ref" : "#/components/schemas/report_name"
+            },
+            "type" : "array"
+          },
+          "document_ids" : {
+            "description" : "Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "asynchronous" : {
+            "default" : true,
+            "description" : "Defaults to `true`. If set to `false`, you will only receive a response when all reports in your check have completed.\n",
+            "type" : "boolean"
+          },
+          "suppress_form_emails" : {
+            "description" : "For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.\n",
+            "type" : "boolean"
+          },
+          "consider" : {
+            "description" : "Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "us_driving_licence" : {
+            "additionalProperties" : true,
+            "description" : "An object that contains all accepted fields for the Driver's License Data Verification report.",
+            "type" : "object"
+          }
+        },
+        "type" : "object"
+      },
+      "report_name" : {
+        "enum" : [ "document", "document_video", "document_video_with_address", "document_with_address_information", "document_with_driving_licence_information", "document_with_driver_verification", "facial_similarity_photo", "facial_similarity_photo_fully_auto", "facial_similarity_video", "facial_similarity_motion", "known_faces", "identity_enhanced", "watchlist_aml", "watchlist_enhanced", "watchlist_standard", "watchlist_peps_only", "watchlist_sanctions_only", "proof_of_address", "us_driving_licence", "device_intelligence" ],
+        "type" : "string"
+      },
+      "document_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/document_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "document_video_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/document_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "document_video_with_address_information" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/document_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "document_with_address_information_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/document_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "document_with_driving_licence_information_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/document_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "document_with_driver_verification_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/document_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_with_driver_verification_report_allOf_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "facial_similarity_photo_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/facial_similarity_photo_breakdown"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "facial_similarity_photo_fully_auto_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/facial_similarity_photo_fully_auto_breakdown"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "facial_similarity_video_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/facial_similarity_video_breakdown"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "facial_similarity_motion_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/facial_similarity_motion_breakdown"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "known_faces_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/known_faces_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/known_faces_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "identity_enhanced_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/identity_enhanced_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/identity_enhanced_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "watchlist_aml_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/watchlist_aml_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/watchlist_aml_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "watchlist_enhanced_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/watchlist_enhanced_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/watchlist_enhanced_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "watchlist_standard_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/watchlist_standard_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/watchlist_standard_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "watchlist_peps_only_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/watchlist_standard_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/watchlist_standard_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "watchlist_sanctions_only_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/watchlist_standard_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/watchlist_standard_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "proof_of_address_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/proof_of_address_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/proof_of_address_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "us_driving_licence_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/us_driving_licence_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/document_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "device_intelligence_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/device_intelligence_breakdown"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
+      "india_pan_report" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/report_shared"
+        }, {
+          "properties" : {
+            "breakdown" : {
+              "$ref" : "#/components/schemas/india_pan_report_allOf_breakdown"
+            },
+            "properties" : {
+              "$ref" : "#/components/schemas/india_pan_report_allOf_properties"
+            }
+          },
+          "type" : "object"
+        } ],
+        "required" : [ "id", "name" ]
+      },
       "id_number" : {
         "properties" : {
           "type" : {
@@ -3176,349 +3664,38 @@
         },
         "type" : "object"
       },
-      "country_codes" : {
-        "enum" : [ "ABW", "AFG", "AGO", "AIA", "ALA", "ALB", "AND", "ARE", "ARG", "ARM", "ASM", "ATA", "ATF", "ATG", "AUS", "AUT", "AZE", "BDI", "BEL", "BEN", "BES", "BFA", "BGD", "BGR", "BHR", "BHS", "BIH", "BLM", "BLR", "BLZ", "BMU", "BOL", "BRA", "BRB", "BRN", "BTN", "BVT", "BWA", "CAF", "CAN", "CCK", "CHE", "CHL", "CHN", "CIV", "CMR", "COD", "COG", "COK", "COL", "COM", "CPV", "CRI", "CUB", "CUW", "CXR", "CYM", "CYP", "CZE", "DEU", "DJI", "DMA", "DNK", "DOM", "DZA", "ECU", "EGY", "ERI", "ESH", "ESP", "EST", "ETH", "FIN", "FJI", "FLK", "FRA", "FRO", "FSM", "GAB", "GBR", "GEO", "GGY", "GHA", "GIB", "GIN", "GLP", "GMB", "GNB", "GNQ", "GRC", "GRD", "GRL", "GTM", "GUF", "GUM", "GUY", "HKG", "HMD", "HND", "HRV", "HTI", "HUN", "IDN", "IMN", "IND", "IOT", "IRL", "IRN", "IRQ", "ISL", "ISR", "ITA", "JAM", "JEY", "JOR", "JPN", "KAZ", "KEN", "KGZ", "KHM", "KIR", "KNA", "KOR", "KWT", "LAO", "LBN", "LBR", "LBY", "LCA", "LIE", "LKA", "LSO", "LTU", "LUX", "LVA", "MAC", "MAF", "MAR", "MCO", "MDA", "MDG", "MDV", "MEX", "MHL", "MKD", "MLI", "MLT", "MMR", "MNE", "MNG", "MNP", "MOZ", "MRT", "MSR", "MTQ", "MUS", "MWI", "MYS", "MYT", "NAM", "NCL", "NER", "NFK", "NGA", "NIC", "NIU", "NLD", "NOR", "NPL", "NRU", "NZL", "OMN", "PAK", "PAN", "PCN", "PER", "PHL", "PLW", "PNG", "POL", "PRI", "PRK", "PRT", "PRY", "PSE", "PYF", "QAT", "REU", "RKS", "ROU", "RUS", "RWA", "SAU", "SDN", "SEN", "SGP", "SGS", "SHN", "SJM", "SLB", "SLE", "SLV", "SMR", "SOM", "SPM", "SRB", "SSD", "STP", "SUR", "SVK", "SVN", "SWE", "SWZ", "SXM", "SYC", "SYR", "TCA", "TCD", "TGO", "THA", "TJK", "TKL", "TKM", "TLS", "TON", "TTO", "TUN", "TUR", "TUV", "TWN", "TZA", "UGA", "UKR", "UMI", "URY", "USA", "UZB", "VAT", "VCT", "VEN", "VGB", "VIR", "VNM", "VUT", "WLF", "WSM", "YEM", "ZAF", "ZMB", "ZWE" ],
-        "type" : "string"
-      },
-      "document_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/document_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "document_video_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/document_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "document_video_with_address_information" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/document_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "document_with_address_information_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/document_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "document_with_driving_licence_information_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/document_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "document_with_driver_verification_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/document_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_with_driver_verification_report_allOf_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "facial_similarity_photo_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/facial_similarity_photo_breakdown"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "facial_similarity_photo_fully_auto_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/facial_similarity_photo_fully_auto_breakdown"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "facial_similarity_video_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/facial_similarity_video_breakdown"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "facial_similarity_motion_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/facial_similarity_motion_breakdown"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "known_faces_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/known_faces_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/known_faces_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "identity_enhanced_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/identity_enhanced_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/identity_enhanced_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "watchlist_aml_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/watchlist_aml_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/watchlist_aml_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "watchlist_enhanced_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/watchlist_enhanced_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/watchlist_enhanced_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "watchlist_standard_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/watchlist_standard_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/watchlist_standard_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "watchlist_peps_only_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/watchlist_standard_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/watchlist_standard_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "watchlist_sanctions_only_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/watchlist_standard_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/watchlist_standard_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "proof_of_address_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/proof_of_address_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/proof_of_address_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "us_driving_licence_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/us_driving_licence_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "device_intelligence_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/device_intelligence_breakdown"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "india_pan_report" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/report_common"
-        }, {
-          "properties" : {
-            "breakdown" : {
-              "$ref" : "#/components/schemas/india_pan_report_allOf_breakdown"
-            },
-            "properties" : {
-              "$ref" : "#/components/schemas/india_pan_report_allOf_properties"
-            }
-          },
-          "type" : "object"
-        } ]
-      },
-      "report_common" : {
+      "report_shared" : {
         "properties" : {
           "id" : {
             "description" : "The unique identifier for the report. Read-only.",
-            "readOnly" : true,
             "type" : "string"
           },
           "created_at" : {
             "description" : "The date and time at which the report was first initiated. Read-only.",
             "format" : "date-time",
-            "readOnly" : true,
             "type" : "string"
           },
           "href" : {
             "description" : "The API endpoint to retrieve the report. Read-only.",
-            "readOnly" : true,
             "type" : "string"
           },
           "status" : {
             "description" : "The current state of the report in the checking process. Read-only.",
             "enum" : [ "awaiting_data", "awaiting_approval", "cancelled", "complete", "withdrawn" ],
-            "readOnly" : true,
             "type" : "string"
           },
           "result" : {
             "description" : "The result of the report. Read-only.",
-            "enum" : [ "clear", "consider", "unidentified", null ],
-            "readOnly" : true,
+            "enum" : [ "clear", "consider", "unidentified" ],
             "type" : "string"
           },
           "sub_result" : {
             "description" : "The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.",
             "enum" : [ "clear", "rejected", "suspected", "caution" ],
-            "readOnly" : true,
             "type" : "string"
           },
           "check_id" : {
             "description" : "The ID of the check to which the report belongs. Read-only.",
-            "readOnly" : true,
             "type" : "string"
           },
           "documents" : {
@@ -3540,12 +3717,9 @@
           "properties" : {
             "additionalProperties" : true,
             "description" : "The properties associated with the report, if any. Read-only.",
-            "readOnly" : true,
             "type" : "object"
           }
-        },
-        "required" : [ "name" ],
-        "type" : "object"
+        }
       },
       "document_breakdown" : {
         "properties" : {
@@ -3651,7 +3825,7 @@
             "type" : "string"
           },
           "real_id_compliance" : {
-            "type" : "string"
+            "type" : "boolean"
           },
           "address_lines" : {
             "$ref" : "#/components/schemas/document_properties_address_lines"
@@ -4136,7 +4310,7 @@
         },
         "type" : "object"
       },
-      "list_applicants_200_response" : {
+      "Applicants_list" : {
         "properties" : {
           "applicants" : {
             "items" : {
@@ -4145,6 +4319,8 @@
             "type" : "array"
           }
         },
+        "required" : [ "applicants" ],
+        "title" : "Applicants list",
         "type" : "object"
       },
       "ErrorProperties" : {
@@ -4172,7 +4348,7 @@
         "title" : "Error",
         "type" : "object"
       },
-      "list_documents_200_response" : {
+      "Documents_list" : {
         "properties" : {
           "documents" : {
             "items" : {
@@ -4181,24 +4357,11 @@
             "type" : "array"
           }
         },
+        "required" : [ "documents" ],
+        "title" : "Documents list",
         "type" : "object"
       },
-      "upload_document_request" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/document"
-        }, {
-          "properties" : {
-            "file" : {
-              "description" : "The file to be uploaded.",
-              "format" : "binary",
-              "type" : "string"
-            }
-          },
-          "required" : [ "file" ],
-          "type" : "object"
-        } ]
-      },
-      "list_live_photos_200_response" : {
+      "Live_Photos_list" : {
         "properties" : {
           "live_photos" : {
             "items" : {
@@ -4207,33 +4370,11 @@
             "type" : "array"
           }
         },
+        "required" : [ "live_photos" ],
+        "title" : "Live Photos list",
         "type" : "object"
       },
-      "upload_live_photo_request" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/live_photo"
-        }, {
-          "properties" : {
-            "applicant_id" : {
-              "description" : "The ID of the applicant whose live photo is being uploaded.",
-              "type" : "string"
-            },
-            "file" : {
-              "description" : "The file to be uploaded.",
-              "format" : "binary",
-              "type" : "string"
-            },
-            "advanced_validation" : {
-              "default" : true,
-              "description" : "Validates that the live photo contains exactly one face.",
-              "type" : "boolean"
-            }
-          },
-          "required" : [ "applicant_id", "file" ],
-          "type" : "object"
-        } ]
-      },
-      "list_live_videos_200_response" : {
+      "Liveo_Videos_list" : {
         "properties" : {
           "live_videos" : {
             "items" : {
@@ -4242,43 +4383,11 @@
             "type" : "array"
           }
         },
+        "required" : [ "live_videos" ],
+        "title" : "Liveo Videos list",
         "type" : "object"
       },
-      "create_workflow_run_request" : {
-        "properties" : {
-          "workflow_id" : {
-            "description" : "The unique identifier for the Workflow.",
-            "type" : "string"
-          },
-          "applicant_id" : {
-            "description" : "The unique identifier for the Applicant.",
-            "type" : "string"
-          },
-          "custom_data" : {
-            "description" : "Optional object with custom input data to be used in the Workflow Run.",
-            "type" : "object"
-          },
-          "tags" : {
-            "description" : "Tags or labels to assign to the workflow run.",
-            "items" : {
-              "maxLength" : 128,
-              "minLength" : 1,
-              "type" : "string"
-            },
-            "maxItems" : 30,
-            "minItems" : 1,
-            "type" : "array",
-            "uniqueItems" : true
-          },
-          "link" : {
-            "description" : "Optional object for the configuration of the Workflow Run link.",
-            "type" : "object"
-          }
-        },
-        "required" : [ "applicant_id", "workflow_id" ],
-        "type" : "object"
-      },
-      "list_tasks_200_response_inner" : {
+      "Task" : {
         "properties" : {
           "id" : {
             "description" : "The identifier for the Task.",
@@ -4299,6 +4408,7 @@
             "type" : "string"
           }
         },
+        "title" : "Task",
         "type" : "object"
       },
       "complete_task_request" : {
@@ -4310,7 +4420,7 @@
         },
         "type" : "object"
       },
-      "list_motion_captures_200_response" : {
+      "Motion_Captures_list" : {
         "properties" : {
           "motion_captures" : {
             "items" : {
@@ -4319,9 +4429,11 @@
             "type" : "array"
           }
         },
+        "required" : [ "motion_captures" ],
+        "title" : "Motion Captures list",
         "type" : "object"
       },
-      "list_watchlist_monitor_matches_200_response_inner" : {
+      "Watchlist_monitor_match" : {
         "properties" : {
           "id" : {
             "description" : "Monitor ID",
@@ -4332,6 +4444,7 @@
             "type" : "boolean"
           }
         },
+        "title" : "Watchlist monitor match",
         "type" : "object"
       },
       "update_monitor_match_request" : {
@@ -4353,37 +4466,20 @@
         },
         "type" : "object"
       },
-      "list_id_photos_200_response" : {
+      "ID_Photos_list" : {
         "properties" : {
-          "live_photos" : {
+          "id_photos" : {
             "items" : {
               "$ref" : "#/components/schemas/id_photo"
             },
             "type" : "array"
           }
         },
+        "required" : [ "id_photos" ],
+        "title" : "ID Photos list",
         "type" : "object"
       },
-      "upload_id_photo_request" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/id_photo"
-        }, {
-          "properties" : {
-            "applicant_id" : {
-              "description" : "The ID of the applicant whose ID photo is being uploaded.",
-              "type" : "string"
-            },
-            "file" : {
-              "description" : "The file to be uploaded.",
-              "format" : "binary",
-              "type" : "string"
-            }
-          },
-          "required" : [ "applicant_id", "file" ],
-          "type" : "object"
-        } ]
-      },
-      "list_webhooks_200_response" : {
+      "Webhooks_list" : {
         "properties" : {
           "webhooks" : {
             "items" : {
@@ -4392,9 +4488,10 @@
             "type" : "array"
           }
         },
+        "title" : "Webhooks list",
         "type" : "object"
       },
-      "find_addresses_200_response" : {
+      "Addresses" : {
         "properties" : {
           "addresses" : {
             "items" : {
@@ -4403,6 +4500,7 @@
             "type" : "array"
           }
         },
+        "title" : "Addresses",
         "type" : "object"
       },
       "generate_sdk_token_request" : {
@@ -4427,13 +4525,14 @@
         "required" : [ "applicant_id" ],
         "type" : "object"
       },
-      "generate_sdk_token_200_response" : {
+      "SDK_token" : {
         "properties" : {
           "token" : {
             "description" : "The generated SDK token",
             "type" : "string"
           }
         },
+        "title" : "SDK token",
         "type" : "object"
       },
       "extract_request" : {
@@ -4471,7 +4570,7 @@
         "title" : "Error",
         "type" : "object"
       },
-      "list_checks_200_response" : {
+      "Checks_list" : {
         "properties" : {
           "checks" : {
             "items" : {
@@ -4480,9 +4579,11 @@
             "type" : "array"
           }
         },
+        "required" : [ "checks" ],
+        "title" : "Checks list",
         "type" : "object"
       },
-      "list_reports_200_response" : {
+      "Reports_list" : {
         "properties" : {
           "reports" : {
             "items" : {
@@ -4491,48 +4592,8 @@
             "type" : "array"
           }
         },
-        "type" : "object"
-      },
-      "workflow_run_error" : {
-        "description" : "Error object. Only set when the Workflow Run status is 'error'.",
-        "properties" : {
-          "type" : {
-            "description" : "The type of error.",
-            "type" : "string"
-          },
-          "message" : {
-            "description" : "A textual description of the error.",
-            "type" : "string"
-          }
-        },
-        "type" : "object"
-      },
-      "workflow_run_link" : {
-        "description" : "Object for the configuration of the Workflow Run link.",
-        "properties" : {
-          "url" : {
-            "description" : "Link to access the Workflow Run without the need to integrate with Onfido's SDKs.",
-            "type" : "string"
-          },
-          "completed_redirect_url" : {
-            "description" : "When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.",
-            "type" : "string"
-          },
-          "expired_redirect_url" : {
-            "description" : "When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.",
-            "type" : "string"
-          },
-          "expires_at" : {
-            "description" : "Date and time when the link will expire.",
-            "format" : "date-time",
-            "type" : "string"
-          },
-          "language" : {
-            "description" : "The code for the language when the workflow run is acessed using the link.",
-            "enum" : [ "en_US", "de_DE", "es_ES", "fr_FR", "it_IT", "pt_PT", "nl_NL" ],
-            "type" : "string"
-          }
-        },
+        "required" : [ "reports" ],
+        "title" : "Reports list",
         "type" : "object"
       },
       "webhook_resend_data_inner" : {
@@ -4675,24 +4736,12 @@
             "pattern" : "/^[A-Z]{3}$/",
             "type" : "string"
           },
-          "mrz_line1" : {
-            "description" : "Line 1 of the MRZ code.",
-            "type" : "string"
-          },
           "mrz_line_1" : {
             "description" : "Line 1 of the MRZ code.",
             "type" : "string"
           },
-          "mrz_line2" : {
-            "description" : "Line 2 of the MRZ code.",
-            "type" : "string"
-          },
           "mrz_line_2" : {
             "description" : "Line 2 of the MRZ code.",
-            "type" : "string"
-          },
-          "mrz_line3" : {
-            "description" : "Line 3 of the MRZ code.",
             "type" : "string"
           },
           "mrz_line_3" : {
@@ -4754,6 +4803,63 @@
         },
         "type" : "object"
       },
+      "Applicant_consent" : {
+        "description" : "The applicant's consents",
+        "properties" : {
+          "name" : {
+            "enum" : [ "privacy_notices_read", "ssn_verification", "phone_number_verification" ],
+            "type" : "string"
+          },
+          "granted" : {
+            "type" : "boolean"
+          }
+        },
+        "required" : [ "granted", "name" ],
+        "title" : "Applicant consent",
+        "type" : "object"
+      },
+      "workflow_run_shared_link" : {
+        "description" : "Object for the configuration of the Workflow Run link.",
+        "properties" : {
+          "url" : {
+            "description" : "Link to access the Workflow Run without the need to integrate with Onfido's SDKs.",
+            "type" : "string"
+          },
+          "completed_redirect_url" : {
+            "description" : "When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.",
+            "type" : "string"
+          },
+          "expired_redirect_url" : {
+            "description" : "When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.",
+            "type" : "string"
+          },
+          "expires_at" : {
+            "description" : "Date and time when the link will expire.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "language" : {
+            "description" : "The code for the language when the workflow run is acessed using the link.",
+            "enum" : [ "en_US", "de_DE", "es_ES", "fr_FR", "it_IT", "pt_PT", "nl_NL" ],
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "workflow_run_response_error" : {
+        "description" : "Error object. Only set when the Workflow Run status is 'error'.",
+        "properties" : {
+          "type" : {
+            "description" : "The type of error.",
+            "type" : "string"
+          },
+          "message" : {
+            "description" : "A textual description of the error.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
       "document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner" : {
         "properties" : {
           "category" : {
@@ -4771,6 +4877,26 @@
           },
           "expiry_date" : {
             "description" : "Category expiry date",
+            "format" : "date",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "document_with_driver_verification_report_allOf_properties_allOf_passenger_vehicle" : {
+        "description" : "Normalised data for passenger cars",
+        "properties" : {
+          "is_qualified" : {
+            "description" : "Whether they are qualified for a passenger car, such as a “B” class in the UK",
+            "type" : "boolean"
+          },
+          "obtainment_date" : {
+            "description" : "Date the class qualification was obtained",
+            "format" : "date",
+            "type" : "string"
+          },
+          "expiry_date" : {
+            "description" : "Date the class qualification expires, which may be different to doc expiry",
             "format" : "date",
             "type" : "string"
           }
@@ -4804,6 +4930,9 @@
                 "$ref" : "#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner"
               },
               "type" : "array"
+            },
+            "passenger_vehicle" : {
+              "$ref" : "#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_passenger_vehicle"
             }
           },
           "type" : "object"

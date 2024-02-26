@@ -1,0 +1,76 @@
+report_shared:
+  properties:
+    id:
+      type: string
+      description: The unique identifier for the report. Read-only.
+    created_at:
+      type: string
+      format: date-time
+      description: The date and time at which the report was first initiated. Read-only.
+    href:
+      type: string
+      description: The API endpoint to retrieve the report. Read-only.
+    status:
+      type: string
+      enum:
+        - awaiting_data
+        - awaiting_approval
+        - cancelled
+        - complete
+        - withdrawn
+      description: The current state of the report in the checking process. Read-only.
+    result:
+      type: string
+      enum:
+        - clear
+        - consider
+        - unidentified
+      description: The result of the report. Read-only.
+    sub_result:
+      type: string
+      enum:
+        - clear
+        - rejected
+        - suspected
+        - caution
+      description: The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.
+    check_id:
+      type: string
+      description: The ID of the check to which the report belongs. Read-only.
+    documents:
+      type: array
+      description: Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
+      items:
+        $ref: report_document.yaml
+    name:
+      type: string
+      enum:
+        - document
+        - document_video
+        - document_video_with_address_information
+        - document_with_address_information
+        - document_with_driving_licence_information
+        - document_with_driver_verification
+        - facial_similarity_photo
+        - facial_similarity_photo_fully_auto
+        - facial_similarity_video
+        - facial_similarity_motion
+        - known_faces
+        - identity_enhanced
+        - watchlist_aml
+        - watchlist_enhanced
+        - watchlist_standard
+        - watchlist_peps_only
+        - watchlist_sanctions_only
+        - proof_of_address
+        - us_driving_licence
+        - device_intelligence
+        - india_pan
+      description: The name of the report type.
+    breakdown:
+      type: object
+      description: The details of the report. This is specific to each type of report.
+    properties:
+      type: object
+      additionalProperties: true
+      description: The properties associated with the report, if any. Read-only.
