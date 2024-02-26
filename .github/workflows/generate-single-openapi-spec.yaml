@@ -19,7 +19,10 @@ jobs:
           apt-get update
           apt-get install -yqq \
             gettext-base
-      - name: Build single-file Onfido OpenAPI defintions
+      - name: Validate single-file Onfido OpenAPI specification
+        run: |
+          $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
+      - name: Build single-file Onfido OpenAPI specifications
         run: |
           ./generator/script/generate.sh \
             generator/configuration/openapi.yaml \
@@ -30,6 +33,7 @@ jobs:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
   commit-single-spec:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     needs: build-single-spec
     steps:
@@ -38,8 +42,7 @@ jobs:
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
-      - name: Commit single-file Onfido OpenAPI defintions
-        if: github.event_name == 'push'
+      - name: Commit single-file Onfido OpenAPI specifications
         run: |
           git --version
           git config user.name "GitHub Actions Bot"
