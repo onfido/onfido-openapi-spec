@@ -1,0 +1,23 @@
+name: generate-single-openapi-spec
+run-name: Build and publish single-file Onfido OpenAPI specs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  build-single-files:
+    runs-on: ubuntu-latest
+    container:
+      image: openapitools/openapi-generator-cli:v7.3.0
+      env:
+        OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pre-requisites
+        run: |
+          apt-get update
+          apt-get install gettext-base
+      - name: Build single-file Onfido OpenAPI defintions
+        run: |
+          ./generator/script/generate.sh generator/configuration/openapi.yaml

@@ -1,1 +1,2 @@
-generated/**/.openapi-generator*
+generated/configuration
+generated/artifacts/*/.openapi-generator*
