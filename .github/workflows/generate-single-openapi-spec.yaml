@@ -20,4 +20,6 @@ jobs:
           apt-get install gettext-base
       - name: Build single-file Onfido OpenAPI defintions
         run: |
-          ./generator/script/generate.sh generator/configuration/openapi.yaml
+          ./generator/script/generate.sh \
+            generator/configuration/openapi.yaml \
+            generator/configuration/openapi-yaml.yaml
