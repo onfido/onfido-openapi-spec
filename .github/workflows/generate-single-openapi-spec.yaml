@@ -7,6 +7,7 @@ on:
   pull_request:
 jobs:
   build-single-spec:
+    name: Build single-file OpenAPI specifications
     runs-on: ubuntu-latest
     container:
       image: openapitools/openapi-generator-cli:v7.3.0
@@ -19,10 +20,10 @@ jobs:
           apt-get update
           apt-get install -yqq \
             gettext-base
-      - name: Validate single-file OpenAPI specification
+      - name: Validate multi-file OpenAPI specification
         run: |
           $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
-      - name: Build single-file OpenAPI specifications
+      - name: Refresh single-file OpenAPI specifications
         run: |
           ./generator/script/generate.sh \
             generator/configuration/openapi.yaml \
@@ -33,16 +34,17 @@ jobs:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
   commit-single-spec:
+    name: Commit and push single-file OpenAPI specifications
     runs-on: ubuntu-latest
     needs: build-single-spec
-    if: ${{ github.event.pull_request.merged || github.repository == 'onfido/onfido-openapi-spec' }}
+    if: ${{ github.event.pull_request.merged && github.repository == 'onfido/onfido-openapi-spec' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
-      - name: Commit single-file OpenAPI specifications
+      - name: Commit and push single-file OpenAPI specifications
         run: |
           git --version
           if [ -z "$(git status --porcelain=v1 generated/artifacts)" ];
@@ -53,4 +55,5 @@ jobs:
             git config user.email "<>"
             git status generated/artifacts
             git commit -m "Single file specifications refresh" generated/artifacts
+            git push
           fi
