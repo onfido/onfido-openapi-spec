@@ -68,7 +68,7 @@
   retrieve:
     get:
       summary: A single workflow run can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
-      operationId: retrieve_workflow_run
+      operationId: find_workflow_run
       parameters:
         - name: workflow_run_id
           in: path
@@ -138,10 +138,10 @@
           schema:
             type: string
       responses:
-        "302":
-          description: Redirects to the evidence file destination
+        "200":
+          description: The signed evidence file PDF
           content:
-            "*/*":
+            binary/octet-stream:
               schema:
                 type: string
                 format: binary

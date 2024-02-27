@@ -1,0 +1,133 @@
+name: update-specs-and-client-libraries
+run-name: Update specs and client libraries
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'generated/artifacts/**'
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      type-of-change:
+        description: 'Type of change?'
+        required: true
+        default: Patch
+        type: choice
+        options:
+          - Major
+          - Minor
+          - Patch
+      update-onfido-node:
+        description: 'Update onfido-node?'
+        required: true
+        default: false
+        type: boolean
+jobs:
+  generate_specs_and_libraries:
+    name: Build single-file OpenAPI specifications and client libraries
+    runs-on: ubuntu-latest
+    outputs:
+      typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
+    container:
+      image: openapitools/openapi-generator-cli:v7.3.0
+      env:
+        OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
+        BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change || 'Minor' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pre-requisites
+        run: |
+          apt-get update
+          apt-get install -yqq \
+            gettext-base \
+            git \
+            jq
+      - name: Validate multi-file OpenAPI specification
+        run: |
+          $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
+      - name: Generate specifications and client libraries
+        id: generator
+        run: |
+          ./shell/generate.sh
+      - name: Store generated artifacts and finalization scripts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+          path: |
+            generated/artifacts
+            generators/*/exclusions.txt
+  update_specs:
+    name: Update and commit single-file OpenAPI specifications
+    runs-on: ubuntu-latest
+    needs: generate_specs_and_libraries
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
+          ref: ${{ github.ref_name }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+      - name: Commit and push single-file OpenAPI specifications
+        run: |
+          if [ -z "$(git status --porcelain=v1 generated/artifacts/openapi-*)" ];
+          then
+            echo "no change detected"
+          else
+            echo "changes detected"
+            git config user.name "GitHub Actions Bot"
+            git config user.email "<>"
+            git status generated/artifacts/openapi-*
+            git commit -m "Single file specifications refresh" generated/artifacts/openapi-*
+            git push
+          fi
+  update_client_libraries:
+    name: "Create pull request to ${{ matrix.git_repo_id }} repository with ${{ matrix.generator }}:${{matrix.version}}"
+    runs-on: ubuntu-latest
+    needs: generate_specs_and_libraries
+    strategy:
+      matrix:
+        include:
+          - generator: typescript-axios
+            git_repo_id: onfido-node
+            preCommit: npm install
+            version: ${{ needs.generate_specs_and_libraries.outputs.typescript_axios_version }}
+            update: ${{ inputs.update-onfido-node }}
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+        if: ${{ matrix.update }}
+        with:
+          repository: onfido/${{ matrix.git_repo_id }}
+      - uses: actions/download-artifact@v4
+        if: ${{ matrix.update }}
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+      - name: Integrate generated code (${{ matrix.version }})
+        if: ${{ matrix.update }}
+        id: generator
+        run: |
+          rsync -r --delete-after --exclude='/.git*' \
+                --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
+                generated/artifacts/${{ matrix.generator }}/ .
+
+          ${{ matrix.preCommit }}
+
+          echo any_change=$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//') >> $GITHUB_OUTPUT
+      - name: Create Pull Request with changes after library update
+        uses: peter-evans/create-pull-request@v6
+        if: ${{ matrix.update && steps.generator.outputs.any_change }}
+        with:
+            token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
+            commit-message: Client library upgrade after OpenAPI change (${{ matrix.version }})
+            title: Releasing ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
+            body: |
+              - Dependency updates
+
+              Auto-generated after change: ${{ github.sha }}
+
+            branch: release-${{ matrix.version }}

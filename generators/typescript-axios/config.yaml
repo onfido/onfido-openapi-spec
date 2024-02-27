@@ -1,0 +1,15 @@
+gitRepoId: onfido-node
+npmName: "@onfido/api"
+npmRepository: github:onfido/onfido-node
+npmVersion: ${CLIENT_LIBRARY_VERSION}
+enumUnknownDefaultCase: true
+supportsES6: true
+apiPackage: api
+modelPackage: model
+withNodeImports: true
+withSeparateModelsAndApi: true
+files:
+  LICENSE.mustache:
+    destinationFilename: LICENSE
+  webhook-event-verifier.mustache:
+    destinationFilename: webhook-event-verifier.ts

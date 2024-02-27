@@ -75,7 +75,7 @@
     get:
       summary: Download motion capture frame
       description: Instead of the whole capture binary, a single frame can be downloaded using this endpoint. Returns the binary data representing the frame.
-      operationId: frame_motion_capture
+      operationId: download_motion_capture_frame
       parameters:
         - name: motion_capture_id
           in: path

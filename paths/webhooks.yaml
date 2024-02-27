@@ -59,7 +59,7 @@
 
     put:
       summary: Edit a webhook
-      operationId: edit_webhook
+      operationId: update_webhook
       parameters:
         - name: webhook_id
           in: path
