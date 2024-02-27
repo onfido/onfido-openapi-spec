@@ -28,17 +28,16 @@ jobs:
             generator/configuration/openapi.yaml \
             generator/configuration/openapi-yaml.yaml
       - name: Store generated artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
   commit-single-spec:
     runs-on: ubuntu-latest
     needs: build-single-spec
-    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
@@ -53,5 +52,4 @@ jobs:
             git config user.email "<>"
             git status generated/artifacts
             git commit -m "Single file specifications refresh" generated/artifacts
-            git push
           fi
