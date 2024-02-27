@@ -3,7 +3,7 @@ run-name: Build and publish single-file OpenAPI specs
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
 jobs:
   build-single-spec:
