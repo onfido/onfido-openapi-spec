@@ -1,6 +1,6 @@
 # Onfido OpenAPI specification (beta)
 
-:warning: Our OpenAPI specification is currently in beta and we welcome any feedback. You can contact us via the issues tab or [email](mailto:openapi-feedback@onfido.com), but we don't yet officially support this specification. :warning:
+:warning: Our OpenAPI specification is currently in beta and we welcome any feedback. You can contact us via the issues tab or [support portal](https://public.support.onfido.com), but we don't yet officially support this specification. :warning:
 
 This specification supports the latest version of the Onfido API.
 

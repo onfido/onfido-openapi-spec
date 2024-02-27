@@ -1,0 +1,104 @@
+workflow_run_shared:
+  type: object
+  properties:
+    applicant_id:
+      type: string
+      description: The unique identifier for the Applicant.
+    workflow_id:
+      type: string
+      description: The unique identifier for the Workflow.
+    tags:
+      type: array
+      maxItems: 30
+      description: Tags or labels assigned to the workflow run.
+      uniqueItems: true
+      items:
+        type: string
+        minLength: 1
+        maxLength: 128
+    link:
+      type: object
+      description: Object for the configuration of the Workflow Run link.
+      properties:
+        url:
+          type: string
+          description: Link to access the Workflow Run without the need to integrate with Onfido's SDKs.
+        completed_redirect_url:
+          type: string
+          description: When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
+        expired_redirect_url:
+          type: string
+          description: When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.
+        expires_at:
+          type: string
+          format: date-time
+          description: Date and time when the link will expire.
+        language:
+          type: string
+          enum:
+            - en_US
+            - de_DE
+            - es_ES
+            - fr_FR
+            - it_IT
+            - pt_PT
+            - nl_NL
+          description: The code for the language when the workflow run is acessed using the link.
+    created_at:
+      type: string
+      format: date-time
+      description: The date and time when the Workflow Run was created.
+    updated_at:
+      type: string
+      format: date-time
+      description: The date and time when the Workflow Run was last updated.
+
+workflow_run_request:
+  type: object
+  properties:
+    custom_data:
+      type: object
+      additionalProperties: true
+      description: Object with Custom Input Data to be used in the Workflow Run.
+
+workflow_run_response:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier for the Workflow Run.
+    workflow_version_id:
+      type: integer
+      description: The identifier for the Workflow version.
+    dashboard_url:
+      type: string
+      description: The URL for viewing the Workflow Run results on your Onfido Dashboard.
+    status:
+      type: string
+      enum:
+        - awaiting_input
+        - processing
+        - abandoned
+        - error
+        - approved
+        - review
+        - declined
+      description: The status of the Workflow Run.
+    output:
+      type: object
+      description: Output object contains all of the properties configured on the Workflow version.
+    reasons:
+      type: array
+      description: The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow version.
+      items:
+        type: string
+    error:
+      type: object
+      description: Error object. Only set when the Workflow Run status is 'error'.
+      properties:
+        type:
+          type: string
+          description: The type of error.
+        message:
+          type: string
+          description: A textual description of the error.

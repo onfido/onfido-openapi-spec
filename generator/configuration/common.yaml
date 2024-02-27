@@ -1,0 +1,7 @@
+inputSpec: openapi.yaml
+gitUserId: onfido
+generatorName: ${GENERATOR}
+templateDir: generator/templates/${GENERATOR}
+outputDir: generated/artifacts/${GENERATOR}
+useOneOfDiscriminatorLookup: true
+disallowAdditionalPropertiesIfNotPresent: false

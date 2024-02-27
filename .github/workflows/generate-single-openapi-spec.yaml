@@ -1,0 +1,59 @@
+name: generate-single-openapi-spec
+run-name: Build and publish single-file OpenAPI specs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  build-single-spec:
+    name: Build single-file OpenAPI specifications
+    runs-on: ubuntu-latest
+    container:
+      image: openapitools/openapi-generator-cli:v7.3.0
+      env:
+        OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pre-requisites
+        run: |
+          apt-get update
+          apt-get install -yqq \
+            gettext-base
+      - name: Validate multi-file OpenAPI specification
+        run: |
+          $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
+      - name: Refresh single-file OpenAPI specifications
+        run: |
+          ./generator/script/generate.sh \
+            generator/configuration/openapi.yaml \
+            generator/configuration/openapi-yaml.yaml
+      - name: Store generated artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+          path: generated/artifacts
+  commit-single-spec:
+    name: Commit and push single-file OpenAPI specifications
+    runs-on: ubuntu-latest
+    needs: build-single-spec
+    if: ${{ github.event.pull_request.merged && github.repository == 'onfido/onfido-openapi-spec' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+          path: generated/artifacts
+      - name: Commit and push single-file OpenAPI specifications
+        run: |
+          git --version
+          if [ -z "$(git status --porcelain=v1 generated/artifacts)" ];
+          then
+            echo "no change detected"
+          else
+            git config user.name "GitHub Actions Bot"
+            git config user.email "<>"
+            git status generated/artifacts
+            git commit -m "Single file specifications refresh" generated/artifacts
+            git push
+          fi
