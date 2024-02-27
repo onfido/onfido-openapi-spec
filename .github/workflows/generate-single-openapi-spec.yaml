@@ -1,5 +1,5 @@
 name: generate-single-openapi-spec
-run-name: Build and publish single-file Onfido OpenAPI specs
+run-name: Build and publish single-file OpenAPI specs
 on:
   push:
     branches:
@@ -19,10 +19,10 @@ jobs:
           apt-get update
           apt-get install -yqq \
             gettext-base
-      - name: Validate single-file Onfido OpenAPI specification
+      - name: Validate single-file OpenAPI specification
         run: |
           $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
-      - name: Build single-file Onfido OpenAPI specifications
+      - name: Build single-file OpenAPI specifications
         run: |
           ./generator/script/generate.sh \
             generator/configuration/openapi.yaml \
@@ -42,15 +42,16 @@ jobs:
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: generated/artifacts
-      - name: Commit single-file Onfido OpenAPI specifications
+      - name: Commit single-file OpenAPI specifications
         run: |
           git --version
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git diff
-          if [ "$(git status -s)" != "" ];
+          if [ -z "$(git status --porcelain=v1 generated/artifacts)" ];
           then
-            git add generated/artifacts && \
-            git commit -m "Update single file spec" && \
+            echo "no change detected"
+          else
+            git config user.name "GitHub Actions Bot"
+            git config user.email "<>"
+            git status generated/artifacts
+            git commit -m "Single file specifications refresh" generated/artifacts
             git push
           fi
