@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_ACTION_ACCESS_TOKEN }}
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
           ref: ${{ github.ref_name }}
       - uses: actions/download-artifact@v4
         with:
