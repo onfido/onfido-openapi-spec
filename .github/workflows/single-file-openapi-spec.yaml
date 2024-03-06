@@ -1,15 +1,17 @@
-name: generate-single-openapi-spec
-run-name: Build and publish single-file OpenAPI specs
+name: single-file-openapi-spec
+run-name: Generate and publish single-file OpenAPI specs
 on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'generated/artifacts/**'
   pull_request:
     branches:
       - master
 jobs:
   build-single-spec:
-    name: Build single-file OpenAPI specifications
+    name: Generate single-file OpenAPI specifications
     runs-on: ubuntu-latest
     container:
       image: openapitools/openapi-generator-cli:v7.3.0
@@ -43,6 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
           ref: ${{ github.ref_name }}
       - uses: actions/download-artifact@v4
         with:
@@ -55,6 +58,7 @@ jobs:
           then
             echo "no change detected"
           else
+            echo "changes detected"
             git config user.name "GitHub Actions Bot"
             git config user.email "<>"
             git status generated/artifacts
