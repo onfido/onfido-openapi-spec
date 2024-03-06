@@ -13,18 +13,12 @@ export enum Region{
 {{! Added code - END }}
 
 export interface ConfigurationParameters {
-    apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
-    username?: string;
-    password?: string;
-    accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
-    basePath?: string;
-    serverIndex?: number;
-    baseOptions?: any;
-    formDataCtor?: new () => any;
-{{! Added parameters - BEGIN }}
+    {{! Updated parameters (add apiToken and region, remove unused apiKey, username, password, accessToken and serverIndex) }}
     apiToken?: string;
     region?: Region;
-{{! Added parameters - END }}
+    basePath?: string;
+    baseOptions?: any;
+    formDataCtor?: new () => any;
 }
 
 export class Configuration {
@@ -85,7 +79,7 @@ export class Configuration {
      */
     formDataCtor?: new () => any;
 
-    {{! Updated constructor }}
+    {{! Updated constructor (remove unused username, password, accessToken and serverIndex) }}
     constructor(param: ConfigurationParameters = {}) {
         if (!param.apiToken) {
             throw new Error("No apiToken provided");
@@ -95,12 +89,8 @@ export class Configuration {
             throw new Error(`Unknown or missing region '${param.region}'`);
         }
 
-        this.apiKey = param.apiKey || 'Token token=' + param.apiToken;
-        this.username = param.username;
-        this.password = param.password;
-        this.accessToken = param.accessToken;
+        this.apiKey = 'Token token=' + param.apiToken;
         this.basePath = param.basePath || BASE_PATH.replace('.eu.', `.${Region[param.region || Region.EU].toLowerCase()}.`);
-        this.serverIndex = param.serverIndex;
         this.baseOptions = param.baseOptions || { headers: {'User-Agent': 'onfido-node/{{npmVersion}}'} };
         this.formDataCtor = param.formDataCtor || require('form-data');         // Injiect form data constructor (if needed)
     }
