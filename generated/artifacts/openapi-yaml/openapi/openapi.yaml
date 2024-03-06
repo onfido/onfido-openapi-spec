@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   contact:
-    email: engineering@onfido.com
     name: Onfido
+    url: https://public.support.onfido.com
   description: The Onfido API
   license:
     name: MIT
