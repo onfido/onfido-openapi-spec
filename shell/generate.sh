@@ -10,9 +10,10 @@ COMMON_CONFIG_FILE="generators/common/config.yaml"
 GENERATORS=${*:-`ls generators`}
 GENERATED_CONFIG_FILES=""
 
+OPENAPI_GENERATOR_VERSION=${OPENAPI_GENERATOR_VERSION:-v7.3.0}
 OPENAPI_GENERATOR_COMMAND=${OPENAPI_GENERATOR_COMMAND:-\
   docker run --rm -v "$(pwd):/local" -w /local \
-  openapitools/openapi-generator-cli:v7.3.0}
+  openapitools/openapi-generator-cli:${OPENAPI_GENERATOR_VERSION}}
 
 BUMP_CLIENT_LIBRARY_VERSION=${BUMP_CLIENT_LIBRARY_VERSION:-""}
 
@@ -51,6 +52,60 @@ function semver_bump() {
   done
 }
 
+function validate_templates_checksum() {
+  GENERATOR=$1
+  LIBRARY=$2
+  RESULT=0
+
+  if [ ! -z "$LIBRARY" ];
+  then
+    LIBRARY="--library $LIBRARY"
+  fi
+
+  $OPENAPI_GENERATOR_COMMAND author template -g $GENERATOR $LIBRARY -o generated/templates/${GENERATOR} > /dev/null
+
+  pushd generated/templates/${GENERATOR} > /dev/null
+  shasum -a 256 * >| SHA256SUM
+  popd > /dev/null
+
+  OUR_SHASUMS=generators/${GENERATOR}/templates/SHA256SUM
+  echo >| $OUR_SHASUMS.new
+
+  for TEMPLATE in $(ls generators/${GENERATOR}/templates/ | grep -v SHA256SUM) ;
+  do
+    FILENAME=$(basename $TEMPLATE)
+
+    LIB_SHASUM=$(grep $FILENAME generated/templates/${GENERATOR}/SHA256SUM | awk '{print $1}' || true)
+    OUR_SHASUM=$(grep $FILENAME $OUR_SHASUMS | awk '{print $1}' || true)
+
+    if [[ ! -z "$LIB_SHASUM" ]];  # File is provided by lib
+    then
+      if [ ! -z "$OUR_SHASUM" ] && [[ "$LIB_SHASUM" != "$OUR_SHASUM" ]];   # We do have checksum and doesn't match
+      then
+        echo -e "\n################################################################################\n"
+        echo -e " !!! Error while building generator ${GENERATOR}!!!\n"
+        echo " SHA256SUM for template $FILENAME changed, diff reported below. To overwrite template, run:"
+        echo "  cp generated/templates/${GENERATOR}/$FILENAME generators/${GENERATOR}/templates/"
+        echo
+        diff generated/templates/${GENERATOR}/$FILENAME generators/${GENERATOR}/templates/$FILENAME || true
+        RESULT=1
+      fi
+
+      echo "$LIB_SHASUM  $FILENAME" >> $OUR_SHASUMS.new
+    fi
+  done
+
+  # If any change to checksums
+  if [ $RESULT -ne 0 ];
+  then
+    mv $OUR_SHASUMS.new $OUR_SHASUMS
+  else
+    unlink $OUR_SHASUMS.new
+  fi
+
+  return $RESULT
+}
+
 cd ${BASEDIR}
 rm -rf generated; mkdir -p generated/configuration
 
@@ -58,9 +113,14 @@ for GENERATOR in $GENERATORS
 do
   if [ "${GENERATOR}" != "common" ];
   then
-    CONFIG_FILE=generators/${GENERATOR}/config.yaml
     echo "Building configuration for generator ${GENERATOR}..."
+
+    GENERATOR_FOLDER=generators/${GENERATOR}
+    CONFIG_FILE=${GENERATOR_FOLDER}/config.yaml
+    GENERATED_CONFIG_FILE=generated/configuration/${GENERATOR}.yaml
+
     GIT_REPO_ID=$(grep gitRepoId: $CONFIG_FILE | sed 's/gitRepoId: //g')
+    LIBRARY=$(grep library: $CONFIG_FILE | sed 's/library: //g')
 
     if [ -n "${GIT_REPO_ID}" ];
     then
@@ -74,7 +134,7 @@ do
       CURRENT_LIBRARY_VERSION=""
     fi
 
-    GENERATED_CONFIG_FILE=generated/configuration/${GENERATOR}.yaml
+    validate_templates_checksum $GENERATOR $LIBRARY
 
     ( cat $COMMON_CONFIG_FILE && echo && cat $CONFIG_FILE ) | \
         GENERATOR=${GENERATOR} \
