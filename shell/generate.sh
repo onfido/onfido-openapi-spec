@@ -95,12 +95,12 @@ function validate_templates_checksum() {
     fi
   done
 
-  # If any change to checksums
-  if [ $RESULT -ne 0 ];
+  # Remove if empty or rename otherwise
+  if [[ "$(grep -e '\s' $OUR_SHASUMS.new)" == "" ]];
   then
-    mv $OUR_SHASUMS.new $OUR_SHASUMS
-  else
     unlink $OUR_SHASUMS.new
+  else
+    mv $OUR_SHASUMS.new $OUR_SHASUMS
   fi
 
   return $RESULT
@@ -129,7 +129,7 @@ do
 
       echo "Latest delivered version was: ${LATEST_LIBRARY_VERSION}"
       echo "Current version is going to be: ${CURRENT_LIBRARY_VERSION}"
-      echo "Should bump client library?: ${BUMP_CLIENT_LIBRARY_VERSION}"
+      echo "Client library version bump?: ${BUMP_CLIENT_LIBRARY_VERSION}"
     else
       CURRENT_LIBRARY_VERSION=""
     fi

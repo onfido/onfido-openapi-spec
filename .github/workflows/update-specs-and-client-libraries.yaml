@@ -123,11 +123,9 @@ jobs:
         if: ${{ matrix.update && steps.generator.outputs.any_change }}
         with:
             token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
-            commit-message: Client library upgrade after OpenAPI change (${{ matrix.version }})
+            commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
             title: Releasing ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
             body: |
-              - Dependency updates
+              - Auto-generated PR
 
-              Auto-generated after change: ${{ github.sha }}
-
-            branch: release-${{ matrix.version }}
+            branch: release-upgrade
