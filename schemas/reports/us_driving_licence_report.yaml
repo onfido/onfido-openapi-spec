@@ -1,6 +1,3 @@
-required:
-  - id
-  - name
 allOf:
   - $ref: definitions.yaml#/report_shared
   - type: object

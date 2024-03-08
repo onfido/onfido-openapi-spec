@@ -1,5 +1,8 @@
 workflow_run_shared:
   type: object
+  required:
+    - workflow_id
+    - applicant_id
   properties:
     applicant_id:
       type: string
@@ -62,6 +65,8 @@ workflow_run_request:
 
 workflow_run_response:
   type: object
+  required:
+    - id
   properties:
     id:
       type: string

@@ -1,4 +1,2 @@
-required:
-  - url
 allOf:
   - $ref: definitions.yaml#/webhook_shared

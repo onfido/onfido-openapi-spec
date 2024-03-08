@@ -1,5 +1,3 @@
-required:
-  - id
 allOf:
   - $ref: definitions.yaml#/document_shared
   - $ref: definitions.yaml#/document_response
