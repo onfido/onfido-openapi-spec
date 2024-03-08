@@ -52,6 +52,7 @@ jobs:
         id: generator
         run: |
           ./shell/generate.sh
+          grep Onfido generated/artifacts/typescript-axios/LICENSE
       - name: Store generated artifacts and finalization scripts
         uses: actions/upload-artifact@v4
         with:
@@ -111,12 +112,15 @@ jobs:
         if: ${{ matrix.update }}
         id: generator
         run: |
+          grep Onfido generated/artifacts/${{ matrix.generator }}/LICENSE
+
           rsync -r --delete-after --exclude='/.git*' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
 
           ${{ matrix.preCommit }}
 
+          grep Onfido LICENSE
           echo any_change=$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//') >> $GITHUB_OUTPUT
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
