@@ -111,7 +111,7 @@
 
     delete:
       summary: Delete Applicant
-      operationId: destroy_applicant
+      operationId: delete_applicant
       parameters:
         - name: applicant_id
           in: path

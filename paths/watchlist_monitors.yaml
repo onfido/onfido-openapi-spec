@@ -70,7 +70,7 @@
 
     delete:
       summary: Deactivates the given monitor
-      operationId: destroy_watchlist_monitor
+      operationId: delete_watchlist_monitor
       parameters:
         - name: monitor_id
           in: path

@@ -59,6 +59,8 @@ paths:
     $ref: paths/live_videos.yaml#/live_videos
   /live_videos/{live_video_id}:
     $ref: paths/live_videos.yaml#/live_video
+  /live_videos/{live_video_id}/download:
+    $ref: paths/live_videos.yaml#/download
   /live_videos/{live_video_id}/frame:
     $ref: paths/live_videos.yaml#/frame
   # Workflow Runs and Tasks
