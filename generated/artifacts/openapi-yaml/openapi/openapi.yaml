@@ -82,7 +82,7 @@ paths:
       summary: Create Applicant
   /applicants/{applicant_id}:
     delete:
-      operationId: destroy_applicant
+      operationId: delete_applicant
       parameters:
       - in: path
         name: applicant_id
@@ -438,6 +438,32 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Retrieve live video
+  /live_videos/{live_video_id}/download:
+    get:
+      description: Live videos are downloaded using this endpoint.
+      operationId: download_live_video
+      parameters:
+      - description: The live video's unique identifier.
+        in: path
+        name: live_video_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: binary
+                type: string
+          description: The live video's binary data.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Download live video
   /live_videos/{live_video_id}/frame:
     get:
       description: Returns the binary data representing a single frame from a live
@@ -548,7 +574,7 @@ paths:
       summary: Create a Workflow Run.
   /workflow_runs/{workflow_run_id}:
     get:
-      operationId: retrieve_workflow_run
+      operationId: find_workflow_run
       parameters:
       - description: The unique identifier of the Workflow Run.
         in: path
@@ -675,13 +701,13 @@ paths:
         schema:
           type: string
       responses:
-        "302":
+        "200":
           content:
-            '*/*':
+            binary/octet-stream:
               schema:
                 format: binary
                 type: string
-          description: Redirects to the evidence file destination
+          description: The signed evidence file PDF
         default:
           content:
             application/json:
@@ -767,7 +793,7 @@ paths:
     get:
       description: "Instead of the whole capture binary, a single frame can be downloaded\
         \ using this endpoint. Returns the binary data representing the frame."
-      operationId: frame_motion_capture
+      operationId: download_motion_capture_frame
       parameters:
       - description: The motion capture's unique identifier.
         in: path
@@ -848,7 +874,7 @@ paths:
       summary: Creates a new monitor for the applicant
   /watchlist_monitors/{monitor_id}:
     delete:
-      operationId: destroy_watchlist_monitor
+      operationId: delete_watchlist_monitor
       parameters:
       - in: path
         name: monitor_id
@@ -1157,7 +1183,7 @@ paths:
           description: Unexpected error
       summary: Retrieve a Webhook
     put:
-      operationId: edit_webhook
+      operationId: update_webhook
       parameters:
       - in: path
         name: webhook_id
@@ -2315,7 +2341,6 @@ components:
             type: string
           maxItems: 30
           type: array
-          uniqueItems: true
         link:
           $ref: '#/components/schemas/workflow_run_shared_link'
         created_at:
