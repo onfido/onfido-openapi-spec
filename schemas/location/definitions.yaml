@@ -1,0 +1,11 @@
+location_shared:
+  type: object
+  properties:
+    ip_address:
+      type: string
+      description: The applicant's ip address.
+    country_of_residence:
+      allOf:
+        - $ref: ../countries/country_codes.yaml
+      description: The applicant's country of residence in 3-letter ISO code.
+      example: GBR
