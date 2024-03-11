@@ -18,11 +18,11 @@ properties:
               properties:
                 type: object
                 properties:
-                  total_number_of_sources: 
+                  total_number_of_sources:
                     type: integer
   address:
     type: object
-    description: Asserts if the applicant's address matches any sources. 
+    description: Asserts if the applicant's address matches any sources.
     properties:
       result:
         type: string
@@ -39,7 +39,7 @@ properties:
                 type: object
                 properties:
                   number_of_matches:
-                    type: integer 
+                    type: integer
           telephone_database:
             type: object
             description: Address match against telephone database.
@@ -55,7 +55,7 @@ properties:
               result:
                 type: string
               properties:
-                type: object                
+                type: object
   date_of_birth:
     type: object
     description: Asserts if the applicant's date of birth matches any sources.
@@ -72,7 +72,7 @@ properties:
               result:
                 type: string
               properties:
-                type: object       
+                type: object
           voting_register:
             type: object
             description: Date of birth match against voting register.
@@ -80,7 +80,7 @@ properties:
               result:
                 type: string
               properties:
-                type: object       
+                type: object
   mortality:
     type: object
     description: Asserts if the applicant's details match any death records.

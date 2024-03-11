@@ -31,7 +31,7 @@ check_request:
       description: An array of report names (strings).
       type: array
       items:
-        $ref: '#/report_name'
+        $ref: "#/report_name"
     document_ids:
       description: Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.
       type: array

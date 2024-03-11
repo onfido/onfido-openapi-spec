@@ -1,13 +1,13 @@
 type: object
-required:
-  - resource_type
-  - resource_id
-  - event
 properties:
   data:
     type: array
     items:
       type: object
+      required:
+        - resource_type
+        - resource_id
+        - event
       properties:
         resource_type:
           type: string

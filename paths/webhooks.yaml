@@ -1,116 +1,129 @@
-  webhooks:
-    get:
-      summary: List webhooks
-      operationId: list_webhooks
-      responses:
-        "200":
-          description: A list of webhooks
-          content:
-            application/json:
-              schema:
-                type: object
-                title: Webhooks list
-                properties:
-                  webhooks:
-                    type: array
-                    items:
-                      $ref: ../schemas/webhooks/webhook.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-    post:
-      summary: Create a webhook
-      operationId: create_webhook
-      requestBody:
-        required: true
+webhooks:
+  get:
+    summary: List webhooks
+    operationId: list_webhooks
+    responses:
+      "200":
+        description: A list of webhooks
         content:
           application/json:
             schema:
-              $ref: ../schemas/webhooks/webhook_builder.yaml
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/webhooks/webhook.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+              type: object
+              title: Webhooks list
+              properties:
+                webhooks:
+                  type: array
+                  items:
+                    $ref: ../schemas/webhooks/webhook.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-  webhook:
-    get:
-      summary: Retrieve a Webhook
-      operationId: find_webhook
-      parameters:
-        - name: webhook_id
-          in: path
-          required: true
+  post:
+    summary: Create a webhook
+    operationId: create_webhook
+    requestBody:
+      required: true
+      content:
+        application/json:
           schema:
-            type: string
-      responses:
-        "200":
-          description: Webhook object
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/webhooks/webhook.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-    put:
-      summary: Edit a webhook
-      operationId: update_webhook
-      parameters:
-        - name: webhook_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
+            $ref: ../schemas/webhooks/webhook_builder.yaml
+    responses:
+      "201":
+        description: Created
         content:
           application/json:
             schema:
               $ref: ../schemas/webhooks/webhook.yaml
-      responses:
-        "200":
-          description: Webhook Object
-          content:
-              application/json:
-                schema:
-                  $ref: ../schemas/webhooks/webhook.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+    callbacks:
+      webhookEvent:
+        "{$request.body#/url}":
+          post:
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    $ref: ../schemas/webhooks/webhook_event.yaml
+            responses:
+              default:
+                description: Your server should acknowledge success by responding with an HTTP 20x response within 10 seconds.
 
-    delete:
-      summary: Delete a webhook
-      operationId: delete_webhook
-      parameters:
-        - name: webhook_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: Webhook deleted
-        default:
-          $ref: ../responses/default_error.yaml
-
-  webhooks_resend:
-    post:
-      summary: Resends webhooks
-      operationId: resend_webhooks
-      requestBody:
+webhook:
+  get:
+    summary: Retrieve a Webhook
+    operationId: find_webhook
+    parameters:
+      - name: webhook_id
+        in: path
         required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Webhook object
         content:
           application/json:
             schema:
-              $ref: ../schemas/webhooks/webhook_resend.yaml
-      responses:
-        '204':
-          description: Webhooks are resent for the respective checks
-        '422':
-          description: Request was received but it could not be processed
-        default:
-          $ref: ../responses/default_error.yaml
+              $ref: ../schemas/webhooks/webhook.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  put:
+    summary: Edit a webhook
+    operationId: update_webhook
+    parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/webhooks/webhook_updater.yaml
+    responses:
+      "200":
+        description: Webhook Object
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/webhooks/webhook.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Delete a webhook
+    operationId: delete_webhook
+    parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "204":
+        description: Webhook deleted
+      default:
+        $ref: ../responses/default_error.yaml
+
+webhooks_resend:
+  post:
+    summary: Resends webhooks
+    operationId: resend_webhooks
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/webhooks/webhook_resend.yaml
+    responses:
+      "204":
+        description: Webhooks are resent for the respective checks
+      "422":
+        description: Request was received but it could not be processed
+      default:
+        $ref: ../responses/default_error.yaml

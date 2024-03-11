@@ -71,7 +71,7 @@ properties:
         description: Date of expiry in YYYY-MM-DD format.
       nationality:
         type: string
-        pattern: '/^[A-Z]{3}$/'
+        pattern: "/^[A-Z]{3}$/"
         description: Nationality in 3-letter ISO code.
       mrz_line_1:
         type: string

@@ -14,16 +14,16 @@ address_shared:
       type: string
       description: The building name of this address
     street:
-      type:  string
+      type: string
       description: The street of the applicant's address
     sub_street:
-      type:  string
+      type: string
       description: The sub-street of the applicant's address
     town:
-      type:  string
+      type: string
       description: The town of the applicant's address
     postcode:
-      type:  string
+      type: string
       description: The postcode or ZIP of the applicant's address
     country:
       type: string
@@ -36,15 +36,15 @@ address_shared:
     line1:
       type: string
       nullable: true
-      pattern: '/^[^!$%^*=<>]*$/'
+      pattern: "/^[^!$%^*=<>]*$/"
       description: Line 1 of the applicant's address
     line2:
       type: string
       nullable: true
-      pattern: '/^[^!$%^*=<>]*$/'
+      pattern: "/^[^!$%^*=<>]*$/"
       description: Line 2 of the applicant's address
     line3:
       type: string
       nullable: true
-      pattern: '/^[^!$%^*=<>]*$/'
+      pattern: "/^[^!$%^*=<>]*$/"
       description: Line 3 of the applicant's address

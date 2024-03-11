@@ -17,4 +17,4 @@ properties:
     description: Asserts if there are any records found in Law-Enforcement and Regulatory bodies Monitored Lists (including Terrorism, Money Laundering and Most Wanted lists).
     properties:
       result:
-        type: string      
+        type: string

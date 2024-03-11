@@ -1,11 +1,6 @@
 webhook_shared:
   type: object
-  required:
-    - url
   properties:
-    url:
-      type: string
-      description: The url that will listen to notifications (must be https).
     enabled:
       type: boolean
       description: Determine if the webhook is active.
@@ -15,23 +10,7 @@ webhook_shared:
         The events that will be published to the webhook.
         If the events parameter is omitted all the events will be subscribed.
       items:
-        enum:
-          - audit_log.created
-          - watchlist_monitor.matches_updated
-          - workflow_run.completed
-          - workflow_task.started
-          - workflow_task.completed
-          - check.started
-          - check.reopened
-          - check.withdrawn
-          - check.completed
-          - check.form_completed
-          - report.withdrawn
-          - report.resumed
-          - report.cancelled
-          - report.awaiting_approval
-          - report.completed
-        type: string
+        $ref: "#/webhook_event_type"
     environments:
       type: array
       description: >
@@ -52,9 +31,46 @@ webhook_response:
     id:
       type: string
       description: The unique identifier of the webhook.
+    url:
+      $ref: "#/webhook_url"
     token:
       type: string
       description: Webhook secret token used to sign the webhook's payload.
     href:
       type: string
       description: The API endpoint to retrieve the webhook.
+
+webhook_create:
+  required:
+    - url
+  properties:
+    url:
+      $ref: "#/webhook_url"
+
+webhook_update:
+  properties:
+    url:
+      $ref: "#/webhook_url"
+
+webhook_event_type:
+  enum:
+    - audit_log.created
+    - watchlist_monitor.matches_updated
+    - workflow_run.completed
+    - workflow_task.started
+    - workflow_task.completed
+    - check.started
+    - check.reopened
+    - check.withdrawn
+    - check.completed
+    - check.form_completed
+    - report.withdrawn
+    - report.resumed
+    - report.cancelled
+    - report.awaiting_approval
+    - report.completed
+  type: string
+
+webhook_url:
+  type: string
+  description: The url that will listen to notifications (must be https).

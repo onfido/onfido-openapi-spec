@@ -1,13 +1,13 @@
-  ping:
-    get:
-      summary: Run a health check on the Onfido API
-      operationId: ping
-      responses:
-        "200":
-          description: Regional base URL is operational
-          content:
-            text/plain:
-              schema:
-                type: string
-        default:
-          $ref: ../responses/default_error.yaml
+ping:
+  get:
+    summary: Run a health check on the Onfido API
+    operationId: ping
+    responses:
+      "200":
+        description: Regional base URL is operational
+        content:
+          text/plain:
+            schema:
+              type: string
+      default:
+        $ref: ../responses/default_error.yaml

@@ -1,0 +1,43 @@
+type: object
+properties:
+  payload:
+    type: object
+    required:
+      - resource_type
+      - resource_id
+      - event
+    properties:
+      resource_type:
+        type: string
+        description: Indicates the resource affected by this event.
+      action:
+        type: string
+        allOf:
+          - $ref: definitions.yaml#/webhook_event_type
+        description: The event that triggered this webhook.
+        example: report.completed
+      object:
+        type: object
+        required:
+          - id
+          - href
+        description: The object affected by this event.
+        properties:
+          id:
+            description: The unique identifier of the resource.
+            type: string
+          status:
+            type: string
+            description: The current state of the object, if available.
+            example: complete
+          completed_at_iso8601:
+            type: string
+            format: date-time
+            description: The date and time when the operation was completed, if available.
+            example: "2019-10-28T15:00:39Z"
+          href:
+            description: The uri of the resource.
+            type: string
+      resource:
+        type: object
+        description: The resource affected by this event.

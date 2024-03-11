@@ -56,4 +56,3 @@ allOf:
                     description: Date the class qualification expires, which may be different to doc expiry
                     type: string
                     format: date
-

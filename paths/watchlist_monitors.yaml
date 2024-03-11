@@ -1,170 +1,170 @@
-  watchlist_monitors:
-    post:
-      summary: Creates a new monitor for the applicant
-      operationId: create_watchlist_monitor
-      requestBody:
-        required: true
+watchlist_monitors:
+  post:
+    summary: Creates a new monitor for the applicant
+    operationId: create_watchlist_monitor
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
+    responses:
+      "200":
+        description: Created watchlist monitor
         content:
           application/json:
             schema:
               $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
-      responses:
-        "200":
-          description: Created watchlist monitor
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-    get:
-      summary: List all available monitors for an applicant
-      operationId: list_watchlist_monitors
-      parameters:
-        - name: applicant_id
-          in: query
-          required: true
-          description: The id of the applicant the watchlist monitors belong to. If omitted, all monitors for the account will be listed.
-          schema:
-            type: string
-        - name: include_deleted
-          in: query
-          description: Whether to also include deleted (inactive) monitors.
-          schema:
-            type: boolean
-            default: false
-      responses:
-        "200":
-          description: An array of watchlist monitors
-          content:
-            application/json:
-              schema:
-                type: array
-                title: Watchlist monitors
-                items:
-                  $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-  watchlist_monitor:
-    get:
-      summary: Retrieves a single monitor
-      operationId: find_watchlist_monitor
-      parameters:
-        - name: monitor_id
-          in: path
-          required: true
-          description: The watchlist monitor's unique identifier.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A watchlist monitor
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-    delete:
-      summary: Deactivates the given monitor
-      operationId: delete_watchlist_monitor
-      parameters:
-        - name: monitor_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          $ref: ../responses/default_error.yaml
-
-  matches:
-    get:
-      summary: List match IDs on this monitor, as well as their enabled/disabled status
-      operationId: list_watchlist_monitor_matches
-      parameters:
-        - name: monitor_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: An array of watchlist monitors
-          content:
-            application/json:
-              schema:
-                type: array
-                title: Watchlist monitor matches
-                items:
-                  type: object
-                  title: Watchlist monitor match
-                  properties:
-                    id:
-                      type: string
-                      description: Monitor ID
-                    status:
-                      type: boolean
-                      description: Monitor status
-
-    patch:
-      summary: Update the status of the given matches.
-      operationId: update_monitor_match
-      parameters:
-        - name: monitor_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
+  get:
+    summary: List all available monitors for an applicant
+    operationId: list_watchlist_monitors
+    parameters:
+      - name: applicant_id
+        in: query
         required: true
+        description: The id of the applicant the watchlist monitors belong to. If omitted, all monitors for the account will be listed.
+        schema:
+          type: string
+      - name: include_deleted
+        in: query
+        description: Whether to also include deleted (inactive) monitors.
+        schema:
+          type: boolean
+          default: false
+    responses:
+      "200":
+        description: An array of watchlist monitors
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                enable:
-                  type: array
-                  items:
-                    type: string
-                    description: Match ID to enable.
-                disable:
-                  type: array
-                  items:
-                    type: string
-                    description: Match ID to disable.
-      responses:
-        "204":
-          description: No Content
-        default:
-          $ref: ../responses/default_error.yaml
+              type: array
+              title: Watchlist monitors
+              items:
+                $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-  new_report:
-    post:
-      summary: Force new report creation (BETA)
-      operationId: force_new_record_creation
-      parameters:
-        - name: monitor_id
-          in: path
-          required: true
+watchlist_monitor:
+  get:
+    summary: Retrieves a single monitor
+    operationId: find_watchlist_monitor
+    parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        description: The watchlist monitor's unique identifier.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: A watchlist monitor
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Deactivates the given monitor
+    operationId: delete_watchlist_monitor
+    parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "204":
+        description: No Content
+      default:
+        $ref: ../responses/default_error.yaml
+
+matches:
+  get:
+    summary: List match IDs on this monitor, as well as their enabled/disabled status
+    operationId: list_watchlist_monitor_matches
+    parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: An array of watchlist monitors
+        content:
+          application/json:
+            schema:
+              type: array
+              title: Watchlist monitor matches
+              items:
+                type: object
+                title: Watchlist monitor match
+                properties:
+                  id:
+                    type: string
+                    description: Monitor ID
+                  status:
+                    type: boolean
+                    description: Monitor status
+
+  patch:
+    summary: Update the status of the given matches.
+    operationId: update_monitor_match
+    parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
           schema:
-            type: string
-      responses:
-        "201":
-          description: Created
-          headers:
-            Location:
-              schema:
-                type: string
-              description: Link to the newly generated report.
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/applicants/applicant.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+            type: object
+            properties:
+              enable:
+                type: array
+                items:
+                  type: string
+                  description: Match ID to enable.
+              disable:
+                type: array
+                items:
+                  type: string
+                  description: Match ID to disable.
+    responses:
+      "204":
+        description: No Content
+      default:
+        $ref: ../responses/default_error.yaml
+
+new_report:
+  post:
+    summary: Force new report creation (BETA)
+    operationId: force_new_record_creation
+    parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "201":
+        description: Created
+        headers:
+          Location:
+            schema:
+              type: string
+            description: Link to the newly generated report.
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/applicants/applicant.yaml
+      default:
+        $ref: ../responses/default_error.yaml

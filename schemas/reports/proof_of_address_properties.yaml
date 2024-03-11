@@ -12,13 +12,13 @@ properties:
   last_names:
     description: This property provided the last names on the document.
     type: string
-  issue_date: 
+  issue_date:
     description: This property provides the issue date of the document.
     type: string
     format: date
   issuer:
     description: This property provides the document issuer (e.g. HSBC, British Gas).
-    type: string  
+    type: string
   summary_period_start:
     description: This property provides the summary period start date.
     type: string

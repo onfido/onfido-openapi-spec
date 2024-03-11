@@ -1,103 +1,103 @@
-  checks:
-    get:
-      summary: Retrieve Checks
-      operationId: list_checks
-      parameters:
-        - name: applicant_id
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: An array of checks
-          content:
-            application/json:
-              schema:
-                type: object
-                title: Checks list
-                required:
-                  - checks
-                properties:
-                  checks:
-                    type: array
-                    items:
-                      $ref: ../schemas/checks/check.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-    post:
-      summary: Create a check
-      operationId: create_check
-      requestBody:
+checks:
+  get:
+    summary: Retrieve Checks
+    operationId: list_checks
+    parameters:
+      - name: applicant_id
+        in: query
         required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: An array of checks
         content:
           application/json:
             schema:
-              $ref: ../schemas/checks/check_builder.yaml
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/checks/check.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+              type: object
+              title: Checks list
+              required:
+                - checks
+              properties:
+                checks:
+                  type: array
+                  items:
+                    $ref: ../schemas/checks/check.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-  check:
-    get:
-      summary: Retrieve a Check
-      operationId: find_check
-      parameters:
-        - name: check_id
-          in: path
-          required: true
+  post:
+    summary: Create a check
+    operationId: create_check
+    requestBody:
+      required: true
+      content:
+        application/json:
           schema:
-            type: string
-      responses:
-        "200":
-          description: Check object
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/checks/check.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+            $ref: ../schemas/checks/check_builder.yaml
+    responses:
+      "201":
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/checks/check.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-  resume:
-    post:
-      summary: Resume a Check
-      operationId: resume_check
-      parameters:
-        - name: check_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          $ref: ../responses/default_error.yaml
+check:
+  get:
+    summary: Retrieve a Check
+    operationId: find_check
+    parameters:
+      - name: check_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Check object
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/checks/check.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-  download:
-    get:
-      summary: Download raw data for a check
-      operationId: download_check
-      parameters:
-        - name: check_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: The check PDF binary data
-          content:
-            application/pdf:
-              schema:
-                type: string
-                format: binary
-        default:
-          $ref: ../responses/default_error.yaml
+resume:
+  post:
+    summary: Resume a Check
+    operationId: resume_check
+    parameters:
+      - name: check_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "204":
+        description: No Content
+      default:
+        $ref: ../responses/default_error.yaml
+
+download:
+  get:
+    summary: Download raw data for a check
+    operationId: download_check
+    parameters:
+      - name: check_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: The check PDF binary data
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+      default:
+        $ref: ../responses/default_error.yaml

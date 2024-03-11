@@ -24,4 +24,3 @@ properties:
   digital_document:
     type: string
     description: When a document has been published digitally, there aren't enough security features to review so we cannot perform a full fraud assessment.
-

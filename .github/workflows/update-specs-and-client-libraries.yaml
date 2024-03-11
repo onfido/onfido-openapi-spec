@@ -26,6 +26,15 @@ on:
         default: false
         type: boolean
 jobs:
+  validate_input_specs:
+    name: Validate multi file specification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate OpenAPI Specification YAML
+        run: |
+          npm install prettier
+          npx prettier -c openapi.yaml paths/*.yaml schemas/**/*.yaml responses/**/*.yaml
   generate_specs_and_libraries:
     name: Build single-file OpenAPI specifications and client libraries
     runs-on: ubuntu-latest
@@ -114,17 +123,33 @@ jobs:
         run: |
           grep Onfido generated/artifacts/${{ matrix.generator }}/LICENSE
 
-          rsync -r --delete-after --exclude='/.git*' \
+          rsync -r --delete-after --exclude='/.git*' --exclude='CHANGELOG*' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
 
           ${{ matrix.preCommit }}
 
           grep Onfido LICENSE
-          echo any_change=$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//') >> $GITHUB_OUTPUT
+
+          if [ "$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//')" != "" ];
+          then
+            if [ -f CHANGELOG ];
+            then
+              git mv CHANGELOG CHANGELOG.md
+            fi
+
+            if [ -f CHANGELOG.md ];
+            then
+              TMP_FILE=$(mktemp)
+              ( echo "# Changelog"; echo;
+                echo "## v${{ matrix.version }} `date +'%dth %B %Y' | sed -E 's/^([2,3]?)1th/\11st/;s/^([2]?)2th/\12nd/;s/^([2]?)3th/\13rd/'`";
+                grep -v "^# Changelog" CHANGELOG.md ) >| $TMP_FILE
+                mv $TMP_FILE CHANGELOG.md
+            fi
+          fi
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
-        if: ${{ matrix.update && steps.generator.outputs.any_change }}
+        if: ${{ matrix.update }}
         with:
             token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
             commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}

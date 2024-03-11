@@ -1,25 +1,25 @@
-  extractions:
-    post:
-      summary: Extract information from a document
-      operationId: extract
-      requestBody:
-        required: true
+extractions:
+  post:
+    summary: Extract information from a document
+    operationId: extract
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - document_id
+            properties:
+              document_id:
+                type: string
+                description: The unique identifier of the uploaded document to run extraction on
+    responses:
+      "201":
+        description: Extraction result
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - document_id
-              properties:
-                document_id:
-                  type: string
-                  description: The unique identifier of the uploaded document to run extraction on
-      responses:
-        "201":
-          description: Extraction result
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/extractions/extraction.yaml
-        default:
-          $ref: ../responses/document_extraction_error.yaml
+              $ref: ../schemas/extractions/extraction.yaml
+      default:
+        $ref: ../responses/document_extraction_error.yaml
