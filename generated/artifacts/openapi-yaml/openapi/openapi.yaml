@@ -1120,6 +1120,22 @@ paths:
           description: Unexpected error
       summary: List webhooks
     post:
+      callbacks:
+        webhookEvent:
+          '{$request.body#/url}':
+            post:
+              operationId: webhookEvent_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/webhook_event'
+                required: true
+              responses:
+                default:
+                  description: Your server should acknowledge success by responding
+                    with an HTTP 20x response within 10 seconds.
+              x-callback-request: true
       operationId: create_webhook
       requestBody:
         content:
@@ -1194,7 +1210,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhook'
+              $ref: '#/components/schemas/webhook_updater'
         required: true
       responses:
         "200":
@@ -1865,25 +1881,31 @@ components:
         - environments
         id: id
         href: href
-        url: url
         enabled: true
         events:
-        - audit_log.created
-        - audit_log.created
+        - null
+        - null
+        url: url
         token: token
     webhook_builder:
       allOf:
       - $ref: '#/components/schemas/webhook_shared'
+      - $ref: '#/components/schemas/webhook_create'
+    webhook_event:
+      properties:
+        payload:
+          $ref: '#/components/schemas/webhook_event_payload'
+      type: object
+    webhook_updater:
+      allOf:
+      - $ref: '#/components/schemas/webhook_shared'
+      - $ref: '#/components/schemas/webhook_update'
     webhook_resend:
       properties:
         data:
           items:
             $ref: '#/components/schemas/webhook_resend_data_inner'
           type: array
-      required:
-      - event
-      - resource_id
-      - resource_type
       type: object
     address:
       allOf:
@@ -2376,9 +2398,6 @@ components:
       type: object
     webhook_shared:
       properties:
-        url:
-          description: The url that will listen to notifications (must be https).
-          type: string
         enabled:
           description: Determine if the webhook is active.
           type: boolean
@@ -2386,23 +2405,7 @@ components:
           description: |
             The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.
           items:
-            enum:
-            - audit_log.created
-            - watchlist_monitor.matches_updated
-            - workflow_run.completed
-            - workflow_task.started
-            - workflow_task.completed
-            - check.started
-            - check.reopened
-            - check.withdrawn
-            - check.completed
-            - check.form_completed
-            - report.withdrawn
-            - report.resumed
-            - report.cancelled
-            - report.awaiting_approval
-            - report.completed
-            type: string
+            $ref: '#/components/schemas/webhook_event_type'
           type: array
         environments:
           description: |
@@ -2414,13 +2417,32 @@ components:
           description: Webhook version used to control the payload object when sending
             webhooks.
           type: integer
-      required:
-      - url
       type: object
+    webhook_event_type:
+      enum:
+      - audit_log.created
+      - watchlist_monitor.matches_updated
+      - workflow_run.completed
+      - workflow_task.started
+      - workflow_task.completed
+      - check.started
+      - check.reopened
+      - check.withdrawn
+      - check.completed
+      - check.form_completed
+      - report.withdrawn
+      - report.resumed
+      - report.cancelled
+      - report.awaiting_approval
+      - report.completed
+      type: string
     webhook_response:
       properties:
         id:
           description: The unique identifier of the webhook.
+          type: string
+        url:
+          description: The url that will listen to notifications (must be https).
           type: string
         token:
           description: Webhook secret token used to sign the webhook's payload.
@@ -2431,6 +2453,21 @@ components:
       required:
       - id
       type: object
+    webhook_url:
+      description: The url that will listen to notifications (must be https).
+      type: string
+    webhook_create:
+      properties:
+        url:
+          description: The url that will listen to notifications (must be https).
+          type: string
+      required:
+      - url
+    webhook_update:
+      properties:
+        url:
+          description: The url that will listen to notifications (must be https).
+          type: string
     address_shared:
       properties:
         flat_number:
@@ -4562,11 +4599,11 @@ components:
           - environments
           id: id
           href: href
-          url: url
           enabled: true
           events:
-          - audit_log.created
-          - audit_log.created
+          - null
+          - null
+          url: url
           token: token
         - payload_version: 0
           environments:
@@ -4574,11 +4611,11 @@ components:
           - environments
           id: id
           href: href
-          url: url
           enabled: true
           events:
-          - audit_log.created
-          - audit_log.created
+          - null
+          - null
+          url: url
           token: token
       properties:
         webhooks:
@@ -5349,6 +5386,49 @@ components:
       - reports
       title: Reports list
       type: object
+    webhook_event_payload_object:
+      description: The object affected by this event.
+      properties:
+        id:
+          description: The unique identifier of the resource.
+          type: string
+        status:
+          description: "The current state of the object, if available."
+          example: complete
+          type: string
+        completed_at_iso8601:
+          description: "The date and time when the operation was completed, if available."
+          example: 2019-10-28T15:00:39Z
+          format: date-time
+          type: string
+        href:
+          description: The uri of the resource.
+          type: string
+      required:
+      - href
+      - id
+      type: object
+    webhook_event_payload:
+      properties:
+        resource_type:
+          description: Indicates the resource affected by this event.
+          type: string
+        action:
+          allOf:
+          - $ref: '#/components/schemas/webhook_event_type'
+          description: The event that triggered this webhook.
+          example: report.completed
+          type: string
+        object:
+          $ref: '#/components/schemas/webhook_event_payload_object'
+        resource:
+          description: The resource affected by this event.
+          type: object
+      required:
+      - event
+      - resource_id
+      - resource_type
+      type: object
     webhook_resend_data_inner:
       properties:
         resource_type:
@@ -5362,6 +5442,10 @@ components:
           enum:
           - check.completed
           type: string
+      required:
+      - event
+      - resource_id
+      - resource_type
       type: object
     repeat_attempts_repeat_attempts_inner:
       example:
