@@ -1,5 +1,3 @@
-required:
-  - applicant_id
 allOf:
   - $ref: definitions.yaml#/check_shared
-  - $ref: definitions.yaml#/write_only
+  - $ref: definitions.yaml#/check_request

@@ -1,4 +1,7 @@
 report_shared:
+  required:
+    - id
+    - name
   properties:
     id:
       type: string

@@ -35,7 +35,7 @@ jobs:
       image: openapitools/openapi-generator-cli:v7.3.0
       env:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
-        BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change || 'Minor' }}
+        BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
     steps:
       - uses: actions/checkout@v4
       - name: Install pre-requisites
@@ -52,6 +52,7 @@ jobs:
         id: generator
         run: |
           ./shell/generate.sh
+          grep Onfido generated/artifacts/typescript-axios/LICENSE
       - name: Store generated artifacts and finalization scripts
         uses: actions/upload-artifact@v4
         with:
@@ -111,12 +112,15 @@ jobs:
         if: ${{ matrix.update }}
         id: generator
         run: |
+          grep Onfido generated/artifacts/${{ matrix.generator }}/LICENSE
+
           rsync -r --delete-after --exclude='/.git*' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
 
           ${{ matrix.preCommit }}
 
+          grep Onfido LICENSE
           echo any_change=$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//') >> $GITHUB_OUTPUT
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
@@ -124,8 +128,10 @@ jobs:
         with:
             token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
             commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
-            title: Releasing ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
+            title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
             body: |
               - Auto-generated PR
+            labels: |
+              automated pr
 
             branch: release-upgrade

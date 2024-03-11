@@ -1,5 +1,3 @@
-required:
-  - id
 allOf:
   - $ref: definitions.yaml#/check_shared
-  - $ref: definitions.yaml#/read_only
+  - $ref: definitions.yaml#/check_response

@@ -1,5 +1,7 @@
 check_shared:
   type: object
+  required:
+    - applicant_id
   properties:
     webhook_ids:
       description: An array of webhook ids describing which webhooks to trigger for this check.
@@ -22,7 +24,7 @@ check_shared:
       type: string
       description: For checks where `applicant_provides_data` is `true`, redirect to this URI when the applicant has submitted their data.
 
-write_only:
+check_request:
   type: object
   properties:
     report_names:
@@ -56,8 +58,10 @@ write_only:
       additionalProperties: true
       description: An object that contains all accepted fields for the Driver's License Data Verification report.
 
-read_only:
+check_response:
   type: object
+  required:
+    - id
   properties:
     id:
       type: string

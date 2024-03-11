@@ -1,5 +1,7 @@
 webhook_shared:
   type: object
+  required:
+    - url
   properties:
     url:
       type: string
@@ -44,6 +46,8 @@ webhook_shared:
 
 webhook_response:
   type: object
+  required:
+    - id
   properties:
     id:
       type: string

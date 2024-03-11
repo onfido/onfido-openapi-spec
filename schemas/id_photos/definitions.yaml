@@ -11,6 +11,8 @@ id_photo_request:
 
 id_photo_response:
   type: object
+  required:
+    - id
   properties:
     id:
       type: string

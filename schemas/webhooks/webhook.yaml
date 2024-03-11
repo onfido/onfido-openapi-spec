@@ -1,6 +1,3 @@
-required:
-  - id
-  - url
 allOf:
   - $ref: definitions.yaml#/webhook_shared
   - $ref: definitions.yaml#/webhook_response
