@@ -7,6 +7,8 @@ try {
   // We throw an error when verifying webhooks instead.
 }
 
+import { WebhookEvent } from "./model/webhook-event";
+
 export class OnfidoInvalidSignatureError extends Error {}
 
 export class WebhookEventVerifier {
@@ -16,10 +18,7 @@ export class WebhookEventVerifier {
     this.webhookToken = webhookToken;
   }
 
-  public readPayload(
-    rawEventBody: string | Buffer,
-    hexSignature: string
-  ) {
+  public readPayload(rawEventBody: string | Buffer, hexSignature: string) {
     if (!crypto) {
       throw new Error("Verifying webhook events requires crypto support");
     }
@@ -33,10 +32,11 @@ export class WebhookEventVerifier {
 
     // Use timingSafeEqual to prevent against timing attacks.
     if (!crypto.timingSafeEqual(givenSignature, eventSignature)) {
-      throw new OnfidoInvalidSignatureError("Invalid signature for webhook event");
+      throw new OnfidoInvalidSignatureError(
+        "Invalid signature for webhook event"
+      );
     }
 
-    const { payload } = JSON.parse(rawEventBody.toString());
-    return payload;
+    return JSON.parse(rawEventBody.toString()) as WebhookEvent;
   }
 }
