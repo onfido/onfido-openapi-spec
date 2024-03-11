@@ -71,7 +71,7 @@
         content:
           application/json:
             schema:
-              $ref: ../schemas/webhooks/webhook.yaml
+              $ref: ../schemas/webhooks/webhook_builder.yaml
       responses:
         "200":
           description: Webhook Object
