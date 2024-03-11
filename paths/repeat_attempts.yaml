@@ -1,19 +1,19 @@
-  repeat_attempts:
-    get:
-      summary: Returns all repeat attempts for a given Document report.
-      operationId: list_repeat_attempts
-      parameters:
-        - name: report_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Repeat attempts object
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/repeat_attempts/repeat_attempts.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+repeat_attempts:
+  get:
+    summary: Returns all repeat attempts for a given Document report.
+    operationId: list_repeat_attempts
+    parameters:
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Repeat attempts object
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/repeat_attempts/repeat_attempts.yaml
+      default:
+        $ref: ../responses/default_error.yaml

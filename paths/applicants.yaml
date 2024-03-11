@@ -1,141 +1,141 @@
-  applicants:
-    post:
-      summary: Create Applicant
-      operationId: create_applicant
-      requestBody:
-        required: true
+applicants:
+  post:
+    summary: Create Applicant
+    operationId: create_applicant
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/applicants/applicant_builder.yaml
+    responses:
+      "201":
+        description: Created
         content:
           application/json:
             schema:
-              $ref: ../schemas/applicants/applicant_builder.yaml
-      responses:
-        "201":
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/applicants/applicant.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+              $ref: ../schemas/applicants/applicant.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-    get:
-      summary: List Applicants
-      operationId: list_applicants
-      parameters:
-        - name: page
-          in: query
-          description: The page to return. The first page is `page=1`
-          schema:
-            type: integer
-            default: 1
-        - name: per_page
-          in: query
-          description: The number of objects per page.
-          schema:
-            type: integer
-            default: 20
-        - name: include_deleted
-          in: query
-          description: Whether to also include applicants scheduled for deletion.
-          schema:
-            type: boolean
-            default: false
-      responses:
-        "200":
-          description: A list of applicants
-          content:
-            application/json:
-              schema:
-                type: object
-                title: Applicants list
-                required:
-                  - applicants
-                properties:
-                  applicants:
-                    type: array
-                    items:
-                      $ref: ../schemas/applicants/applicant.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-  applicant:
-    get:
-      summary: Retrieve Applicant
-      operationId: find_applicant
-      parameters:
-        - name: applicant_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Applicant object
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/applicants/applicant.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-    put:
-      summary: Update Applicant
-      description: >
-        Allows updating applicant's information before any checks is created.
-
-        - Partial updates
-        - Addresses and ID numbers present will replace existing ones
-        - Same applicant validations to create applicant
-      operationId: update_applicant
-      parameters:
-        - name: applicant_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
+  get:
+    summary: List Applicants
+    operationId: list_applicants
+    parameters:
+      - name: page
+        in: query
+        description: The page to return. The first page is `page=1`
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        description: The number of objects per page.
+        schema:
+          type: integer
+          default: 20
+      - name: include_deleted
+        in: query
+        description: Whether to also include applicants scheduled for deletion.
+        schema:
+          type: boolean
+          default: false
+    responses:
+      "200":
+        description: A list of applicants
         content:
           application/json:
             schema:
-              $ref: ../schemas/applicants/applicant_builder.yaml
-      responses:
-        "200":
-          description: Applicant Object
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/applicants/applicant.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+              type: object
+              title: Applicants list
+              required:
+                - applicants
+              properties:
+                applicants:
+                  type: array
+                  items:
+                    $ref: ../schemas/applicants/applicant.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-    delete:
-      summary: Delete Applicant
-      operationId: delete_applicant
-      parameters:
-        - name: applicant_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          $ref: ../responses/default_error.yaml
+applicant:
+  get:
+    summary: Retrieve Applicant
+    operationId: find_applicant
+    parameters:
+      - name: applicant_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Applicant object
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/applicants/applicant.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-  restore:
-    post:
-      summary: Restore Applicant
-      operationId: restore_applicant
-      parameters:
-        - name: applicant_id
-          in: path
-          required: true
+  put:
+    summary: Update Applicant
+    description: >
+      Allows updating applicant's information before any checks is created.
+
+      - Partial updates
+      - Addresses and ID numbers present will replace existing ones
+      - Same applicant validations to create applicant
+    operationId: update_applicant
+    parameters:
+      - name: applicant_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
           schema:
-            type: string
-      responses:
-        "204":
-          description: No Content
-        default:
-          $ref: ../responses/default_error.yaml
+            $ref: ../schemas/applicants/applicant_builder.yaml
+    responses:
+      "200":
+        description: Applicant Object
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/applicants/applicant.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Delete Applicant
+    operationId: delete_applicant
+    parameters:
+      - name: applicant_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "204":
+        description: No Content
+      default:
+        $ref: ../responses/default_error.yaml
+
+restore:
+  post:
+    summary: Restore Applicant
+    operationId: restore_applicant
+    parameters:
+      - name: applicant_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      "204":
+        description: No Content
+      default:
+        $ref: ../responses/default_error.yaml

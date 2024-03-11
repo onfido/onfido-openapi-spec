@@ -84,4 +84,3 @@ properties:
                     type: number
                     format: float
                     description: A floating point number between 0 and 1. The closer the score is to 0, the more likely it is to be a spoof.
-

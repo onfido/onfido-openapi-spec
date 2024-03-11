@@ -65,7 +65,7 @@ properties:
             description: The browser name reported by the browser's user agent.
           emulator:
             type: boolean
-            description:  Whether the device is an emulator.
+            description: Whether the device is an emulator.
           randomized_device:
             type: boolean
             description: Whether the device is providing false randomized device and network information.

@@ -1,95 +1,95 @@
-  id_photos:
-    get:
-      summary: List ID photos
-      operationId: list_id_photos
-      parameters:
-        - name: applicant_id
-          in: query
-          required: true
-          description: The id of the applicant the ID photos belong to.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: An array of ID photos
-          content:
-            application/json:
-              schema:
-                type: object
-                title: ID Photos list
-                required:
-                  - id_photos
-                properties:
-                  id_photos:
-                    type: array
-                    items:
-                      $ref: ../schemas/id_photos/id_photo.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-    post:
-      summary: Upload ID photo
-      operationId: upload_id_photo
-      description: >
-        You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form.
-        Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
-      requestBody:
+id_photos:
+  get:
+    summary: List ID photos
+    operationId: list_id_photos
+    parameters:
+      - name: applicant_id
+        in: query
         required: true
+        description: The id of the applicant the ID photos belong to.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: An array of ID photos
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              $ref: ../schemas/id_photos/id_photo_uploader.yaml
+              type: object
+              title: ID Photos list
+              required:
+                - id_photos
+              properties:
+                id_photos:
+                  type: array
+                  items:
+                    $ref: ../schemas/id_photos/id_photo.yaml
+      default:
+        $ref: ../responses/default_error.yaml
 
-      responses:
-        "201":
-          description: The ID photo
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/id_photos/id_photo.yaml
-        default:
-          $ref: ../responses/default_error.yaml
-
-  id_photo:
-    get:
-      summary: Retrieve ID photo
-      operationId: find_id_photo
-      parameters:
-        - name: id_photo_id
-          in: path
-          required: true
-          description: The ID photo's unique identifier.
+  post:
+    summary: Upload ID photo
+    operationId: upload_id_photo
+    description: >
+      You can upload ID photos to this endpoint. Like document upload, files must be uploaded as a multipart form.
+      Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB.
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
           schema:
-            type: string
-      responses:
-        "200":
-          description: A ID photo
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/id_photos/id_photo.yaml
-        default:
-          $ref: ../responses/default_error.yaml
+            $ref: ../schemas/id_photos/id_photo_uploader.yaml
 
-  download:
-    get:
-      summary: Download ID photo
-      description: ID photos are downloaded using this endpoint.
-      operationId: download_id_photo
-      parameters:
-        - name: id_photo_id
-          in: path
-          required: true
-          description: The ID photo's unique identifier.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: The ID photo's binary data.
-          content:
-            "*/*":
-              schema:
-                type: string
-                format: binary
-        default:
-          $ref: ../responses/default_error.yaml
+    responses:
+      "201":
+        description: The ID photo
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/id_photos/id_photo.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+id_photo:
+  get:
+    summary: Retrieve ID photo
+    operationId: find_id_photo
+    parameters:
+      - name: id_photo_id
+        in: path
+        required: true
+        description: The ID photo's unique identifier.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: A ID photo
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/id_photos/id_photo.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+download:
+  get:
+    summary: Download ID photo
+    description: ID photos are downloaded using this endpoint.
+    operationId: download_id_photo
+    parameters:
+      - name: id_photo_id
+        in: path
+        required: true
+        description: The ID photo's unique identifier.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: The ID photo's binary data.
+        content:
+          "*/*":
+            schema:
+              type: string
+              format: binary
+      default:
+        $ref: ../responses/default_error.yaml
