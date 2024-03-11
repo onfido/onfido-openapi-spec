@@ -15,23 +15,7 @@ webhook_shared:
         The events that will be published to the webhook.
         If the events parameter is omitted all the events will be subscribed.
       items:
-        enum:
-          - audit_log.created
-          - watchlist_monitor.matches_updated
-          - workflow_run.completed
-          - workflow_task.started
-          - workflow_task.completed
-          - check.started
-          - check.reopened
-          - check.withdrawn
-          - check.completed
-          - check.form_completed
-          - report.withdrawn
-          - report.resumed
-          - report.cancelled
-          - report.awaiting_approval
-          - report.completed
-        type: string
+        $ref: "#/webhook_event_type"
     environments:
       type: array
       description: >
@@ -58,3 +42,22 @@ webhook_response:
     href:
       type: string
       description: The API endpoint to retrieve the webhook.
+
+webhook_event_type:
+  enum:
+    - audit_log.created
+    - watchlist_monitor.matches_updated
+    - workflow_run.completed
+    - workflow_task.started
+    - workflow_task.completed
+    - check.started
+    - check.reopened
+    - check.withdrawn
+    - check.completed
+    - check.form_completed
+    - report.withdrawn
+    - report.resumed
+    - report.cancelled
+    - report.awaiting_approval
+    - report.completed
+  type: string

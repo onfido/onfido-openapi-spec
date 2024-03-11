@@ -36,6 +36,19 @@ webhooks:
               $ref: ../schemas/webhooks/webhook.yaml
       default:
         $ref: ../responses/default_error.yaml
+    callbacks:
+      webhookEvent:
+        "{$request.body#/url}":
+          post:
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    $ref: ../schemas/webhooks/webhook_event.yaml
+            responses:
+              default:
+                description: Your server should acknowledge success by responding with an HTTP 20x response within 10 seconds.
 
 webhook:
   get:

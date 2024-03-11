@@ -1,0 +1,31 @@
+type: object
+properties:
+  payload:
+    type: object
+    required:
+      - resource_type
+      - resource_id
+      - event
+    properties:
+      resource_type:
+        type: string
+        description: Indicates the resource affected by this event.
+      action:
+        type: string
+        allOf:
+          - $ref: definitions.yaml#/webhook_event_type
+        description: The event that triggered this webhook.
+        example: report.completed
+      object:
+        type: object
+        required:
+          - id
+          - href
+        description: The events that should retrigger webhooks. Accepts values check.completed.
+        properties:
+          id:
+            description: The unique identifier of the resource.
+            type: string
+          href:
+            description: The uri of the resource.
+            type: string
