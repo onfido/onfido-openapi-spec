@@ -5,13 +5,9 @@ properties:
     items:
       type: object
       required:
-        - resource_type
         - resource_id
         - event
       properties:
-        resource_type:
-          type: string
-          description: Type of resource to retrigger webhooks. Accepts values check.
         resource_id:
           type: string
           description: ID of the resource whose webhooks are to be retriggered.
