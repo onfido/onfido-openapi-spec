@@ -69,6 +69,8 @@ webhook_event_type:
     - report.cancelled
     - report.awaiting_approval
     - report.completed
+    - workflow_timeline_file.created
+    - workflow_signed_evidence_file.created
   type: string
 
 webhook_url:

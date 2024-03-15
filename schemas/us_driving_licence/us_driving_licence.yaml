@@ -1,0 +1,3 @@
+allOf:
+  - $ref: definitions.yaml#/us_driving_licence_shared
+  - $ref: definitions.yaml#/us_driving_licence_response

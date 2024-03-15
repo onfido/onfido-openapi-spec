@@ -13,6 +13,8 @@ properties:
         description: Document country in 3-letter ISO code.
       document_type:
         type: string
+        allOf:
+          - $ref: ../document_types/document_types.yaml
         description: Type of document.
       issuing_state:
         type: string
@@ -108,6 +110,8 @@ properties:
       document_type:
         type: string
         description: Type of document.
+        allOf:
+          - $ref: ../document_types/document_types.yaml
       place_of_birth:
         type: string
         description: Place of birth.

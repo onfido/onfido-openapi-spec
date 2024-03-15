@@ -26,6 +26,8 @@ check_shared:
 
 check_request:
   type: object
+  required:
+    - report_names
   properties:
     report_names:
       description: An array of report names (strings).
@@ -37,6 +39,10 @@ check_request:
       type: array
       items:
         type: string
+    applicant_provides_data:
+      description: Send an applicant form to applicant to complete to proceed with check. Defaults to false.
+      type: boolean
+      default: false
     asynchronous:
       type: boolean
       description: >
@@ -48,15 +54,16 @@ check_request:
         For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`.
         You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object.
         Write-only. Defaults to false.
+    sub_result:
+      type: string
+      description: Triggers responses for particular sub-results for sandbox Document reports.
     consider:
       type: array
       items:
-        type: string
+        $ref: "#/report_name"
       description: Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing
     us_driving_licence:
-      type: object
-      additionalProperties: true
-      description: An object that contains all accepted fields for the Driver's License Data Verification report.
+      $ref: ../us_driving_licence/us_driving_licence_builder.yaml
 
 check_response:
   type: object

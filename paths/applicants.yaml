@@ -98,7 +98,7 @@ applicant:
       content:
         application/json:
           schema:
-            $ref: ../schemas/applicants/applicant_builder.yaml
+            $ref: ../schemas/applicants/applicant_updater.yaml
     responses:
       "200":
         description: Applicant Object

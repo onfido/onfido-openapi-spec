@@ -1,0 +1,27 @@
+enum:
+  - passport
+  - driving_licence
+  - national_identity_card
+  - residence_permit
+  - passport_card
+  - tax_id
+  - visa
+  - voter_id
+  - residence_status_document
+  - postal_identity_card
+  - social_security_card
+  - work_permit
+  - asylum_registration_card
+  - national_health_insurance_card
+  - municipality_identity_card
+  - private_operators_card
+  - proof_of_citizenship
+  - service_id_card
+  - immigration_status_document
+  - indigenous_card
+  - vehicle_registration_card
+  - certificate_of_naturalisation
+  - professional_qualification_card
+  - consular_id
+  - international_driving_licence
+type: string
