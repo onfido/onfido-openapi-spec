@@ -70,10 +70,3 @@ report_shared:
         - device_intelligence
         - india_pan
       description: The name of the report type.
-    breakdown:
-      type: object
-      description: The details of the report. This is specific to each type of report.
-    properties:
-      type: object
-      additionalProperties: true
-      description: The properties associated with the report, if any. Read-only.
