@@ -7,6 +7,8 @@ apiPackage: com.onfido.api
 modelPackage: com.onfido.model
 library: jersey2
 enumUnknownDefaultCase: true
+licenseName: MIT
+useOneOfDiscriminatorLookup: true
 additionalModelTypeAnnotations: | # https://github.com/OpenAPITools/openapi-generator/issues/10645
   @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
 files:
