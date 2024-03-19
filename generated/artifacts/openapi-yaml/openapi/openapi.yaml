@@ -5431,9 +5431,6 @@ components:
       type: object
     webhook_resend_data_inner:
       properties:
-        resource_type:
-          description: Type of resource to retrigger webhooks. Accepts values check.
-          type: string
         resource_id:
           description: ID of the resource whose webhooks are to be retriggered.
           type: string
@@ -5445,7 +5442,6 @@ components:
       required:
       - event
       - resource_id
-      - resource_type
       type: object
     repeat_attempts_repeat_attempts_inner:
       example:
