@@ -3,9 +3,17 @@ properties:
   id:
     type: string
     description: The identifier for the Task.
+  workflow_run_id:
+    type: string
+    format: uuid
+    description: The workflow run id the task belongs to.
   task_def_id:
     type: string
     description: The identifier for the Task Definition.
+  task_def_version:
+    type: string
+    nullable: true
+    description: The task definition version.
   input:
     type: object
     description: Input object with the fields used by the Task to execute.
