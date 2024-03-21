@@ -151,7 +151,7 @@ signed_evidence_file:
 task:
   get:
     summary: A single task can be retrieved by calling this endpoint with the unique identifier of the Task and Workflow Run.
-    operationId: retrieve_task
+    operationId: find_task
     parameters:
       - name: workflow_run_id
         in: path

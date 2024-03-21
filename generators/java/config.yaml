@@ -6,6 +6,7 @@ invokerPackage: com.onfido
 apiPackage: com.onfido.api
 modelPackage: com.onfido.model
 library: jersey2
+httpUserAgent: onfido-node/${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
 licenseName: MIT
 useOneOfDiscriminatorLookup: true
