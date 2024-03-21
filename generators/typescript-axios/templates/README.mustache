@@ -64,11 +64,6 @@ Using with `async`/`await` (in an `async function`):
       },
     });
 
-    const check = await onfido.createCheck({
-      applicant_id: applicant.data.id,
-      report_names: ["identity_enhanced"],
-    });
-
     // ...
 
     // Webhook verification
@@ -146,6 +141,11 @@ For some common types of streams, like instances of `fs.ReadStream`, you can pro
 ```js
 onfido.uploadDocument("passport", "<APPLICANT_ID>", fs.createReadStream("path/to/passport.png"));
 ```
+
+## Contributing
+
+This library is automatically generated using [OpenAPI Generator](https://openapi-generator.tech);
+therefore all the contributions, except tests files, should target [Onfido OpenAPI specification repository](https://github.com/onfido/onfido-openapi-spec/tree/master) instead of this repository.
 
 ## More documentation
 
