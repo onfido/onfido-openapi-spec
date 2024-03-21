@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Don't carry on when any command fails
+set -e
+
 if [ $# -lt 1 ];
 then
   echo "Usage: $0 client-lib-name [generator-name]"

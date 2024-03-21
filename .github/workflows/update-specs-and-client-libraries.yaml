@@ -5,14 +5,14 @@ on:
     branches:
       - master
     paths-ignore:
-      - 'generated/artifacts/**'
+      - "generated/artifacts/**"
   pull_request:
     branches:
       - master
   workflow_dispatch:
     inputs:
       type-of-change:
-        description: 'Type of change?'
+        description: "Type of change?"
         required: true
         default: Patch
         type: choice
@@ -21,12 +21,12 @@ on:
           - Minor
           - Patch
       update-onfido-java:
-        description: 'Update onfido-java?'
+        description: "Update onfido-java?"
         required: true
         default: false
         type: boolean
       update-onfido-node:
-        description: 'Update onfido-node?'
+        description: "Update onfido-node?"
         required: true
         default: false
         type: boolean
@@ -37,11 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate OpenAPI Specification YAML
-        run: |
-          npm install prettier
-          npx prettier -c openapi.yaml paths/*.yaml schemas/**/*.yaml responses/**/*.yaml \
-                          generators/**/config.yaml
-          npx prettier -c --parser markdown generators/*/templates/README.mustache
+        run: ./shell/run-prettier.sh check
   generate_specs_and_libraries:
     name: Build single-file OpenAPI specifications and client libraries
     runs-on: ubuntu-latest
@@ -166,12 +162,12 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         if: ${{ matrix.update }}
         with:
-            token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
-            commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
-            title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
-            body: |
-              - Auto-generated PR
-            labels: |
-              automated pr
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
+          commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
+          title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
+          body: |
+            - Auto-generated PR
+          labels: |
+            automated pr
 
-            branch: release-upgrade
+          branch: release-upgrade
