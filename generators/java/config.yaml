@@ -14,3 +14,7 @@ additionalModelTypeAnnotations: | # https://github.com/OpenAPITools/openapi-gene
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
+  WebhookEventVerifier.mustache:
+    destinationFilename: src/main/java/com/onfido/WebhookEventVerifier.java
+  OnfidoInvalidSignatureError.mustache:
+    destinationFilename: src/main/java/com/onfido/OnfidoInvalidSignatureError.java
