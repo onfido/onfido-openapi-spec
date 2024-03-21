@@ -27,15 +27,24 @@ yarn add @onfido/api
 Require the package:
 
 ```js
-const { DefaultApi, Configuration, WebhookEventVerifier } = require("@onfido/api");
-const { isAxiosError } = require('axios');
+const {
+  DefaultApi,
+  Configuration,
+  WebhookEventVerifier,
+} = require("@onfido/api");
+const { isAxiosError } = require("axios");
 ```
 
 For TypeScript users, types are available as well:
 
 ```ts
-import { DefaultApi, Configuration, Region, WebhookEventVerifier } from "@onfido/api";
-import { isAxiosError } from 'axios';
+import {
+  DefaultApi,
+  Configuration,
+  Region,
+  WebhookEventVerifier,
+} from "@onfido/api";
+import { isAxiosError } from "axios";
 ```
 
 Configure with your API token and region:
@@ -46,7 +55,7 @@ const onfido = new DefaultApi(
     apiToken: process.env.ONFIDO_API_TOKEN,
     region: Region.EU, // Supports Region.EU, Region.US and Region.CA
     baseOptions: { timeout: 30_000 }, // Additional Axios options (timeout, etc.)
-  })
+  }),
 );
 ```
 
@@ -125,7 +134,7 @@ File downloads, for example `onfido.downloadDocument(documentId, {responseType: 
 These objects will have a content type, e.g. `image/png`.
 
 ```js
-download.headers['content-type'];
+download.headers["content-type"];
 ```
 
 Call `slice()` to get a `Blob` of the download:
@@ -139,7 +148,11 @@ const blob = download.data.slice();
 For some common types of streams, like instances of `fs.ReadStream`, you can provide the stream directly:
 
 ```js
-onfido.uploadDocument("passport", "<APPLICANT_ID>", fs.createReadStream("path/to/passport.png"));
+onfido.uploadDocument(
+  "passport",
+  "<APPLICANT_ID>",
+  fs.createReadStream("path/to/passport.png"),
+);
 ```
 
 ## Contributing

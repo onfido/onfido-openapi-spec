@@ -41,6 +41,7 @@ jobs:
           npm install prettier
           npx prettier -c openapi.yaml paths/*.yaml schemas/**/*.yaml responses/**/*.yaml \
                           generators/**/config.yaml
+          npx prettier -c --parser markdown generators/*/templates/README.mustache
   generate_specs_and_libraries:
     name: Build single-file OpenAPI specifications and client libraries
     runs-on: ubuntu-latest
