@@ -13,6 +13,7 @@ extractions:
             properties:
               document_id:
                 type: string
+                format: uuid
                 description: The unique identifier of the uploaded document to run extraction on
     responses:
       "201":

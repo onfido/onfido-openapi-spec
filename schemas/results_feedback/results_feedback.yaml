@@ -8,9 +8,11 @@ properties:
     description: The expected result for the check or report.
   check_id:
     type: string
+    format: uuid
     description: The ID of the check (only if report_id is not provided).
   report_id:
     type: string
+    format: uuid
     description: The ID of the check (only if check_id is not provided).
   feedback_notes:
     type: string

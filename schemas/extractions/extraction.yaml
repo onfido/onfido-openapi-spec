@@ -2,6 +2,7 @@ type: object
 properties:
   document_id:
     type: string
+    format: uuid
     description: The unique identifier of the uploaded document.
   document_classification:
     type: object

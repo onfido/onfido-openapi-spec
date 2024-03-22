@@ -2,10 +2,10 @@ type: object
 properties:
   id:
     type: string
+    format: uuid
     description: The identifier for the Task.
   task_def_id:
-    type: string
-    description: The identifier for the Task Definition.
+    $ref: definitions.yaml#/task_def_id
   input:
     type: object
     description: Input object with the fields used by the Task to execute.

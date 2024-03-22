@@ -10,6 +10,7 @@ check_shared:
         type: string
     applicant_id:
       type: string
+      format: uuid
       description: The ID of the applicant to do the check on.
     applicant_provides_data:
       type: boolean
@@ -39,6 +40,7 @@ check_request:
       type: array
       items:
         type: string
+        format: uuid
     applicant_provides_data:
       description: Send an applicant form to applicant to complete to proceed with check. Defaults to false.
       type: boolean
@@ -72,6 +74,7 @@ check_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier for the check.
     created_at:
       type: string
@@ -107,6 +110,7 @@ check_response:
       type: array
       items:
         type: string
+        format: uuid
     sandbox:
       description: Indicates whether the object was created in the sandbox or not.
       type: boolean

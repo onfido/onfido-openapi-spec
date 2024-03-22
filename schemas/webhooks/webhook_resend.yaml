@@ -14,6 +14,7 @@ properties:
           description: Type of resource to retrigger webhooks. Accepts values check.
         resource_id:
           type: string
+          format: uuid
           description: ID of the resource whose webhooks are to be retriggered.
         event:
           type: string

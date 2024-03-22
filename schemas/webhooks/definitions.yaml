@@ -30,6 +30,7 @@ webhook_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier of the webhook.
     url:
       $ref: "#/webhook_url"

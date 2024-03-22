@@ -9,6 +9,7 @@ live_videos:
         description: The id of the applicant the live videos belong to.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of live videos
@@ -38,6 +39,7 @@ live_video:
         description: The live video's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A live video
@@ -60,6 +62,7 @@ download:
         description: The live video's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The live video's binary data.
@@ -83,6 +86,7 @@ frame:
         description: The live video's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The live video frame's binary data.

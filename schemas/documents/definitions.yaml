@@ -24,6 +24,7 @@ document_shared:
       description: The issuing country of the document, a 3-letter ISO code.
     applicant_id:
       type: string
+      format: uuid
       description: The ID of the applicant whose document is being uploaded.
 
 document_request:
@@ -46,6 +47,7 @@ document_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier for the document
     created_at:
       type: string

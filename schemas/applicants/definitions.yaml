@@ -37,6 +37,7 @@ applicant_response:
       $ref: "#/applicant_last_name"
     id:
       type: string
+      format: uuid
       description: The unique identifier for the applicant.
     created_at:
       type: string

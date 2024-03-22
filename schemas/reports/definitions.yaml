@@ -5,6 +5,7 @@ report_shared:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier for the report. Read-only.
     created_at:
       type: string
@@ -21,6 +22,7 @@ report_shared:
       $ref: "#/report_sub_result"
     check_id:
       type: string
+      format: uuid
       description: The ID of the check to which the report belongs. Read-only.
     documents:
       type: array

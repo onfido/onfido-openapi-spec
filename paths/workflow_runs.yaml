@@ -76,6 +76,7 @@ retrieve:
         description: The unique identifier of the Workflow Run.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A Workflow Run object.
@@ -97,6 +98,7 @@ tasks:
         description: The unique identifier of the Workflow Run to which the Tasks belong.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of subset Task objects that were already started or completed, ordered by the created_at field, in ascending order.
@@ -111,10 +113,10 @@ tasks:
                 properties:
                   id:
                     type: string
+                    format: uuid
                     description: The identifier for the Task.
                   task_def_id:
-                    type: string
-                    description: The identifier for the Task Definition.
+                    $ref: ../schemas/tasks/definitions.yaml#/task_def_id
                   created_at:
                     type: string
                     format: date-time
@@ -137,6 +139,7 @@ signed_evidence_file:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The signed evidence file PDF
@@ -159,6 +162,7 @@ task:
         description: The unique identifier of the Workflow Run to which the Task belongs.
         schema:
           type: string
+          format: uuid
       - name: task_id
         in: path
         required: true
@@ -186,6 +190,7 @@ complete_task:
         description: The unique identifier of the Workflow Run to which the Task belongs.
         schema:
           type: string
+          format: uuid
       - name: task_id
         in: path
         required: true

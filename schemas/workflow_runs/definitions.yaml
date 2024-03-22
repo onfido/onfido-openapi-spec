@@ -6,9 +6,11 @@ workflow_run_shared:
   properties:
     applicant_id:
       type: string
+      format: uuid
       description: The unique identifier for the Applicant.
     workflow_id:
       type: string
+      format: uuid
       description: The unique identifier for the Workflow.
     tags:
       type: array
@@ -70,6 +72,7 @@ workflow_run_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier for the Workflow Run.
     workflow_version_id:
       type: integer

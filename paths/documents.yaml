@@ -9,6 +9,7 @@ documents:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: List of Documents
@@ -59,6 +60,7 @@ document:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A document
@@ -79,6 +81,7 @@ download:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The document binary data

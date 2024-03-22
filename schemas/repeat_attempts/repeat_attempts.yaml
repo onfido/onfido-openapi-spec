@@ -2,6 +2,7 @@ type: object
 properties:
   report_id:
     type: string
+    format: uuid
     description: The unique identifier of the completed Document report.
   repeat_attempts:
     type: array
@@ -13,9 +14,11 @@ properties:
       properties:
         report_id:
           type: string
+          format: uuid
           description: The unique identifier of the matching Document report.
         applicant_id:
           type: string
+          format: uuid
           description: The unique identifier of the applicant for the matching Document report.
         date_of_birth:
           type: string

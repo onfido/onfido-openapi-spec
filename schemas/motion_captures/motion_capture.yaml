@@ -2,6 +2,7 @@ type: object
 properties:
   id:
     type: string
+    format: uuid
     description: The unique identifier for the motion capture.
   created_at:
     type: string

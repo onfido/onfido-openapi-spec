@@ -9,6 +9,7 @@ motion_captures:
         description: The id of the applicant the motion captures belong to.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of motion captures
@@ -38,6 +39,7 @@ motion_capture:
         description: The motion capture's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A motion capture
@@ -60,6 +62,7 @@ download:
         description: The motion capture's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The motion capture's binary data.
@@ -83,6 +86,7 @@ frame:
         description: The motion capture's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The motion capture frame's binary data.
