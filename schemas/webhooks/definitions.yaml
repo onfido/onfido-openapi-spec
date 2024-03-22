@@ -54,6 +54,7 @@ webhook_update:
       $ref: "#/webhook_url"
 
 webhook_event_type:
+  type: string
   enum:
     - audit_log.created
     - watchlist_monitor.matches_updated
@@ -72,7 +73,6 @@ webhook_event_type:
     - report.completed
     - workflow_timeline_file.created
     - workflow_signed_evidence_file.created
-  type: string
 
 webhook_url:
   type: string
