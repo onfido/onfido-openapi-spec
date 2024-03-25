@@ -96,38 +96,33 @@ DefaultApi onfido = new DefaultApi(Configuration.getDefaultApiClient()
 
 ## Making a call to the API
 
-Using your configured and instantiated instance of the `Onfido` object you can make calls to the API by calling one of the methods on the resources inside of it. For example, to create an applicant:
+Most of the request bodies can be created using a builder pattern, this would look something like:
 
 ```java
-import com.onfido.models.Applicant;
-
-onfido.applicant.create(<REQUEST_BODY_HERE>);
-```
-
-All request bodies can be created using a builder pattern on the `Request` subclass of the desired resource. For example in the request above an `Applicant.Request` object is needed as the body, this would look something like:
-
-```java
-Applicant.request().firstName("First").lastName("Last");
+new ApplicantBuilder().firstName("First").lastName("Last");
 ```
 
 The above will return an `Applicant.Request` object that can be provided to the `create()` method as the request body, so a full call to to the API will look something like:
 
 ```java
 try {
-    Applicant newApplicant = onfido.applicant.create(
-            Applicant.request().firstName("First").lastName("Last")
-    );
+   Applicant applicant = onfido.createApplicant(new ApplicantBuilder()
+                                                   .firstName("First")
+                                                   .lastName("Last"));
 
-    // ...
+   //  To access the information call the getter of the desired property on the object, for example:
+   applicant.getFirstName();
 
-    // Webhook verification
-    WebhookEventVerifier verifier = new WebhookEventVerifier("_ABC123abc...3ABC123_");
+   // ...
 
-    String signature = "a0...760e";
+   // Webhook verification
+   WebhookEventVerifier verifier = new WebhookEventVerifier("_ABC123abc...3ABC123_");
 
-    WebhookEvent event = verifier.readPayload(rawEvent, signature);
+   String signature = "a0...760e";
 
-    const event = verifier.readPayload("{\"payload\":{\"r...3\"}}}", signature);
+   WebhookEvent event = verifier.readPayload(rawEvent, signature);
+
+   const event = verifier.readPayload("{\"payload\":{\"r...3\"}}}", signature);
 } catch (ApiException e) {
     // An error response was received from the Onfido API, extra info is available.
     System.out.println(e.getMessage());
@@ -136,12 +131,6 @@ try {
     // No response was received for some reason e.g. a network error.
     System.out.println(e.getMessage());
 }
-```
-
-The above methods will return the corresponding resource object, as most methods will. To access the information call the getter of the desired property on the object, for example:
-
-```java
-newApplicant.getFirstName();
 ```
 
 ## Recommendation
