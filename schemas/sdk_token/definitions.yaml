@@ -20,6 +20,8 @@ sdk_token_request:
 
 sdk_token_response:
   type: object
+  required:
+    - token
   properties:
     token:
       type: string

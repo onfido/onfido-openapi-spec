@@ -1,4 +1,6 @@
 type: object
+required:
+  - repeat_attempts
 properties:
   report_id:
     type: string

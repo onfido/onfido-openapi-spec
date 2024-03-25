@@ -15,7 +15,9 @@ pick:
           application/json:
             schema:
               type: object
-              title: Addresses
+              title: Addresses list
+              required:
+                - address
               properties:
                 addresses:
                   type: array

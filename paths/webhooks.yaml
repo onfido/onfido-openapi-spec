@@ -10,6 +10,8 @@ webhooks:
             schema:
               type: object
               title: Webhooks list
+              required:
+                - webhooks
               properties:
                 webhooks:
                   type: array

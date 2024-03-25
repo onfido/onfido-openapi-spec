@@ -15,6 +15,6 @@ repeat_attempts:
         content:
           application/json:
             schema:
-              $ref: ../schemas/repeat_attempts/repeat_attempts.yaml
+              $ref: ../schemas/repeat_attempts/repeat_attempts_list.yaml
       default:
         $ref: ../responses/default_error.yaml

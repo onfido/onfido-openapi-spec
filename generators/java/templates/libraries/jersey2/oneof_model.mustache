@@ -70,7 +70,7 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
             new{{classname}}.status = ReportStatus.fromValue((String)result2.get(JSON_PROPERTY_STATUS));
             new{{classname}}.result = ReportResult.fromValue((String)result2.get(JSON_PROPERTY_RESULT));
             new{{classname}}.subResult = ReportSubResult.fromValue((String)result2.get(JSON_PROPERTY_SUB_RESULT));
-            new{{classname}}.checkId = (String)result2.get(JSON_PROPERTY_CHECK_ID);
+            new{{classname}}.checkId = UUID.fromString((String)result2.get(JSON_PROPERTY_CHECK_ID));
             new{{classname}}.documents = (List<ReportDocument>)(List<?>) result2.get(JSON_PROPERTY_DOCUMENTS);
             new{{classname}}.name = ReportName.fromValue((String)result2.get(JSON_PROPERTY_NAME));
             {{! Added code based on com/onfido/model/IdentityEnhancedReport.java - END }}
@@ -169,7 +169,7 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
     private ReportSubResult subResult;
 
     public static final String JSON_PROPERTY_CHECK_ID = "check_id";
-    private String checkId;
+    private UUID checkId;
 
     public static final String JSON_PROPERTY_DOCUMENTS = "documents";
     private List<ReportDocument> documents;
@@ -358,7 +358,7 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
     @JsonProperty(JSON_PROPERTY_CHECK_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-    public String getCheckId() {
+    public UUID getCheckId() {
         return checkId;
     }
 

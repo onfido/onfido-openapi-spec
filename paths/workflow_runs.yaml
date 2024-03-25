@@ -60,6 +60,7 @@ workflow_runs:
           application/json:
             schema:
               type: array
+              title: Workflow runs
               items:
                 $ref: ../schemas/workflow_runs/workflow_run.yaml
       default:
