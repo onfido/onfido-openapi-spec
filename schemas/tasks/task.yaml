@@ -4,8 +4,16 @@ properties:
     type: string
     format: uuid
     description: The identifier for the Task.
+  workflow_run_id:
+    type: string
+    format: uuid
+    description: The workflow run id the task belongs to.
   task_def_id:
     $ref: definitions.yaml#/task_def_id
+  task_def_version:
+    type: string
+    nullable: true
+    description: The task definition version.
   input:
     type: object
     description: Input object with the fields used by the Task to execute.

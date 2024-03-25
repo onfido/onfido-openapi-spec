@@ -7,13 +7,9 @@ properties:
       type: object
       title: Webhooks resend item
       required:
-        - resource_type
         - resource_id
         - event
       properties:
-        resource_type:
-          type: string
-          description: Type of resource to retrigger webhooks. Accepts values check.
         resource_id:
           type: string
           format: uuid
