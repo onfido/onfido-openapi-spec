@@ -4,8 +4,10 @@ npmRepository: github:onfido/onfido-node
 npmVersion: ${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
 supportsES6: true
+apiPackage: api
+modelPackage: model
 withNodeImports: true
-legacyDiscriminatorBehavior: false
+withSeparateModelsAndApi: true
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
