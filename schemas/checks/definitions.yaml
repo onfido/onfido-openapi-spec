@@ -34,7 +34,7 @@ check_request:
       description: An array of report names (strings).
       type: array
       items:
-        $ref: "#/report_name"
+        $ref: ../reports/definitions.yaml#/report_name
     document_ids:
       description: Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.
       type: array
@@ -62,7 +62,7 @@ check_request:
     consider:
       type: array
       items:
-        $ref: "#/report_name"
+        $ref: ../reports/definitions.yaml#/report_name
       description: Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing
     us_driving_licence:
       $ref: ../us_driving_licence/us_driving_licence_builder.yaml
@@ -114,27 +114,3 @@ check_response:
     sandbox:
       description: Indicates whether the object was created in the sandbox or not.
       type: boolean
-
-report_name:
-  type: string
-  enum:
-    - document
-    - document_video
-    - document_video_with_address
-    - document_with_address_information
-    - document_with_driving_licence_information
-    - document_with_driver_verification
-    - facial_similarity_photo
-    - facial_similarity_photo_fully_auto
-    - facial_similarity_video
-    - facial_similarity_motion
-    - known_faces
-    - identity_enhanced
-    - watchlist_aml
-    - watchlist_enhanced
-    - watchlist_standard
-    - watchlist_peps_only
-    - watchlist_sanctions_only
-    - proof_of_address
-    - us_driving_licence
-    - device_intelligence
