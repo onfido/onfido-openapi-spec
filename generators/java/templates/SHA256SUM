@@ -1,5 +1,4 @@
 
 8707cab68f10d18489f4680385e29bb34a7013ebe64e9662d25f28b1b442db47  ./README.mustache
 205298b80b17cfb2632468477ab97d169436c449028f827a51e54238eb30fd43  ./libraries/jersey2/ApiClient.mustache
-cfe368e634399efc0c6facb5289871d0810eb8ed51dcb75679a4df057ebe93c9  ./libraries/jersey2/oneof_model.mustache
 cc78197dec038c2715dc16b60114847c4065d2886e279dfa721e00e2d644a714  ./libraries/jersey2/pom.mustache
