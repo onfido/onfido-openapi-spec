@@ -91,8 +91,12 @@ Instantiate and configure an `Onfido` instance with your API token, and region i
 ```java
 DefaultApi onfido = new DefaultApi(Configuration.getDefaultApiClient()
                       .setApiToken(System.getenv("ONFIDO_API_TOKEN"))
-                      .setRegion(Region.EU));   // Supports `EU`, `US` and `CA`
+                      .setRegion(Region.EU)     // Supports `EU`, `US` and `CA`
+                      .setConnectTimeout(60_000)
+                      .setReadTimeout(60_000));
 ```
+
+NB: by default, timeout values are set to 30 seconds.
 
 ## Making a call to the API
 

@@ -172,8 +172,10 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
   protected Map<String, Map<String, String>> operationServerVariables = new HashMap<>();
   protected boolean debugging = false;
   protected ClientConfig clientConfig;
-  protected int connectionTimeout = 0;
-  private int readTimeout = 0;
+  {{! Updated default settings - BEGIN }}
+  protected int connectionTimeout = 30_000;
+  private int readTimeout = 30_000;
+  {{! Updated default settings - END }}
 
   protected Client httpClient;
   protected JSON json;
@@ -405,8 +407,6 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
   }
 
   public ApiClient setRegion(Region region) {
-    // serverVariables = getServerVariables();
-    // HashMap<String, String> serverVariables = HashMap<String, String>();
     Map<String, String> serverVariables = getServerVariables();
 
     if ( serverVariables == null ){
@@ -416,12 +416,8 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
 
     serverVariables.put("region", region.name().toLowerCase());
 
-    // getServerVariables().put("region", region.name().toLowerCase());
     updateBasePath();
 
-    // this.setServerVariables(new HashMap<>(){}"region": "ca"});
-
-    // this.setApiKey("Token token=" + apiToken);
     return this;
   }
   {{! Added methods - END }}

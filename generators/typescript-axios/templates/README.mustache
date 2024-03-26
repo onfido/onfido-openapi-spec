@@ -54,10 +54,12 @@ const onfido = new DefaultApi(
   new Configuration({
     apiToken: process.env.ONFIDO_API_TOKEN,
     region: Region.EU, // Supports Region.EU, Region.US and Region.CA
-    baseOptions: { timeout: 30_000 }, // Additional Axios options (timeout, etc.)
+    baseOptions: { timeout: 60_000 }, // Additional Axios options (timeout, etc.)
   }),
 );
 ```
+
+NB: by default, timeout is set to 30 seconds.
 
 Using with `async`/`await` (in an `async function`):
 
