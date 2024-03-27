@@ -13,13 +13,14 @@ on:
     inputs:
       type-of-change:
         description: "Type of change?"
-        required: false
-        default: Patch
+        required: true
+        default: No change
         type: choice
         options:
           - Major
           - Minor
           - Patch
+          - No change
       update-onfido-java:
         description: "Update onfido-java?"
         required: true
