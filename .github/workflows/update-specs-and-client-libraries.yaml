@@ -13,7 +13,7 @@ on:
     inputs:
       type-of-change:
         description: "Type of change?"
-        required: true
+        required: false
         default: Patch
         type: choice
         options:
