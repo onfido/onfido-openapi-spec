@@ -1,0 +1,7 @@
+/onfido-java/src/test
+/onfido-java/media
+/src/test
+/api
+/docs
+/media
+/git_push.sh

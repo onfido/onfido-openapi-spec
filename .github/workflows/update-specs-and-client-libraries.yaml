@@ -5,14 +5,14 @@ on:
     branches:
       - master
     paths-ignore:
-      - 'generated/artifacts/**'
+      - "generated/artifacts/**"
   pull_request:
     branches:
       - master
   workflow_dispatch:
     inputs:
       type-of-change:
-        description: 'Type of change?'
+        description: "Type of change?"
         required: true
         default: Patch
         type: choice
@@ -20,8 +20,13 @@ on:
           - Major
           - Minor
           - Patch
+      update-onfido-java:
+        description: "Update onfido-java?"
+        required: true
+        default: false
+        type: boolean
       update-onfido-node:
-        description: 'Update onfido-node?'
+        description: "Update onfido-node?"
         required: true
         default: false
         type: boolean
@@ -32,13 +37,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate OpenAPI Specification YAML
-        run: |
-          npm install prettier
-          npx prettier -c openapi.yaml paths/*.yaml schemas/**/*.yaml responses/**/*.yaml
+        run: ./shell/run-prettier.sh check
   generate_specs_and_libraries:
     name: Build single-file OpenAPI specifications and client libraries
     runs-on: ubuntu-latest
     outputs:
+      java_version: ${{ steps.generator.outputs.java_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
     container:
       image: openapitools/openapi-generator-cli:v7.3.0
@@ -102,9 +106,16 @@ jobs:
     strategy:
       matrix:
         include:
+          - generator: java
+            git_repo_id: onfido-java
+            preCommit: |
+              mvn -B package --file pom.xml clean
+            version: ${{ needs.generate_specs_and_libraries.outputs.java_version }}
+            update: ${{ inputs.update-onfido-java }}
           - generator: typescript-axios
             git_repo_id: onfido-node
-            preCommit: npm install
+            preCommit: |
+              npm install
             version: ${{ needs.generate_specs_and_libraries.outputs.typescript_axios_version }}
             update: ${{ inputs.update-onfido-node }}
     if: github.event_name == 'workflow_dispatch'
@@ -151,12 +162,12 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         if: ${{ matrix.update }}
         with:
-            token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
-            commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
-            title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
-            body: |
-              - Auto-generated PR
-            labels: |
-              automated pr
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
+          commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
+          title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
+          body: |
+            - Auto-generated PR
+          labels: |
+            automated pr
 
-            branch: release-upgrade
+          branch: release-upgrade

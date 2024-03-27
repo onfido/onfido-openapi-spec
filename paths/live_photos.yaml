@@ -9,6 +9,7 @@ live_photos:
         description: The id of the applicant the live photos belong to.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of live photos
@@ -62,6 +63,7 @@ live_photo:
         description: The live photo's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A live photo
@@ -84,6 +86,7 @@ download:
         description: The live photo's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The live photo's binary data.

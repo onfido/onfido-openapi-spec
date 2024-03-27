@@ -9,6 +9,7 @@ id_photos:
         description: The id of the applicant the ID photos belong to.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of ID photos
@@ -61,6 +62,7 @@ id_photo:
         description: The ID photo's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A ID photo
@@ -83,6 +85,7 @@ download:
         description: The ID photo's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The ID photo's binary data.

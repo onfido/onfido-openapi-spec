@@ -8,12 +8,13 @@ repeat_attempts:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: Repeat attempts object
         content:
           application/json:
             schema:
-              $ref: ../schemas/repeat_attempts/repeat_attempts.yaml
+              $ref: ../schemas/repeat_attempts/repeat_attempts_list.yaml
       default:
         $ref: ../responses/default_error.yaml

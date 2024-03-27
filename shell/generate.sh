@@ -64,19 +64,20 @@ function validate_templates_checksum() {
 
   $OPENAPI_GENERATOR_COMMAND author template -g $GENERATOR $LIBRARY -o generated/templates/${GENERATOR} > /dev/null
 
-  pushd generated/templates/${GENERATOR} > /dev/null
-  shasum -a 256 * >| SHA256SUM
+  GENERATORS_PATH=$(pwd)/generators/${GENERATOR}/templates
+  GENERATED_PATH=$(pwd)/generated/templates/${GENERATOR}
+
+  pushd $GENERATED_PATH > /dev/null
+  shasum -a 256 $(find . -type f) >| SHA256SUM
   popd > /dev/null
 
-  OUR_SHASUMS=generators/${GENERATOR}/templates/SHA256SUM
-  echo >| $OUR_SHASUMS.new
+  pushd $GENERATORS_PATH > /dev/null
+  echo >| SHA256SUM.new
 
-  for TEMPLATE in $(ls generators/${GENERATOR}/templates/ | grep -v SHA256SUM) ;
+  for FILENAME in $(find . -type f \! -name  'SHA256SUM*' | sort);
   do
-    FILENAME=$(basename $TEMPLATE)
-
-    LIB_SHASUM=$(grep $FILENAME generated/templates/${GENERATOR}/SHA256SUM | awk '{print $1}' || true)
-    OUR_SHASUM=$(grep $FILENAME $OUR_SHASUMS | awk '{print $1}' || true)
+    LIB_SHASUM=$(grep \\$FILENAME ${GENERATED_PATH}/SHA256SUM | awk '{print $1}' || true)
+    OUR_SHASUM=$(grep \\$FILENAME ${GENERATORS_PATH}/SHA256SUM | awk '{print $1}' || true)
 
     if [[ ! -z "$LIB_SHASUM" ]];  # File is provided by lib
     then
@@ -87,20 +88,22 @@ function validate_templates_checksum() {
         echo " SHA256SUM for template $FILENAME changed, diff reported below. To overwrite template, run:"
         echo "  cp generated/templates/${GENERATOR}/$FILENAME generators/${GENERATOR}/templates/"
         echo
-        diff generated/templates/${GENERATOR}/$FILENAME generators/${GENERATOR}/templates/$FILENAME || true
+        diff ${GENERATED_PATH}/$FILENAME ${GENERATORS_PATH}/$FILENAME || true
         RESULT=1
       fi
 
-      echo "$LIB_SHASUM  $FILENAME" >> $OUR_SHASUMS.new
+      echo "$LIB_SHASUM  $FILENAME" >> ${GENERATORS_PATH}/SHA256SUM.new
     fi
   done
 
+  popd > /dev/null
+
   # Remove if empty or rename otherwise
-  if [[ "$(grep -e '\s' $OUR_SHASUMS.new)" == "" ]];
+  if [[ "$(grep -e '\s' ${GENERATORS_PATH}/SHA256SUM.new)" == "" ]];
   then
-    unlink $OUR_SHASUMS.new
+    unlink ${GENERATORS_PATH}/SHA256SUM.new
   else
-    mv $OUR_SHASUMS.new $OUR_SHASUMS
+    mv ${GENERATORS_PATH}/SHA256SUM.new ${GENERATORS_PATH}/SHA256SUM
   fi
 
   return $RESULT

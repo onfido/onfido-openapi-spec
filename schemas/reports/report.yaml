@@ -1,7 +1,7 @@
 oneOf:
   - $ref: document_report.yaml
   - $ref: document_video_report.yaml
-  - $ref: document_video_with_address_information.yaml
+  - $ref: document_video_with_address_information_report.yaml
   - $ref: document_with_address_information_report.yaml
   - $ref: document_with_driving_licence_information_report.yaml
   - $ref: document_with_driver_verification_report.yaml
@@ -25,7 +25,7 @@ discriminator:
   mapping:
     document: document_report.yaml
     document_video: document_video_report.yaml
-    document_video_with_address_information: document_video_with_address_information.yaml
+    document_video_with_address_information: document_video_with_address_information_report.yaml
     document_with_address_information: document_with_address_information_report.yaml
     document_with_driving_licence_information: document_with_driving_licence_information_report.yaml
     document_with_driver_verification: document_with_driver_verification_report.yaml

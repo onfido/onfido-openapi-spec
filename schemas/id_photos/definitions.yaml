@@ -3,6 +3,7 @@ id_photo_request:
   properties:
     applicant_id:
       type: string
+      format: uuid
       description: The ID of the applicant whose ID photo is being uploaded.
     file:
       type: string
@@ -16,6 +17,7 @@ id_photo_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier for the photo.
     created_at:
       type: string

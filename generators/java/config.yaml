@@ -1,0 +1,34 @@
+gitRepoId: onfido-java
+artifactId: onfido-api-java
+packageName: onfido
+groupId: com.onfido
+invokerPackage: com.onfido
+apiPackage: com.onfido.api
+modelPackage: com.onfido.model
+library: jersey2
+httpUserAgent: onfido-java/${CLIENT_LIBRARY_VERSION}
+artifactDescription: Official Java API client library for the Onfido API
+artifactUrl: https://documentation.onfido.com
+artifactVersion: ${CLIENT_LIBRARY_VERSION}
+developerEmail: info@onfido.com
+developerName: Onfido
+developerOrganization: Onfido
+developerOrganizationUrl: http://onfido.com
+hideGenerationTimestamp: true
+enumUnknownDefaultCase: true
+licenseName: MIT
+licenseUrl: https://opensource.org/license/mit
+scmConnection: scm:git:git://github.com/onfido/onfido-java.git
+scmDeveloperConnection: scm:git:git://github.com/onfido/onfido-java.git
+scmUrl: https://github.com/onfido/onfido-java
+useOneOfDiscriminatorLookup: true
+additionalModelTypeAnnotations:
+  | # https://github.com/OpenAPITools/openapi-generator/issues/10645
+  @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
+files:
+  LICENSE.mustache:
+    destinationFilename: LICENSE
+  WebhookEventVerifier.mustache:
+    destinationFilename: src/main/java/com/onfido/WebhookEventVerifier.java
+  OnfidoInvalidSignatureError.mustache:
+    destinationFilename: src/main/java/com/onfido/OnfidoInvalidSignatureError.java

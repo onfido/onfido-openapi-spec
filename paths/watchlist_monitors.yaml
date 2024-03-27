@@ -28,6 +28,7 @@ watchlist_monitors:
         description: The id of the applicant the watchlist monitors belong to. If omitted, all monitors for the account will be listed.
         schema:
           type: string
+          format: uuid
       - name: include_deleted
         in: query
         description: Whether to also include deleted (inactive) monitors.
@@ -58,6 +59,7 @@ watchlist_monitor:
         description: The watchlist monitor's unique identifier.
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: A watchlist monitor
@@ -77,6 +79,7 @@ watchlist_monitor:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "204":
         description: No Content
@@ -93,6 +96,7 @@ matches:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of watchlist monitors
@@ -107,6 +111,7 @@ matches:
                 properties:
                   id:
                     type: string
+                    format: uuid
                     description: Monitor ID
                   status:
                     type: boolean
@@ -121,6 +126,7 @@ matches:
         required: true
         schema:
           type: string
+          format: uuid
     requestBody:
       required: true
       content:
@@ -154,6 +160,7 @@ new_report:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "201":
         description: Created

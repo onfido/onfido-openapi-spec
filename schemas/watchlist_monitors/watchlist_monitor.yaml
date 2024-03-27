@@ -5,6 +5,7 @@ required:
 properties:
   id:
     type: string
+    format: uuid
     description: The unique identifier for the monitor.
     readOnly: true
   created_at:
@@ -19,6 +20,7 @@ properties:
     readOnly: true
   applicant_id:
     type: string
+    format: uuid
     description: The ID for the applicant associated with the monitor.
   report_name:
     type: string

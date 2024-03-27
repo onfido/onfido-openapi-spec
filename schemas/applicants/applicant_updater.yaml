@@ -1,0 +1,4 @@
+allOf:
+  - $ref: definitions.yaml#/applicant_shared
+  - $ref: definitions.yaml#/applicant_request
+  - $ref: definitions.yaml#/applicant_update

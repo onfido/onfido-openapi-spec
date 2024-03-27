@@ -4,4 +4,5 @@ required:
 properties:
   id:
     type: string
+    format: uuid
     description: ID of uploaded document to use.

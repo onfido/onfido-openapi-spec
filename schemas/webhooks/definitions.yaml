@@ -30,6 +30,7 @@ webhook_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier of the webhook.
     url:
       $ref: "#/webhook_url"
@@ -53,6 +54,7 @@ webhook_update:
       $ref: "#/webhook_url"
 
 webhook_event_type:
+  type: string
   enum:
     - audit_log.created
     - watchlist_monitor.matches_updated
@@ -69,7 +71,8 @@ webhook_event_type:
     - report.cancelled
     - report.awaiting_approval
     - report.completed
-  type: string
+    - workflow_timeline_file.created
+    - workflow_signed_evidence_file.created
 
 webhook_url:
   type: string

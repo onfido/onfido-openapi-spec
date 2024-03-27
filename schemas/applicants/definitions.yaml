@@ -1,14 +1,6 @@
 applicant_shared:
   type: object
   properties:
-    first_name:
-      type: string
-      pattern: '/^[^!#$%*=<>;{}"]*$/'
-      description: The applicant's first name
-    last_name:
-      type: string
-      pattern: '/^[^!#$%*=<>;{}"]*$/'
-      description: The applicant's surname
     email:
       type: string
       description: The applicant's email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.
@@ -28,23 +20,7 @@ applicant_request:
   type: object
   properties:
     consents:
-      type: array
-      items:
-        type: object
-        title: Applicant consent
-        properties:
-          name:
-            type: string
-            enum:
-              - privacy_notices_read
-              - ssn_verification
-              - phone_number_verification
-          granted:
-            type: boolean
-        required:
-          - name
-          - granted
-        description: The applicant's consents
+      $ref: ../consents/consents_builder.yaml
     address:
       $ref: ../address/address_builder.yaml
     location:
@@ -55,8 +31,13 @@ applicant_response:
   required:
     - id
   properties:
+    first_name:
+      $ref: "#/applicant_first_name"
+    last_name:
+      $ref: "#/applicant_last_name"
     id:
       type: string
+      format: uuid
       description: The unique identifier for the applicant.
     created_at:
       type: string
@@ -75,3 +56,30 @@ applicant_response:
       $ref: ../address/address.yaml
     location:
       $ref: ../location/location.yaml
+
+applicant_create:
+  required:
+    - first_name
+    - last_name
+  properties:
+    first_name:
+      $ref: "#/applicant_first_name"
+    last_name:
+      $ref: "#/applicant_last_name"
+
+applicant_update:
+  properties:
+    first_name:
+      $ref: "#/applicant_first_name"
+    last_name:
+      $ref: "#/applicant_last_name"
+
+applicant_first_name:
+  type: string
+  pattern: '/^[^!#$%*=<>;{}"]*$/'
+  description: The applicant's first name
+
+applicant_last_name:
+  type: string
+  pattern: '/^[^!#$%*=<>;{}"]*$/'
+  description: The applicant's surname

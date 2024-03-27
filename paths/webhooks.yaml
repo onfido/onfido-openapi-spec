@@ -10,6 +10,8 @@ webhooks:
             schema:
               type: object
               title: Webhooks list
+              required:
+                - webhooks
               properties:
                 webhooks:
                   type: array
@@ -60,6 +62,7 @@ webhook:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: Webhook object
@@ -79,6 +82,7 @@ webhook:
         required: true
         schema:
           type: string
+          format: uuid
     requestBody:
       required: true
       content:
@@ -104,6 +108,7 @@ webhook:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "204":
         description: Webhook deleted

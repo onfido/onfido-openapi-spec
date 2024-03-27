@@ -6,6 +6,18 @@ properties:
   document_type:
     description: This property provides the document type according to the set of supported documents.
     type: string
+    enum:
+      - bank_building_society_statement
+      - utility_bill
+      - council_tax
+      - benefit_letters
+      - mortgage_statement
+      - mobile_phone_bill
+      - general_letter
+      - insurance_statement
+      - pension_property_statement_letter
+      - identity_document_with_address
+      - exchange_house_statement
   first_names:
     description: This property provides the first names on the document, including any initials and middle names.
     type: string

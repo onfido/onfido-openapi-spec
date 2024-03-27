@@ -1,0 +1,2 @@
+allOf:
+  - $ref: definitions.yaml#/sdk_token_request

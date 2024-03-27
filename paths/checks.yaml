@@ -8,6 +8,7 @@ checks:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: An array of checks
@@ -55,6 +56,7 @@ check:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: Check object
@@ -75,6 +77,7 @@ resume:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "204":
         description: No Content
@@ -91,6 +94,7 @@ download:
         required: true
         schema:
           type: string
+          format: uuid
     responses:
       "200":
         description: The check PDF binary data

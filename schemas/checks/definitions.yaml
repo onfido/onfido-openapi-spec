@@ -10,6 +10,7 @@ check_shared:
         type: string
     applicant_id:
       type: string
+      format: uuid
       description: The ID of the applicant to do the check on.
     applicant_provides_data:
       type: boolean
@@ -26,17 +27,24 @@ check_shared:
 
 check_request:
   type: object
+  required:
+    - report_names
   properties:
     report_names:
       description: An array of report names (strings).
       type: array
       items:
-        $ref: "#/report_name"
+        $ref: ../reports/definitions.yaml#/report_name
     document_ids:
       description: Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.
       type: array
       items:
         type: string
+        format: uuid
+    applicant_provides_data:
+      description: Send an applicant form to applicant to complete to proceed with check. Defaults to false.
+      type: boolean
+      default: false
     asynchronous:
       type: boolean
       description: >
@@ -48,15 +56,16 @@ check_request:
         For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`.
         You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object.
         Write-only. Defaults to false.
+    sub_result:
+      type: string
+      description: Triggers responses for particular sub-results for sandbox Document reports.
     consider:
       type: array
       items:
-        type: string
+        $ref: ../reports/definitions.yaml#/report_name
       description: Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing
     us_driving_licence:
-      type: object
-      additionalProperties: true
-      description: An object that contains all accepted fields for the Driver's License Data Verification report.
+      $ref: ../us_driving_licence/us_driving_licence_builder.yaml
 
 check_response:
   type: object
@@ -65,6 +74,7 @@ check_response:
   properties:
     id:
       type: string
+      format: uuid
       description: The unique identifier for the check.
     created_at:
       type: string
@@ -100,30 +110,7 @@ check_response:
       type: array
       items:
         type: string
+        format: uuid
     sandbox:
       description: Indicates whether the object was created in the sandbox or not.
       type: boolean
-
-report_name:
-  type: string
-  enum:
-    - document
-    - document_video
-    - document_video_with_address
-    - document_with_address_information
-    - document_with_driving_licence_information
-    - document_with_driver_verification
-    - facial_similarity_photo
-    - facial_similarity_photo_fully_auto
-    - facial_similarity_video
-    - facial_similarity_motion
-    - known_faces
-    - identity_enhanced
-    - watchlist_aml
-    - watchlist_enhanced
-    - watchlist_standard
-    - watchlist_peps_only
-    - watchlist_sanctions_only
-    - proof_of_address
-    - us_driving_licence
-    - device_intelligence

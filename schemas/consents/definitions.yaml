@@ -1,0 +1,19 @@
+consents_shared:
+  type: array
+  items:
+    type: object
+    required:
+      - name
+      - granted
+    title: Consent item
+    properties:
+      name:
+        type: string
+        title: Consent name
+        enum:
+          - privacy_notices_read
+          - ssn_verification
+          - phone_number_verification
+      granted:
+        type: boolean
+    description: The applicant's consents
