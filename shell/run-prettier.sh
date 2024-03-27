@@ -14,3 +14,4 @@ npm install prettier
 npx prettier $option openapi.yaml paths/*.yaml schemas/**/*.yaml responses/**/*.yaml \
                      generators/**/config.yaml .github/workflows/*.yaml
 npx prettier $option --parser markdown generators/*/templates/README.mustache
+npx prettier $option --parser typescript generators/typescript-axios/templates/webhook-event-verifier.mustache
