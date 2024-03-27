@@ -88,6 +88,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -106,6 +107,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -131,12 +133,13 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/applicant_builder'
+              $ref: '#/components/schemas/applicant_updater'
         required: true
       responses:
         "200":
@@ -160,6 +163,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -181,6 +185,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -228,6 +233,7 @@ paths:
         name: document_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -252,6 +258,7 @@ paths:
         name: document_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -301,6 +308,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -349,6 +357,7 @@ paths:
         name: live_photo_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -374,6 +383,7 @@ paths:
         name: live_photo_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -399,6 +409,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -423,6 +434,7 @@ paths:
         name: live_video_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -448,6 +460,7 @@ paths:
         name: live_video_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -475,6 +488,7 @@ paths:
         name: live_video_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -541,6 +555,7 @@ paths:
               schema:
                 items:
                   $ref: '#/components/schemas/workflow_run'
+                title: Workflow runs
                 type: array
           description: An array of Workflow Run objects matching the query parameters.
         default:
@@ -581,6 +596,7 @@ paths:
         name: workflow_run_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -607,6 +623,7 @@ paths:
         name: workflow_run_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -629,13 +646,14 @@ paths:
         the unique identifier of the Workflow Run.
   /workflow_runs/{workflow_run_id}/tasks/{task_id}:
     get:
-      operationId: retrieve_task
+      operationId: find_task
       parameters:
       - description: The unique identifier of the Workflow Run to which the Task belongs.
         in: path
         name: workflow_run_id
         required: true
         schema:
+          format: uuid
           type: string
       - description: The identifier of the Task you want to retrieve.
         in: path
@@ -667,6 +685,7 @@ paths:
         name: workflow_run_id
         required: true
         schema:
+          format: uuid
           type: string
       - description: The identifier of the Task you want to complete.
         in: path
@@ -699,6 +718,7 @@ paths:
         name: workflow_run_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -724,6 +744,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -748,6 +769,7 @@ paths:
         name: motion_capture_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -773,6 +795,7 @@ paths:
         name: motion_capture_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -800,6 +823,7 @@ paths:
         name: motion_capture_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -826,6 +850,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       - description: Whether to also include deleted (inactive) monitors.
         in: query
@@ -880,6 +905,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -899,6 +925,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -922,6 +949,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -942,6 +970,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          format: uuid
           type: string
       requestBody:
         content:
@@ -967,6 +996,7 @@ paths:
         name: monitor_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "201":
@@ -996,6 +1026,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1044,6 +1075,7 @@ paths:
         name: id_photo_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1069,6 +1101,7 @@ paths:
         name: id_photo_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1165,6 +1198,7 @@ paths:
         name: webhook_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -1183,6 +1217,7 @@ paths:
         name: webhook_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1205,6 +1240,7 @@ paths:
         name: webhook_id
         required: true
         schema:
+          format: uuid
           type: string
       requestBody:
         content:
@@ -1261,7 +1297,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Addresses'
+                $ref: '#/components/schemas/Addresses_list'
           description: A list of addresses
         default:
           content:
@@ -1277,14 +1313,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/generate_sdk_token_request'
+              $ref: '#/components/schemas/sdk_token_builder'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SDK_token'
+                $ref: '#/components/schemas/sdk_token'
           description: Generated
         default:
           content:
@@ -1301,13 +1337,14 @@ paths:
         name: report_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/repeat_attempts'
+                $ref: '#/components/schemas/repeat_attempts_list'
           description: Repeat attempts object
         default:
           content:
@@ -1370,6 +1407,7 @@ paths:
         name: applicant_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1415,6 +1453,7 @@ paths:
         name: check_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1438,6 +1477,7 @@ paths:
         name: check_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -1457,6 +1497,7 @@ paths:
         name: check_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1481,6 +1522,7 @@ paths:
         name: check_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1505,6 +1547,7 @@ paths:
         name: report_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "200":
@@ -1529,6 +1572,7 @@ paths:
         name: report_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -1548,6 +1592,7 @@ paths:
         name: report_id
         required: true
         schema:
+          format: uuid
           type: string
       responses:
         "204":
@@ -1608,7 +1653,7 @@ components:
         location:
           country_of_residence: GBR
           ip_address: ip_address
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         first_name: first_name
         email: email
@@ -1616,6 +1661,12 @@ components:
       allOf:
       - $ref: '#/components/schemas/applicant_shared'
       - $ref: '#/components/schemas/applicant_request'
+      - $ref: '#/components/schemas/applicant_create'
+    applicant_updater:
+      allOf:
+      - $ref: '#/components/schemas/applicant_shared'
+      - $ref: '#/components/schemas/applicant_request'
+      - $ref: '#/components/schemas/applicant_update'
     document:
       allOf:
       - $ref: '#/components/schemas/document_shared'
@@ -1623,12 +1674,12 @@ components:
       example:
         side: front
         download_href: download_href
-        applicant_id: applicant_id
+        applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         issuing_country: issuing_country
         file_type: jpg
         file_name: file_name
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         type: type
         file_size: 0
@@ -1648,7 +1699,7 @@ components:
         file_name: file_name
         file_type: file_type
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         file_size: 0
     live_photo_uploader:
@@ -1666,12 +1717,13 @@ components:
         challenge:
         - key: ""
         - key: ""
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         file_size: 0
       properties:
         id:
           description: The unique identifier for the video.
+          format: uuid
           type: string
         created_at:
           description: The date and time at which the video was uploaded.
@@ -1705,7 +1757,7 @@ components:
       - $ref: '#/components/schemas/workflow_run_shared'
       - $ref: '#/components/schemas/workflow_run_response'
       example:
-        workflow_id: workflow_id
+        workflow_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         reasons:
         - reasons
         - reasons
@@ -1726,9 +1778,9 @@ components:
         - tags
         - tags
         output: "{}"
-        applicant_id: applicant_id
+        applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         workflow_version_id: 0
         dashboard_url: dashboard_url
         status: awaiting_input
@@ -1736,6 +1788,11 @@ components:
       allOf:
       - $ref: '#/components/schemas/workflow_run_shared'
       - $ref: '#/components/schemas/workflow_run_request'
+    task_def_id:
+      description: The identifier for the Task Definition.
+      example: task_123
+      pattern: "/^[0-9a-z-_]+$/"
+      type: string
     task:
       example:
         output: "{}"
@@ -1743,12 +1800,13 @@ components:
         input: "{}"
         updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
-        task_def_id: task_def_id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        task_def_id: task_123
         workflow_run_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
           description: The identifier for the Task.
+          format: uuid
           type: string
         workflow_run_id:
           description: The workflow run id the task belongs to.
@@ -1756,6 +1814,8 @@ components:
           type: string
         task_def_id:
           description: The identifier for the Task Definition.
+          example: task_123
+          pattern: "/^[0-9a-z-_]+$/"
           type: string
         task_def_version:
           description: The task definition version.
@@ -1783,12 +1843,13 @@ components:
         file_name: file_name
         file_type: file_type
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         file_size: 0
       properties:
         id:
           description: The unique identifier for the motion capture.
+          format: uuid
           type: string
         created_at:
           description: The date and time at which the motion capture was uploaded.
@@ -1812,10 +1873,10 @@ components:
       type: object
     watchlist_monitor:
       example:
-        applicant_id: applicant_id
+        applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sandbox: false
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         report_name: watchlist_standard
         deleted_at: 2000-01-23T04:56:07.000+00:00
         tags:
@@ -1824,6 +1885,7 @@ components:
       properties:
         id:
           description: The unique identifier for the monitor.
+          format: uuid
           readOnly: true
           type: string
         created_at:
@@ -1839,6 +1901,7 @@ components:
           type: string
         applicant_id:
           description: The ID for the applicant associated with the monitor.
+          format: uuid
           type: string
         report_name:
           description: The name of the report type the monitor creates. Can be either
@@ -1871,7 +1934,7 @@ components:
         file_name: file_name
         file_type: file_type
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         file_size: 0
     id_photo_uploader:
@@ -1889,7 +1952,7 @@ components:
         environments:
         - environments
         - environments
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         enabled: true
         events:
@@ -1914,7 +1977,8 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/webhook_resend_data_inner'
+            $ref: '#/components/schemas/Webhooks_resend_item'
+          title: Webhooks resend list
           type: array
       type: object
     address:
@@ -1933,23 +1997,31 @@ components:
         building_number: building_number
         line1: line1
         sub_street: sub_street
-    repeat_attempts:
+    sdk_token_builder:
+      allOf:
+      - $ref: '#/components/schemas/sdk_token_request'
+    sdk_token:
+      allOf:
+      - $ref: '#/components/schemas/sdk_token_response'
+      example:
+        token: token
+    repeat_attempts_list:
       example:
         attempts_clear_rate: 0.6027456
-        report_id: report_id
+        report_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         repeat_attempts:
         - result: clear
           completed_at: 2000-01-23T04:56:07.000+00:00
           names: match
-          applicant_id: applicant_id
-          report_id: report_id
+          applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          report_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           date_of_birth: match
           created_at: 2000-01-23T04:56:07.000+00:00
         - result: clear
           completed_at: 2000-01-23T04:56:07.000+00:00
           names: match
-          applicant_id: applicant_id
-          report_id: report_id
+          applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          report_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           date_of_birth: match
           created_at: 2000-01-23T04:56:07.000+00:00
         attempts_count: 0
@@ -1957,12 +2029,13 @@ components:
       properties:
         report_id:
           description: The unique identifier of the completed Document report.
+          format: uuid
           type: string
         repeat_attempts:
           description: |
             An array of repeat attempt objects. If no repeat attempts were found, the array will be empty. The number of objects returned can increase over time if more matches are received.
           items:
-            $ref: '#/components/schemas/repeat_attempts_repeat_attempts_inner'
+            $ref: '#/components/schemas/repeat_attempts_list_repeat_attempts_inner'
           type: array
         attempts_count:
           description: "The total number of attempts using the same document, including\
@@ -1980,6 +2053,8 @@ components:
           description: The number of unique entries in the repeat_attempts field for
             which at least one of the fields is a mismatch.
           type: integer
+      required:
+      - repeat_attempts
       type: object
     extraction:
       example:
@@ -2017,10 +2092,11 @@ components:
           issuing_state: issuing_state
           version: version
           document_type: document_type
-        document_id: document_id
+        document_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         document_id:
           description: The unique identifier of the uploaded document.
+          format: uuid
           type: string
         document_classification:
           $ref: '#/components/schemas/extraction_document_classification'
@@ -2030,8 +2106,8 @@ components:
     results_feedback:
       example:
         feedback_notes: feedback_notes
-        report_id: report_id
-        check_id: check_id
+        report_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         expected_result: clear
       properties:
         expected_result:
@@ -2042,9 +2118,11 @@ components:
           type: string
         check_id:
           description: The ID of the check (only if report_id is not provided).
+          format: uuid
           type: string
         report_id:
           description: The ID of the check (only if check_id is not provided).
+          format: uuid
           type: string
         feedback_notes:
           description: Any additional information or feedback.
@@ -2059,8 +2137,8 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         results_uri: results_uri
         report_ids:
-        - report_ids
-        - report_ids
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tags:
         - tags
         - tags
@@ -2069,9 +2147,9 @@ components:
         webhook_ids:
         - webhook_ids
         - webhook_ids
-        applicant_id: applicant_id
+        applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         redirect_uri: redirect_uri
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         applicant_provides_data: true
         status: in_progress
@@ -2084,7 +2162,7 @@ components:
         mapping:
           document: '#/components/schemas/document_report'
           document_video: '#/components/schemas/document_video_report'
-          document_video_with_address_information: '#/components/schemas/document_video_with_address_information'
+          document_video_with_address_information: '#/components/schemas/document_video_with_address_information_report'
           document_with_address_information: '#/components/schemas/document_with_address_information_report'
           document_with_driving_licence_information: '#/components/schemas/document_with_driving_licence_information_report'
           document_with_driver_verification: '#/components/schemas/document_with_driver_verification_report'
@@ -2107,7 +2185,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/document_report'
       - $ref: '#/components/schemas/document_video_report'
-      - $ref: '#/components/schemas/document_video_with_address_information'
+      - $ref: '#/components/schemas/document_video_with_address_information_report'
       - $ref: '#/components/schemas/document_with_address_information_report'
       - $ref: '#/components/schemas/document_with_driving_licence_information_report'
       - $ref: '#/components/schemas/document_with_driver_verification_report'
@@ -2128,14 +2206,6 @@ components:
       - $ref: '#/components/schemas/india_pan_report'
     applicant_shared:
       properties:
-        first_name:
-          description: The applicant's first name
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
-          type: string
-        last_name:
-          description: The applicant's surname
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
-          type: string
         email:
           description: "The applicant's email address. Required if doing a US check,\
             \ or a UK check for which `applicant_provides_data` is `true`."
@@ -2154,8 +2224,17 @@ components:
       type: object
     applicant_response:
       properties:
+        first_name:
+          description: The applicant's first name
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          type: string
+        last_name:
+          description: The applicant's surname
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          type: string
         id:
           description: The unique identifier for the applicant.
+          format: uuid
           type: string
         created_at:
           description: The date and time when this applicant was created.
@@ -2177,17 +2256,46 @@ components:
       required:
       - id
       type: object
+    applicant_first_name:
+      description: The applicant's first name
+      pattern: "/^[^!#$%*=<>;{}\"]*$/"
+      type: string
+    applicant_last_name:
+      description: The applicant's surname
+      pattern: "/^[^!#$%*=<>;{}\"]*$/"
+      type: string
     applicant_request:
       properties:
         consents:
-          items:
-            $ref: '#/components/schemas/Applicant_consent'
-          type: array
+          $ref: '#/components/schemas/consents_builder'
         address:
           $ref: '#/components/schemas/address_builder'
         location:
           $ref: '#/components/schemas/location_builder'
       type: object
+    applicant_create:
+      properties:
+        first_name:
+          description: The applicant's first name
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          type: string
+        last_name:
+          description: The applicant's surname
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          type: string
+      required:
+      - first_name
+      - last_name
+    applicant_update:
+      properties:
+        first_name:
+          description: The applicant's first name
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          type: string
+        last_name:
+          description: The applicant's surname
+          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          type: string
     document_shared:
       properties:
         file_type:
@@ -2214,12 +2322,14 @@ components:
           type: string
         applicant_id:
           description: The ID of the applicant whose document is being uploaded.
+          format: uuid
           type: string
       type: object
     document_response:
       properties:
         id:
           description: The unique identifier for the document
+          format: uuid
           type: string
         created_at:
           description: The date and time at which the document was uploaded
@@ -2257,6 +2367,7 @@ components:
       properties:
         id:
           description: The unique identifier for the photo.
+          format: uuid
           type: string
         created_at:
           description: The date and time at which the photo was uploaded.
@@ -2284,6 +2395,7 @@ components:
       properties:
         applicant_id:
           description: The ID of the applicant whose live photo is being uploaded.
+          format: uuid
           type: string
         file:
           description: The file to be uploaded.
@@ -2298,9 +2410,11 @@ components:
       properties:
         applicant_id:
           description: The unique identifier for the Applicant.
+          format: uuid
           type: string
         workflow_id:
           description: The unique identifier for the Workflow.
+          format: uuid
           type: string
         tags:
           description: Tags or labels assigned to the workflow run.
@@ -2328,6 +2442,7 @@ components:
       properties:
         id:
           description: The unique identifier for the Workflow Run.
+          format: uuid
           type: string
         workflow_version_id:
           description: The identifier for the Workflow version.
@@ -2373,6 +2488,7 @@ components:
       properties:
         id:
           description: The unique identifier for the photo.
+          format: uuid
           type: string
         created_at:
           description: The date and time at which the photo was uploaded.
@@ -2400,6 +2516,7 @@ components:
       properties:
         applicant_id:
           description: The ID of the applicant whose ID photo is being uploaded.
+          format: uuid
           type: string
         file:
           description: The file to be uploaded.
@@ -2445,11 +2562,14 @@ components:
       - report.cancelled
       - report.awaiting_approval
       - report.completed
+      - workflow_timeline_file.created
+      - workflow_signed_evidence_file.created
       type: string
     webhook_response:
       properties:
         id:
           description: The unique identifier of the webhook.
+          format: uuid
           type: string
         url:
           description: The url that will listen to notifications (must be https).
@@ -2529,6 +2649,33 @@ components:
       required:
       - country
       - postcode
+      type: object
+    sdk_token_request:
+      properties:
+        applicant_id:
+          description: The unique identifier of the applicant
+          format: uuid
+          type: string
+        referrer:
+          description: The referrer URL pattern
+          type: string
+        application_id:
+          description: The application ID (iOS or Android)
+          format: uuid
+          type: string
+        cross_device_url:
+          description: The URL to be used by the Web SDK for the cross device flow.
+          type: string
+      required:
+      - applicant_id
+      type: object
+    sdk_token_response:
+      properties:
+        token:
+          description: The generated SDK token
+          type: string
+      required:
+      - token
       type: object
     country_codes:
       enum:
@@ -2783,6 +2930,34 @@ components:
       - ZMB
       - ZWE
       type: string
+    document_types:
+      enum:
+      - passport
+      - driving_licence
+      - national_identity_card
+      - residence_permit
+      - passport_card
+      - tax_id
+      - visa
+      - voter_id
+      - residence_status_document
+      - postal_identity_card
+      - social_security_card
+      - work_permit
+      - asylum_registration_card
+      - national_health_insurance_card
+      - municipality_identity_card
+      - private_operators_card
+      - proof_of_citizenship
+      - service_id_card
+      - immigration_status_document
+      - indigenous_card
+      - vehicle_registration_card
+      - certificate_of_naturalisation
+      - professional_qualification_card
+      - consular_id
+      - international_driving_licence
+      type: string
     check_shared:
       properties:
         webhook_ids:
@@ -2793,6 +2968,7 @@ components:
           type: array
         applicant_id:
           description: The ID of the applicant to do the check on.
+          format: uuid
           type: string
         applicant_provides_data:
           description: |
@@ -2814,6 +2990,7 @@ components:
       properties:
         id:
           description: The unique identifier for the check.
+          format: uuid
           type: string
         created_at:
           description: The date and time when this check was created.
@@ -2849,6 +3026,7 @@ components:
         report_ids:
           description: An array of report ids.
           items:
+            format: uuid
             type: string
           type: array
         sandbox:
@@ -2870,8 +3048,14 @@ components:
             \ reports only. If omitted, the Document report will use the most recently\
             \ uploaded document by default."
           items:
+            format: uuid
             type: string
           type: array
+        applicant_provides_data:
+          default: false
+          description: Send an applicant form to applicant to complete to proceed
+            with check. Defaults to false.
+          type: boolean
         asynchronous:
           default: true
           description: |
@@ -2881,41 +3065,21 @@ components:
           description: |
             For checks where `applicant_provides_data` is `true`, applicant form will not be automatically sent if `suppress_form_emails` is set to `true`. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.
           type: boolean
+        sub_result:
+          description: Triggers responses for particular sub-results for sandbox Document
+            reports.
+          type: string
         consider:
           description: Array of names of particular reports to return consider as
             their results. This is a feature available in sandbox testing
           items:
-            type: string
+            $ref: '#/components/schemas/report_name'
           type: array
         us_driving_licence:
-          additionalProperties: true
-          description: An object that contains all accepted fields for the Driver's
-            License Data Verification report.
-          type: object
+          $ref: '#/components/schemas/us_driving_licence_builder'
+      required:
+      - report_names
       type: object
-    report_name:
-      enum:
-      - document
-      - document_video
-      - document_video_with_address
-      - document_with_address_information
-      - document_with_driving_licence_information
-      - document_with_driver_verification
-      - facial_similarity_photo
-      - facial_similarity_photo_fully_auto
-      - facial_similarity_video
-      - facial_similarity_motion
-      - known_faces
-      - identity_enhanced
-      - watchlist_aml
-      - watchlist_enhanced
-      - watchlist_standard
-      - watchlist_peps_only
-      - watchlist_sanctions_only
-      - proof_of_address
-      - us_driving_licence
-      - device_intelligence
-      type: string
     document_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
@@ -2926,10 +3090,10 @@ components:
             $ref: '#/components/schemas/document_properties'
         type: object
       example:
-        result: clear
+        result: null
         documents:
-        - id: id
-        - id: id
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         breakdown:
           visual_authenticity:
             result: result
@@ -3105,11 +3269,11 @@ components:
                   no_document_in_image: no_document_in_image
                   damaged_document: damaged_document
                   dark_photo: dark_photo
-        name: document
+        name: null
         created_at: 2000-01-23T04:56:07.000+00:00
-        sub_result: clear
-        check_id: check_id
-        id: id
+        sub_result: null
+        check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         properties:
           gender: gender
@@ -3227,7 +3391,7 @@ components:
           nationality: nationality
           date_of_expiry: 2000-01-23
           issuing_authority: issuing_authority
-        status: awaiting_data
+        status: null
     document_video_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
@@ -3237,7 +3401,7 @@ components:
           properties:
             $ref: '#/components/schemas/document_properties'
         type: object
-    document_video_with_address_information:
+    document_video_with_address_information_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
       - properties:
@@ -3431,16 +3595,47 @@ components:
       example:
         country_of_residence: GBR
         ip_address: ip_address
+    consents_builder:
+      allOf:
+      - $ref: '#/components/schemas/consents_shared'
     address_builder:
       allOf:
       - $ref: '#/components/schemas/address_shared'
     location_builder:
       allOf:
       - $ref: '#/components/schemas/location_shared'
+    report_name:
+      enum:
+      - document
+      - document_video
+      - document_video_with_address_information
+      - document_with_address_information
+      - document_with_driving_licence_information
+      - document_with_driver_verification
+      - facial_similarity_photo
+      - facial_similarity_photo_fully_auto
+      - facial_similarity_video
+      - facial_similarity_motion
+      - known_faces
+      - identity_enhanced
+      - watchlist_aml
+      - watchlist_enhanced
+      - watchlist_standard
+      - watchlist_peps_only
+      - watchlist_sanctions_only
+      - proof_of_address
+      - us_driving_licence
+      - device_intelligence
+      - india_pan
+      type: string
+    us_driving_licence_builder:
+      allOf:
+      - $ref: '#/components/schemas/us_driving_licence_shared'
     report_shared:
       properties:
         id:
           description: The unique identifier for the report. Read-only.
+          format: uuid
           type: string
         created_at:
           description: The date and time at which the report was first initiated.
@@ -3451,32 +3646,14 @@ components:
           description: The API endpoint to retrieve the report. Read-only.
           type: string
         status:
-          description: The current state of the report in the checking process. Read-only.
-          enum:
-          - awaiting_data
-          - awaiting_approval
-          - cancelled
-          - complete
-          - withdrawn
-          type: string
+          $ref: '#/components/schemas/report_status'
         result:
-          description: The result of the report. Read-only.
-          enum:
-          - clear
-          - consider
-          - unidentified
-          type: string
+          $ref: '#/components/schemas/report_result'
         sub_result:
-          description: "The sub_result of the report. It gives a more detailed result\
-            \ for document reports only, and will be null otherwise. Read-only."
-          enum:
-          - clear
-          - rejected
-          - suspected
-          - caution
-          type: string
+          $ref: '#/components/schemas/report_sub_result'
         check_id:
           description: The ID of the check to which the report belongs. Read-only.
+          format: uuid
           type: string
         documents:
           description: "Array of objects with document ids that were used in the Onfido\
@@ -3485,41 +3662,35 @@ components:
             $ref: '#/components/schemas/report_document'
           type: array
         name:
-          description: The name of the report type.
-          enum:
-          - document
-          - document_video
-          - document_video_with_address_information
-          - document_with_address_information
-          - document_with_driving_licence_information
-          - document_with_driver_verification
-          - facial_similarity_photo
-          - facial_similarity_photo_fully_auto
-          - facial_similarity_video
-          - facial_similarity_motion
-          - known_faces
-          - identity_enhanced
-          - watchlist_aml
-          - watchlist_enhanced
-          - watchlist_standard
-          - watchlist_peps_only
-          - watchlist_sanctions_only
-          - proof_of_address
-          - us_driving_licence
-          - device_intelligence
-          - india_pan
-          type: string
-        breakdown:
-          description: The details of the report. This is specific to each type of
-            report.
-          type: object
-        properties:
-          additionalProperties: true
-          description: "The properties associated with the report, if any. Read-only."
-          type: object
+          $ref: '#/components/schemas/report_name'
       required:
       - id
       - name
+    report_status:
+      description: The current state of the report in the checking process. Read-only.
+      enum:
+      - awaiting_data
+      - awaiting_approval
+      - cancelled
+      - complete
+      - withdrawn
+      type: string
+    report_result:
+      description: The result of the report. Read-only.
+      enum:
+      - clear
+      - consider
+      - unidentified
+      type: string
+    report_sub_result:
+      description: "The sub_result of the report. It gives a more detailed result\
+        \ for document reports only, and will be null otherwise. Read-only."
+      enum:
+      - clear
+      - rejected
+      - suspected
+      - caution
+      type: string
     document_breakdown:
       example:
         visual_authenticity:
@@ -4051,6 +4222,18 @@ components:
         document_type:
           description: This property provides the document type according to the set
             of supported documents.
+          enum:
+          - bank_building_society_statement
+          - utility_bill
+          - council_tax
+          - benefit_letters
+          - mortgage_statement
+          - mobile_phone_bill
+          - general_letter
+          - insurance_statement
+          - pension_property_statement_letter
+          - identity_document_with_address
+          - exchange_house_statement
           type: string
         first_names:
           description: "This property provides the first names on the document, including\
@@ -4103,12 +4286,103 @@ components:
           description: The applicant's country of residence in 3-letter ISO code.
           example: GBR
       type: object
+    consents_shared:
+      items:
+        $ref: '#/components/schemas/Consent_item'
+      type: array
+    us_driving_licence_shared:
+      description: An object that contains all accepted fields for the Driver's License
+        Data Verification report.
+      properties:
+        id_number:
+          description: Driving licence ID number
+          type: string
+        issue_state:
+          description: Two letter code of issuing state (state-issued driving licenses
+            only)
+          pattern: "/^[A-Z]{2}$/"
+          type: string
+        address_line_1:
+          description: Line 1 of the address
+          type: string
+        address_line_2:
+          description: Line 2 of the address
+          type: string
+        city:
+          description: The city of the owner's address
+          type: string
+        date_of_birth:
+          description: Date of birth in yyyy-mm-dd format
+          format: date
+          type: string
+        document_category:
+          description: Document category.
+          enum:
+          - driver license
+          - driver permit
+          - id card
+          type: string
+        expiration_date:
+          description: Expiration date of the driving licence in yyyy-mm-dd format
+          format: date
+          type: string
+        eye_color_code:
+          description: Eye color code.
+          enum:
+          - BLK
+          - BLU
+          - BRO
+          - DIC
+          - GRY
+          - GRN
+          - HAZ
+          - MAR
+          - PNK
+          type: string
+        first_name:
+          description: The owner's first name
+          type: string
+        gender:
+          enum:
+          - Male
+          - Female
+          readOnly: true
+          type: string
+        issue_date:
+          description: Issue date in yyyy-mm-dd format
+          format: date
+          type: string
+        last_name:
+          description: The owner's surname
+          type: string
+        middle_name:
+          description: The owner's middle name
+          type: string
+        name_suffix:
+          description: The owner's name suffix
+          type: string
+        postal_code:
+          description: The postcode or ZIP of the owner's address
+          type: string
+        state:
+          description: 2-characters state code
+          example: CA
+          pattern: "/^[A-Z]{2}$/"
+          type: string
+        weight_measure:
+          description: Weight in pounds
+          type: integer
+      required:
+      - id_number
+      - issue_state
+      type: object
     report_document:
       example:
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
           description: ID of uploaded document to use.
+          format: uuid
           type: string
       required:
       - id
@@ -4327,7 +4601,7 @@ components:
           location:
             country_of_residence: GBR
             ip_address: ip_address
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           first_name: first_name
           email: email
@@ -4360,7 +4634,7 @@ components:
           location:
             country_of_residence: GBR
             ip_address: ip_address
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           first_name: first_name
           email: email
@@ -4406,23 +4680,23 @@ components:
         documents:
         - side: front
           download_href: download_href
-          applicant_id: applicant_id
+          applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           issuing_country: issuing_country
           file_type: jpg
           file_name: file_name
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           type: type
           file_size: 0
         - side: front
           download_href: download_href
-          applicant_id: applicant_id
+          applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           issuing_country: issuing_country
           file_type: jpg
           file_name: file_name
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           type: type
           file_size: 0
@@ -4442,14 +4716,14 @@ components:
           file_name: file_name
           file_type: file_type
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
         - download_href: download_href
           file_name: file_name
           file_type: file_type
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
       properties:
@@ -4471,7 +4745,7 @@ components:
           challenge:
           - key: ""
           - key: ""
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
         - download_href: download_href
@@ -4481,7 +4755,7 @@ components:
           challenge:
           - key: ""
           - key: ""
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
       properties:
@@ -4497,14 +4771,17 @@ components:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
-        id: id
-        task_def_id: task_def_id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        task_def_id: task_123
       properties:
         id:
           description: The identifier for the Task.
+          format: uuid
           type: string
         task_def_id:
           description: The identifier for the Task Definition.
+          example: task_123
+          pattern: "/^[0-9a-z-_]+$/"
           type: string
         created_at:
           description: The date and time when the Task was created.
@@ -4529,14 +4806,14 @@ components:
           file_name: file_name
           file_type: file_type
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
         - download_href: download_href
           file_name: file_name
           file_type: file_type
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
       properties:
@@ -4550,11 +4827,12 @@ components:
       type: object
     Watchlist_monitor_match:
       example:
-        id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         status: true
       properties:
         id:
           description: Monitor ID
+          format: uuid
           type: string
         status:
           description: Monitor status
@@ -4581,14 +4859,14 @@ components:
           file_name: file_name
           file_type: file_type
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
         - download_href: download_href
           file_name: file_name
           file_type: file_type
           created_at: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           file_size: 0
       properties:
@@ -4607,7 +4885,7 @@ components:
           environments:
           - environments
           - environments
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           enabled: true
           events:
@@ -4619,7 +4897,7 @@ components:
           environments:
           - environments
           - environments
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           enabled: true
           events:
@@ -4632,9 +4910,11 @@ components:
           items:
             $ref: '#/components/schemas/webhook'
           type: array
+      required:
+      - webhooks
       title: Webhooks list
       type: object
-    Addresses:
+    Addresses_list:
       example:
         addresses:
         - building_name: building_name
@@ -4666,39 +4946,16 @@ components:
           items:
             $ref: '#/components/schemas/address'
           type: array
-      title: Addresses
-      type: object
-    generate_sdk_token_request:
-      properties:
-        applicant_id:
-          description: The unique identifier of the applicant
-          type: string
-        referrer:
-          description: The referrer URL pattern
-          type: string
-        application_id:
-          description: The application ID (iOS or Android)
-          type: string
-        cross_device_url:
-          description: The URL to be used by the Web SDK for the cross device flow.
-          type: string
       required:
-      - applicant_id
-      type: object
-    SDK_token:
-      example:
-        token: token
-      properties:
-        token:
-          description: The generated SDK token
-          type: string
-      title: SDK token
+      - address
+      title: Addresses list
       type: object
     extract_request:
       properties:
         document_id:
           description: The unique identifier of the uploaded document to run extraction
             on
+          format: uuid
           type: string
       required:
       - document_id
@@ -4735,8 +4992,8 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           results_uri: results_uri
           report_ids:
-          - report_ids
-          - report_ids
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tags:
           - tags
           - tags
@@ -4745,9 +5002,9 @@ components:
           webhook_ids:
           - webhook_ids
           - webhook_ids
-          applicant_id: applicant_id
+          applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           redirect_uri: redirect_uri
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           applicant_provides_data: true
           status: in_progress
@@ -4755,8 +5012,8 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           results_uri: results_uri
           report_ids:
-          - report_ids
-          - report_ids
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tags:
           - tags
           - tags
@@ -4765,9 +5022,9 @@ components:
           webhook_ids:
           - webhook_ids
           - webhook_ids
-          applicant_id: applicant_id
+          applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           redirect_uri: redirect_uri
-          id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           applicant_provides_data: true
           status: in_progress
@@ -4783,10 +5040,10 @@ components:
     Reports_list:
       example:
         reports:
-        - result: clear
+        - result: null
           documents:
-          - id: id
-          - id: id
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           breakdown:
             visual_authenticity:
               result: result
@@ -4962,11 +5219,11 @@ components:
                     no_document_in_image: no_document_in_image
                     damaged_document: damaged_document
                     dark_photo: dark_photo
-          name: document
+          name: null
           created_at: 2000-01-23T04:56:07.000+00:00
-          sub_result: clear
-          check_id: check_id
-          id: id
+          sub_result: null
+          check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           properties:
             gender: gender
@@ -5084,11 +5341,11 @@ components:
             nationality: nationality
             date_of_expiry: 2000-01-23
             issuing_authority: issuing_authority
-          status: awaiting_data
-        - result: clear
+          status: null
+        - result: null
           documents:
-          - id: id
-          - id: id
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           breakdown:
             visual_authenticity:
               result: result
@@ -5264,11 +5521,11 @@ components:
                     no_document_in_image: no_document_in_image
                     damaged_document: damaged_document
                     dark_photo: dark_photo
-          name: document
+          name: null
           created_at: 2000-01-23T04:56:07.000+00:00
-          sub_result: clear
-          check_id: check_id
-          id: id
+          sub_result: null
+          check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           properties:
             gender: gender
@@ -5386,7 +5643,7 @@ components:
             nationality: nationality
             date_of_expiry: 2000-01-23
             issuing_authority: issuing_authority
-          status: awaiting_data
+          status: null
       properties:
         reports:
           items:
@@ -5401,6 +5658,7 @@ components:
       properties:
         id:
           description: The unique identifier of the resource.
+          format: uuid
           type: string
         status:
           description: "The current state of the object, if available."
@@ -5439,36 +5697,41 @@ components:
       - resource_id
       - resource_type
       type: object
-    webhook_resend_data_inner:
+    Webhooks_resend_item:
       properties:
         resource_id:
           description: ID of the resource whose webhooks are to be retriggered.
+          format: uuid
           type: string
         event:
+          allOf:
+          - $ref: '#/components/schemas/webhook_event_type'
           description: The events that should retrigger webhooks. Accepts values check.completed.
-          enum:
-          - check.completed
+          example: check.completed
           type: string
       required:
       - event
       - resource_id
+      title: Webhooks resend item
       type: object
-    repeat_attempts_repeat_attempts_inner:
+    repeat_attempts_list_repeat_attempts_inner:
       example:
         result: clear
         completed_at: 2000-01-23T04:56:07.000+00:00
         names: match
-        applicant_id: applicant_id
-        report_id: report_id
+        applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        report_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         date_of_birth: match
         created_at: 2000-01-23T04:56:07.000+00:00
       properties:
         report_id:
           description: The unique identifier of the matching Document report.
+          format: uuid
           type: string
         applicant_id:
           description: The unique identifier of the applicant for the matching Document
             report.
+          format: uuid
           type: string
         date_of_birth:
           description: Whether the dates of birth are exactly the same or are different.
@@ -5511,6 +5774,8 @@ components:
           description: Document country in 3-letter ISO code.
           type: string
         document_type:
+          allOf:
+          - $ref: '#/components/schemas/document_types'
           description: Type of document.
           type: string
         issuing_state:
@@ -5633,6 +5898,8 @@ components:
           description: Document country in 3-letter ISO code.
           type: string
         document_type:
+          allOf:
+          - $ref: '#/components/schemas/document_types'
           description: Type of document.
           type: string
         place_of_birth:
@@ -5648,22 +5915,6 @@ components:
         personal_number:
           description: The owner's unique identification number.
           type: string
-      type: object
-    Applicant_consent:
-      description: The applicant's consents
-      properties:
-        name:
-          enum:
-          - privacy_notices_read
-          - ssn_verification
-          - phone_number_verification
-          type: string
-        granted:
-          type: boolean
-      required:
-      - granted
-      - name
-      title: Applicant consent
       type: object
     workflow_run_shared_link:
       description: Object for the configuration of the Workflow Run link.
@@ -7526,6 +7777,23 @@ components:
           $ref: '#/components/schemas/device_intelligence_breakdown_properties_ip'
         geolocation:
           $ref: '#/components/schemas/device_intelligence_breakdown_properties_geolocation'
+      type: object
+    Consent_item:
+      description: The applicant's consents
+      properties:
+        name:
+          enum:
+          - privacy_notices_read
+          - ssn_verification
+          - phone_number_verification
+          title: Consent name
+          type: string
+        granted:
+          type: boolean
+      required:
+      - granted
+      - name
+      title: Consent item
       type: object
   securitySchemes:
     Token:
