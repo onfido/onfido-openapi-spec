@@ -46,7 +46,7 @@ jobs:
       java_version: ${{ steps.generator.outputs.java_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
     container:
-      image: openapitools/openapi-generator-cli:v7.3.0
+      image: openapitools/openapi-generator-cli:v7.4.0
       env:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
