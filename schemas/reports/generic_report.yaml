@@ -1,0 +1,8 @@
+allOf:
+  - $ref: definitions.yaml#/report_shared
+  - type: object
+    properties:
+      breakdown:
+        type: object
+      properties:
+        type: object
