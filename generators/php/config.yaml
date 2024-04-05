@@ -1,0 +1,14 @@
+gitRepoId: onfido-php
+enumUnknownDefaultCase: true
+legacyDiscriminatorBehavior: false
+composerPackageName: onfido/api
+invokerPackage: Onfido
+httpUserAgent: onfido-php/${CLIENT_LIBRARY_VERSION}
+licenseName: MIT
+files:
+  LICENSE.mustache:
+    destinationFilename: LICENSE
+  WebhookEventVerifier.mustache:
+    destinationFilename: lib/WebhookEventVerifier.php
+  Region.mustache:
+    destinationFilename: lib/Region.php

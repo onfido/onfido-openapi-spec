@@ -6,3 +6,6 @@ outputDir: generated/artifacts/${GENERATOR}
 disallowAdditionalPropertiesIfNotPresent: false
 additionalProperties:
   apiVersion: v3.6
+  documentationUrl: https://documentation.onfido.com
+  supportUrl: https://public.support.onfido.com/
+  supportDescription: Customer Experience Portal
