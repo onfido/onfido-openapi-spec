@@ -20,7 +20,6 @@ oneOf:
   - $ref: us_driving_licence_report.yaml
   - $ref: device_intelligence_report.yaml
   - $ref: india_pan_report.yaml
-  - $ref: generic_report.yaml
 discriminator:
   propertyName: name
   mapping:
