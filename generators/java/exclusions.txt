@@ -4,3 +4,4 @@
 /media
 /git_push.sh
 /.maven.xml
+/.travis.yml
