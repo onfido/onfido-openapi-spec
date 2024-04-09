@@ -1,4 +1,4 @@
 
 16502193337397367078434a27f67edfc6410f4c06d12db876155885d6a49394  ./README.mustache
-205298b80b17cfb2632468477ab97d169436c449028f827a51e54238eb30fd43  ./libraries/jersey2/ApiClient.mustache
-cc78197dec038c2715dc16b60114847c4065d2886e279dfa721e00e2d644a714  ./libraries/jersey2/pom.mustache
+c3d88c055ea33b1ba005b4344a2a95d7bf1d3ba4d4f931e26575c87a1e1c3c4a  ./libraries/okhttp-gson/ApiClient.mustache
+f5f282511d50815920f98c963b5c46ecbe5ca7d4103c209ef856bf02925f0934  ./libraries/okhttp-gson/oneof_model.mustache
