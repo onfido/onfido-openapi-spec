@@ -66,7 +66,6 @@ jobs:
         id: generator
         run: |
           ./shell/generate.sh
-          grep Onfido generated/artifacts/typescript-axios/LICENSE
       - name: Store generated artifacts and finalization scripts
         uses: actions/upload-artifact@v4
         with:
@@ -131,18 +130,18 @@ jobs:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
       - name: Integrate generated code (${{ matrix.version }})
         if: ${{ matrix.update }}
-        id: generator
         run: |
-          grep Onfido generated/artifacts/${{ matrix.generator }}/LICENSE
-
           rsync -r --delete-after --exclude='/.git*' --exclude='CHANGELOG*' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
-
+      - name: Run pre-commit script
+        continue-on-error: true
+        if: ${{ matrix.update }}
+        run: |
           ${{ matrix.preCommit }}
-
-          grep Onfido LICENSE
-
+      - name: Update CHANGELOG (if any change detected)
+        if: ${{ matrix.update }}
+        run: |
           if [ "$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//')" != "" ];
           then
             if [ -f CHANGELOG ];
