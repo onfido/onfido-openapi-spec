@@ -31,6 +31,11 @@ on:
         required: true
         default: false
         type: boolean
+      update-onfido-php:
+        description: "Update onfido-php?"
+        required: true
+        default: false
+        type: boolean
 jobs:
   validate_input_specs:
     name: Validate multi file specification
@@ -45,6 +50,7 @@ jobs:
     outputs:
       java_version: ${{ steps.generator.outputs.java_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
+      php_version: ${{ steps.generator.outputs.php_version }}
     container:
       image: openapitools/openapi-generator-cli:v7.4.0
       env:
@@ -119,6 +125,12 @@ jobs:
               npm install
             version: ${{ needs.generate_specs_and_libraries.outputs.typescript_axios_version }}
             update: ${{ inputs.update-onfido-node }}
+          - generator: php
+            git_repo_id: onfido-php
+            preCommit: |
+              composer install
+            version: ${{ needs.generate_specs_and_libraries.outputs.php_version }}
+            update: ${{ inputs.update-onfido-php }}
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
