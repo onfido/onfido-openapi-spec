@@ -1,0 +1,4 @@
+
+bb92a3f3107664c296ebc45c75bff7c88abf8b765565f4656a05e24234cb6d67  ./Configuration.mustache
+2d94750ad5d913f8b7fbba24681c7cc1d75e96c89ec46c379e6625c825b39020  ./model_generic.mustache
+37d3333c7c3dbc6f6bffe64ce076bc512a2a1e61e986738c8e023bb745168e9a  ./phpunit.xml.mustache
