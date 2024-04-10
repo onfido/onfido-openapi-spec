@@ -7,7 +7,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASEDIR=${SCRIPT_DIR}/..
 
 COMMON_CONFIG_FILE="generators/common/config.yaml"
-GENERATORS=${*:-`ls generators`}
+GENERATORS=${*:-`find generators -name 'config.yaml' -exec dirname {} \; | sed 's/generators\///'`}
 GENERATED_CONFIG_FILES=""
 
 OPENAPI_GENERATOR_VERSION=${OPENAPI_GENERATOR_VERSION:-v7.4.0}
@@ -53,16 +53,17 @@ function semver_bump() {
 }
 
 function validate_templates_checksum() {
-  GENERATOR=$1
-  LIBRARY=$2
+  GENERATOR_NAME=$1
+  LIBRARY_NAME=$2
+  LIBRARY=""
   RESULT=0
 
-  if [ ! -z "$LIBRARY" ];
+  if [ ! -z "$LIBRARY_NAME" ];
   then
-    LIBRARY="--library $LIBRARY"
+    LIBRARY="--library $LIBRARY_NAME"
   fi
 
-  $OPENAPI_GENERATOR_COMMAND author template -g $GENERATOR $LIBRARY -o generated/templates/${GENERATOR} > /dev/null
+  $OPENAPI_GENERATOR_COMMAND author template -g $GENERATOR_NAME $LIBRARY -o generated/templates/${GENERATOR} > /dev/null
 
   GENERATORS_PATH=$(pwd)/generators/${GENERATOR}/templates
   GENERATED_PATH=$(pwd)/generated/templates/${GENERATOR}
@@ -118,6 +119,8 @@ do
   then
     echo "Building configuration for generator ${GENERATOR}..."
 
+    IFS='/' read -r GENERATOR_NAME GENERATOR_LIBRARY <<< $GENERATOR
+
     GENERATOR_FOLDER=generators/${GENERATOR}
     CONFIG_FILE=${GENERATOR_FOLDER}/config.yaml
     GENERATED_CONFIG_FILE=generated/configuration/${GENERATOR}.yaml
@@ -128,6 +131,12 @@ do
     if [ -n "${GIT_REPO_ID}" ];
     then
       LATEST_LIBRARY_VERSION=$(curl -s https://api.github.com/repos/onfido/${GIT_REPO_ID}/releases/latest | jq .name | sed 's/[v"]//g')
+
+      if [ "$LATEST_LIBRARY_VERSION" == null ];
+      then
+        LATEST_LIBRARY_VERSION="0.0.0"
+      fi
+
       CURRENT_LIBRARY_VERSION=$(semver_bump ${LATEST_LIBRARY_VERSION} ${BUMP_CLIENT_LIBRARY_VERSION})
 
       echo "Latest delivered version was: ${LATEST_LIBRARY_VERSION}"
@@ -137,10 +146,14 @@ do
       CURRENT_LIBRARY_VERSION=""
     fi
 
-    validate_templates_checksum $GENERATOR $LIBRARY
+    validate_templates_checksum $GENERATOR_NAME $LIBRARY_NAME
+
+    mkdir -p $(dirname $GENERATED_CONFIG_FILE)
 
     ( cat $COMMON_CONFIG_FILE && echo && cat $CONFIG_FILE ) | \
         GENERATOR=${GENERATOR} \
+        GENERATOR_NAME=${GENERATOR_NAME} \
+        GENERATOR_LIBRARY=${GENERATOR_LIBRARY} \
         CLIENT_LIBRARY_VERSION=${CURRENT_LIBRARY_VERSION} \
         envsubst >| ${GENERATED_CONFIG_FILE}
 

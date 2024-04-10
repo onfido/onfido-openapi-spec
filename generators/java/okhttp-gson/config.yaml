@@ -5,7 +5,6 @@ groupId: com.onfido
 invokerPackage: com.onfido
 apiPackage: com.onfido.api
 modelPackage: com.onfido.model
-library: okhttp-gson
 httpUserAgent: onfido-java/${CLIENT_LIBRARY_VERSION}
 artifactDescription: Official Java API client library for the Onfido API
 artifactUrl: https://documentation.onfido.com
