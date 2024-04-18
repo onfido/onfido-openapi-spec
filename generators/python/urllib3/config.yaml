@@ -1,0 +1,10 @@
+gitRepoId: onfido-python
+packageName: onfido
+packageVersion: ${CLIENT_LIBRARY_VERSION}
+useOneOfDiscriminatorLookup: true
+httpUserAgent: onfido-python/${CLIENT_LIBRARY_VERSION}
+files:
+  LICENSE.mustache:
+    destinationFilename: LICENSE
+  webhook_event_verifier.py:
+    folder: onfido

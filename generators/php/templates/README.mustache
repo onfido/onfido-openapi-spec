@@ -1,0 +1,118 @@
+# Onfido PHP Library
+
+The official PHP library for integrating with the Onfido API.
+
+Documentation can be found at <{{ documentationUrl }}>.
+
+This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
+
+## Installation & Usage
+
+### Requirements
+
+PHP 7.4 and later.
+Should also work with PHP 8.0.
+
+### Composer
+
+To install the bindings via [Composer](https://getcomposer.org/), add the following to `composer.json`:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://{{gitHost}}/{{gitUserId}}/{{gitRepoId}}.git"
+    }
+  ],
+  "require": {
+    "{{gitUserId}}/{{gitRepoId}}": "*@dev"
+  }
+}
+```
+
+Then run `composer install`
+
+### Manual Installation
+
+Download the files and include `autoload.php`:
+
+```php
+<?php
+require_once('/path/to/{{packageName}}/vendor/autoload.php');
+```
+
+## Getting Started
+
+Please follow the [installation procedure](#installation--usage) and then run the following:
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = {{invokerPackage}}\Configuration::getDefaultConfiguration();
+$configuration->setApiToken($_ENV['ONFIDO_API_TOKEN']);
+$configuration->setRegion({{invokerPackage}}\Region::EU);   // Supports `EU`, `US` and `CA`
+
+$onfidoApi = new {{invokerPackage}}\Api\DefaultApi(
+              new \GuzzleHttp\Client([
+                  'timeout'  => 30,
+                  'connect_timeout' => 30,
+                  'read_timeout' => 30
+              ]), $configuration);
+
+```
+
+## Making a call to the API
+
+```php
+try {
+  $applicant = $onfidoApi->createApplicant(
+      new {{invokerPackage}}\Model\ApplicantBuilder(
+          [
+              'first_name' => 'First',
+              'last_name' => 'Last'
+          ])
+  );
+
+  // To access the information use the getter for the desired property on the object, for example:
+  $applicant->getFirstName();
+
+  // ...
+
+  // Webhook verification
+  $verifier = new Onfido\WebhookEventVerifier('_ABC123abc...3ABC123_');
+
+  $signature = 'a0...760e';
+
+  $event = $verifier->readPayload('{"payload":{"r...3"}}}', $signature);
+} catch ({{invokerPackage}}\OnfidoInvalidSignatureError $ex) {
+  // Invalid webhook signature
+} catch ({{invokerPackage}}\ApiException $ex) {
+  // Handle API exception
+  echo 'Caught exception: ',  $ex->getMessage(), "\n";
+}
+```
+
+## Contributing
+
+This library is automatically generated using [OpenAPI Generator](https://openapi-generator.tech) - version: {{generatorVersion}};
+therefore all the contributions, except tests files, should target [Onfido OpenAPI specification repository](https://github.com/onfido/onfido-openapi-spec/tree/master) instead of this repository.
+
+For contributions to the tests instead, please follow the steps below:
+
+1. [Fork](<https://github.com/{{ gitUserId }}/{{ gitRepoId }}/fork>) repository
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
+
+## More documentation
+
+More documentation and code examples can be found at <{{ documentationUrl }}>.
+
+## Support
+
+Should you encounter any technical issues during integration, please contact Onfido's Customer Support team
+via the [{{ supportDescription }}]({{ supportUrl }}) which also include support documentation.

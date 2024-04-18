@@ -36,6 +36,11 @@ on:
         required: true
         default: false
         type: boolean
+      update-onfido-python:
+        description: "Update onfido-python?"
+        required: true
+        default: false
+        type: boolean
 jobs:
   validate_input_specs:
     name: Validate multi file specification
@@ -51,6 +56,7 @@ jobs:
       java_version: ${{ steps.generator.outputs.java_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
       php_version: ${{ steps.generator.outputs.php_version }}
+      python_version: ${{ steps.generator.outputs.python_version }}
     container:
       image: openapitools/openapi-generator-cli:v7.4.0
       env:
@@ -64,7 +70,8 @@ jobs:
           apt-get install -yqq \
             gettext-base \
             git \
-            jq
+            jq \
+            pipx
       - name: Validate multi-file OpenAPI specification
         run: |
           $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
@@ -78,7 +85,7 @@ jobs:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
             generated/artifacts
-            generators/*/exclusions.txt
+            generators/**/exclusions.txt
   update_specs:
     name: Update and commit single-file OpenAPI specifications
     runs-on: ubuntu-latest
@@ -112,7 +119,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - generator: java
+          - generator: java/okhttp-gson
             git_repo_id: onfido-java
             preCommit: |
               mvn -B package --file pom.xml clean
@@ -127,9 +134,16 @@ jobs:
           - generator: php
             git_repo_id: onfido-php
             preCommit: |
-              composer install
+              composer update --lock
             version: ${{ needs.generate_specs_and_libraries.outputs.php_version }}
             update: ${{ inputs.update-onfido-php }}
+          - generator: python/urllib3
+            git_repo_id: onfido-python
+            preCommit: |
+              pipx install poetry==1.8
+              poetry lock
+            version: ${{ needs.generate_specs_and_libraries.outputs.python_version }}
+            update: ${{ inputs.update-onfido-python }}
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
@@ -143,7 +157,8 @@ jobs:
       - name: Integrate generated code (${{ matrix.version }})
         if: ${{ matrix.update }}
         run: |
-          rsync -r --delete-after --exclude='/.git*' --exclude='CHANGELOG*' \
+          rsync -r --delete-after --exclude='/.git*' --exclude='/CHANGELOG*' \
+                --exclude='/.openapi-generator-ignore' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
       - name: Run pre-commit script
