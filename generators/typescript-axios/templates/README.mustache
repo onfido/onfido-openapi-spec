@@ -80,7 +80,6 @@ Using `async`/`await` (in an `async function`):
     });
 
     // ...
-
   } catch (error) {
     if (isAxiosError(error)) {
       console.log(`status code: ${error.response?.status}`);
@@ -167,8 +166,7 @@ Webhook events payload needs to be verified before it can be accessed. Library a
     const signature = "a0...760e";
 
     const event = verifier.readPayload(`{"payload":{"r...3"}}`, signature);
-  }
-  catch(e){
+  } catch (e) {
     if (e instanceof OnfidoInvalidSignatureError) {
       // Invalid webhook signature
     }
