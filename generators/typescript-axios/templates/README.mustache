@@ -8,21 +8,23 @@ This library is only for use on the backend, as it uses Onfido API tokens which 
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
 
-## Installation
+## Installation & Usage
 
-For npm:
+### Installation
+
+#### Npm
 
 ```sh
 npm install @onfido/api
 ```
 
-For Yarn:
+#### Yarn
 
 ```sh
 yarn add @onfido/api
 ```
 
-## Getting started
+## Getting Started
 
 Require the package:
 
@@ -61,7 +63,9 @@ const onfido = new DefaultApi(
 
 NB: by default, timeout is set to 30 seconds.
 
-Using with `async`/`await` (in an `async function`):
+### Making a call to the API
+
+Using `async`/`await` (in an `async function`):
 
 ```js
 (async () => {
@@ -77,11 +81,6 @@ Using with `async`/`await` (in an `async function`):
 
     // ...
 
-    // Webhook verification
-    const verifier = new WebhookEventVerifier("_ABC123abc...3ABC123_");
-    const signature = "a0...760e";
-
-    const event = verifier.readPayload(`{"payload":{"r...3"}}}`, signature);
   } catch (error) {
     if (isAxiosError(error)) {
       console.log(`status code: ${error.response?.status}`);
@@ -103,7 +102,7 @@ Using with `async`/`await` (in an `async function`):
 
 Please find more information regarding Axios errors in library [documentation](https://axios-http.com/docs/handling_errors).
 
-Using with promises:
+Using promises:
 
 ```js
 onfido
@@ -129,7 +128,7 @@ onfido
   });
 ```
 
-## File download
+### File download
 
 File downloads, for example `onfido.downloadDocument(documentId, {responseType: 'arraybuffer'})`, will return an instance of a specific object for this endpoint.
 
@@ -145,7 +144,7 @@ Call `slice()` to get a `Blob` of the download:
 const blob = download.data.slice();
 ```
 
-## File upload
+### File upload
 
 For some common types of streams, like instances of `fs.ReadStream`, you can provide the stream directly:
 
@@ -155,6 +154,26 @@ onfido.uploadDocument(
   "<APPLICANT_ID>",
   fs.createReadStream("path/to/passport.png"),
 );
+```
+
+### Webhook event verification
+
+Webhook events payload needs to be verified before it can be accessed. Library allows to easily decode the payload and verify its signature before returning it as an object for user convenience:
+
+```js
+(async () => {
+  try {
+    const verifier = new WebhookEventVerifier("_ABC123abc...3ABC123_");
+    const signature = "a0...760e";
+
+    const event = verifier.readPayload(`{"payload":{"r...3"}}`, signature);
+  }
+  catch(e){
+    if (e instanceof OnfidoInvalidSignatureError) {
+      // Invalid webhook signature
+    }
+  }
+})();
 ```
 
 ## Contributing

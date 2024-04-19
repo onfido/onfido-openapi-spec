@@ -13,7 +13,9 @@ This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guid
 PHP 7.4 and later.
 Should also work with PHP 8.0.
 
-### Composer
+### Installation
+
+#### Composer
 
 To install the bindings via [Composer](https://getcomposer.org/), add the following to `composer.json`:
 
@@ -33,7 +35,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
 
 Then run `composer install`
 
-### Manual Installation
+#### Manual Installation
 
 Download the files and include `autoload.php`:
 
@@ -63,7 +65,7 @@ $onfidoApi = new {{invokerPackage}}\Api\DefaultApi(
 
 ```
 
-## Making a call to the API
+### Making a call to the API
 
 ```php
 try {
@@ -80,17 +82,25 @@ try {
 
   // ...
 
-  // Webhook verification
+} catch ({{invokerPackage}}\ApiException $ex) {
+  // Handle API exception
+  echo 'Caught exception: ',  $ex->getMessage(), "\n";
+}
+```
+
+### Webhook event verification
+
+Webhook events payload needs to be verified before it can be accessed. Library allows to easily decode the payload and verify its signature before returning it as an object for user convenience:
+
+```php
+try {
   $verifier = new Onfido\WebhookEventVerifier('_ABC123abc...3ABC123_');
 
   $signature = 'a0...760e';
 
-  $event = $verifier->readPayload('{"payload":{"r...3"}}}', $signature);
+  $event = $verifier->readPayload('{"payload":{"r...3"}}', $signature);
 } catch ({{invokerPackage}}\OnfidoInvalidSignatureError $ex) {
   // Invalid webhook signature
-} catch ({{invokerPackage}}\ApiException $ex) {
-  // Handle API exception
-  echo 'Caught exception: ',  $ex->getMessage(), "\n";
 }
 ```
 

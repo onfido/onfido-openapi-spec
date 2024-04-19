@@ -6,13 +6,15 @@ Documentation can be found at <{{ documentationUrl }}>.
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
 
-## Requirements
+## Installation & Usage
 
+### Requirements
 
 Python {{{generatorLanguageVersion}}}
 
-## Installation & Usage
-### pip install
+### Installation
+
+#### Pip
 
 If the python package is hosted on a repository, you can install directly using:
 
@@ -20,21 +22,16 @@ If the python package is hosted on a repository, you can install directly using:
 pip install {{{packageName}}}
 ```
 
-(you may also use poetry: `poetry add {{{packageName}}}`)
-
 Then import the package:
 ```python
 import {{{packageName}}}
 ```
 
-### Setuptools
-
-Install via [Setuptools](http://pypi.python.org/pypi/setuptools).
+#### Poetry
 
 ```sh
-python setup.py install --user
+poetry add {{{packageName}}}
 ```
-(or `sudo python setup.py install` to install the package for all users)
 
 Then import the package:
 ```python
@@ -68,7 +65,7 @@ with {{{packageName}}}.ApiClient(configuration) as api_client:
 
 NB: by default, timeout values are set to 30 seconds.
 
-## Making a call to the API
+### Making a call to the API
 
 ```python
   try:
@@ -83,17 +80,29 @@ NB: by default, timeout values are set to 30 seconds.
 
     # ...
 
-    # Webhook verification
+  except OpenApiException:
+    # ...
+    pass
+  except Exception:
+    # ...
+    pass
+```
+
+Specific exception types are defined into [exceptions.py](onfido/exceptions.py).
+
+### Webhook event verification
+
+Webhook events payload needs to be verified before it can be accessed. Library allows to easily decode the payload and verify its signature before returning it as an object for user convenience:
+
+```python
+  try:
     verifier = {{{packageName}}}.WebhookEventVerifier("_ABC123abc...3ABC123_")
 
     signature = "a0...760e"
 
-    event = verifier.read_payload('{"payload":{"r...3"}}}', signature)
+    event = verifier.read_payload('{"payload":{"r...3"}}', signature)
   except onfido.OnfidoInvalidSignatureError:
     # Invalid webhook signature
-    pass
-  except Exception:
-    # ...
     pass
 ```
 
