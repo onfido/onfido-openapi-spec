@@ -119,7 +119,7 @@ do
   then
     echo "Building configuration for generator ${GENERATOR}..."
 
-    IFS='/' read -r GENERATOR_NAME GENERATOR_LIBRARY <<< $GENERATOR
+    read GENERATOR_NAME GENERATOR_LIBRARY <<<$(IFS="/"; echo $GENERATOR)
 
     GENERATOR_FOLDER=generators/${GENERATOR}
     CONFIG_FILE=${GENERATOR_FOLDER}/config.yaml
