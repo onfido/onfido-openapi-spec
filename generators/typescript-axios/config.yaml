@@ -5,6 +5,7 @@ npmVersion: ${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
 supportsES6: true
 withNodeImports: true
+httpUserAgent: onfido-node/${CLIENT_LIBRARY_VERSION}
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE

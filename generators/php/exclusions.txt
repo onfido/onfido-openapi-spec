@@ -1,3 +1,6 @@
 /test/
 /docs/
+/vendor/
+/composer.lock
 /git_push.sh
+/.travis.yml

@@ -1,2 +1,3 @@
 /test/
 /git_push.sh
+/.travis.yml

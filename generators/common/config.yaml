@@ -1,6 +1,7 @@
 inputSpec: openapi.yaml
 gitUserId: onfido
-generatorName: ${GENERATOR}
+generatorName: ${GENERATOR_NAME}
+library: "${GENERATOR_LIBRARY}"
 templateDir: generators/${GENERATOR}/templates
 outputDir: generated/artifacts/${GENERATOR}
 disallowAdditionalPropertiesIfNotPresent: false

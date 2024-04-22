@@ -1,0 +1,8 @@
+/test*/
+/docs/
+/*requirements.txt
+/setup.*
+/tox.ini
+/git_push.sh
+/.travis.yml
+/sample_*.png

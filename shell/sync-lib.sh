@@ -18,6 +18,6 @@ then
   exit 2
 fi
 
-rsync -r --exclude='/.git*' \
+rsync -r --exclude='/.git*' --exclude='/CHANGELOG*' --exclude='/.openapi-generator-ignore' \
   --exclude-from=../onfido-openapi-spec/generators/${generator_name}/exclusions.txt \
   --delete-after ../onfido-openapi-spec/generated/artifacts/${generator_name}/ .
