@@ -1,0 +1,15 @@
+gitRepoId: onfido-ruby
+# npmName: "@onfido/api"
+# npmRepository: github:onfido/onfido-node
+npmVersion: ${CLIENT_LIBRARY_VERSION}
+enumUnknownDefaultCase: true
+# apiPackage: "onfido/api"
+gemName: onfido
+# library: faraday
+# hideGenerationTimestamp: true
+licenseName: MIT
+files:
+  LICENSE.mustache:
+    destinationFilename: LICENSE
+  webhook_event_verifier.mustache:
+    destinationFilename: lib/onfido/webhook_event_verifier.rb
