@@ -5,12 +5,16 @@ import sys
 
 from dataclasses import dataclass
 
+
 @dataclass
 class Section:
     name: str
     resources: dict
 
 
+# Division of the resources by Section
+# When resource value is set to None, tag will be automatically generated
+# from path prefix replacing _ with spaces and capitalising each word
 SECTIONS = (
     Section('Core',
             {'applicants': None,
@@ -37,11 +41,11 @@ SECTIONS = (
 )
 
 
-def to_camel_case_with_spaces(snake_str: str):
+def convert_path(snake_str: str) -> None:
     return " ".join(x.capitalize() for x in snake_str.lower().split("_"))
 
 
-def convert(input_spec_file: str, output_spec_file: str):
+def convert_spec(input_spec_file: str, output_spec_file: str) -> None:
     with open(input_spec_file) as input_handler:
         input_dict = json.load(input_handler)
 
@@ -51,7 +55,7 @@ def convert(input_spec_file: str, output_spec_file: str):
             for section in SECTIONS:
                 if path_prefix in section.resources:
                     if not (resource_name := section.resources[path_prefix]):
-                        resource_name = to_camel_case_with_spaces(path_prefix)
+                        resource_name = convert_path(path_prefix)
 
                     tag = '{} | {}'.format(section.name, resource_name)
                     break
@@ -66,9 +70,10 @@ def convert(input_spec_file: str, output_spec_file: str):
     with open(output_spec_file, 'w') as fp:
         json.dump(input_dict, fp, indent=2)
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print(f"Usage: {sys.argv[0]} input-spec.json output-spec.json")
         sys.exit(1)
 
-    convert(sys.argv[1], sys.argv[2])
+    convert_spec(sys.argv[1], sys.argv[2])
