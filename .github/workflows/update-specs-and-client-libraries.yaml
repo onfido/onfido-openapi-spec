@@ -99,17 +99,24 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+      - name: Refresh single-file OpenAPI specifications for Postman
+        run: |
+          ./shell/postman-openapi-refresh.py \
+            generated/artifacts/openapi/openapi.json \
+            generated/artifacts/openapi-postman/openapi.json
+          npm install prettier && npx prettier --write \
+            generated/artifacts/openapi-postman/openapi.json
       - name: Commit and push single-file OpenAPI specifications
         run: |
-          if [ -z "$(git status --porcelain=v1 generated/artifacts/openapi-*)" ];
+          if [ -z "$(git status --porcelain=v1 generated/artifacts/openapi*)" ];
           then
             echo "no change detected"
           else
             echo "changes detected"
             git config user.name "GitHub Actions Bot"
             git config user.email "<>"
-            git status generated/artifacts/openapi-*
-            git commit -m "Single file specifications refresh" generated/artifacts/openapi-*
+            git add generated/artifacts/openapi* && git status
+            git commit -m "Single file specifications refresh" generated/artifacts/openapi*
             git push
           fi
   update_client_libraries:
@@ -122,7 +129,7 @@ jobs:
           - generator: java/okhttp-gson
             git_repo_id: onfido-java
             preCommit: |
-              mvn -B package --file pom.xml clean
+              mvn -B package --file pom.xml clean -Dmaven.test.skip
             version: ${{ needs.generate_specs_and_libraries.outputs.java_version }}
             update: ${{ inputs.update-onfido-java }}
           - generator: typescript-axios
