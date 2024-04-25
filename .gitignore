@@ -1,3 +1,2 @@
-generated/**
-!generated/artifacts/
-!generated/artifacts/openapi/
+generated/*/*
+!generated/artifacts/openapi*
