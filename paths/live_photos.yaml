@@ -2,6 +2,8 @@ live_photos:
   get:
     summary: List live photos
     operationId: list_live_photos
+    description: >
+      Lists the live photos that belong to an applicant.
     parameters:
       - name: applicant_id
         in: query
@@ -56,6 +58,8 @@ live_photo:
   get:
     summary: Retrieve live photo
     operationId: find_live_photo
+    description: >
+      Retrieves a single live photo. Returns a live photo object.
     parameters:
       - name: live_photo_id
         in: path

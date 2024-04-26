@@ -165,7 +165,7 @@ jobs:
         if: ${{ matrix.update }}
         run: |
           rsync -r --delete-after --exclude='/.git*' --exclude='/CHANGELOG*' \
-                --exclude='/.openapi-generator-ignore' \
+                --exclude='/.openapi-generator-ignore' --exclude='/.openapi-generator/FILES' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
       - name: Run pre-commit script

@@ -1,7 +1,9 @@
 extractions:
   post:
-    summary: Extract information from a document
+    summary: Autofill
     operationId: extract
+    description: >
+      Extract information from a document
     requestBody:
       required: true
       content:

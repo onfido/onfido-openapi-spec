@@ -1,8 +1,8 @@
 documents:
   get:
     summary: List documents
-    operationId: list_documents
     description: All documents belonging to an applicant can be listed from this endpoint
+    operationId: list_documents
     parameters:
       - name: applicant_id
         in: query
@@ -52,8 +52,10 @@ documents:
 
 document:
   get:
-    summary: A single document can be retrieved by calling this endpoint with the document's unique identifier.
+    summary: Retrieve document
     operationId: find_document
+    description: >
+      A single document can be retrieved by calling this endpoint with the document's unique identifier.
     parameters:
       - name: document_id
         in: path
@@ -73,8 +75,10 @@ document:
 
 download:
   get:
-    summary: Download raw data for a document
+    summary: Download document
     operationId: download_document
+    description: >
+      Downloads specific documents belonging to an applicant. If successful, the response will be the binary data representing the image.
     parameters:
       - name: document_id
         in: path
@@ -96,8 +100,10 @@ download:
 video:
   download:
     get:
-      summary: Download a documents raw data
+      summary: Download document video
       operationId: download_document_video
+      description: >
+        Downloads a document video. If successful, the response will be the binary data representing the video.
       parameters:
         - name: document_id
           in: path

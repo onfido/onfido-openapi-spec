@@ -1,0 +1,108 @@
+tasks:
+  get:
+    summary: List Tasks
+    operationId: list_tasks
+    description: >
+      The tasks of a Workflow can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
+    parameters:
+      - name: workflow_run_id
+        in: path
+        required: true
+        description: The unique identifier of the Workflow Run to which the Tasks belong.
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "200":
+        description: An array of subset Task objects that were already started or completed, ordered by the created_at field, in ascending order.
+        content:
+          application/json:
+            schema:
+              type: array
+              title: Tasks
+              items:
+                type: object
+                title: Task
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The identifier for the Task.
+                  task_def_id:
+                    $ref: ../schemas/tasks/definitions.yaml#/task_def_id
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: The date and time when the Task was created.
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: The date and time when the Task was last updated.
+      default:
+        $ref: ../responses/default_error.yaml
+
+task:
+  get:
+    summary: Retrieve Task
+    operationId: find_task
+    description: >
+      A single task can be retrieved by calling this endpoint with the unique identifier of the Task and Workflow Run.
+    parameters:
+      - name: workflow_run_id
+        in: path
+        required: true
+        description: The unique identifier of the Workflow Run to which the Task belongs.
+        schema:
+          type: string
+          format: uuid
+      - name: task_id
+        in: path
+        required: true
+        description: The identifier of the Task you want to retrieve.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: A Task object.
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/tasks/task.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+complete_task:
+  post:
+    summary: Complete Task
+    operationId: complete_task
+    description: >
+      Completes a Send / Receive Data Task.
+    parameters:
+      - name: workflow_run_id
+        in: path
+        required: true
+        description: The unique identifier of the Workflow Run to which the Task belongs.
+        schema:
+          type: string
+          format: uuid
+      - name: task_id
+        in: path
+        required: true
+        description: The identifier of the Task you want to complete.
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: The Task completion payload.
+    responses:
+      "200":
+        description: An empty response body.
+      default:
+        $ref: ../responses/default_error.yaml

@@ -1,7 +1,9 @@
 reports:
   get:
-    summary: All the reports belonging to a particular check can be listed from this endpoint.
+    summary: List reports
     operationId: list_reports
+    description: >
+      All the reports belonging to a particular check can be listed from this endpoint.
     parameters:
       - name: check_id
         in: query
@@ -29,8 +31,10 @@ reports:
 
 report:
   get:
-    summary: A single report can be retrieved using this endpoint with the corresponding unique identifier.
+    summary: Retrieve report
     operationId: find_report
+    description: >
+      A single report can be retrieved using this endpoint with the corresponding unique identifier.
     parameters:
       - name: report_id
         in: path
@@ -50,8 +54,10 @@ report:
 
 resume:
   post:
-    summary: This endpoint is for resuming individual paused reports.
+    summary: Resume report
     operationId: resume_report
+    description: >
+      Resumes a single paused report.
     parameters:
       - name: report_id
         in: path
@@ -67,8 +73,10 @@ resume:
 
 cancel:
   post:
-    summary: This endpoint is for cancelling individual paused reports.
+    summary: Cancel report
     operationId: cancel_report
+    description: >
+      Cancels single paused reports.
     parameters:
       - name: report_id
         in: path

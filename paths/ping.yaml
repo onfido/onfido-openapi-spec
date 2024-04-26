@@ -1,7 +1,9 @@
 ping:
   get:
-    summary: Run a health check on the Onfido API
+    summary: Ping
     operationId: ping
+    description: >
+      Run a health check on the Onfido API
     responses:
       "200":
         description: Regional base URL is operational

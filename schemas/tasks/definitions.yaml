@@ -1,5 +1,5 @@
 task_def_id:
   type: string
-  pattern: "/^[0-9a-z-_]+$/"
+  pattern: ^[0-9a-z-_]+$
   description: The identifier for the Task Definition.
   example: task_123
