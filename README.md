@@ -4,19 +4,17 @@
 
 This specification supports the latest version of the Onfido API (v3.6).
 
-It used also used for generating client libraries to allow backend services to interact with Onfido API.
-
-A postman collection is also provided for user's convenience.
+It is also used for generating client libraries to allow backend services to interact with Onfido API. A postman collection isprovided as well for user's convenience.
 
 ## Client libraries
 
 Client libraries are built and provided by Onfido in 5 different programming languages.
 
-Nevertheless, user can generate libraries in any other language supported by the [OpenAPI Generator](https://openapi-generator.tech).
+Nevertheless, users can generate libraries in any other language supported by the [OpenAPI Generator](https://openapi-generator.tech).
 
 ### How to use pre-built client libraries
 
-Libraries below are generated and mantained by Onfido:
+Libraries below are generated and maintained by Onfido:
 
 - [onfido-java](https://github.com/onfido/onfido-java)
 - [onfido-node](https://github.com/onfido/onfido-node)
@@ -24,7 +22,7 @@ Libraries below are generated and mantained by Onfido:
 - [onfido-python](https://github.com/onfido/onfido-python)
 - [onfido-ruby](https://github.com/onfido/onfido-ruby)
 
-Libraries comes with Webhook validation and possibility to easily choose region to target.
+Libraries come with Webhook validation and the possibility to easily choose a region to target.
 
 Please find more information regarding how to use each library in his own README.md file.
 
@@ -34,7 +32,7 @@ Please find in [OpenAPI Generator documentation](https://openapi-generator.tech)
 
 The file [openapi.yaml](https://github.com/onfido/onfido-openapi-spec/blob/master/openapi.yaml) should be provided to the generator.
 
-We reccomend providing the generator with options below (whenever available):
+We recommend providing the generator with options below (whenever available):
 
 ```yaml
 enumUnknownDefaultCase: true
@@ -45,9 +43,9 @@ disallowAdditionalPropertiesIfNotPresent: false
 
 ## API Documentation
 
-The [openapi-documentation/openapi.json](generated/artifacts/openapi-documentation/openapi.json) defition might be used to explore the OpenAPI definition with tools like [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/).
+The [openapi-documentation/openapi.json](generated/artifacts/openapi-documentation/openapi.json) file might be used to explore the OpenAPI definition with tools like [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/).
 
-A pre-compiled Postman collection is also avialable in [documentation portal](https://documentation.onfido.com/#postman).
+A pre-compiled Postman collection is also available in [documentation portal](https://documentation.onfido.com/#postman).
 
 ## Development
 
@@ -65,9 +63,9 @@ A few exceptions come from a global exclusion list (defined as part of the rsync
 
 For each generator, additional exclusions are defined into specific [exclusions.txt files](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fexclusions.txt&type=code) stored in each generator folder.
 
-Code is automatically generated into the [generated/artifacts](https://github.com/onfido/onfido-openapi-spec/tree/master/generated/artifacts) subfolders and copied to specific client library repository via aautomatically created PRs. Every path matching the exclusion lists defined above is neither copied from artifact folder nor removed from the target client library repository: that’s the way for not pushing some contents to client libraries but also holding back some files (tests and git files) from being removed or overridden.
+Code is automatically generated into the [generated/artifacts](https://github.com/onfido/onfido-openapi-spec/tree/master/generated/artifacts) subfolders and pushed to each client library repository via automatically created PRs. Every path matching the exclusion lists defined above is neither copied from artifact folder nor removed from the target client library repository: that’s the way for not pushing some contents to client libraries but also holding back some files (tests and git files) from being removed or overridden.
 
-A few files are automatically generated and committed in [generated/artifacts](https://github.com/onfido/onfido-openapi-spec/tree/master/generated/artifacts) folder at PR merge time.
+A few files are automatically generated and committed in the [generated/artifacts](https://github.com/onfido/onfido-openapi-spec/tree/master/generated/artifacts) folder at PR merge time.
 
 ### Configuration files
 
@@ -75,7 +73,7 @@ Configuration files are named conf[ig.yaml](https://github.com/search?q=repo%3Ao
 
 ### Templates
 
-Templates are provided to add particular functionalites to client libraries:
+Templates are provided to add particular features to client libraries:
 
 - Webhook Event validation
 - Region selection
@@ -106,7 +104,7 @@ That happens when templates we're overriding have been updated. The script autom
 3. Add all changes from the new version except the ones noted by mustache comments (i.e. `{{! }}`)
 4. Commit changes to both templates and SHA256SUM files
 
-The changes to README.md should be carefully reviewed by comparing `generated/templates/**/README.mustache` files created with different OpenAPI generator version.
+The changes to README.md should be carefully reviewed by comparing `generated/templates/**/README.mustache` files created with different OpenAPI generator versions.
 
 ## Contributing
 
@@ -130,7 +128,7 @@ Repository is open to external contributions. At this end please:
             generated/artifacts/openapi-documentation/openapi.json
     ```
 
-6. Before commiting your changes, run the script `./shell/run-prettier.sh`
+6. Before committing your changes, run the script `./shell/run-prettier.sh`
 7. Commit your changes (`git commit -am 'Add some feature'`)
 8. Push to the branch (`git push origin my-new-feature`)
 9. Create a new Pull Request
