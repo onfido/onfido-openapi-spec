@@ -4,6 +4,13 @@
 
 module {{moduleName}}
   class Configuration
+    {{! Added one line with region list}}
+    REGIONS = {
+      EU: 'eu',
+      CA: 'ca',
+      US: 'us'
+    }.freeze
+
     # Defines url scheme
     attr_accessor :scheme
 
@@ -187,6 +194,21 @@ module {{moduleName}}
         server_index.nil? ? "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '') : server_url(server_index, server_variables, nil)
       end
     end
+
+    {{! BEGIN - Added api token and region}}
+    def api_token=(api_token)
+      @api_key = {'Token' => "Token token=#{api_token}"}
+    end
+
+    def region()
+      REGIONS
+    end
+
+    def region=(region)
+      @server_index = 0
+      server_variables[:region] = region
+    end
+    {{! END - Added api token and region}}
 
     # Gets API key (with prefix if set).
     # @param [String] param_name the parameter name of API key auth
