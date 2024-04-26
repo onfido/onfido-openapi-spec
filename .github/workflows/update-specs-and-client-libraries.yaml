@@ -99,13 +99,13 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
-      - name: Refresh single-file OpenAPI specifications for Postman
+      - name: Refresh single-file OpenAPI specifications for Documentation
         run: |
-          ./shell/postman-openapi-refresh.py \
+          ./shell/refresh-openapi-spec-for-documentation.py \
             generated/artifacts/openapi/openapi.json \
-            generated/artifacts/openapi-postman/openapi.json
+            generated/artifacts/openapi-documentation/openapi.json
           npm install prettier && npx prettier --write \
-            generated/artifacts/openapi-postman/openapi.json
+            generated/artifacts/openapi-documentation/openapi.json
       - name: Commit and push single-file OpenAPI specifications
         run: |
           if [ -z "$(git status --porcelain=v1 generated/artifacts/openapi*)" ];
