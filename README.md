@@ -4,7 +4,7 @@
 
 This specification supports the latest version of the Onfido API (v3.6).
 
-It can also be used for generating client libraries to allow backend services to interact with the Onfido API. A [Postman collection](https://god.gw.postman.com/run-collection/221325-406603c0-7f64-4251-a58c-93324d99f916) is provided as well for user's convenience.
+It can also be used for generating client libraries to allow backend services to interact with the Onfido API. A [Postman collection](#api-documentation) is provided as well for user's convenience.
 
 ## Client libraries
 
