@@ -60,6 +60,7 @@ A few exceptions come from a global exclusion list (defined as part of the rsync
 - `/.git*`
 - `/CHANGELOG*`
 - `/.openapi-generator-ignore`
+- `/.openapi-generator/FILES`
 
 For each generator, additional exclusions are defined into specific [exclusions.txt files](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fexclusions.txt&type=code) stored in each generator's folder.
 
