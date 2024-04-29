@@ -47,12 +47,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
       - name: Validate OpenAPI Specification YAML
         run: ./shell/run-prettier.sh check
   generate_specs_and_libraries:
     name: Build single-file OpenAPI specifications and client libraries
     runs-on: ubuntu-latest
     outputs:
+      last_commit_long_sha: ${{ steps.retriever.outputs.last_commit_long_sha }}
+      last_commit_short_sha: ${{ steps.retriever.outputs.last_commit_short_sha }}
       java_version: ${{ steps.generator.outputs.java_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
       php_version: ${{ steps.generator.outputs.php_version }}
@@ -72,6 +76,13 @@ jobs:
             git \
             jq \
             pipx
+      - name: Retrieve information about last commit (excluding ones authored by GitHub Actions Bot)
+        id: retriever
+        run: |
+          ls -lhA
+          LAST_COMMIT_LONG_SHA=$(git rev-list --perl-regexp --author='^((?!GitHub Actions Bot).*)$' HEAD | head -n 1)
+          echo "last_commit_long_sha=$LAST_COMMIT_LONG_SHA" >> $GITHUB_OUTPUT
+          echo "last_commit_short_sha=$(git rev-parse --short $LAST_COMMIT_LONG_SHA)" >> $GITHUB_OUTPUT
       - name: Validate multi-file OpenAPI specification
         run: |
           $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
@@ -116,7 +127,7 @@ jobs:
             git config user.name "GitHub Actions Bot"
             git config user.email "<>"
             git add generated/artifacts/openapi* && git status
-            git commit -m "Single file specifications refresh" generated/artifacts/openapi*
+            git commit -m "Single file specifications refresh (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})" generated/artifacts/openapi*
             git push
           fi
   update_client_libraries:
@@ -197,10 +208,10 @@ jobs:
         if: ${{ matrix.update }}
         with:
           token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
-          commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
-          title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
+          commit-message: Upgrade after onfido-openapi-spec change ${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
+          title: Refresh ${{ matrix.git_repo_id }} after onfido-openapi-spec update (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})
           body: |
-            - Auto-generated PR
+            Auto-generated PR to update ${{ matrix.git_repo_id }} (${{ matrix.version }}) with changes till commit ${{ github.repository_owner	}}/onfido-openapi-spec@${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }} (included)
           labels: |
             automated pr
 
