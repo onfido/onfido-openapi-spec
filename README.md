@@ -4,7 +4,7 @@
 
 This specification supports the latest version of the Onfido API (v3.6).
 
-It is also used for generating client libraries to allow backend services to interact with Onfido API. A postman collection is provided as well for user's convenience.
+It can also be used for generating client libraries to allow backend services to interact with the Onfido API. A [Postman collection](https://god.gw.postman.com/run-collection/221325-406603c0-7f64-4251-a58c-93324d99f916) is provided as well for user's convenience.
 
 ## Client libraries
 
@@ -14,7 +14,7 @@ Nevertheless, users can generate libraries in any other language supported by th
 
 ### How to use pre-built client libraries
 
-Libraries below are generated and maintained by Onfido:
+The libraries below are generated and maintained by Onfido:
 
 - [onfido-java](https://github.com/onfido/onfido-java)
 - [onfido-node](https://github.com/onfido/onfido-node)
@@ -24,7 +24,7 @@ Libraries below are generated and maintained by Onfido:
 
 Libraries come with Webhook Events validation and the possibility to easily choose a region to target.
 
-Please find more information regarding how to use each library in his own README.md file.
+Please find more information regarding how to use each library within their own README.md file.
 
 ### How to build client libraries yourself
 
@@ -32,7 +32,7 @@ Please find in [OpenAPI Generator documentation](https://openapi-generator.tech)
 
 The file [openapi.yaml](https://github.com/onfido/onfido-openapi-spec/blob/master/openapi.yaml) should be provided to the generator.
 
-We recommend providing the generator with options below (whenever available):
+We recommend providing the generator with the options below (whenever available):
 
 ```yaml
 enumUnknownDefaultCase: true
@@ -43,9 +43,9 @@ disallowAdditionalPropertiesIfNotPresent: false
 
 ## API Documentation
 
-The [openapi-documentation/openapi.json](generated/artifacts/openapi-documentation/openapi.json) file might be used to explore the OpenAPI definition with tools like [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/).
+The [openapi-documentation/openapi.json](generated/artifacts/openapi-documentation/openapi.json) file can be used to explore the OpenAPI definition with tools like [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/).
 
-A pre-compiled Postman collection is also available in [documentation portal](https://documentation.onfido.com/#postman).
+A pre-compiled Postman collection is also available in the Onfido [documentation portal](https://documentation.onfido.com/#postman).
 
 ## Development
 
@@ -69,7 +69,7 @@ A few files are automatically generated and committed in the [generated/artifact
 
 ### Configuration files
 
-Configuration files are named [config.yaml](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fconfig.yaml&type=code) and allow providing custom parameters to each generator. Most of parameters are defined in [OpenAPI generator documentation](https://openapi-generator.tech/docs/generators/). A global configuration ([common/config.yaml](https://github.com/onfido/onfido-openapi-spec/blob/master/generators/common/config.yaml)) is used to store common parameters and them share among the different generators. Configuration files also include some variables (e.g. ${GENERATOR_NAME}) which are replaced before being provided to openapi generator (see `envsubst` command in [generate.sh](https://github.com/onfido/onfido-openapi-spec/blob/master/shell/generate.sh)).
+Configuration files are named [config.yaml](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fconfig.yaml&type=code) and allow for the provision of custom parameters to each generator. Most parameters are defined in the [OpenAPI generator documentation](https://openapi-generator.tech/docs/generators/). A global configuration ([common/config.yaml](https://github.com/onfido/onfido-openapi-spec/blob/master/generators/common/config.yaml)) is used to store common parameters and share them among the different generators. Configuration files also include some variables (e.g. ${GENERATOR_NAME}) which are replaced before being provided to the Openapi generator (see `envsubst` command in [generate.sh](https://github.com/onfido/onfido-openapi-spec/blob/master/shell/generate.sh)).
 
 ### Templates
 
@@ -86,7 +86,7 @@ In nearly all cases, with the exception of Webhook Event Validation and README.m
 
 ### Updating OpenAPI generator version
 
-To update OpenAPI generator version, bump version in both [update-specs-and-client-libraries.yaml](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec%20path%3A*%2Fupdate-specs-and-client-libraries.yaml%20openapi-generator-cli&type=code) and [generate.sh](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3Ashell%2Fgenerate.sh+OPENAPI_GENERATOR_VERSION&type=code). Afterwards run the `./shell/generate.sh` script as usual, some errors like below might be raised:
+To update the OpenAPI generator version, bump the version in both [update-specs-and-client-libraries.yaml](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec%20path%3A*%2Fupdate-specs-and-client-libraries.yaml%20openapi-generator-cli&type=code) and [generate.sh](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3Ashell%2Fgenerate.sh+OPENAPI_GENERATOR_VERSION&type=code). Afterwards run the `./shell/generate.sh` script as usual, some errors like below might be raised:
 
 ```sh
  !!! Error while building generator ...!!!
@@ -94,10 +94,10 @@ To update OpenAPI generator version, bump version in both [update-specs-and-clie
  SHA256SUM for template ... changed, diff reported below. To overwrite template, run:
  ...
 ```
-That happens when templates we're overriding have been updated. The script automatically fix checksums for one generator at each run, but the templates needs to be carefully reviewed and updated by following procedure below:
+This happens when templates we're overriding have been updated. The script automatically fixes checksums for one generator at each run, but the templates need to be carefully reviewed and updated by following the procedure below:
 
 1. Check which files have changed, by running `git diff generators/**/templates/SHA256SUM`
-2. Compare each files with the one that has been freshly generated, e.g. if _libraries/okhttp-gson/ApiClient.mustache_ checksum has been denoted as modified for _java/okhttp-gson_ generator:
+2. Compare each file with the one that has been freshly generated, e.g. if _libraries/okhttp-gson/ApiClient.mustache_ checksum has been denoted as modified for _java/okhttp-gson_ generator:
     ```sh
     diff generators/java/okhttp-gson/templates/libraries/okhttp-gson/ApiClient.mustache  generated/templates/java/okhttp-gson/libraries/okhttp-gson/ApiClient.mustache
     ```
@@ -120,7 +120,7 @@ Repository is open to external contributions. At this end please:
     ../onfido-openapi-spec/shell/sync-lib.sh php
     ```
 
-5. To verify changes to OpenAPI definition with external tools, run:
+5. To verify changes to the OpenAPI definition with external tools, run:
 
     ```sh
     ./shell/refresh-openapi-spec-for-documentation.py \
@@ -135,7 +135,7 @@ Repository is open to external contributions. At this end please:
 
 ### Delivering client libraries (internal use only)
 
-Below how to deliver new client libraries:
+Described below is the procedure on how to deliver new client libraries:
 
 1. Merge all the requested PRs in [onfido-openapi-spec](https://github.com/onfido/onfido-openapi-spec).
 2. Manually trigger an [update-specs-and-client-libraries](https://github.com/onfido/onfido-openapi-spec/actions/workflows/update-specs-and-client-libraries.yaml) by clicking over the _Run workflow_ button
