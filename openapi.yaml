@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Onfido API v3.6
-  description: The Onfido API
-  version: 3.6.0
+  title: Onfido API
+  version: v3.6
+  description: The Onfido API (v3.6)
   contact:
     name: Onfido
     url: https://public.support.onfido.com
