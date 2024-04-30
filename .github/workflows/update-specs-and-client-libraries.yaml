@@ -110,13 +110,24 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
-      - name: Refresh single-file OpenAPI specifications for Postman
+      - name: Create reference OpenAPI Specification and refresh Postman Collection
         run: |
-          ./shell/postman-openapi-refresh.py \
+          mkdir -p generated/artifacts/postman
+          npm install prettier openapi-to-postmanv2
+          ./shell/patch-openapi-definition.py \
             generated/artifacts/openapi/openapi.json \
-            generated/artifacts/openapi-postman/openapi.json
-          npm install prettier && npx prettier --write \
-            generated/artifacts/openapi-postman/openapi.json
+            generated/artifacts/openapi-reference/openapi.json
+          npx prettier --write \
+            generated/artifacts/openapi-reference/openapi.json
+          npx openapi2postmanv2 \
+            -s generated/artifacts/openapi-reference/openapi.json \
+            -o generated/artifacts/postman/collection.json \
+            -p -O folderStrategy=Tags
+          ./shell/publish-postman-collection.py \
+            generated/artifacts/postman/collection.json \
+            221325-8ba05649-fd5b-40eb-976b-bc1d8ef6e328
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
       - name: Commit and push single-file OpenAPI specifications
         run: |
           if [ -z "$(git status --porcelain=v1 generated/artifacts/openapi*)" ];
