@@ -5,25 +5,46 @@ import requests
 import sys
 
 from os import getenv
-
+from collections import defaultdict
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
 
-def replace_collection(postman_collection: str, collection_id: str) -> None:
+def nest_collection(postman_collection: dict) -> None:
+    patched_items = defaultdict(list)
+
+    for item in postman_collection['item']:
+        folder_name, subfolder_name = map(str.strip,
+                                          item['name'].split('|', 2))
+
+        item['name'] = subfolder_name
+        patched_items[folder_name].append(item)
+
+    postman_collection['item'] = [{
+            "name": folder_name,
+            "description": "",
+            "item": folder_contents
+    } for folder_name, folder_contents in patched_items.items()]
+
+
+def replace_collection(postman_collection_file: str,
+                       collection_id: str) -> None:
     headers = {'Accept': 'application/vnd.api.v10+json',
                'Content-Type': "application/json",
                'X-API-Key': getenv('POSTMAN_API_KEY')}
 
-    with open(postman_collection) as postman_collection:
+    with open(postman_collection_file) as postman_collection_str:
+        postman_collection = json.load(postman_collection_str)
+        nest_collection(postman_collection)
+
         # Replace a collection's data
         # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-bc8b292b-ffbb-4c67-a2a1-2fc416e2aef8
         result = requests.put(
                     url=f"https://api.getpostman.com/collections/{collection_id}",
                     headers=headers,
                     data=json.dumps({
-                        "collection": json.load(postman_collection)
+                        "collection": postman_collection
                     }))
 
         result.raise_for_status()

@@ -19,7 +19,7 @@ class Section:
 # When resource value is set to None, tag will be automatically generated
 # from path prefix replacing _ with spaces and capitalising each word
 SECTIONS = (
-    Section('Core',
+    Section('Core Resources',
             {'applicants': None,
              'documents': None,
              'live_photos': 'Live photos',
@@ -30,7 +30,7 @@ SECTIONS = (
              'watchlist_monitors': 'Monitors',
              'id_photos': 'ID Photos'
              }),
-    Section('Others',
+    Section('Other Endpoints',
             {'ping': None,
              'webhooks': None,
              'addresses': 'Address Picker',
