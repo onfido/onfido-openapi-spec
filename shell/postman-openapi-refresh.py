@@ -7,6 +7,7 @@ import sys
 from dataclasses import dataclass
 from time import sleep
 from os import getenv
+from datetime import date
 
 
 @dataclass
@@ -57,9 +58,11 @@ def get_logger() -> logging.Logger:
     return root
 
 
+logger = get_logger()
+
+
 def convert_path(snake_str: str) -> None:
     return " ".join(x.capitalize() for x in snake_str.lower().split("_"))
-
 
 def patch_spec(input_spec_file: str, output_spec_file: str) -> dict:
     with open(input_spec_file) as input_handler:
@@ -89,85 +92,121 @@ def patch_spec(input_spec_file: str, output_spec_file: str) -> dict:
     return spec_dict
 
 
-def update_postman_collection(spec_dict: dict, api_id: str,
-                              schema_id: str, file_path: str,
-                              collection_id: str = None) -> None:
+class PostmanClient:
+    def __init__(self, api_id: str):
+        self._postman_base = f"https://api.getpostman.com/apis/{api_id}"
+        self._headers = {'Accept': 'application/vnd.api.v10+json',
+                         'Content-Type': "application/json",
+                         'X-API-Key': getenv('POSTMAN_API_KEY')}
 
-    postman_base = f"https://api.getpostman.com/apis/{api_id}"
-
-    headers = {'Accept': 'application/vnd.api.v10+json',
-               'Content-Type': "application/json",
-               'X-API-Key': getenv('POSTMAN_API_KEY')}
-
-    # Update OpenAPI schema
-    # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-7ad78218-f1c6-48a6-b612-3cf64cdde475
-    result = requests.put(
-                url=f"{postman_base}/schemas/{schema_id}/files/{file_path}",
-                headers=headers,
-                data=json.dumps({
-                    "content": json.dumps(spec_dict, indent=2)
-                }))
-
-    result.raise_for_status()
-
-    logger.info("API updated")
-
-    if not collection_id:
-        # Add collection if collection id wasn't provided
-        # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-c70373b3-b7df-4f7e-90a1-f0d0f2fe9370
-        result = requests.post(url=f"{postman_base}/collections",
-                               headers=headers,
-                               data=json.dumps({
-                                  "operationType": "GENERATE_FROM_SCHEMA",
-                                  "options": {
-                                    "folderStrategy": "Tags"
-                                    }
-                                  }))
-
-        result.raise_for_status()
-
-        logger.info("Collection created")
-    else:
-        # Or just sync collection, need to Update Collection on Postman though
-        # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-4fff4089-9529-41c9-9ceb-58253e5cb342
-        result = requests.put(
-          f"{postman_base}/collections/{collection_id}/sync-with-schema-tasks",
-          headers=headers)
-
-        result.raise_for_status()
-
-        task_id, status = result.json()['taskId'], None
-
-        logger.info(f"Collection re-sync req., waiting for task: {task_id}")
+    def wait_for_task(self, task_id: str) -> None:
+        status = None
 
         while (True):
-            status = requests.get(url=f"{postman_base}/tasks/{task_id}",
-                                  headers=headers).json()['status']
+            status = requests.get(url=f"{self._postman_base}/tasks/{task_id}",
+                                  headers=self._headers).json()['status']
 
             if status != 'pending':
                 break
 
             sleep(15)
 
-        logger.info(f"Task {task_id} status: {status}")
+        if status != 'completed':
+            raise Exception(f"Unexpected status for task {task_id}: {status}")
 
+    def get_postman_collection_version(self):
+        today = date.today()
+        return today.strftime("%Y-%m-%d_%H:%M")
 
-logger = get_logger()
+    def update_collection(self, spec_dict: dict,
+                          schema_id: str, file_path: str,
+                          collection_id: str = None) -> None:
+        # Update OpenAPI schema
+        # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-7ad78218-f1c6-48a6-b612-3cf64cdde475
+        result = requests.put(
+                    url=f"{self._postman_base}/schemas/"
+                        f"{schema_id}/files/{file_path}",
+                    headers=self._headers,
+                    data=json.dumps({
+                        "content": json.dumps(spec_dict, indent=2)
+                    }))
 
+        result.raise_for_status()
 
+        logger.info("API updated")
+
+        if not collection_id:
+            # Add collection if collection id wasn't provided
+            # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-c70373b3-b7df-4f7e-90a1-f0d0f2fe9370
+            result = requests.post(url=f"{self._postman_base}/collections",
+                                   headers=self._headers,
+                                   data=json.dumps({
+                                     "operationType": "GENERATE_FROM_SCHEMA",
+                                     "options": {
+                                      "folderStrategy": "Tags",
+                                      "requestParametersResolution": "Example",
+                                      "exampleParametersResolution": "Example"
+                                     }
+                                    }))
+
+            result.raise_for_status()
+
+            logger.info("Collection created")
+            # TODO store collection_id
+        else:
+            # Or just sync collection
+            # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-4fff4089-9529-41c9-9ceb-58253e5cb342
+            result = requests.put(url=f"{self._postman_base}/collections/"
+                                      f"{collection_id}"
+                                      "/sync-with-schema-tasks",
+                                  headers=self._headers)
+
+            result.raise_for_status()
+
+            self.wait_for_task(task_id=result.json()['taskId'])
+
+        # Publish a new Postman API version
+        # https://www.postman.com/postman/workspace/postman-public-workspace/request/12959542-425f4392-7276-4f31-a9c4-abc0922895e0
+        postman_collection_version = self.get_postman_collection_version()
+
+        result = requests.post(url=f"{self._postman_base}/versions",
+                               headers=self._headers,
+                               data=json.dumps({
+                                    "name": postman_collection_version,
+                                    "releaseNotes": "",
+                                    "collections": [
+                                        {
+                                            "id": f"{collection_id}"
+                                        }
+                                    ],
+                                    "schemas": [
+                                        {
+                                            "id": f"{schema_id}"
+                                        }
+                                    ]
+                                    }))
+
+        result.raise_for_status()
+
+        print('Url: ',
+              'https://god.gw.postman.com/run-collection/{}'.format(
+                  result.json()['id']))
+
+# https://god.gw.postman.com/run-collection/221325-8ba05649-fd5b-40eb-976b-bc1d8ef6e328
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print(f"Usage: {sys.argv[0]} input-spec.json output-spec.json")
         sys.exit(1)
 
     try:
-        update_postman_collection(
-            patch_spec(sys.argv[1], sys.argv[2]),
-            api_id=getenv('POSTMAN_API_ID'),
+        postman_client = PostmanClient(api_id=getenv('POSTMAN_API_ID'))
+        patched_spec = patch_spec(sys.argv[1], sys.argv[2])
+        postman_client.update_collection(
+            spec_dict=patched_spec,
             schema_id=getenv('POSTMAN_SCHEMA_ID'),
             file_path='openapi.json',
             collection_id=getenv('POSTMAN_COLLECTION_ID'))
 
     except Exception:
-        logging.exception("Exception raised!")
+        logger.exception("Exception raised!")
         sys.exit(1)
