@@ -1,13 +1,9 @@
 gitRepoId: onfido-ruby
-# npmName: "@onfido/api"
-# npmRepository: github:onfido/onfido-node
 npmVersion: ${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
-# apiPackage: "onfido/api"
 gemName: onfido
-# library: faraday
-# hideGenerationTimestamp: true
 licenseName: MIT
+httpUserAgent: onfido-ruby/${CLIENT_LIBRARY_VERSION}
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE

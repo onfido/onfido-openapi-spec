@@ -133,7 +133,8 @@ module {{moduleName}}
       @ssl_client_key = nil
       @middlewares = Hash.new { |h, k| h[k] = [] }
       @configure_connection_blocks = []
-      @timeout = 60
+      {{! Modified default timeout to 30}}
+      @timeout = 30
       # return data as binary instead of file
       @return_binary_data = false
       @params_encoder = nil
@@ -195,7 +196,7 @@ module {{moduleName}}
       end
     end
 
-    {{! BEGIN - Added api token and region}}
+    {{! BEGIN - Added api token, region and timeout}}
     def api_token=(api_token)
       @api_key = {'Token' => "Token token=#{api_token}"}
     end
@@ -208,7 +209,11 @@ module {{moduleName}}
       @server_index = 0
       server_variables[:region] = region
     end
-    {{! END - Added api token and region}}
+
+    def timeout=(timeout)
+      @timeout = timeout
+    end
+    {{! END - Added api token, region and timeout}}
 
     # Gets API key (with prefix if set).
     # @param [String] param_name the parameter name of API key auth
