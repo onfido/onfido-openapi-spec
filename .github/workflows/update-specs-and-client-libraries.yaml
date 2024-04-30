@@ -47,8 +47,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 10
       - name: Validate OpenAPI Specification YAML
         run: ./shell/run-prettier.sh check
   generate_specs_and_libraries:
@@ -67,7 +65,6 @@ jobs:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
     steps:
-      - uses: actions/checkout@v4
       - name: Install pre-requisites
         run: |
           apt-get update
@@ -76,10 +73,13 @@ jobs:
             git \
             jq \
             pipx
-      - name: Retrieve information about last commit (excluding ones authored by GitHub Actions Bot)
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
+      - name: Retrieve information about last commit not authored by GitHub Actions Bot
         id: retriever
         run: |
-          ls -lhA
+          git config --global --add safe.directory $(pwd)
           LAST_COMMIT_LONG_SHA=$(git rev-list --perl-regexp --author='^((?!GitHub Actions Bot).*)$' HEAD | head -n 1)
           echo "last_commit_long_sha=$LAST_COMMIT_LONG_SHA" >> $GITHUB_OUTPUT
           echo "last_commit_short_sha=$(git rev-parse --short $LAST_COMMIT_LONG_SHA)" >> $GITHUB_OUTPUT
@@ -138,8 +138,8 @@ jobs:
             git config user.name "GitHub Actions Bot"
             git config user.email "<>"
             git add generated/artifacts/openapi* && git status
-            echo git commit -m "Single file specifications refresh (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})" generated/artifacts/openapi*
-            echo git push
+            git commit -m "Single file specifications refresh (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})" generated/artifacts/openapi*
+            git push
           fi
   update_client_libraries:
     name: "Create pull request to ${{ matrix.git_repo_id }} repository with ${{ matrix.generator }}:${{matrix.version}}"
@@ -222,7 +222,10 @@ jobs:
           commit-message: Upgrade after onfido-openapi-spec change ${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
           title: Refresh ${{ matrix.git_repo_id }} after onfido-openapi-spec update (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})
           body: |
-            Auto-generated PR to update ${{ matrix.git_repo_id }} (${{ matrix.version }}) with changes till commit ${{ github.repository_owner	}}/onfido-openapi-spec@${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }} (included)
+            Auto-generated PR with changes till commit ${{ github.repository_owner	}}/onfido-openapi-spec@${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }} (included)
+
+            Additional changes:
+              - None
           labels: |
             automated pr
 
