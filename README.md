@@ -43,7 +43,7 @@ disallowAdditionalPropertiesIfNotPresent: false
 
 ## API Documentation
 
-The [openapi-documentation/openapi.json](generated/artifacts/openapi-documentation/openapi.json) file can be used to explore the OpenAPI definition with tools like [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/).
+The [openapi-reference/openapi.json](generated/artifacts/openapi-reference/openapi.json) file can be used to explore the OpenAPI definition with tools like [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/).
 
 A pre-compiled Postman collection is also available in the Onfido [documentation portal](https://documentation.onfido.com/#postman).
 
