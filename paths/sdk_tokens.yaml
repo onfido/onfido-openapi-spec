@@ -2,6 +2,8 @@ sdk_token:
   post:
     summary: Generate a SDK token
     operationId: generate_sdk_token
+    description: >
+      Generates an SDK token. Returns a token object containing the SDK token.
     requestBody:
       required: true
       content:

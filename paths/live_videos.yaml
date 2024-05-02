@@ -2,6 +2,8 @@ live_videos:
   get:
     summary: List live videos
     operationId: list_live_videos
+    description: >
+      Lists all the live videos that belong to an applicant.
     parameters:
       - name: applicant_id
         in: query
@@ -32,6 +34,8 @@ live_video:
   get:
     summary: Retrieve live video
     operationId: find_live_video
+    description: >
+      Retrieves a single live video. Returns the corresponding live video object.
     parameters:
       - name: live_video_id
         in: path

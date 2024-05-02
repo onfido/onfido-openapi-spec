@@ -2,6 +2,8 @@ motion_captures:
   get:
     summary: List motion captures
     operationId: list_motion_captures
+    description: >
+      Lists all the motion captures that belong to an applicant.
     parameters:
       - name: applicant_id
         in: query
@@ -32,6 +34,8 @@ motion_capture:
   get:
     summary: Retrieve motion capture
     operationId: find_motion_capture
+    description: >
+      Retrieves a single motion capture. Returns the corresponding motion capture object.
     parameters:
       - name: motion_capture_id
         in: path

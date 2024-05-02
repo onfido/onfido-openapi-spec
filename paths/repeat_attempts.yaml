@@ -1,7 +1,9 @@
 repeat_attempts:
   get:
-    summary: Returns all repeat attempts for a given Document report.
+    summary: Retrieve repeat attempts
     operationId: list_repeat_attempts
+    description: >
+      Returns all repeat attempts for a given Document report
     parameters:
       - name: report_id
         in: path

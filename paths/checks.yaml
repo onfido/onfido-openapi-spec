@@ -2,6 +2,8 @@ checks:
   get:
     summary: Retrieve Checks
     operationId: list_checks
+    description: >
+      Retrieves a single check. Returns a check object.
     parameters:
       - name: applicant_id
         in: query
@@ -30,6 +32,8 @@ checks:
   post:
     summary: Create a check
     operationId: create_check
+    description: >
+      Initiates a check for an applicant, which can contain one or more reports. Returns a check object.
     requestBody:
       required: true
       content:
@@ -50,6 +54,8 @@ check:
   get:
     summary: Retrieve a Check
     operationId: find_check
+    description: >
+      Retrieves a single check. Returns a check object.
     parameters:
       - name: check_id
         in: path
@@ -71,6 +77,8 @@ resume:
   post:
     summary: Resume a Check
     operationId: resume_check
+    description: >
+      Resumes a paused check.
     parameters:
       - name: check_id
         in: path
@@ -86,8 +94,10 @@ resume:
 
 download:
   get:
-    summary: Download raw data for a check
+    summary: Download check
     operationId: download_check
+    description: >
+      Downloads a PDF of a check with a given check ID. Returns the binary data representing the PDF.
     parameters:
       - name: check_id
         in: path

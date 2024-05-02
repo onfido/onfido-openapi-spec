@@ -5,6 +5,9 @@ import sys
 
 from dataclasses import dataclass
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger()
+
 
 @dataclass
 class Section:
@@ -16,7 +19,7 @@ class Section:
 # When resource value is set to None, tag will be automatically generated
 # from path prefix replacing _ with spaces and capitalising each word
 SECTIONS = (
-    Section('Core',
+    Section('Core Resources',
             {'applicants': None,
              'documents': None,
              'live_photos': 'Live photos',
@@ -27,7 +30,7 @@ SECTIONS = (
              'watchlist_monitors': 'Monitors',
              'id_photos': 'ID Photos'
              }),
-    Section('Others',
+    Section('Other Endpoints',
             {'ping': None,
              'webhooks': None,
              'addresses': 'Address Picker',
@@ -45,11 +48,11 @@ def convert_path(snake_str: str) -> None:
     return " ".join(x.capitalize() for x in snake_str.lower().split("_"))
 
 
-def convert_spec(input_spec_file: str, output_spec_file: str) -> None:
+def patch_spec(input_spec_file: str, output_spec_file: str) -> dict:
     with open(input_spec_file) as input_handler:
-        input_dict = json.load(input_handler)
+        spec_dict = json.load(input_handler)
 
-        for path in input_dict['paths'].keys():
+        for path in spec_dict['paths'].keys():
             path_prefix, resource_name = path.split('/')[1], None
 
             for section in SECTIONS:
@@ -61,14 +64,16 @@ def convert_spec(input_spec_file: str, output_spec_file: str) -> None:
                     break
 
             if not resource_name:
-                logging.warning('Skipping path prefix: {}'.format(path_prefix))
+                logger.warning('Skipping path prefix: {}'.format(path_prefix))
                 continue
 
-            for method in input_dict['paths'][path]:
-                input_dict['paths'][path][method]['tags'] = [tag]
+            for method in spec_dict['paths'][path]:
+                spec_dict['paths'][path][method]['tags'] = [tag]
 
     with open(output_spec_file, 'w') as fp:
-        json.dump(input_dict, fp, indent=2)
+        json.dump(spec_dict, fp, indent=2)
+
+    return spec_dict
 
 
 if __name__ == "__main__":
@@ -76,4 +81,10 @@ if __name__ == "__main__":
         print(f"Usage: {sys.argv[0]} input-spec.json output-spec.json")
         sys.exit(1)
 
-    convert_spec(sys.argv[1], sys.argv[2])
+    try:
+        patched_spec = patch_spec(sys.argv[1], sys.argv[2])
+        logger.info("OpenAPI JSON patched")
+
+    except Exception:
+        logger.exception("Exception raised!")
+        sys.exit(2)

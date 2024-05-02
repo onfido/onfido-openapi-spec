@@ -1,7 +1,9 @@
 results_feedback:
   post:
-    summary: Create Feedback on checks and reports (ALPHA)
+    summary: Fraud reporting (ALPHA)
     operationId: post_results_feedback
+    description: >
+      Create Feedback on checks and reports
     requestBody:
       required: true
       content:

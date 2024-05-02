@@ -53,6 +53,8 @@ jobs:
     name: Build single-file OpenAPI specifications and client libraries
     runs-on: ubuntu-latest
     outputs:
+      last_commit_long_sha: ${{ steps.retriever.outputs.last_commit_long_sha }}
+      last_commit_short_sha: ${{ steps.retriever.outputs.last_commit_short_sha }}
       java_version: ${{ steps.generator.outputs.java_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
       php_version: ${{ steps.generator.outputs.php_version }}
@@ -63,7 +65,6 @@ jobs:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
     steps:
-      - uses: actions/checkout@v4
       - name: Install pre-requisites
         run: |
           apt-get update
@@ -72,6 +73,16 @@ jobs:
             git \
             jq \
             pipx
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
+      - name: Retrieve information about last commit not authored by GitHub Actions Bot
+        id: retriever
+        run: |
+          git config --global --add safe.directory $(pwd)
+          LAST_COMMIT_LONG_SHA=$(git rev-list --perl-regexp --author='^((?!GitHub Actions Bot).*)$' HEAD | head -n 1)
+          echo "last_commit_long_sha=$LAST_COMMIT_LONG_SHA" >> $GITHUB_OUTPUT
+          echo "last_commit_short_sha=$(git rev-parse --short $LAST_COMMIT_LONG_SHA)" >> $GITHUB_OUTPUT
       - name: Validate multi-file OpenAPI specification
         run: |
           $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
@@ -99,13 +110,24 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
-      - name: Refresh single-file OpenAPI specifications for Postman
+      - name: Create reference OpenAPI Specification and refresh Postman Collection
         run: |
-          ./shell/postman-openapi-refresh.py \
+          npm install prettier openapi-to-postmanv2
+          mkdir -p generated/artifacts/{openapi-reference,postman}
+          ./shell/patch-openapi-definition.py \
             generated/artifacts/openapi/openapi.json \
-            generated/artifacts/openapi-postman/openapi.json
-          npm install prettier && npx prettier --write \
-            generated/artifacts/openapi-postman/openapi.json
+            generated/artifacts/openapi-reference/openapi.json
+          npx prettier --write \
+            generated/artifacts/openapi-reference/openapi.json
+          npx openapi2postmanv2 \
+            -s generated/artifacts/openapi-reference/openapi.json \
+            -o generated/artifacts/postman/collection.json \
+            -p -O folderStrategy=Tags,parametersResolution=Example
+          ./shell/publish-postman-collection.py \
+            generated/artifacts/postman/collection.json \
+            221325-8ba05649-fd5b-40eb-976b-bc1d8ef6e328
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
       - name: Commit and push single-file OpenAPI specifications
         run: |
           if [ -z "$(git status --porcelain=v1 generated/artifacts/openapi*)" ];
@@ -116,7 +138,7 @@ jobs:
             git config user.name "GitHub Actions Bot"
             git config user.email "<>"
             git add generated/artifacts/openapi* && git status
-            git commit -m "Single file specifications refresh" generated/artifacts/openapi*
+            git commit -m "Single file specifications refresh (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})" generated/artifacts/openapi*
             git push
           fi
   update_client_libraries:
@@ -165,7 +187,7 @@ jobs:
         if: ${{ matrix.update }}
         run: |
           rsync -r --delete-after --exclude='/.git*' --exclude='/CHANGELOG*' \
-                --exclude='/.openapi-generator-ignore' \
+                --exclude='/.openapi-generator-ignore' --exclude='/.openapi-generator/FILES' \
                 --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
                 generated/artifacts/${{ matrix.generator }}/ .
       - name: Run pre-commit script
@@ -197,10 +219,13 @@ jobs:
         if: ${{ matrix.update }}
         with:
           token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
-          commit-message: Upgrade after onfido-openapi-spec change ${{ github.sha }}
-          title: Release ${{ matrix.git_repo_id }} ${{ matrix.version }} after onfido-openapi-spec update
+          commit-message: Upgrade after onfido-openapi-spec change ${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
+          title: Refresh ${{ matrix.git_repo_id }} after onfido-openapi-spec update (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})
           body: |
-            - Auto-generated PR
+            Auto-generated PR with changes till commit ${{ github.repository_owner	}}/onfido-openapi-spec@${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }} (included)
+
+            Additional changes:
+              - None
           labels: |
             automated pr
 

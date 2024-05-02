@@ -1,7 +1,9 @@
 pick:
   get:
-    summary: Search for addresses by postcode
+    summary: Address Picker
     operationId: find_addresses
+    description: >
+      Search for addresses by postcode
     parameters:
       - name: postcode
         in: query

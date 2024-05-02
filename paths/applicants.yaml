@@ -2,6 +2,8 @@ applicants:
   post:
     summary: Create Applicant
     operationId: create_applicant
+    description: >
+      Creates a single applicant. Returns an applicant object.
     requestBody:
       required: true
       content:
@@ -21,6 +23,8 @@ applicants:
   get:
     summary: List Applicants
     operationId: list_applicants
+    description: >
+      Lists all applicants you've created, sorted by creation date in descending order.
     parameters:
       - name: page
         in: query
@@ -62,6 +66,8 @@ applicant:
   get:
     summary: Retrieve Applicant
     operationId: find_applicant
+    description: >
+      Retrieves a single applicant. Returns an applicant object.
     parameters:
       - name: applicant_id
         in: path
@@ -114,6 +120,8 @@ applicant:
   delete:
     summary: Delete Applicant
     operationId: delete_applicant
+    description: >
+      Deletes a single applicant.
     parameters:
       - name: applicant_id
         in: path
@@ -131,6 +139,8 @@ restore:
   post:
     summary: Restore Applicant
     operationId: restore_applicant
+    description: >
+      Restores a single applicant scheduled for deletion.
     parameters:
       - name: applicant_id
         in: path

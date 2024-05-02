@@ -1,7 +1,9 @@
 workflow_runs:
   post:
-    summary: Create a Workflow Run.
+    summary: Create a Workflow Run
     operationId: create_workflow_run
+    description: >
+      Creates and starts a Workflow Run. Returns a Workflow Run object.
     requestBody:
       required: true
       content:
@@ -18,8 +20,10 @@ workflow_runs:
       default:
         $ref: ../responses/default_error.yaml
   get:
-    summary: List Workflow Runs.
+    summary: List Workflow Runs
     operationId: list_workflow_runs
+    description: >
+      Retrieves the Workflow Runs of the client. Returns a list of Workflow Run objects.
     parameters:
       - name: page
         in: query
@@ -68,8 +72,10 @@ workflow_runs:
 
 retrieve:
   get:
-    summary: A single workflow run can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
+    summary: Retrieve Workflow Run
     operationId: find_workflow_run
+    description: >
+      A single workflow run can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
     parameters:
       - name: workflow_run_id
         in: path
@@ -88,51 +94,12 @@ retrieve:
       default:
         $ref: ../responses/default_error.yaml
 
-tasks:
-  get:
-    summary: The tasks of a Workflow can be retrieved by calling this endpoint with the unique identifier of the Workflow Run.
-    operationId: list_tasks
-    parameters:
-      - name: workflow_run_id
-        in: path
-        required: true
-        description: The unique identifier of the Workflow Run to which the Tasks belong.
-        schema:
-          type: string
-          format: uuid
-    responses:
-      "200":
-        description: An array of subset Task objects that were already started or completed, ordered by the created_at field, in ascending order.
-        content:
-          application/json:
-            schema:
-              type: array
-              title: Tasks
-              items:
-                type: object
-                title: Task
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                    description: The identifier for the Task.
-                  task_def_id:
-                    $ref: ../schemas/tasks/definitions.yaml#/task_def_id
-                  created_at:
-                    type: string
-                    format: date-time
-                    description: The date and time when the Task was created.
-                  updated_at:
-                    type: string
-                    format: date-time
-                    description: The date and time when the Task was last updated.
-      default:
-        $ref: ../responses/default_error.yaml
-
 signed_evidence_file:
   get:
-    summary: Retrieves the signed evidence file for the designated Workflow Run
+    summary: Retrieve Workflow Run Evidence Summary File
     operationId: download_signed_evidence_file
+    description: >
+      Retrieves the signed evidence file for the designated Workflow Run
     parameters:
       - name: workflow_run_id
         in: path
@@ -149,67 +116,5 @@ signed_evidence_file:
             schema:
               type: string
               format: binary
-      default:
-        $ref: ../responses/default_error.yaml
-
-task:
-  get:
-    summary: A single task can be retrieved by calling this endpoint with the unique identifier of the Task and Workflow Run.
-    operationId: find_task
-    parameters:
-      - name: workflow_run_id
-        in: path
-        required: true
-        description: The unique identifier of the Workflow Run to which the Task belongs.
-        schema:
-          type: string
-          format: uuid
-      - name: task_id
-        in: path
-        required: true
-        description: The identifier of the Task you want to retrieve.
-        schema:
-          type: string
-    responses:
-      "200":
-        description: A Task object.
-        content:
-          application/json:
-            schema:
-              $ref: ../schemas/tasks/task.yaml
-      default:
-        $ref: ../responses/default_error.yaml
-
-complete_task:
-  post:
-    summary: Completes a Send / Receive Data task.
-    operationId: complete_task
-    parameters:
-      - name: workflow_run_id
-        in: path
-        required: true
-        description: The unique identifier of the Workflow Run to which the Task belongs.
-        schema:
-          type: string
-          format: uuid
-      - name: task_id
-        in: path
-        required: true
-        description: The identifier of the Task you want to complete.
-        schema:
-          type: string
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                description: The Task completion payload.
-    responses:
-      "200":
-        description: An empty response body.
       default:
         $ref: ../responses/default_error.yaml

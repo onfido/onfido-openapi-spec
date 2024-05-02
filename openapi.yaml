@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Onfido API v3.6
-  description: The Onfido API
-  version: 3.6.0
+  version: v3.6
+  description: The Onfido API (v3.6)
   contact:
     name: Onfido
     url: https://public.support.onfido.com
@@ -38,6 +38,13 @@ paths:
     $ref: paths/applicants.yaml#/applicant
   /applicants/{applicant_id}/restore:
     $ref: paths/applicants.yaml#/restore
+  # Workflow Runs
+  /workflow_runs:
+    $ref: paths/workflow_runs.yaml#/workflow_runs
+  /workflow_runs/{workflow_run_id}:
+    $ref: paths/workflow_runs.yaml#/retrieve
+  /workflow_runs/{workflow_run_id}/signed_evidence_file:
+    $ref: paths/workflow_runs.yaml#/signed_evidence_file
   # Documents
   /documents:
     $ref: paths/documents.yaml#/documents
@@ -63,19 +70,13 @@ paths:
     $ref: paths/live_videos.yaml#/download
   /live_videos/{live_video_id}/frame:
     $ref: paths/live_videos.yaml#/frame
-  # Workflow Runs and Tasks
-  /workflow_runs:
-    $ref: paths/workflow_runs.yaml#/workflow_runs
-  /workflow_runs/{workflow_run_id}:
-    $ref: paths/workflow_runs.yaml#/retrieve
+  # Tasks
   /workflow_runs/{workflow_run_id}/tasks:
-    $ref: paths/workflow_runs.yaml#/tasks
+    $ref: paths/tasks.yaml#/tasks
   /workflow_runs/{workflow_run_id}/tasks/{task_id}:
-    $ref: paths/workflow_runs.yaml#/task
+    $ref: paths/tasks.yaml#/task
   /workflow_runs/{workflow_run_id}/tasks/{task_id}/complete:
-    $ref: paths/workflow_runs.yaml#/complete_task
-  /workflow_runs/{workflow_run_id}/signed_evidence_file:
-    $ref: paths/workflow_runs.yaml#/signed_evidence_file
+    $ref: paths/tasks.yaml#/complete_task
   # Motion Captures
   /motion_captures:
     $ref: paths/motion_captures.yaml#/motion_captures

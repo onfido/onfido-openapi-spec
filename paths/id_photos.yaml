@@ -2,6 +2,8 @@ id_photos:
   get:
     summary: List ID photos
     operationId: list_id_photos
+    description: >
+      Lists the ID photos that belong to an applicant.
     parameters:
       - name: applicant_id
         in: query
@@ -55,6 +57,8 @@ id_photo:
   get:
     summary: Retrieve ID photo
     operationId: find_id_photo
+    description: >
+      Retrieves a single ID photo. Returns a ID photo object.
     parameters:
       - name: id_photo_id
         in: path
