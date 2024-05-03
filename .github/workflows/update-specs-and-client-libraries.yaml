@@ -155,7 +155,7 @@ jobs:
             preCommit: |
               bundle lock --update
             version: ${{ needs.generate_specs_and_libraries.outputs.ruby_version }}
-            update: ${{ inputs.update-onfido-ruby || true}}
+            update: ${{ inputs.update-onfido-ruby}}
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
