@@ -25,9 +25,7 @@ tasks:
                 title: Task
                 properties:
                   id:
-                    type: string
-                    format: uuid
-                    description: The identifier for the Task.
+                    $ref: ../schemas/tasks/definitions.yaml#/task_id
                   task_def_id:
                     $ref: ../schemas/tasks/definitions.yaml#/task_def_id
                   created_at:

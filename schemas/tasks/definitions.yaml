@@ -1,3 +1,8 @@
+task_id:
+  type: string
+  pattern: ^[0-9a-z-_]+$
+  description: The identifier for the Task.
+  example: profile_123
 task_def_id:
   type: string
   pattern: ^[0-9a-z-_]+$
