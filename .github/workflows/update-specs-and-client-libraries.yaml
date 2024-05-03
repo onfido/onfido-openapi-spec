@@ -41,6 +41,11 @@ on:
         required: true
         default: false
         type: boolean
+      update-onfido-ruby:
+        description: "Update onfido-ruby?"
+        required: true
+        default: false
+        type: boolean
 jobs:
   validate_input_specs:
     name: Validate multi file specification
@@ -59,8 +64,9 @@ jobs:
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
       php_version: ${{ steps.generator.outputs.php_version }}
       python_version: ${{ steps.generator.outputs.python_version }}
+      ruby_version: ${{ steps.generator.outputs.ruby_version }}
     container:
-      image: openapitools/openapi-generator-cli:v7.4.0
+      image: openapitools/openapi-generator-cli:v7.5.0
       env:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
@@ -173,6 +179,12 @@ jobs:
               poetry lock
             version: ${{ needs.generate_specs_and_libraries.outputs.python_version }}
             update: ${{ inputs.update-onfido-python }}
+          - generator: ruby/faraday
+            git_repo_id: onfido-ruby
+            preCommit: |
+              bundle lock --update
+            version: ${{ needs.generate_specs_and_libraries.outputs.ruby_version }}
+            update: ${{ inputs.update-onfido-ruby}}
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4

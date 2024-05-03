@@ -1,0 +1,11 @@
+gitRepoId: onfido-ruby
+npmVersion: ${CLIENT_LIBRARY_VERSION}
+enumUnknownDefaultCase: true
+gemName: onfido
+licenseName: MIT
+httpUserAgent: onfido-ruby/${CLIENT_LIBRARY_VERSION}
+files:
+  LICENSE.mustache:
+    destinationFilename: LICENSE
+  webhook_event_verifier.mustache:
+    destinationFilename: lib/onfido/webhook_event_verifier.rb

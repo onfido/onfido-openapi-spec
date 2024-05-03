@@ -1,0 +1,4 @@
+/spec/
+/git_push.sh
+/docs/
+/.travis.yml

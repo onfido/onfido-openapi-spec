@@ -2,4 +2,4 @@
 47fdf5141b3d999914c33faff1626c6ac2f00f87fcf9653814084f1dc67351d9  ./README.mustache
 6a196e67020d765512f0c8c88afc39ef9d3cacdd50a9eba6731a6dbb1997c6e5  ./__init__package.mustache
 e589dfcb5f8243b7e87998c012262d20db37c8dd985759232aad5e846bccd2bb  ./configuration.mustache
-8460a5d2eef3bdc62748ed011517629dd4d0578ef81a6b378f96d79b8a78f17b  ./rest.mustache
+36cae3e3b78cb80e1bdcc3c3f30ff58dc03d04561ed1559a92bfb07b934a8cf2  ./rest.mustache
