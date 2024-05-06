@@ -108,6 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: generate_specs_and_libraries
     if: github.event_name == 'push'
+    environment: generation
     steps:
       - uses: actions/checkout@v4
         with:
