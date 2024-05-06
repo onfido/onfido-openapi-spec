@@ -164,6 +164,7 @@ jobs:
           - generator: typescript-axios
             git_repo_id: onfido-node
             preCommit: |
+              npx prettier --write package.json
               npm install
             version: ${{ needs.generate_specs_and_libraries.outputs.typescript_axios_version }}
             update: ${{ inputs.update-onfido-node }}
@@ -187,6 +188,7 @@ jobs:
             version: ${{ needs.generate_specs_and_libraries.outputs.ruby_version }}
             update: ${{ inputs.update-onfido-ruby}}
     if: github.event_name == 'workflow_dispatch'
+    environment: generation
     steps:
       - uses: actions/checkout@v4
         if: ${{ matrix.update }}
@@ -208,7 +210,7 @@ jobs:
         if: ${{ matrix.update }}
         run: |
           ${{ matrix.preCommit }}
-      - name: Update CHANGELOG (if any change detected)
+      - name: Update CHANGELOG and lint .md files as needed
         if: ${{ matrix.update }}
         run: |
           if [ "$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//')" != "" ];
@@ -218,14 +220,18 @@ jobs:
               git mv CHANGELOG CHANGELOG.md
             fi
 
-            if [ -f CHANGELOG.md ];
+            if [ -f CHANGELOG.md ] && [ -z "$(grep '${{ matrix.version }} ' CHANGELOG.md)" ];
             then
               TMP_FILE=$(mktemp)
-              ( echo "# Changelog"; echo;
-                echo "## v${{ matrix.version }} `date +'%dth %B %Y' | sed -E 's/^([2,3]?)1th/\11st/;s/^([2]?)2th/\12nd/;s/^([2]?)3th/\13rd/'`";
+              RELEASE_DATE=`date +'%dth %B %Y' | sed -E 's/^0//;s/^([2,3]?)1th/\11st/;s/^([2]?)2th/\12nd/;s/^([2]?)3th/\13rd/'`
+              COMMIT_SHA=${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
+              COMMIT_URL=https://github.com/${{ github.repository_owner }}/onfido-openapi-spec/commit/${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }}
+              ( echo -e "# Changelog\n\n## v${{ matrix.version }} $RELEASE_DATE\n\n- Refresh library up to commit: [$COMMIT_SHA]($COMMIT_URL)"
                 grep -v "^# Changelog" CHANGELOG.md ) >| $TMP_FILE
-                mv $TMP_FILE CHANGELOG.md
+              mv $TMP_FILE CHANGELOG.md
             fi
+
+            npx prettier --write *.md
           fi
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
@@ -235,7 +241,7 @@ jobs:
           commit-message: Upgrade after onfido-openapi-spec change ${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
           title: Refresh ${{ matrix.git_repo_id }} after onfido-openapi-spec update (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})
           body: |
-            Auto-generated PR with changes till commit ${{ github.repository_owner	}}/onfido-openapi-spec@${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }} (included)
+            Auto-generated PR with changes till commit ${{ github.repository_owner }}/onfido-openapi-spec@${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }} (included)
 
             Additional changes:
               - None

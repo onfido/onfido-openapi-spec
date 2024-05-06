@@ -43,6 +43,10 @@ SECTIONS = (
              })
 )
 
+# Path[3] which should be promoted to section
+# e.g. /workflow_runs/:workflow_run_id/tasks -> Tasks
+PROMOTED_PATH = ('tasks', )
+
 
 def convert_path(snake_str: str) -> None:
     return " ".join(x.capitalize() for x in snake_str.lower().split("_"))
@@ -53,7 +57,12 @@ def patch_spec(input_spec_file: str, output_spec_file: str) -> dict:
         spec_dict = json.load(input_handler)
 
         for path in spec_dict['paths'].keys():
-            path_prefix, resource_name = path.split('/')[1], None
+            splitted_path, resource_name = path.split('/'), None
+
+            if len(splitted_path) > 3 and splitted_path[3] in PROMOTED_PATH:
+                path_prefix = splitted_path[3]
+            else:
+                path_prefix = splitted_path[1]
 
             for section in SECTIONS:
                 if path_prefix in section.resources:

@@ -1,6 +1,5 @@
 gitRepoId: onfido-node
 npmName: "@onfido/api"
-npmRepository: github:onfido/onfido-node
 npmVersion: ${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
 supportsES6: true

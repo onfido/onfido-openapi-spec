@@ -1,7 +1,7 @@
 {
   "name": "{{npmName}}",
   "version": "{{npmVersion}}",
-  "description": "OpenAPI client for {{npmName}}",
+  "description": "Node.js library for the Onfido API",    {{! Updated description }}
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
@@ -12,7 +12,13 @@
     "typescript",
     "openapi-client",
     "openapi-generator",
-    "{{npmName}}"
+    "{{npmName}}",
+    {{! Added keywords - BEGIN }}
+    "{{gitUserId}}",
+    "identity",
+    "verification",
+    "api"
+    {{! Added keywords - NED }}
   ],
   "license": "MIT",         {{! Updated license }}
   "main": "./dist/index.js",
@@ -26,6 +32,10 @@
     "build": "tsc{{#supportsES6}} && tsc -p tsconfig.esm.json{{/supportsES6}}",
     "prepare": "npm run build"
   },
+  {{! Added block for package delivery }}
+  "files": [
+    "/dist"
+  ],
   {{! Added block for integration tests }}
   "jest": {
     "preset": "ts-jest",
@@ -54,10 +64,9 @@
     {{! Added dependencies for tests development - END }}
     "@types/node": "^12.11.5",
     "typescript": "^4.0"
-  }{{#npmRepository}},{{/npmRepository}}
-{{#npmRepository}}
+  },
+  {{! Added block for package delivery }}
   "publishConfig": {
-    "registry": "{{npmRepository}}"
+    "access": "public"
   }
-{{/npmRepository}}
 }
