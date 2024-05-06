@@ -2792,6 +2792,12 @@
         },
         "type": "object"
       },
+      "task_id": {
+        "description": "The identifier for the Task.",
+        "example": "profile_123",
+        "pattern": "^[0-9a-z-_]+$",
+        "type": "string"
+      },
       "task_def_id": {
         "description": "The identifier for the Task Definition.",
         "example": "task_123",
@@ -2801,9 +2807,7 @@
       "task": {
         "properties": {
           "id": {
-            "description": "The identifier for the Task.",
-            "format": "uuid",
-            "type": "string"
+            "$ref": "#/components/schemas/task_id"
           },
           "workflow_run_id": {
             "description": "The workflow run id the task belongs to.",
@@ -3323,6 +3327,7 @@
               "type": "string"
             },
             "maxItems": 30,
+            "nullable": true,
             "type": "array"
           },
           "link": {
@@ -5521,9 +5526,7 @@
       "Task": {
         "properties": {
           "id": {
-            "description": "The identifier for the Task.",
-            "format": "uuid",
-            "type": "string"
+            "$ref": "#/components/schemas/task_id"
           },
           "task_def_id": {
             "$ref": "#/components/schemas/task_def_id"
