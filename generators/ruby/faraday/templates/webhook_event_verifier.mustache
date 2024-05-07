@@ -14,7 +14,7 @@ module {{moduleName}}
 
       raise(OnfidoInvalidSignatureError, "Invalid signature for webhook event") unless OpenSSL.secure_compare(signature, event_signature)
 
-      WebhookEvent.build_from_hash(JSON.parse(event_body)["payload"])
+      WebhookEvent.build_from_hash(JSON.parse(event_body))
     end
   end
 end
