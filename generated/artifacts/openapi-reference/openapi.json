@@ -1070,7 +1070,7 @@
           }
         },
         "summary": "List Tasks",
-        "tags": ["Core Resources | Workflow Runs"]
+        "tags": ["Core Resources | Tasks"]
       }
     },
     "/workflow_runs/{workflow_run_id}/tasks/{task_id}": {
@@ -1121,7 +1121,7 @@
           }
         },
         "summary": "Retrieve Task",
-        "tags": ["Core Resources | Workflow Runs"]
+        "tags": ["Core Resources | Tasks"]
       }
     },
     "/workflow_runs/{workflow_run_id}/tasks/{task_id}/complete": {
@@ -1175,7 +1175,7 @@
           }
         },
         "summary": "Complete Task",
-        "tags": ["Core Resources | Workflow Runs"]
+        "tags": ["Core Resources | Tasks"]
       }
     },
     "/motion_captures": {
