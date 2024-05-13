@@ -60,11 +60,11 @@ jobs:
     outputs:
       last_commit_long_sha: ${{ steps.retriever.outputs.last_commit_long_sha }}
       last_commit_short_sha: ${{ steps.retriever.outputs.last_commit_short_sha }}
-      java_version: ${{ steps.generator.outputs.java_version }}
+      java_version: ${{ steps.generator.outputs.java_okhttp_gson_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
       php_version: ${{ steps.generator.outputs.php_version }}
-      python_version: ${{ steps.generator.outputs.python_version }}
-      ruby_version: ${{ steps.generator.outputs.ruby_version }}
+      python_version: ${{ steps.generator.outputs.python_urllib3_version }}
+      ruby_version: ${{ steps.generator.outputs.ruby_faraday_version }}
     container:
       image: openapitools/openapi-generator-cli:v7.5.0
       env:
