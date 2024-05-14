@@ -2,7 +2,10 @@ gitRepoId: onfido-ruby
 npmVersion: ${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
 gemName: onfido
-licenseName: MIT
+gemHomepage: https://github.com/onfido/onfido-ruby
+gemLicense: MIT
+gemSummary: The official Ruby library for integrating with the Onfido API.
+gemDescription: Ruby Library for the Onfido API
 httpUserAgent: onfido-ruby/${CLIENT_LIBRARY_VERSION}
 files:
   LICENSE.mustache:
