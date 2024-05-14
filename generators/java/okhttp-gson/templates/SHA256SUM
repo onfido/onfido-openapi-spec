@@ -2,3 +2,4 @@
 16502193337397367078434a27f67edfc6410f4c06d12db876155885d6a49394  ./README.mustache
 7b635a5f3fcc4cb2ace38f0dd0ca8252a78090e592a6c35fe5a08f7bc407ef6b  ./libraries/okhttp-gson/ApiClient.mustache
 0e06162937a3175d59b3bdb9fa249de9888ea0d0a06cfbae543f53720ff706e5  ./libraries/okhttp-gson/oneof_model.mustache
+ee73f2440b54f85d91dfd65350167639e770c0d85e75690a8f797852852ec516  ./libraries/okhttp-gson/pom.mustache

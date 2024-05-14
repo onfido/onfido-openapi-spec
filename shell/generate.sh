@@ -162,7 +162,7 @@ do
     # Dump version number aside to have github action retrieving them later on
     if [ -n "${GITHUB_OUTPUT}" -a -n "${CURRENT_LIBRARY_VERSION}" ];
     then
-      echo "$(echo $GENERATOR | tr - _ )_version=${CURRENT_LIBRARY_VERSION}" >> $GITHUB_OUTPUT
+      echo "$(echo $GENERATOR | tr /- _ )_version=${CURRENT_LIBRARY_VERSION}" >> $GITHUB_OUTPUT
     fi
 
     GENERATED_CONFIG_FILES="${GENERATED_CONFIG_FILES} ${GENERATED_CONFIG_FILE}"
