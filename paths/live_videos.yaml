@@ -19,7 +19,7 @@ live_videos:
           application/json:
             schema:
               type: object
-              title: Liveo Videos list
+              title: Live Videos list
               required:
                 - live_videos
               properties:
