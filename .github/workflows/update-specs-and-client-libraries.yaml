@@ -149,7 +149,7 @@ jobs:
             git push
           fi
   update_client_libraries:
-    name: "Create pull request to ${{ matrix.git_repo_id }} repository with ${{ matrix.generator }}:${{matrix.version}}"
+    name: "Create PR to ${{ matrix.git_repo_id }} repository using ${{ matrix.generator }} generator (${{matrix.version}})"
     runs-on: ubuntu-latest
     needs: generate_specs_and_libraries
     strategy:
@@ -158,6 +158,7 @@ jobs:
           - generator: java/okhttp-gson
             git_repo_id: onfido-java
             preCommit: |
+              sed -i "s/ *$//" pom.xml
               mvn -B package --file pom.xml clean -Dmaven.test.skip
             version: ${{ needs.generate_specs_and_libraries.outputs.java_version }}
             update: ${{ inputs.update-onfido-java }}
@@ -177,6 +178,7 @@ jobs:
           - generator: python/urllib3
             git_repo_id: onfido-python
             preCommit: |
+              sed -i "s/ *$//" pyproject.toml setup.py
               pipx install poetry==1.8
               poetry lock
             version: ${{ needs.generate_specs_and_libraries.outputs.python_version }}
@@ -215,11 +217,6 @@ jobs:
         run: |
           if [ "$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//')" != "" ];
           then
-            if [ -f CHANGELOG ];
-            then
-              git mv CHANGELOG CHANGELOG.md
-            fi
-
             if [ -f CHANGELOG.md ] && [ -z "$(grep '${{ matrix.version }} ' CHANGELOG.md)" ];
             then
               TMP_FILE=$(mktemp)
