@@ -1,0 +1,2 @@
+allOf:
+  - $ref: definitions.yaml#/timeline_file_reference

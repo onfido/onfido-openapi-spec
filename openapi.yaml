@@ -102,6 +102,11 @@ paths:
     $ref: paths/id_photos.yaml#/id_photo
   /id_photos/{id_photo_id}/download:
     $ref: paths/id_photos.yaml#/download
+  # Timeline Files
+  /workflow_runs/{workflow_run_id}/timeline_file:
+    $ref: paths/timeline_files.yaml#/timeline_files
+  /workflow_runs/{workflow_run_id}/timeline_file/{timeline_file_id}:
+    $ref: paths/timeline_files.yaml#/retrieve
   #
   # OTHER ENDPOINTS
   #
