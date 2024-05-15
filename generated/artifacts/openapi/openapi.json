@@ -817,7 +817,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Liveo_Videos_list"
+                  "$ref" : "#/components/schemas/Live_Videos_list"
                 }
               }
             },
@@ -2077,7 +2077,7 @@
           "required" : true
         },
         "responses" : {
-          "201" : {
+          "200" : {
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -4816,7 +4816,7 @@
         "title" : "Live Photos list",
         "type" : "object"
       },
-      "Liveo_Videos_list" : {
+      "Live_Videos_list" : {
         "properties" : {
           "live_videos" : {
             "items" : {
@@ -4826,7 +4826,7 @@
           }
         },
         "required" : [ "live_videos" ],
-        "title" : "Liveo Videos list",
+        "title" : "Live Videos list",
         "type" : "object"
       },
       "Task" : {

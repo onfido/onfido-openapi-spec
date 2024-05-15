@@ -578,7 +578,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Liveo_Videos_list'
+                $ref: '#/components/schemas/Live_Videos_list'
           description: An array of live videos
         default:
           content:
@@ -1440,7 +1440,7 @@ paths:
               $ref: '#/components/schemas/extract_request'
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
@@ -4837,7 +4837,7 @@ components:
       - live_photos
       title: Live Photos list
       type: object
-    Liveo_Videos_list:
+    Live_Videos_list:
       example:
         live_videos:
         - download_href: download_href
@@ -4867,7 +4867,7 @@ components:
           type: array
       required:
       - live_videos
-      title: Liveo Videos list
+      title: Live Videos list
       type: object
     Task:
       example:
