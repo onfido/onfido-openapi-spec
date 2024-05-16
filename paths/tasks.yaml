@@ -94,11 +94,7 @@ complete_task:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              data:
-                type: object
-                description: The Task completion payload.
+            $ref: ../schemas/tasks/complete_task_builder.yaml
     responses:
       "200":
         description: An empty response body.

@@ -1,0 +1,12 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    description: The Task completion payload.
+    title: Complete Task Builder Data
+    oneOf:
+      - type: object
+      - type: array
+        items:
+          type: object
