@@ -8,6 +8,7 @@ readme = "README.md"
 repository = "https://github.com/{{{gitUserId}}}/{{{gitRepoId}}}"
 keywords = ["OpenAPI", "OpenAPI-Generator", "onfido", "identity"] {{! cutomized keywords }}
 include = ["{{packageName}}/py.typed"]
+packages = [{ include = "{{{packageName}}}" }]
 
 {{! Added section }}
 [tool.poetry.urls]
