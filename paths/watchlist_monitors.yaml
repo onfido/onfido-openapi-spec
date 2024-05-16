@@ -118,19 +118,24 @@ matches:
         content:
           application/json:
             schema:
-              type: array
-              title: Watchlist monitor matches
-              items:
-                type: object
-                title: Watchlist monitor match
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                    description: Monitor ID
-                  status:
-                    type: boolean
-                    description: Monitor status
+              type: object
+              title: Watchlist monitor matches list
+              required:
+                - matches
+              properties:
+                matches:
+                  type: array
+                  items:
+                    type: object
+                    title: Watchlist monitor match
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: Monitor ID
+                      enabled:
+                        type: boolean
+                        description: Monitor status
 
   patch:
     summary: Set match status (BETA)
@@ -155,11 +160,13 @@ matches:
                 type: array
                 items:
                   type: string
+                  format: uuid
                   description: Match ID to enable.
               disable:
                 type: array
                 items:
                   type: string
+                  format: uuid
                   description: Match ID to disable.
     responses:
       "204":
@@ -188,9 +195,5 @@ new_report:
             schema:
               type: string
             description: Link to the newly generated report.
-        content:
-          application/json:
-            schema:
-              $ref: ../schemas/applicants/applicant.yaml
       default:
         $ref: ../responses/default_error.yaml
