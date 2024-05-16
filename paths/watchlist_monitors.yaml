@@ -9,10 +9,10 @@ watchlist_monitors:
       content:
         application/json:
           schema:
-            $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
+            $ref: ../schemas/watchlist_monitors/watchlist_monitor_builder.yaml
     responses:
-      "200":
-        description: Created watchlist monitor
+      "201":
+        description: Created
         content:
           application/json:
             schema:
@@ -45,10 +45,15 @@ watchlist_monitors:
         content:
           application/json:
             schema:
-              type: array
-              title: Watchlist monitors
-              items:
-                $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
+              type: object
+              title: Watchlist monitors list
+              required:
+                - monitors
+              properties:
+                monitors:
+                  type: array
+                  items:
+                    $ref: ../schemas/watchlist_monitors/watchlist_monitor.yaml
       default:
         $ref: ../responses/default_error.yaml
 
