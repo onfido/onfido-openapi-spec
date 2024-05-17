@@ -118,28 +118,11 @@ matches:
         content:
           application/json:
             schema:
-              type: object
-              title: Watchlist monitor matches list
-              required:
-                - matches
-              properties:
-                matches:
-                  type: array
-                  items:
-                    type: object
-                    title: Watchlist monitor match
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                        description: Monitor ID
-                      enabled:
-                        type: boolean
-                        description: Monitor status
+              $ref: ../schemas/watchlist_monitors/watchlist_monitor_matches_list.yaml
 
   patch:
     summary: Set match status (BETA)
-    operationId: update_monitor_match
+    operationId: update_watchlist_monitor_match
     description: >
       Update the status of the given matches
     parameters:
@@ -154,23 +137,14 @@ matches:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              enable:
-                type: array
-                items:
-                  type: string
-                  format: uuid
-                  description: Match ID to enable.
-              disable:
-                type: array
-                items:
-                  type: string
-                  format: uuid
-                  description: Match ID to disable.
+            $ref: ../schemas/watchlist_monitors/watchlist_monitor_matches_updater.yaml
     responses:
-      "204":
-        description: No Content
+      "200":
+        description: An array of watchlist monitors
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/watchlist_monitors/watchlist_monitor_matches_list.yaml
       default:
         $ref: ../responses/default_error.yaml
 
