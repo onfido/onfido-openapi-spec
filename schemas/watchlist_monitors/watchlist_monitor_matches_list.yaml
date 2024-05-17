@@ -1,0 +1,18 @@
+type: object
+title: Watchlist monitor matches list
+required:
+  - matches
+properties:
+  matches:
+    type: array
+    items:
+      type: object
+      title: Watchlist monitor match
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Monitor ID
+        enabled:
+          type: boolean
+          description: Monitor status
