@@ -130,7 +130,7 @@ do
 
     if [ -n "${GIT_REPO_ID}" ];
     then
-      LATEST_LIBRARY_VERSION=$(curl -s https://api.github.com/repos/onfido/${GIT_REPO_ID}/releases/latest | jq .name | sed 's/[v"]//g')
+      LATEST_LIBRARY_VERSION=$(curl -s https://api.github.com/repos/onfido/${GIT_REPO_ID}/releases | jq '.[0].name' | sed 's/[v"]//g')
 
       if [ "$LATEST_LIBRARY_VERSION" == null ];
       then

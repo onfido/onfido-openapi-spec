@@ -112,7 +112,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN_NEW }}
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
           ref: ${{ github.ref_name }}
       - uses: actions/download-artifact@v4
         with:
@@ -234,7 +234,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         if: ${{ matrix.update }}
         with:
-          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN_NEW }}
+          token: ${{ secrets.GH_ACTION_ACCESS_TOKEN }}
           commit-message: Upgrade after onfido-openapi-spec change ${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
           title: Refresh ${{ matrix.git_repo_id }} after onfido-openapi-spec update (${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }})
           body: |
