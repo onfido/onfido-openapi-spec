@@ -1378,11 +1378,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/watchlist_monitor"
-                  },
-                  "title": "Watchlist monitors",
-                  "type": "array"
+                  "$ref": "#/components/schemas/Watchlist_monitors_list"
                 }
               }
             },
@@ -1409,14 +1405,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/watchlist_monitor"
+                "$ref": "#/components/schemas/watchlist_monitor_builder"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
@@ -1424,7 +1420,7 @@
                 }
               }
             },
-            "description": "Created watchlist monitor"
+            "description": "Created"
           },
           "default": {
             "content": {
@@ -1535,11 +1531,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Watchlist_monitor_match"
-                  },
-                  "title": "Watchlist monitor matches",
-                  "type": "array"
+                  "$ref": "#/components/schemas/watchlist_monitor_matches_list"
                 }
               }
             },
@@ -1551,7 +1543,7 @@
       },
       "patch": {
         "description": "Update the status of the given matches\n",
-        "operationId": "update_monitor_match",
+        "operationId": "update_watchlist_monitor_match",
         "parameters": [
           {
             "in": "path",
@@ -1567,15 +1559,22 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/update_monitor_match_request"
+                "$ref": "#/components/schemas/watchlist_monitor_matches_updater"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/watchlist_monitor_matches_list"
+                }
+              }
+            },
+            "description": "An array of watchlist monitors"
           },
           "default": {
             "content": {
@@ -1609,13 +1608,6 @@
         ],
         "responses": {
           "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/applicant"
-                }
-              }
-            },
             "description": "Created",
             "headers": {
               "Location": {
@@ -2889,50 +2881,54 @@
         "type": "object"
       },
       "watchlist_monitor": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/watchlist_monitor_shared"
+          },
+          {
+            "$ref": "#/components/schemas/watchlist_monitor_response"
+          }
+        ]
+      },
+      "watchlist_monitor_builder": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/watchlist_monitor_shared"
+          }
+        ]
+      },
+      "watchlist_monitor_matches_list": {
         "properties": {
-          "id": {
-            "description": "The unique identifier for the monitor.",
-            "format": "uuid",
-            "readOnly": true,
-            "type": "string"
-          },
-          "created_at": {
-            "description": "The date and time at which the monitor was created.",
-            "format": "date-time",
-            "readOnly": true,
-            "type": "string"
-          },
-          "deleted_at": {
-            "description": "The date and time at which the monitor was deleted. If the monitor is still active, this field will be null.",
-            "format": "date-time",
-            "readOnly": true,
-            "type": "string"
-          },
-          "applicant_id": {
-            "description": "The ID for the applicant associated with the monitor.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "report_name": {
-            "description": "The name of the report type the monitor creates. Can be either \"watchlist_standard\" or \"watchlist_aml\".",
-            "enum": ["watchlist_standard", "watchlist_aml"],
-            "type": "string"
-          },
-          "tags": {
-            "description": "A list of tags associated with this monitor. These tags will be applied to each check this monitor creates.",
+          "matches": {
             "items": {
+              "$ref": "#/components/schemas/Watchlist_monitor_match"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["matches"],
+        "title": "Watchlist monitor matches list",
+        "type": "object"
+      },
+      "watchlist_monitor_matches_updater": {
+        "properties": {
+          "enable": {
+            "items": {
+              "description": "Match ID to enable.",
+              "format": "uuid",
               "type": "string"
             },
             "type": "array"
           },
-          "sandbox": {
-            "default": false,
-            "description": "Indicates whether the object was created in the sandbox or not.",
-            "readOnly": true,
-            "type": "boolean"
+          "disable": {
+            "items": {
+              "description": "Match ID to disable.",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": "array"
           }
         },
-        "required": ["applicant_id", "report_name"],
         "type": "object"
       },
       "id_photo": {
@@ -3548,6 +3544,55 @@
             "type": "boolean"
           }
         },
+        "type": "object"
+      },
+      "watchlist_monitor_shared": {
+        "properties": {
+          "applicant_id": {
+            "description": "The ID for the applicant associated with the monitor.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "report_name": {
+            "description": "The name of the report type the monitor creates.",
+            "enum": ["watchlist_standard", "watchlist_aml"],
+            "type": "string"
+          },
+          "tags": {
+            "description": "A list of tags associated with this monitor. These tags will be applied to each check this monitor creates.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["applicant_id", "report_name"],
+        "type": "object"
+      },
+      "watchlist_monitor_response": {
+        "properties": {
+          "id": {
+            "description": "The unique identifier for the monitor.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date and time at which the monitor was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "deleted_at": {
+            "description": "The date and time at which the monitor was deleted. If the monitor is still active, this field will be null.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "is_sandbox": {
+            "default": false,
+            "description": "Indicates whether the object was created in the sandbox or not.",
+            "type": "boolean"
+          }
+        },
+        "required": ["id"],
         "type": "object"
       },
       "id_photo_response": {
@@ -5567,38 +5612,17 @@
         "title": "Motion Captures list",
         "type": "object"
       },
-      "Watchlist_monitor_match": {
+      "Watchlist_monitors_list": {
         "properties": {
-          "id": {
-            "description": "Monitor ID",
-            "format": "uuid",
-            "type": "string"
-          },
-          "status": {
-            "description": "Monitor status",
-            "type": "boolean"
-          }
-        },
-        "title": "Watchlist monitor match",
-        "type": "object"
-      },
-      "update_monitor_match_request": {
-        "properties": {
-          "enable": {
+          "monitors": {
             "items": {
-              "description": "Match ID to enable.",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "disable": {
-            "items": {
-              "description": "Match ID to disable.",
-              "type": "string"
+              "$ref": "#/components/schemas/watchlist_monitor"
             },
             "type": "array"
           }
         },
+        "required": ["monitors"],
+        "title": "Watchlist monitors list",
         "type": "object"
       },
       "ID_Photos_list": {
@@ -5716,6 +5740,21 @@
           }
         ],
         "title": "Complete Task Builder Data"
+      },
+      "Watchlist_monitor_match": {
+        "properties": {
+          "id": {
+            "description": "Monitor ID",
+            "format": "uuid",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Monitor status",
+            "type": "boolean"
+          }
+        },
+        "title": "Watchlist monitor match",
+        "type": "object"
       },
       "webhook_event_payload_object": {
         "description": "The object affected by this event.",
