@@ -689,7 +689,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Task'
+                  $ref: '#/components/schemas/TaskItem'
                 title: Tasks
                 type: array
           description: "An array of subset Task objects that were already started\
@@ -1935,7 +1935,7 @@ components:
     complete_task_builder:
       properties:
         data:
-          $ref: '#/components/schemas/Complete_Task_Builder_Data'
+          $ref: '#/components/schemas/Complete_Task_Data_Builder'
       required:
       - data
       type: object
@@ -4908,7 +4908,7 @@ components:
       - live_videos
       title: Live Videos list
       type: object
-    Task:
+    TaskItem:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -4933,7 +4933,7 @@ components:
           description: The date and time when the Task was last updated.
           format: date-time
           type: string
-      title: Task
+      title: TaskItem
       type: object
     Motion_Captures_list:
       example:
@@ -5792,14 +5792,14 @@ components:
       - reports
       title: Reports list
       type: object
-    Complete_Task_Builder_Data:
+    Complete_Task_Data_Builder:
       description: The Task completion payload.
       oneOf:
-      - type: object
       - items:
           type: object
         type: array
-      title: Complete Task Builder Data
+      - type: object
+      title: Complete Task Data Builder
     Watchlist_monitor_match:
       example:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

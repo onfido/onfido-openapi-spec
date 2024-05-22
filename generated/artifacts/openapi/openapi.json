@@ -976,7 +976,7 @@
               "application/json" : {
                 "schema" : {
                   "items" : {
-                    "$ref" : "#/components/schemas/Task"
+                    "$ref" : "#/components/schemas/TaskItem"
                   },
                   "title" : "Tasks",
                   "type" : "array"
@@ -2641,7 +2641,7 @@
       "complete_task_builder" : {
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/Complete_Task_Builder_Data"
+            "$ref" : "#/components/schemas/Complete_Task_Data_Builder"
           }
         },
         "required" : [ "data" ],
@@ -4878,7 +4878,7 @@
         "title" : "Live Videos list",
         "type" : "object"
       },
-      "Task" : {
+      "TaskItem" : {
         "properties" : {
           "id" : {
             "$ref" : "#/components/schemas/task_id"
@@ -4897,7 +4897,7 @@
             "type" : "string"
           }
         },
-        "title" : "Task",
+        "title" : "TaskItem",
         "type" : "object"
       },
       "Motion_Captures_list" : {
@@ -5027,17 +5027,17 @@
         "title" : "Reports list",
         "type" : "object"
       },
-      "Complete_Task_Builder_Data" : {
+      "Complete_Task_Data_Builder" : {
         "description" : "The Task completion payload.",
         "oneOf" : [ {
-          "type" : "object"
-        }, {
           "items" : {
             "type" : "object"
           },
           "type" : "array"
+        }, {
+          "type" : "object"
         } ],
-        "title" : "Complete Task Builder Data"
+        "title" : "Complete Task Data Builder"
       },
       "Watchlist_monitor_match" : {
         "properties" : {
