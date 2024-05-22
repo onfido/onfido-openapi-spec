@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;  {{! Added import }}
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -77,8 +78,10 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
                     // check if the actual instance is of the type `{{{dataType}}}`
                     if (value.getActualInstance() instanceof {{#isArray}}List<?>{{/isArray}}{{^isArray}}{{{dataType}}}{{/isArray}}) {
                     {{#isPrimitiveType}}
-                        JsonPrimitive primitive = adapter{{#sanitizeGeneric}}{{{dataType}}}{{/sanitizeGeneric}}.toJsonTree(({{{dataType}}})value.getActualInstance()).getAsJsonPrimitive();
-                        elementAdapter.write(out, primitive);
+                        {{! Updated code - BEGIN }}
+                        JsonElement element = adapter{{#sanitizeGeneric}}{{{dataType}}}{{/sanitizeGeneric}}.toJsonTree(({{{dataType}}})value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        {{! Updated code - END }}
                         return;
                     {{/isPrimitiveType}}
                     {{^isPrimitiveType}}

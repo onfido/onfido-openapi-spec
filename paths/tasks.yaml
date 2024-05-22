@@ -22,7 +22,7 @@ tasks:
               title: Tasks
               items:
                 type: object
-                title: Task
+                title: TaskItem
                 properties:
                   id:
                     $ref: ../schemas/tasks/definitions.yaml#/task_id
