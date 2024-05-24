@@ -28,7 +28,8 @@ SECTIONS = (
              'tasks': None,
              'motion_captures': 'Motion captures',
              'watchlist_monitors': 'Monitors',
-             'id_photos': 'ID Photos'
+             'id_photos': 'ID Photos',
+             'timeline_file': 'Timeline Files'
              }),
     Section('Other Endpoints',
             {'ping': None,
@@ -45,7 +46,7 @@ SECTIONS = (
 
 # Path[3] which should be promoted to section
 # e.g. /workflow_runs/:workflow_run_id/tasks -> Tasks
-PROMOTED_PATH = ('tasks', )
+PROMOTED_PATH = ('tasks', 'timeline_file')
 
 
 def convert_path(snake_str: str) -> None:
