@@ -1674,6 +1674,94 @@
         "summary" : "Download ID photo"
       }
     },
+    "/workflow_runs/{workflow_run_id}/timeline_file" : {
+      "post" : {
+        "description" : "Triggers the generation of the Timeline File for the designated Workflow Run.\n",
+        "operationId" : "create_timeline_file",
+        "parameters" : [ {
+          "description" : "The unique identifier of the Workflow Run.",
+          "in" : "path",
+          "name" : "workflow_run_id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "202" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/timeline_file_reference"
+                }
+              }
+            },
+            "description" : "A Timeline File reference."
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Unexpected error"
+          }
+        },
+        "summary" : "Create Timeline File for Workflow Run"
+      }
+    },
+    "/workflow_runs/{workflow_run_id}/timeline_file/{timeline_file_id}" : {
+      "get" : {
+        "description" : "Retrieves the Timeline File for the designated Workflow Run.\n",
+        "operationId" : "find_timeline_file",
+        "parameters" : [ {
+          "description" : "The unique identifier of the Workflow Run.",
+          "in" : "path",
+          "name" : "workflow_run_id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        }, {
+          "description" : "The unique identifier for the Timefile File.",
+          "in" : "path",
+          "name" : "timeline_file_id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "302" : {
+            "description" : "Found",
+            "headers" : {
+              "Location" : {
+                "description" : "Link to the Timeline File.",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Unexpected error"
+          }
+        },
+        "summary" : "Retrieve Timeline File for Workflow Run"
+      }
+    },
     "/ping" : {
       "get" : {
         "description" : "Run a health check on the Onfido API\n",
@@ -2739,6 +2827,11 @@
         } ],
         "required" : [ "applicant_id", "file" ]
       },
+      "timeline_file_reference" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/timeline_file_reference_1"
+        } ]
+      },
       "webhook" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/webhook_shared"
@@ -3384,6 +3477,21 @@
             "type" : "string"
           }
         },
+        "type" : "object"
+      },
+      "timeline_file_reference_1" : {
+        "properties" : {
+          "workflow_timeline_file_id" : {
+            "description" : "The unique identifier for the Timefile File that will be created.",
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "Link to access the Timefile File that will be created.",
+            "type" : "string"
+          }
+        },
+        "required" : [ "href", "workflow_timeline_file_id" ],
         "type" : "object"
       },
       "webhook_shared" : {
