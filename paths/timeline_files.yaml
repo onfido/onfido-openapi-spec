@@ -1,0 +1,55 @@
+timeline_files:
+  post:
+    summary: Create Timeline File for Workflow Run
+    operationId: create_timeline_file
+    description: >
+      Triggers the generation of the Timeline File for the designated Workflow Run.
+    parameters:
+      - name: workflow_run_id
+        in: path
+        required: true
+        description: The unique identifier of the Workflow Run.
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "202":
+        description: A Timeline File reference.
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/timeline_files/timeline_file_reference.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+retrieve:
+  get:
+    summary: Retrieve Timeline File for Workflow Run
+    operationId: find_timeline_file
+    description: >
+      Retrieves the Timeline File for the designated Workflow Run.
+    parameters:
+      - name: workflow_run_id
+        in: path
+        required: true
+        description: The unique identifier of the Workflow Run.
+        schema:
+          type: string
+          format: uuid
+      - name: timeline_file_id
+        in: path
+        required: true
+        description: The unique identifier for the Timefile File.
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "302":
+        description: Found
+        headers:
+          Location:
+            description: Link to the Timeline File.
+            schema:
+              type: string
+      default:
+        $ref: ../responses/default_error.yaml
