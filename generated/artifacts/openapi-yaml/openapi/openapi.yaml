@@ -2101,11 +2101,21 @@ components:
       - applicant_id
       - file
     timeline_file_reference:
-      allOf:
-      - $ref: '#/components/schemas/timeline_file_reference_1'
       example:
         href: href
         workflow_timeline_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        workflow_timeline_file_id:
+          description: The unique identifier for the Timefile File that will be created.
+          format: uuid
+          type: string
+        href:
+          description: Link to access the Timefile File that will be created.
+          type: string
+      required:
+      - href
+      - workflow_timeline_file_id
+      type: object
     webhook:
       allOf:
       - $ref: '#/components/schemas/webhook_shared'
@@ -2731,19 +2741,6 @@ components:
           description: The file to be uploaded.
           format: binary
           type: string
-      type: object
-    timeline_file_reference_1:
-      properties:
-        workflow_timeline_file_id:
-          description: The unique identifier for the Timefile File that will be created.
-          format: uuid
-          type: string
-        href:
-          description: Link to access the Timefile File that will be created.
-          type: string
-      required:
-      - href
-      - workflow_timeline_file_id
       type: object
     webhook_shared:
       properties:

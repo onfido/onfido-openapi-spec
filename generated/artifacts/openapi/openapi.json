@@ -2828,9 +2828,19 @@
         "required" : [ "applicant_id", "file" ]
       },
       "timeline_file_reference" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/timeline_file_reference_1"
-        } ]
+        "properties" : {
+          "workflow_timeline_file_id" : {
+            "description" : "The unique identifier for the Timefile File that will be created.",
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "href" : {
+            "description" : "Link to access the Timefile File that will be created.",
+            "type" : "string"
+          }
+        },
+        "required" : [ "href", "workflow_timeline_file_id" ],
+        "type" : "object"
       },
       "webhook" : {
         "allOf" : [ {
@@ -3477,21 +3487,6 @@
             "type" : "string"
           }
         },
-        "type" : "object"
-      },
-      "timeline_file_reference_1" : {
-        "properties" : {
-          "workflow_timeline_file_id" : {
-            "description" : "The unique identifier for the Timefile File that will be created.",
-            "format" : "uuid",
-            "type" : "string"
-          },
-          "href" : {
-            "description" : "Link to access the Timefile File that will be created.",
-            "type" : "string"
-          }
-        },
-        "required" : [ "href", "workflow_timeline_file_id" ],
         "type" : "object"
       },
       "webhook_shared" : {

@@ -1837,7 +1837,7 @@
           }
         },
         "summary": "Create Timeline File for Workflow Run",
-        "tags": ["Core Resources | Workflow Runs"]
+        "tags": ["Core Resources | Timeline Files"]
       }
     },
     "/workflow_runs/{workflow_run_id}/timeline_file/{timeline_file_id}": {
@@ -1890,7 +1890,7 @@
           }
         },
         "summary": "Retrieve Timeline File for Workflow Run",
-        "tags": ["Core Resources | Workflow Runs"]
+        "tags": ["Core Resources | Timeline Files"]
       }
     },
     "/ping": {
@@ -3042,11 +3042,19 @@
         "required": ["applicant_id", "file"]
       },
       "timeline_file_reference": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/timeline_file_reference_1"
+        "properties": {
+          "workflow_timeline_file_id": {
+            "description": "The unique identifier for the Timefile File that will be created.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "href": {
+            "description": "Link to access the Timefile File that will be created.",
+            "type": "string"
           }
-        ]
+        },
+        "required": ["href", "workflow_timeline_file_id"],
+        "type": "object"
       },
       "webhook": {
         "allOf": [
@@ -3746,21 +3754,6 @@
             "type": "string"
           }
         },
-        "type": "object"
-      },
-      "timeline_file_reference_1": {
-        "properties": {
-          "workflow_timeline_file_id": {
-            "description": "The unique identifier for the Timefile File that will be created.",
-            "format": "uuid",
-            "type": "string"
-          },
-          "href": {
-            "description": "Link to access the Timefile File that will be created.",
-            "type": "string"
-          }
-        },
-        "required": ["href", "workflow_timeline_file_id"],
         "type": "object"
       },
       "webhook_shared": {
