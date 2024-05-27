@@ -7,6 +7,5 @@ properties:
     title: Complete Task Data Builder
     oneOf:
       - type: array
-        items:
-          type: object
+        items: {}
       - type: object

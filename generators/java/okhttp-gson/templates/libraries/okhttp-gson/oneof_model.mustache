@@ -79,7 +79,12 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
                     if (value.getActualInstance() instanceof {{#isArray}}List<?>{{/isArray}}{{^isArray}}{{{dataType}}}{{/isArray}}) {
                     {{#isPrimitiveType}}
                         {{! Updated code - BEGIN }}
+                        {{#isArray}}
                         JsonElement element = adapter{{#sanitizeGeneric}}{{{dataType}}}{{/sanitizeGeneric}}.toJsonTree(({{{dataType}}})value.getActualInstance());
+                        {{/isArray}}
+                        {{^isArray}}
+                        JsonElement element = new GsonBuilder().create().toJsonTree(value.getActualInstance());
+                        {{/isArray}}
                         elementAdapter.write(out, element);
                         {{! Updated code - END }}
                         return;

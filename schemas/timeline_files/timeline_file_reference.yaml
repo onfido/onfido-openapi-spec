@@ -1,2 +1,12 @@
-allOf:
-  - $ref: definitions.yaml#/timeline_file_reference
+type: object
+required:
+  - workflow_timeline_file_id
+  - href
+properties:
+  workflow_timeline_file_id:
+    type: string
+    format: uuid
+    description: The unique identifier for the Timefile File that will be created.
+  href:
+    type: string
+    description: Link to access the Timefile File that will be created.
