@@ -64,7 +64,7 @@ module {{moduleName}}
     # @param [String] mime MIME
     # @return [Boolean] True if the MIME is application/json
     def json_mime?(mime)
-      {{! Modified the regex to avoid high alert}}
+      {{! Modified the regex to avoid high alert - to remove in v7.6.0 }}
       (mime == '*/*') || !(mime =~ /^Application\/.*json(?!p)(;.*)?/i).nil?
     end
 
@@ -144,7 +144,7 @@ module {{moduleName}}
     # @param [String] filename the filename to be sanitized
     # @return [String] the sanitized filename
     def sanitize_filename(filename)
-      {{! Modified the regex to avoid high alert}}
+      {{! Modified the regex to avoid high alert - to remove in v7.6.0 }}
       filename.split(/[\/\\]/).last
     end
 

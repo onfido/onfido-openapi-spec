@@ -2,6 +2,9 @@
 {{> api_info}}
 =end
 
+{{! Added include }}
+require 'faraday/follow_redirects'
+
 module {{moduleName}}
   class Configuration
     {{! Added one line with region list}}
@@ -157,6 +160,8 @@ module {{moduleName}}
       @inject_format = false
       @force_ending_format = false
       @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
+
+      use( Faraday::FollowRedirects::Middleware ) {{! Added middleware to follow 302 Found redirection }}
 
       yield(self) if block_given?
     end
