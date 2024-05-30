@@ -6,6 +6,7 @@ composerPackageName: onfido/api
 invokerPackage: Onfido
 httpUserAgent: onfido-php/${CLIENT_LIBRARY_VERSION}
 licenseName: MIT
+artifactUrl: https://documentation.onfido.com
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
