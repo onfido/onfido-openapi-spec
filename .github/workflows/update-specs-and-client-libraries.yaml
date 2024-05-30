@@ -21,6 +21,9 @@ on:
           - Minor
           - Patch
           - No change
+      version-suffix:
+        description: "Add a suffix to version? (e.g `-beta`)"
+        type: string
       update-onfido-java:
         description: "Update onfido-java?"
         required: true
@@ -70,6 +73,7 @@ jobs:
       env:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
+        CLIENT_LIBRARY_VERSION_SUFFIX: ${{ inputs.version-suffix }}
     steps:
       - name: Install pre-requisites
         run: |
@@ -172,6 +176,7 @@ jobs:
           - generator: php
             git_repo_id: onfido-php
             preCommit: |
+              sed -i "s/ *$//" composer.json
               composer update --lock
             version: ${{ needs.generate_specs_and_libraries.outputs.php_version }}
             update: ${{ inputs.update-onfido-php }}
@@ -186,6 +191,7 @@ jobs:
           - generator: ruby/faraday
             git_repo_id: onfido-ruby
             preCommit: |
+              sed -i "s/ *$//" Gemfile
               bundle lock --update
             version: ${{ needs.generate_specs_and_libraries.outputs.ruby_version }}
             update: ${{ inputs.update-onfido-ruby}}
