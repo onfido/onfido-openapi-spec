@@ -16,6 +16,7 @@ OPENAPI_GENERATOR_COMMAND=${OPENAPI_GENERATOR_COMMAND:-\
   openapitools/openapi-generator-cli:${OPENAPI_GENERATOR_VERSION}}
 
 BUMP_CLIENT_LIBRARY_VERSION=${BUMP_CLIENT_LIBRARY_VERSION:-""}
+CLIENT_LIBRARY_VERSION_SUFFIX=${CLIENT_LIBRARY_VERSION_SUFFIX:-""}
 
 # $1: version, $2: bump type (Major, Minor, Patch)
 function semver_bump() {
@@ -50,6 +51,8 @@ function semver_bump() {
 
     POS=$((POS+1))
   done
+
+  echo -n "${CLIENT_LIBRARY_VERSION_SUFFIX}"
 }
 
 function validate_templates_checksum() {

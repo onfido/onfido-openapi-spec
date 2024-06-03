@@ -109,10 +109,18 @@ signed_evidence_file:
           type: string
           format: uuid
     responses:
+      "302":
+        description: Found
+        headers:
+          Location:
+            description: Link to the signed evidence file PDF.
+            schema:
+              type: string
+              format: uri
       "200":
-        description: The signed evidence file PDF
+        description: The signed evidence PDF binary data.
         content:
-          binary/octet-stream:
+          application/pdf:
             schema:
               type: string
               format: binary
