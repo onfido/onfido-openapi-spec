@@ -312,13 +312,21 @@ paths:
           format: uuid
           type: string
       responses:
+        "302":
+          description: Found
+          headers:
+            Location:
+              description: Link to the signed evidence file PDF.
+              schema:
+                format: uri
+                type: string
         "200":
           content:
-            binary/octet-stream:
+            application/pdf:
               schema:
                 format: binary
                 type: string
-          description: The signed evidence file PDF
+          description: The signed evidence PDF binary data.
         default:
           content:
             application/json:
@@ -1221,7 +1229,15 @@ paths:
             Location:
               description: Link to the Timeline File.
               schema:
+                format: uri
                 type: string
+        "200":
+          content:
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: The Timeline File PDF binary data.
         default:
           content:
             application/json:
