@@ -19,7 +19,7 @@ id_photos:
           application/json:
             schema:
               type: object
-              title: ID Photos list
+              title: Id Photos list
               required:
                 - id_photos
               properties:
