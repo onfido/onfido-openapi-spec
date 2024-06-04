@@ -143,11 +143,13 @@ Webhook events payload needs to be verified before it can be accessed. Library a
 
 ```java
 try {
-   WebhookEventVerifier verifier = new WebhookEventVerifier("_ABC123abc...3ABC123_");
+   WebhookEventVerifier verifier = new WebhookEventVerifier(
+      System.getenv("ONFIDO_WEBHOOK_SECRET_TOKEN")
+   );
 
    String signature = "a0...760e";
 
-   WebhookEvent event = verifier.readPayload("{\"payload\":{\"r...3\"}}}", signature);
+   WebhookEvent event = verifier.readPayload("{\"payload\":{\"r...3\"}}", signature);
 } catch( OnfidoInvalidSignatureError e ) {
    // Invalid webhook signature
 }

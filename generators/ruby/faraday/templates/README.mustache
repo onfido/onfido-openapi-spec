@@ -23,7 +23,7 @@ Configure with your API token, region and optional timeout (default value is 30)
 require {{{gemName}}}
 
 Onfido.configure do |config|
-  config.api_token = ENV["ONFIDO_API_TOKEN"]
+  config.api_token = ENV["ONFIDO_WEBHOOK_SECRET_TOKEN"]
   config.region = config.region[:EU]
   config.timeout = 30
 end
@@ -78,9 +78,9 @@ Webhook events payload needs to be verified before it can be accessed. Library a
     event = verifier.read_payload('{"payload":{"r...3"}}', signature)
 
   rescue Onfido::OnfidoInvalidSignatureError => e
-    e.type         
-    e.fields        
-    e.response_code 
+    e.type
+    e.fields
+    e.response_code
   end
 ```
 
