@@ -1550,7 +1550,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ID_Photos_list"
+                  "$ref" : "#/components/schemas/Id_Photos_list"
                 }
               }
             },
@@ -2701,13 +2701,13 @@
       "task_id" : {
         "description" : "The identifier for the Task.",
         "example" : "profile_123",
-        "pattern" : "^[0-9a-z-_]+$",
+        "pattern" : "^[0-9a-z_-]+$",
         "type" : "string"
       },
       "task_def_id" : {
         "description" : "The identifier for the Task Definition.",
         "example" : "task_123",
-        "pattern" : "^[0-9a-z-_]+$",
+        "pattern" : "^[0-9a-z_-]+$",
         "type" : "string"
       },
       "task" : {
@@ -5053,7 +5053,7 @@
         "title" : "Watchlist monitors list",
         "type" : "object"
       },
-      "ID_Photos_list" : {
+      "Id_Photos_list" : {
         "properties" : {
           "id_photos" : {
             "items" : {
@@ -5063,7 +5063,7 @@
           }
         },
         "required" : [ "id_photos" ],
-        "title" : "ID Photos list",
+        "title" : "Id Photos list",
         "type" : "object"
       },
       "Webhooks_list" : {

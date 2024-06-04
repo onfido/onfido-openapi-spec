@@ -1088,7 +1088,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ID_Photos_list'
+                $ref: '#/components/schemas/Id_Photos_list'
           description: An array of ID photos
         default:
           content:
@@ -1958,12 +1958,12 @@ components:
     task_id:
       description: The identifier for the Task.
       example: profile_123
-      pattern: "^[0-9a-z-_]+$"
+      pattern: "^[0-9a-z_-]+$"
       type: string
     task_def_id:
       description: The identifier for the Task Definition.
       example: task_123
-      pattern: "^[0-9a-z-_]+$"
+      pattern: "^[0-9a-z_-]+$"
       type: string
     task:
       example:
@@ -1979,7 +1979,7 @@ components:
         id:
           description: The identifier for the Task.
           example: profile_123
-          pattern: "^[0-9a-z-_]+$"
+          pattern: "^[0-9a-z_-]+$"
           type: string
         workflow_run_id:
           description: The workflow run id the task belongs to.
@@ -1988,7 +1988,7 @@ components:
         task_def_id:
           description: The identifier for the Task Definition.
           example: task_123
-          pattern: "^[0-9a-z-_]+$"
+          pattern: "^[0-9a-z_-]+$"
           type: string
         task_def_version:
           description: The task definition version.
@@ -5012,12 +5012,12 @@ components:
         id:
           description: The identifier for the Task.
           example: profile_123
-          pattern: "^[0-9a-z-_]+$"
+          pattern: "^[0-9a-z_-]+$"
           type: string
         task_def_id:
           description: The identifier for the Task Definition.
           example: task_123
-          pattern: "^[0-9a-z-_]+$"
+          pattern: "^[0-9a-z_-]+$"
           type: string
         created_at:
           description: The date and time when the Task was created.
@@ -5085,7 +5085,7 @@ components:
       - monitors
       title: Watchlist monitors list
       type: object
-    ID_Photos_list:
+    Id_Photos_list:
       example:
         id_photos:
         - download_href: download_href
@@ -5109,7 +5109,7 @@ components:
           type: array
       required:
       - id_photos
-      title: ID Photos list
+      title: Id Photos list
       type: object
     Webhooks_list:
       example:
