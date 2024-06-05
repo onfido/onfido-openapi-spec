@@ -1,6 +1,15 @@
 class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^parentSchema}}implements ModelInterface, ArrayAccess, \JsonSerializable{{/parentSchema}}
 {
     public const DISCRIMINATOR = {{#discriminator}}'{{discriminatorName}}'{{/discriminator}}{{^discriminator}}null{{/discriminator}};
+    {{! Added lines of code - BEGIN }}
+    {{#discriminator}}
+    public const MAPPING = array(
+    {{#mappedModels}}
+        "{{{mappingName}}}" => '\Onfido\Model\{{{modelName}}}',
+    {{/mappedModels}}
+    );
+    {{/discriminator}}
+    {{! Added lines of code - END }}
 
     /**
       * The original name of the model.
@@ -558,26 +567,4 @@ class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^par
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 
-    {{! Added method BEGIN }}
-    {{#discriminator}}
-    /**
-     * Get actual object instance while waiting for native support in generator.
-     *
-     * @return object
-     */
-    public function getActualInstance()
-    {
-        switch( $this->getName() )
-        {
-        {{#mappedModels}}
-            case "{{{mappingName}}}":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\{{{modelName}}}', []);
-            break;
-        {{/mappedModels}}
-            default:
-                return $this;
-        }
-    }
-    {{/discriminator}}
-    {{! Added method END }}
 }
