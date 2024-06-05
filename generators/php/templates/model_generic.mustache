@@ -5,7 +5,7 @@ class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^par
     {{#discriminator}}
     public const MAPPING = array(
     {{#mappedModels}}
-        "{{{mappingName}}}" => '\Onfido\Model\{{{modelName}}}',
+        "{{{mappingName}}}" => '\{{modelPackage}}\{{{modelName}}}',
     {{/mappedModels}}
     );
     {{/discriminator}}
