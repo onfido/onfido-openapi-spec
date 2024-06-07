@@ -2145,8 +2145,8 @@ components:
         href: href
         enabled: true
         events:
-        - null
-        - null
+        - audit_log.created
+        - audit_log.created
         url: url
         token: token
     webhook_builder:
@@ -3325,7 +3325,7 @@ components:
             $ref: '#/components/schemas/document_properties'
         type: object
       example:
-        result: null
+        result: clear
         documents:
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3504,9 +3504,9 @@ components:
                   no_document_in_image: no_document_in_image
                   damaged_document: damaged_document
                   dark_photo: dark_photo
-        name: null
+        name: document
         created_at: 2000-01-23T04:56:07.000+00:00
-        sub_result: null
+        sub_result: clear
         check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
@@ -3626,7 +3626,7 @@ components:
           nationality: nationality
           date_of_expiry: 2000-01-23
           issuing_authority: issuing_authority
-        status: null
+        status: awaiting_data
     document_video_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
@@ -5122,8 +5122,8 @@ components:
           href: href
           enabled: true
           events:
-          - null
-          - null
+          - audit_log.created
+          - audit_log.created
           url: url
           token: token
         - payload_version: 0
@@ -5134,8 +5134,8 @@ components:
           href: href
           enabled: true
           events:
-          - null
-          - null
+          - audit_log.created
+          - audit_log.created
           url: url
           token: token
       properties:
@@ -5273,7 +5273,7 @@ components:
     Reports_list:
       example:
         reports:
-        - result: null
+        - result: clear
           documents:
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5452,9 +5452,9 @@ components:
                     no_document_in_image: no_document_in_image
                     damaged_document: damaged_document
                     dark_photo: dark_photo
-          name: null
+          name: document
           created_at: 2000-01-23T04:56:07.000+00:00
-          sub_result: null
+          sub_result: clear
           check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
@@ -5574,8 +5574,8 @@ components:
             nationality: nationality
             date_of_expiry: 2000-01-23
             issuing_authority: issuing_authority
-          status: null
-        - result: null
+          status: awaiting_data
+        - result: clear
           documents:
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5754,9 +5754,9 @@ components:
                     no_document_in_image: no_document_in_image
                     damaged_document: damaged_document
                     dark_photo: dark_photo
-          name: null
+          name: document
           created_at: 2000-01-23T04:56:07.000+00:00
-          sub_result: null
+          sub_result: clear
           check_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
@@ -5876,7 +5876,7 @@ components:
             nationality: nationality
             date_of_expiry: 2000-01-23
             issuing_authority: issuing_authority
-          status: null
+          status: awaiting_data
       properties:
         reports:
           items:
