@@ -69,7 +69,7 @@ jobs:
       python_version: ${{ steps.generator.outputs.python_urllib3_version }}
       ruby_version: ${{ steps.generator.outputs.ruby_faraday_version }}
     container:
-      image: openapitools/openapi-generator-cli:v7.5.0
+      image: openapitools/openapi-generator-cli:v7.6.0
       env:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
