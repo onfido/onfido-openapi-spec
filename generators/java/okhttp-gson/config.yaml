@@ -22,6 +22,8 @@ scmDeveloperConnection: scm:git:git://github.com/onfido/onfido-java.git
 scmUrl: https://github.com/onfido/onfido-java
 useOneOfDiscriminatorLookup: true
 legacyDiscriminatorBehavior: false
+typeMappings:
+  File: FileTransfer
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
@@ -29,3 +31,5 @@ files:
     destinationFilename: src/main/java/com/onfido/WebhookEventVerifier.java
   OnfidoInvalidSignatureError.mustache:
     destinationFilename: src/main/java/com/onfido/OnfidoInvalidSignatureError.java
+  FileTransfer.mustache:
+    destinationFilename: src/main/java/com/onfido/FileTransfer.java
