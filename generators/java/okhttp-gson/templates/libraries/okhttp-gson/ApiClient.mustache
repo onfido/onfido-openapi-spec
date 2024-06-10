@@ -1644,10 +1644,12 @@ public class ApiClient {
     private void addPartToMultiPartBuilder(MultipartBody.Builder mpBuilder, String key, FileTransfer file) {
         Headers partHeaders = Headers.of("Content-Disposition", "form-data; name=\"" + key + "\"; filename=\"" + file.getFilename() + "\"");
         MediaType mediaType = MediaType.parse(file.getContentType());
-        if (file.getBytes() != null) {
-            mpBuilder.addPart(partHeaders, RequestBody.create(file.getBytes(), mediaType));
-        } else {
-            mpBuilder.addPart(partHeaders, RequestBody.create(file.getFile(), mediaType));
+
+        if ( file.getByteArray() != null ) {
+            mpBuilder.addPart(partHeaders, RequestBody.create(file.getByteArray(), mediaType));
+        }
+        else {
+            mpBuilder.addPart(partHeaders, RequestBody.create(file.getInputFile(), mediaType));
         }
     }
 
