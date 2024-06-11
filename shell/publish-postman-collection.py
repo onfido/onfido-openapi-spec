@@ -11,6 +11,22 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
 
+def patch_collection(postman_collection: dict) -> None:
+    """
+    Fix type of file in upload forms, while waiting for issue resolution:
+    https://github.com/postmanlabs/openapi-to-postman/issues/795
+    """
+    for folder in postman_collection['item']:
+        for endpoint in folder['item']:
+            if ('body' in endpoint['request'] and
+               'formdata' in endpoint['request']['body']):
+                for input_field in endpoint['request']['body']['formdata']:
+                    if (input_field['key'] == 'file' and
+                       input_field['type'] == 'text'):
+                        input_field['type'] = 'file'
+                        del input_field['value']
+
+
 def nest_collection(postman_collection: dict) -> None:
     patched_items = defaultdict(list)
 
@@ -36,6 +52,7 @@ def replace_collection(postman_collection_file: str,
 
     with open(postman_collection_file) as postman_collection_str:
         postman_collection = json.load(postman_collection_str)
+        patch_collection(postman_collection)
         nest_collection(postman_collection)
 
         # Replace a collection's data
