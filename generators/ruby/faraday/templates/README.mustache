@@ -23,7 +23,7 @@ Configure with your API token, region and optional timeout (default value is 30)
 require {{{gemName}}}
 
 Onfido.configure do |config|
-  config.api_token = ENV["ONFIDO_WEBHOOK_SECRET_TOKEN"]
+  config.api_token = ENV["ONFIDO_API_TOKEN"]
   config.region = config.region[:EU]
   config.timeout = 30
 end
@@ -71,7 +71,7 @@ Webhook events payload needs to be verified before it can be accessed. Library a
   require 'onfido/webhook_event_verifier'
 
   def webhook_verifier()
-    verifier = Onfido::WebhookEventVerifier.new("_ABC123abc...3ABC123_")
+    verifier = Onfido::WebhookEventVerifier.new(ENV["ONFIDO_WEBHOOK_SECRET_TOKEN"])
 
     signature = "a0...760e"
 
@@ -84,23 +84,4 @@ Webhook events payload needs to be verified before it can be accessed. Library a
   end
 ```
 
-## Contributing
-
-This library is automatically generated using [OpenAPI Generator](https://openapi-generator.tech) - version: {{generatorVersion}}; therefore all the contributions, except tests files, should target [Onfido OpenAPI specification repository](https://github.com/onfido/onfido-openapi-spec/tree/master) instead of this repository.
-
-For contributions to the tests instead, please follow the steps below:
-
-1. [Fork](<https://github.com/{{ gitUserId }}/{{ gitRepoId }}/fork>) repository
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Push to the branch (`git push origin my-new-feature`)
-6. Create a new Pull Request
-
-## More documentation
-
-More documentation and code examples can be found at <{{ documentationUrl }}>.
-
-## Support
-Should you encounter any technical issues during integration, please contact Onfido's Customer Support team
-via the [{{ supportDescription }}]({{ supportUrl }}) which also includes support documentation.
+{{>README_footer}}

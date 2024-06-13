@@ -63,6 +63,7 @@ jobs:
     outputs:
       last_commit_long_sha: ${{ steps.retriever.outputs.last_commit_long_sha }}
       last_commit_short_sha: ${{ steps.retriever.outputs.last_commit_short_sha }}
+      last_commit_tag: ${{ steps.retriever.outputs.last_commit_tag }}
       java_version: ${{ steps.generator.outputs.java_okhttp_gson_version }}
       typescript_axios_version: ${{ steps.generator.outputs.typescript_axios_version }}
       php_version: ${{ steps.generator.outputs.php_version }}
@@ -93,6 +94,7 @@ jobs:
           LAST_COMMIT_LONG_SHA=$(git rev-list --perl-regexp --author='^((?!GitHub Actions Bot).*)$' HEAD | head -n 1)
           echo "last_commit_long_sha=$LAST_COMMIT_LONG_SHA" >> $GITHUB_OUTPUT
           echo "last_commit_short_sha=$(git rev-parse --short $LAST_COMMIT_LONG_SHA)" >> $GITHUB_OUTPUT
+          echo "last_commit_tag=$(git tag --contains HEAD | grep ^v | sort | tail -n 1 || true)" >> $GITHUB_OUTPUT
       - name: Validate multi-file OpenAPI specification
         run: |
           $OPENAPI_GENERATOR_COMMAND validate -i openapi.yaml
@@ -194,7 +196,7 @@ jobs:
               sed -i "s/ *$//" Gemfile
               bundle lock --update
             version: ${{ needs.generate_specs_and_libraries.outputs.ruby_version }}
-            update: ${{ inputs.update-onfido-ruby}}
+            update: ${{ inputs.update-onfido-ruby }}
     if: github.event_name == 'workflow_dispatch'
     environment: generation
     steps:
@@ -221,21 +223,26 @@ jobs:
       - name: Update CHANGELOG and lint .md files as needed
         if: ${{ matrix.update }}
         run: |
-          if [ "$(git status --porcelain=v1 | wc -l | sed -e 's/^[[:space:]]*//')" != "" ];
-          then
-            if [ -f CHANGELOG.md ] && [ -z "$(grep '${{ matrix.version }} ' CHANGELOG.md)" ];
-            then
-              TMP_FILE=$(mktemp)
-              RELEASE_DATE=`date +'%dth %B %Y' | sed -E 's/^0//;s/^([2,3]?)1th/\11st/;s/^([2]?)2th/\12nd/;s/^([2]?)3th/\13rd/'`
-              COMMIT_SHA=${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
-              COMMIT_URL=https://github.com/${{ github.repository_owner }}/onfido-openapi-spec/commit/${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }}
-              ( echo -e "# Changelog\n\n## v${{ matrix.version }} $RELEASE_DATE\n\n- Refresh library up to commit: [$COMMIT_SHA]($COMMIT_URL)"
-                grep -v "^# Changelog" CHANGELOG.md ) >| $TMP_FILE
-              mv $TMP_FILE CHANGELOG.md
-            fi
+          TMP_FILE=$(mktemp)
+          RELEASE_FILE=.release.json
 
-            npx prettier --write *.md
+          if [ ! -f $RELEASE_FILE ]
+          then
+            echo "{}" > $RELEASE_FILE
           fi
+
+          SOURCE_REPO_URL=https://github.com/${{ github.repository_owner }}/onfido-openapi-spec
+          SOURCE_SHORT_SHA=${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
+          SOURCE_LONG_SHA=${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }}
+          SOURCE_VERSION=${{ needs.generate_specs_and_libraries.outputs.last_commit_tag }}
+
+          jq  --arg source_repo_url "$SOURCE_REPO_URL" --arg source_short_sha "$SOURCE_SHORT_SHA" \
+              --arg source_long_sha "$SOURCE_LONG_SHA" --arg source_version "$SOURCE_VERSION" \
+              '. += {"source": {"repo_url": $source_repo_url, "short_sha": $source_short_sha,
+                                "long_sha": $source_long_sha, "version": $source_version},
+                                "release": "v${{ matrix.version }}"}' $RELEASE_FILE >| $TMP_FILE
+
+          mv $TMP_FILE $RELEASE_FILE
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
         if: ${{ matrix.update }}
