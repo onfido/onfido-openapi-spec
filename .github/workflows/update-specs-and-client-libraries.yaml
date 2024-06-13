@@ -243,6 +243,7 @@ jobs:
                                 "release": "v${{ matrix.version }}"}' $RELEASE_FILE >| $TMP_FILE
 
           mv $TMP_FILE $RELEASE_FILE
+          npx prettier --write *.md
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
         if: ${{ matrix.update }}
