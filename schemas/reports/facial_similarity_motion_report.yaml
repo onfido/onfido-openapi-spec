@@ -4,3 +4,5 @@ allOf:
     properties:
       breakdown:
         $ref: facial_similarity_motion_breakdown.yaml
+      properties:
+        $ref: facial_similarity_motion_properties.yaml

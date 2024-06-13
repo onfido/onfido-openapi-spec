@@ -1,0 +1,9 @@
+type: object
+properties:
+  score:
+    type: number
+    format: float
+    description: |
+      A floating point number between 0 and 1. The closer the score is to 0, the more likely
+      it is to be a spoof (i.e. videos of digital screens, masks or print-outs).
+      Conversely, the closer it is to 1, the less likely it is to be a spoof.

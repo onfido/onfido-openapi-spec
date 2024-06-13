@@ -4,3 +4,5 @@ allOf:
     properties:
       breakdown:
         $ref: facial_similarity_photo_fully_auto_breakdown.yaml
+      properties:
+        $ref: facial_similarity_photo_fully_auto_properties.yaml
