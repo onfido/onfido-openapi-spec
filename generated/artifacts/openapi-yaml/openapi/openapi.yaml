@@ -3678,6 +3678,8 @@ components:
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_breakdown'
+          properties:
+            $ref: '#/components/schemas/facial_similarity_photo_properties'
         type: object
     facial_similarity_photo_fully_auto_report:
       allOf:
@@ -3685,6 +3687,8 @@ components:
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown'
+          properties:
+            $ref: '#/components/schemas/facial_similarity_photo_fully_auto_properties'
         type: object
     facial_similarity_video_report:
       allOf:
@@ -3692,6 +3696,8 @@ components:
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_video_breakdown'
+          properties:
+            $ref: '#/components/schemas/facial_similarity_video_properties'
         type: object
     facial_similarity_motion_report:
       allOf:
@@ -3699,6 +3705,8 @@ components:
       - properties:
           breakdown:
             $ref: '#/components/schemas/facial_similarity_motion_breakdown'
+          properties:
+            $ref: '#/components/schemas/facial_similarity_motion_properties'
         type: object
     known_faces_report:
       allOf:
@@ -4313,6 +4321,16 @@ components:
         visual_authenticity:
           $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity'
       type: object
+    facial_similarity_photo_properties:
+      properties:
+        score:
+          description: |
+            A floating point number between 0 and 1. The closer the score is to 0, the more likely
+            it is to be a spoof (i.e. photos of printed photos, or photos of digital screens).
+            Conversely, the closer it is to 1, the less likely it is to be a spoof.
+          format: float
+          type: number
+      type: object
     facial_similarity_photo_fully_auto_breakdown:
       properties:
         face_comparison:
@@ -4321,6 +4339,16 @@ components:
           $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity'
         visual_authenticity:
           $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity'
+      type: object
+    facial_similarity_photo_fully_auto_properties:
+      properties:
+        score:
+          description: |
+            A floating point number between 0 and 1. The closer the score is to 0, the more likely
+            it is to be a spoof (i.e. photos of printed photos, or photos of digital screens).
+            Conversely, the closer it is to 1, the less likely it is to be a spoof.
+          format: float
+          type: number
       type: object
     facial_similarity_video_breakdown:
       properties:
@@ -4331,6 +4359,16 @@ components:
         visual_authenticity:
           $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity'
       type: object
+    facial_similarity_video_properties:
+      properties:
+        score:
+          description: |
+            A floating point number between 0 and 1. The closer the score is to 0, the more likely
+            it is to be a spoof (i.e. videos of digital screens, masks or print-outs).
+            Conversely, the closer it is to 1, the less likely it is to be a spoof.
+          format: float
+          type: number
+      type: object
     facial_similarity_motion_breakdown:
       properties:
         face_comparison:
@@ -4339,6 +4377,16 @@ components:
           $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity'
         visual_authenticity:
           $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity'
+      type: object
+    facial_similarity_motion_properties:
+      properties:
+        score:
+          description: |
+            A floating point number between 0 and 1. The closer the score is to 0, the more likely
+            it is to be a spoof (i.e. videos of digital screens, masks or print-outs).
+            Conversely, the closer it is to 1, the less likely it is to be a spoof.
+          format: float
+          type: number
       type: object
     known_faces_breakdown:
       properties:
