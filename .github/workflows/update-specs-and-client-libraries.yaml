@@ -24,6 +24,9 @@ on:
       version-suffix:
         description: "Add a suffix to version? (e.g `-beta`)"
         type: string
+      override-spec-version:
+        description: "Override spec version? (e.g `v2.8.0-beta`)"
+        type: string
       update-onfido-java:
         description: "Update onfido-java?"
         required: true
@@ -234,7 +237,9 @@ jobs:
           SOURCE_REPO_URL=https://github.com/${{ github.repository_owner }}/onfido-openapi-spec
           SOURCE_SHORT_SHA=${{ needs.generate_specs_and_libraries.outputs.last_commit_short_sha }}
           SOURCE_LONG_SHA=${{ needs.generate_specs_and_libraries.outputs.last_commit_long_sha }}
-          SOURCE_VERSION=${{ needs.generate_specs_and_libraries.outputs.last_commit_tag }}
+
+          SOURCE_VERSION=${{ inputs.override-spec-version }}
+          SOURCE_VERSION=${SOURCE_VERSION:-${{ needs.generate_specs_and_libraries.outputs.last_commit_tag }}}
 
           jq  --arg source_repo_url "$SOURCE_REPO_URL" --arg source_short_sha "$SOURCE_SHORT_SHA" \
               --arg source_long_sha "$SOURCE_LONG_SHA" --arg source_version "$SOURCE_VERSION" \
@@ -243,6 +248,7 @@ jobs:
                                 "release": "v${{ matrix.version }}"}' $RELEASE_FILE >| $TMP_FILE
 
           mv $TMP_FILE $RELEASE_FILE
+          npx prettier --write *.md
       - name: Create Pull Request with changes after library update
         uses: peter-evans/create-pull-request@v6
         if: ${{ matrix.update }}
