@@ -95,13 +95,14 @@ To update the OpenAPI generator version, bump the version in both [update-specs-
  SHA256SUM for template ... changed, diff reported below. To overwrite template, run:
  ...
 ```
+
 This happens when templates we're overriding have been updated. The script automatically fixes checksums for one generator at each run, but the templates need to be carefully reviewed and updated by following the procedure below:
 
 1. Check which files have changed, by running `git diff generators/**/templates/SHA256SUM`
 2. Compare each file with the one that has been freshly generated, e.g. if _libraries/okhttp-gson/ApiClient.mustache_ checksum has been denoted as modified for _java/okhttp-gson_ generator:
-    ```sh
-    diff generators/java/okhttp-gson/templates/libraries/okhttp-gson/ApiClient.mustache  generated/templates/java/okhttp-gson/libraries/okhttp-gson/ApiClient.mustache
-    ```
+   ```sh
+   diff generators/java/okhttp-gson/templates/libraries/okhttp-gson/ApiClient.mustache  generated/templates/java/okhttp-gson/libraries/okhttp-gson/ApiClient.mustache
+   ```
 3. Add all changes from the new version except the ones noted by mustache comments (i.e. `{{! }}`)
 4. Commit changes to both templates and SHA256SUM files
 
@@ -111,23 +112,23 @@ The changes to README.md should be carefully reviewed by comparing `generated/te
 
 Repository is open to external contributions. At this end please:
 
-1. [Fork](<https://github.com/onfido/onfido-openapi-spec/fork>) repository
+1. [Fork](https://github.com/onfido/onfido-openapi-spec/fork) repository
 2. Create your feature branch (`git checkout -b my-new-feature`)
-4. Make your changes, see below sections for project setup and testing.
-4. To update one (or more) client libraries, clone them in the parent folder so that all the _onfido-*_ repositories lie at the same level. Then run the script `./shell/generate.sh` in the _onfido-openapi-spec_ folder and `./shell/sync-lib.sh` in each of the client libraries' folder, as in the examples below:
+3. Make your changes, see below sections for project setup and testing.
+4. To update one (or more) client libraries, clone them in the parent folder so that all the _onfido-\*_ repositories lie at the same level. Then run the script `./shell/generate.sh` in the _onfido-openapi-spec_ folder and `./shell/sync-lib.sh` in each of the client libraries' folder, as in the examples below:
 
-    ```sh
-    ../onfido-openapi-spec/shell/sync-lib.sh java java/okhttp-gson
-    ../onfido-openapi-spec/shell/sync-lib.sh php
-    ```
+   ```sh
+   ../onfido-openapi-spec/shell/sync-lib.sh java java/okhttp-gson
+   ../onfido-openapi-spec/shell/sync-lib.sh php
+   ```
 
 5. To verify changes to the OpenAPI definition with external tools, run:
 
-    ```sh
-    ./shell/refresh-openapi-spec-for-documentation.py \
-            generated/artifacts/openapi/openapi.json \
-            generated/artifacts/openapi-documentation/openapi.json
-    ```
+   ```sh
+   ./shell/refresh-openapi-spec-for-documentation.py \
+           generated/artifacts/openapi/openapi.json \
+           generated/artifacts/openapi-documentation/openapi.json
+   ```
 
 6. Before committing your changes, run the script `./shell/run-prettier.sh`
 7. Commit your changes (`git commit -am 'Add some feature'`)
@@ -142,12 +143,12 @@ Described below is the procedure on how to deliver new client libraries:
 2. Manually trigger an [update-specs-and-client-libraries](https://github.com/onfido/onfido-openapi-spec/actions/workflows/update-specs-and-client-libraries.yaml) by clicking over the _Run workflow_ button
 3. Select the type of change:
 
-    | Type        | Description                                                                                                           |
-    |-------------|-----------------------------------------------------------------------------------------------------------------------|
-    | _No change_ | no change expected to client library code                                                                             |
-    | _Patch_     | bug fix not causing any change to client library interface                                                            |
-    | _Minor_     | backward compatible change to client library interface (e.g. new endpoint, new optional parameters)                   |
-    | _Major_     | non-backward compatible change to client library interface (e.g. remove or change endpoint, new mandatory parameters) |
+   | Type        | Description                                                                                                           |
+   | ----------- | --------------------------------------------------------------------------------------------------------------------- |
+   | _No change_ | no change expected to client library code                                                                             |
+   | _Patch_     | bug fix not causing any change to client library interface                                                            |
+   | _Minor_     | backward compatible change to client library interface (e.g. new endpoint, new optional parameters)                   |
+   | _Major_     | non-backward compatible change to client library interface (e.g. remove or change endpoint, new mandatory parameters) |
 
 4. Select the libraries to update
 5. A new PR will be created for each library (or overridden if already present)

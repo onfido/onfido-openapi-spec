@@ -11,7 +11,7 @@ else
 fi
 
 npm install prettier
-npx prettier $option openapi.yaml paths/*.yaml schemas/*/*.yaml responses/*.yaml \
+npx prettier $option *.md openapi.yaml paths/*.yaml schemas/*/*.yaml responses/*.yaml \
                      $(git ls-files generators/\*\*/config.yaml) .github/workflows/*.yaml
 npx prettier $option --parser markdown $(git ls-files generators/\*\*/templates/README.mustache) \
                                        generators/common/templates/README_footer.mustache
