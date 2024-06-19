@@ -339,8 +339,6 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
      * @return The actual instance of `{{{dataType}}}`
      * @throws ClassCastException if the instance is not `{{{dataType}}}`
      */
-    {{! Suppress unchecked cast warning }}
-    @SuppressWarnings("unchecked")
     public {{{dataType}}} get{{#isArray}}{{#sanitizeGeneric}}{{{dataType}}}{{/sanitizeGeneric}}{{/isArray}}{{^isArray}}{{{dataType}}}{{/isArray}}() throws ClassCastException {
         return ({{{dataType}}})super.getActualInstance();
     }
@@ -453,41 +451,32 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
 
     {{! Added block of code based on com/onfido/model/ReportShared.java - BEGIN }}
 
-    /**
-     * Give access to shared properties. Read-only.
-     * @return ReportShared object with common fields
-     **/
+  /**
+  * Give access to shared properties. Read-only.
+  * @return ReportShared object with common fields
+  **/
 
-    public ReportShared getReportShared() {
-        return reportShared;
-    }
+  public ReportShared getReportShared() {
+      return reportShared;
+  }
 
-    /**
-     * Give access to shared properties. Read-only.
-     * @return id
-     **/
+  /**
+  * Give access to shared properties. Read-only.
+  * @return id
+  **/
 
-    public UUID getId() {
-        return reportShared.getId();
-    }
+  public UUID getId() {
+      return reportShared.getId();
+  }
 
-    /**
-     * Get name
-     * @return name
-     **/
+  /**
+  * Get name
+  * @return name
+  **/
 
-    public ReportName getName() {
-        return reportShared.getName();
-    }
-
-    /**
-     * Get status
-     * @return status
-     **/
-
-    public ReportStatus getStatus() {
-        return reportShared.getStatus();
-    }
+  public ReportName getName() {
+      return reportShared.getName();
+  }
 
   {{! Added block of code based on com/onfido/model/ReportShared.java - END }}
 }
