@@ -5,6 +5,3 @@
 export * from "./api";
 export * from "./configuration";
 {{#withSeparateModelsAndApi}}export * from "./{{tsModelPackage}}";{{/withSeparateModelsAndApi}}
-{{! Additional exports below }}
-export * from "./webhook-event-verifier";
-export * from "./file-transfer";

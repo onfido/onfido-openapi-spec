@@ -21,33 +21,6 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
-{{! ONFIDO: Added lines of code - BEGIN }}
-import { FileTransfer } from './file-transfer';
-import { AxiosHeaders } from 'axios';
-
-globalAxios.interceptors.response.use(async (response) => {
-    if (response.headers instanceof AxiosHeaders && response.headers['content-type']) {
-        if ( ! response.headers['content-type'].toString().includes('application/json') ) {
-            const contentDisposition = response.headers['content-disposition'];
-            var filename = "";
-
-            if (contentDisposition && contentDisposition != "") {
-                const matcher = contentDisposition.match(/filename=['\"]?([^'\"\s]+)['\"]?/);
-
-                if (matcher != null) {
-                  filename = matcher[1].replace(/.*[/\\\\]/g, "");
-                }
-            }
-
-            response.data = new FileTransfer(response.data, filename);
-        }
-    }
-
-    return response;
-  });
-
-{{! ONFIDO: Added lines of code - END }}
-
 {{#models}}
 {{#model}}{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{#oneOf}}{{#-first}}{{>modelOneOf}}{{/-first}}{{/oneOf}}{{^isEnum}}{{^oneOf}}{{>modelGeneric}}{{/oneOf}}{{/isEnum}}{{/model}}
 {{/models}}
