@@ -5,8 +5,13 @@ enumUnknownDefaultCase: true
 supportsES6: true
 withNodeImports: true
 httpUserAgent: onfido-node/${CLIENT_LIBRARY_VERSION}
+# Type mapping doesn't work with this generator
+# typeMappings:
+#   File: FileTransfer
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
   webhook-event-verifier.mustache:
     destinationFilename: webhook-event-verifier.ts
+  file-transfer.mustache:
+    destinationFilename: file-transfer.ts
