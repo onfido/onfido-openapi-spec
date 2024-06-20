@@ -11,6 +11,31 @@ on:
       - master
   workflow_dispatch:
     inputs:
+      update-onfido-java:
+        description: "Refresh onfido-java?"
+        required: true
+        default: false
+        type: boolean
+      update-onfido-node:
+        description: "Refresh onfido-node?"
+        required: true
+        default: false
+        type: boolean
+      update-onfido-php:
+        description: "Refresh onfido-php?"
+        required: true
+        default: false
+        type: boolean
+      update-onfido-python:
+        description: "Refresh onfido-python?"
+        required: true
+        default: false
+        type: boolean
+      update-onfido-ruby:
+        description: "Refresh onfido-ruby?"
+        required: true
+        default: false
+        type: boolean
       type-of-change:
         description: "Type of change?"
         required: true
@@ -21,37 +46,15 @@ on:
           - Minor
           - Patch
           - No change
-      version-suffix:
-        description: "Add a suffix to version? (e.g `-beta`)"
+      lib-version-suffix:
+        description: "Add a suffix to version? (e.g `-pre`)"
         type: string
       override-spec-version:
-        description: "Override spec version? (e.g `v2.8.0-beta`)"
+        description: "Override onfido-spec version? (e.g `v2.8.0-beta`)"
         type: string
-      update-onfido-java:
-        description: "Update onfido-java?"
-        required: true
-        default: false
-        type: boolean
-      update-onfido-node:
-        description: "Update onfido-node?"
-        required: true
-        default: false
-        type: boolean
-      update-onfido-php:
-        description: "Update onfido-php?"
-        required: true
-        default: false
-        type: boolean
-      update-onfido-python:
-        description: "Update onfido-python?"
-        required: true
-        default: false
-        type: boolean
-      update-onfido-ruby:
-        description: "Update onfido-ruby?"
-        required: true
-        default: false
-        type: boolean
+      override-lib-version:
+        description: "Override client library version? (e.g `3.0.1-alpha`)"
+        type: string
 jobs:
   validate_input_specs:
     name: Validate multi file specification
@@ -77,7 +80,8 @@ jobs:
       env:
         OPENAPI_GENERATOR_COMMAND: docker-entrypoint.sh
         BUMP_CLIENT_LIBRARY_VERSION: ${{ inputs.type-of-change }}
-        CLIENT_LIBRARY_VERSION_SUFFIX: ${{ inputs.version-suffix }}
+        CLIENT_LIBRARY_VERSION_SUFFIX: ${{ inputs.lib-version-suffix }}
+        OVERRIDE_CLIENT_LIBRARY_VERSION: ${{ inputs.override-lib-version }}
     steps:
       - name: Install pre-requisites
         run: |
@@ -85,8 +89,7 @@ jobs:
           apt-get install -yqq \
             gettext-base \
             git \
-            jq \
-            pipx
+            jq
       - uses: actions/checkout@v4
         with:
           fetch-depth: 10
@@ -110,6 +113,7 @@ jobs:
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
+            shell/sync-lib.sh
             generated/artifacts
             generators/**/exclusions.txt
   update_specs:
@@ -160,50 +164,58 @@ jobs:
   update_client_libraries:
     name: "Create PR to ${{ matrix.git_repo_id }} repository using ${{ matrix.generator }} generator (${{matrix.version}})"
     runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
     needs: generate_specs_and_libraries
     strategy:
       matrix:
         include:
           - generator: java/okhttp-gson
             git_repo_id: onfido-java
-            preCommit: |
-              sed -i "s/ *$//" pom.xml
-              mvn -B package --file pom.xml clean -Dmaven.test.skip
             version: ${{ needs.generate_specs_and_libraries.outputs.java_version }}
             update: ${{ inputs.update-onfido-java }}
           - generator: typescript-axios
             git_repo_id: onfido-node
-            preCommit: |
-              sed -iE 's/\([ <{]\)File\([>},]\)/\1FileTransfer\2/g' api.ts
-              npx prettier --write package.json
-              npm install
             version: ${{ needs.generate_specs_and_libraries.outputs.typescript_axios_version }}
             update: ${{ inputs.update-onfido-node }}
           - generator: php
             git_repo_id: onfido-php
-            preCommit: |
-              sed -i "s/ *$//" composer.json
-              composer update --lock
+            image: composer:2.7
             version: ${{ needs.generate_specs_and_libraries.outputs.php_version }}
             update: ${{ inputs.update-onfido-php }}
           - generator: python/urllib3
             git_repo_id: onfido-python
-            preCommit: |
-              sed -i "s/ *$//" pyproject.toml setup.py
-              pipx install poetry==1.8
-              poetry lock
+            image: python:3.11
+            extra: pipx
             version: ${{ needs.generate_specs_and_libraries.outputs.python_version }}
             update: ${{ inputs.update-onfido-python }}
           - generator: ruby/faraday
             git_repo_id: onfido-ruby
-            preCommit: |
-              sed -i "s/ *$//" Gemfile
-              bundle lock --update
+            image: ruby:3.2
             version: ${{ needs.generate_specs_and_libraries.outputs.ruby_version }}
             update: ${{ inputs.update-onfido-ruby }}
     if: github.event_name == 'workflow_dispatch'
     environment: generation
     steps:
+      - name: Install pre-requisites
+        run: |
+          if [ "$(command -v rsync)" = "" ];
+          then
+            if [ "$(command -v apt-get)" != "" ];
+            then
+              apt-get update
+              UPDATE_COMMAND="apt-get install -yqq"
+            else
+              UPDATE_COMMAND="apk add"
+            fi
+
+            ${UPDATE_COMMAND} \
+              rsync \
+              npm \
+              jq \
+              pipx \
+              ${{ matrix.extra }}
+          fi
       - uses: actions/checkout@v4
         if: ${{ matrix.update }}
         with:
@@ -214,16 +226,11 @@ jobs:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
       - name: Integrate generated code (${{ matrix.version }})
         if: ${{ matrix.update }}
+        env:
+          ONFIDO_OPENAPI_SPEC_FOLDER: .
         run: |
-          rsync -r --delete-after --exclude='/.git*' --exclude='/CHANGELOG*' --exclude='/.release.json' \
-                --exclude='/.openapi-generator-ignore' --exclude='/.openapi-generator/FILES' \
-                --exclude-from=generators/${{ matrix.generator }}/exclusions.txt \
-                generated/artifacts/${{ matrix.generator }}/ .
-      - name: Run pre-commit script
-        continue-on-error: true
-        if: ${{ matrix.update }}
-        run: |
-          ${{ matrix.preCommit }}
+          chmod +x shell/sync-lib.sh
+          shell/sync-lib.sh $(echo ${{ matrix.git_repo_id }} | sed 's/^onfido-//') ${{ matrix.generator }}
       - name: Update CHANGELOG and lint .md files as needed
         if: ${{ matrix.update }}
         run: |

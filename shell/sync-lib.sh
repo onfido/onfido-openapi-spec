@@ -9,16 +9,64 @@ then
   exit 1
 fi
 
+ONFIDO_OPENAPI_SPEC_FOLDER=${ONFIDO_OPENAPI_SPEC_FOLDER:-../onfido-openapi-spec}
+
 client_lib_name=$1
 generator_name=${2:-$client_lib_name}
 
-if [ "$(basename $(pwd))" != "onfido-$client_lib_name" ];
+# Sanity check
+if [ "$(grep -ie "^# Onfido $client_lib_name.* Library" README.md)" = "" ];
 then
-  echo "Invalid folder name, onfido-$client_lib_name expected"
+  echo "This doesn't look to be a valid onfido-$client_lib_name folder"
   exit 2
 fi
 
-rsync -r --exclude='/.git*' --exclude='/CHANGELOG*' \
+if [[ "$OSTYPE" = "darwin"* ]]; then
+  # Mac OSX
+  SED="sed -i -E"
+else
+  # Linux
+  SED="sed -i"
+fi
+
+# Sync library contents
+rsync -r --exclude='/.git*' --exclude='/CHANGELOG*' --exclude='/.release.json' \
   --exclude='/.openapi-generator-ignore' --exclude='/.openapi-generator/FILES' \
-  --exclude-from=../onfido-openapi-spec/generators/${generator_name}/exclusions.txt \
-  --delete-after ../onfido-openapi-spec/generated/artifacts/${generator_name}/ .
+  --exclude-from=${ONFIDO_OPENAPI_SPEC_FOLDER}/generators/${generator_name}/exclusions.txt \
+  --delete-after ${ONFIDO_OPENAPI_SPEC_FOLDER}/generated/artifacts/${generator_name}/ .
+
+# Run specific pre-commit commands
+case $client_lib_name in
+
+  java)
+    $SED'' -e 's/ *$//' pom.xml
+    mvn -B package --file pom.xml clean -Dmaven.test.skip
+  ;;
+
+  node)
+    # workaround typeMappings setting not working with typescript-node generator
+    $SED 's/\([ <{]\)File\([>},]\)/\1FileTransfer\2/g' api.ts
+    npx prettier --write package.json
+    npm install
+  ;;
+
+  php)
+    $SED "s/ *$//" composer.json
+    cat composer.json
+    composer update --lock
+  ;;
+
+  python)
+    $SED "s/ *$//" pyproject.toml setup.py
+    pipx run poetry==1.8 lock
+  ;;
+
+  ruby)
+    $SED "s/ *$//" Gemfile
+    bundle lock --update
+  ;;
+
+esac
+
+# Run linter on generated .md files
+npx prettier --write *.md
