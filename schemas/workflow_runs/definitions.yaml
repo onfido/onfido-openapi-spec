@@ -22,7 +22,8 @@ workflow_run_shared:
         minLength: 1
         maxLength: 128
     sdk_token:
-      type: ["null", string]
+      type: string
+      nullable: true
       description: client token to use when loading this workflow run in the Onfido SDK.
     link:
       type: object
