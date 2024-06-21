@@ -39,7 +39,7 @@ rsync -r --exclude='/.git*' --exclude='/CHANGELOG*' --exclude='/.release.json' \
 case $client_lib_name in
 
   java)
-    $SED'' -e 's/ *$//' pom.xml
+    $SED 's/ *$//' pom.xml
     mvn -B package --file pom.xml clean -Dmaven.test.skip
   ;;
 
