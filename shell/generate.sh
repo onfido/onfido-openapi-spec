@@ -17,6 +17,7 @@ OPENAPI_GENERATOR_COMMAND=${OPENAPI_GENERATOR_COMMAND:-\
 
 BUMP_CLIENT_LIBRARY_VERSION=${BUMP_CLIENT_LIBRARY_VERSION:-""}
 CLIENT_LIBRARY_VERSION_SUFFIX=${CLIENT_LIBRARY_VERSION_SUFFIX:-""}
+OVERRIDE_CLIENT_LIBRARY_VERSION=${OVERRIDE_CLIENT_LIBRARY_VERSION:-""}
 
 # $1: version, $2: bump type (Major, Minor, Patch)
 function semver_bump() {
@@ -131,7 +132,7 @@ do
     GIT_REPO_ID=$(grep gitRepoId: $CONFIG_FILE | sed 's/gitRepoId: //g')
     LIBRARY=$(grep library: $CONFIG_FILE | sed 's/library: //g')
 
-    if [ -n "${GIT_REPO_ID}" ];
+    if [ -z "${OVERRIDE_CLIENT_LIBRARY_VERSION}" ] && [ -n "${GIT_REPO_ID}" ];
     then
       LATEST_LIBRARY_VERSION=$(curl -s https://api.github.com/repos/onfido/${GIT_REPO_ID}/releases | jq '.[0].name' | sed 's/[v"]//g')
 
@@ -146,7 +147,7 @@ do
       echo "Current version is going to be: ${CURRENT_LIBRARY_VERSION}"
       echo "Client library version bump?: ${BUMP_CLIENT_LIBRARY_VERSION}"
     else
-      CURRENT_LIBRARY_VERSION=""
+      CURRENT_LIBRARY_VERSION=$OVERRIDE_CLIENT_LIBRARY_VERSION
     fi
 
     validate_templates_checksum $GENERATOR_NAME $LIBRARY_NAME
