@@ -1,5 +1,6 @@
 gitRepoId: onfido-python
-packageName: onfido
+distributionPackageName: onfido-python
+packageName: onfido # i.e. import package name
 packageVersion: ${CLIENT_LIBRARY_VERSION}
 useOneOfDiscriminatorLookup: true
 httpUserAgent: onfido-python/${CLIENT_LIBRARY_VERSION}
