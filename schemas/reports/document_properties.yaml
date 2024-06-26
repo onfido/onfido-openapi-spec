@@ -6,6 +6,8 @@ properties:
   date_of_expiry:
     type: string
     format: date
+  personal_number:
+    type: string
   document_numbers:
     type: array
     items:
@@ -52,8 +54,56 @@ properties:
     type: string
   issuing_authority:
     type: string
+  remarks:
+    type: string
+  civil_state:
+    type: string
+  expatriation:
+    type: string
+  father_name:
+    type: string
+  mother_name:
+    type: string
+  religion:
+    type: string
+  type_of_permit:
+    type: string
+  version_number:
+    type: string
+  document_subtype:
+    type: string
+  profession:
+    type: string
+  security_document_number:
+    type: string
+  tax_number:
+    type: string
+  nist_identity_evidence_strength:
+    type: string
+    enum:
+      - superior
+      - strong
+      - fair
+      - weak
+      - unacceptable
+      - unspecified_identity_evidence_strength
+  has_issuance_confirmation:
+    type: string
+    enum:
+      - "true"
+      - "false"
+      - unspecified
   real_id_compliance:
     type: boolean
+  security_tier:
+    type: string
+    enum:
+      - tier_1
+      - tier_2
+      - tier_3
+      - tier_4
+      - tier_5
+      - unspecified_security_tier
   address_lines:
     type: object
     properties:
