@@ -93,7 +93,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 10
-      - name: Retrieve information about last commit not authored by GitHub Actions Bot
+          fetch-tags: true
+      - name: Retrieve information about last commit not authored by GitHub Actions Bot and release (if any)
         id: retriever
         run: |
           git config --global --add safe.directory $(pwd)
@@ -231,7 +232,7 @@ jobs:
         run: |
           chmod +x shell/sync-lib.sh
           shell/sync-lib.sh $(echo ${{ matrix.git_repo_id }} | sed 's/^onfido-//') ${{ matrix.generator }}
-      - name: Update CHANGELOG and lint .md files as needed
+      - name: Update release file and lint .md files as needed
         if: ${{ matrix.update }}
         run: |
           TMP_FILE=$(mktemp)
