@@ -23,10 +23,10 @@ fi
 
 if [[ "$OSTYPE" = "darwin"* ]]; then
   # Mac OSX
-  SED="sed -i -E"
+  SED=(sed -i -E)
 else
   # Linux
-  SED="sed -i"
+  SED=(sed -i)
 fi
 
 # Sync library contents
@@ -52,7 +52,6 @@ case $client_lib_name in
 
   php)
     $SED "s/ *$//" composer.json
-    cat composer.json
     composer update --lock
   ;;
 
