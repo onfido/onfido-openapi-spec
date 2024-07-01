@@ -23,10 +23,10 @@ fi
 
 if [[ "$OSTYPE" = "darwin"* ]]; then
   # Mac OSX
-  SED=(sed -i -E)
+  SED_OPTS="-i -E"
 else
   # Linux
-  SED=(sed -i)
+  SED_OPTS="-i"
 fi
 
 # Sync library contents
@@ -39,29 +39,29 @@ rsync -r --exclude='/.git*' --exclude='/CHANGELOG*' --exclude='/.release.json' \
 case $client_lib_name in
 
   java)
-    $SED 's/ *$//' pom.xml
+    sed $SED_OPTS 's/ *$//' pom.xml
     mvn -B package --file pom.xml clean -Dmaven.test.skip
   ;;
 
   node)
     # workaround typeMappings setting not working with typescript-node generator
-    $SED 's/\([ <{]\)File\([>},]\)/\1FileTransfer\2/g' api.ts
+    sed $SED_OPTS 's/\([ <{]\)File\([>},]\)/\1FileTransfer\2/g' api.ts
     npx prettier --write package.json
     npm install
   ;;
 
   php)
-    $SED "s/ *$//" composer.json
+    sed $SED_OPTS "s/ *$//" composer.json
     composer update --lock
   ;;
 
   python)
-    $SED "s/ *$//" pyproject.toml setup.py
+    sed $SED_OPTS "s/ *$//" pyproject.toml setup.py
     pipx run poetry==1.8 lock
   ;;
 
   ruby)
-    $SED "s/ *$//" Gemfile
+    sed $SED_OPTS "s/ *$//" Gemfile
     bundle lock --update
   ;;
 
