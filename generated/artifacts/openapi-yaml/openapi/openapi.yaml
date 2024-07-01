@@ -3512,7 +3512,11 @@ components:
         href: href
         properties:
           gender: gender
+          security_document_number: security_document_number
           date_of_birth: 2000-01-23
+          security_tier: tier_1
+          mother_name: mother_name
+          version_number: version_number
           categorisation: categorisation
           widow_name: widow_name
           extracted_data:
@@ -3539,6 +3543,7 @@ components:
             address_line_4: address_line_4
           mrz_line1: mrz_line1
           spouse_name: spouse_name
+          has_issuance_confirmation: "true"
           real_id_compliance: true
           address_lines:
             street_address: street_address
@@ -3555,6 +3560,7 @@ components:
           mrz_line3: mrz_line3
           issuing_country: issuing_country
           mrz_line2: mrz_line2
+          tax_number: tax_number
           issuing_state: issuing_state
           first_name: first_name
           barcode:
@@ -3595,6 +3601,8 @@ components:
             class: class
             document_type: document_type
           document_type: document_type
+          profession: profession
+          nist_identity_evidence_strength: superior
           document_numbers:
           - type: type
             value: value
@@ -3602,6 +3610,8 @@ components:
             value: value
           address: address
           issuing_date: 2000-01-23
+          document_subtype: document_subtype
+          type_of_permit: type_of_permit
           last_name: last_name
           nfc:
             document_number: document_number
@@ -3622,10 +3632,16 @@ components:
             issuing_state: issuing_state
             document_type: document_type
           alias_name: alias_name
+          expatriation: expatriation
+          religion: religion
           place_of_birth: place_of_birth
           nationality: nationality
           date_of_expiry: 2000-01-23
+          father_name: father_name
           issuing_authority: issuing_authority
+          civil_state: civil_state
+          personal_number: personal_number
+          remarks: remarks
         status: awaiting_data
     document_video_report:
       allOf:
@@ -4133,7 +4149,11 @@ components:
     document_properties:
       example:
         gender: gender
+        security_document_number: security_document_number
         date_of_birth: 2000-01-23
+        security_tier: tier_1
+        mother_name: mother_name
+        version_number: version_number
         categorisation: categorisation
         widow_name: widow_name
         extracted_data:
@@ -4160,6 +4180,7 @@ components:
           address_line_4: address_line_4
         mrz_line1: mrz_line1
         spouse_name: spouse_name
+        has_issuance_confirmation: "true"
         real_id_compliance: true
         address_lines:
           street_address: street_address
@@ -4176,6 +4197,7 @@ components:
         mrz_line3: mrz_line3
         issuing_country: issuing_country
         mrz_line2: mrz_line2
+        tax_number: tax_number
         issuing_state: issuing_state
         first_name: first_name
         barcode:
@@ -4216,6 +4238,8 @@ components:
           class: class
           document_type: document_type
         document_type: document_type
+        profession: profession
+        nist_identity_evidence_strength: superior
         document_numbers:
         - type: type
           value: value
@@ -4223,6 +4247,8 @@ components:
           value: value
         address: address
         issuing_date: 2000-01-23
+        document_subtype: document_subtype
+        type_of_permit: type_of_permit
         last_name: last_name
         nfc:
           document_number: document_number
@@ -4243,16 +4269,24 @@ components:
           issuing_state: issuing_state
           document_type: document_type
         alias_name: alias_name
+        expatriation: expatriation
+        religion: religion
         place_of_birth: place_of_birth
         nationality: nationality
         date_of_expiry: 2000-01-23
+        father_name: father_name
         issuing_authority: issuing_authority
+        civil_state: civil_state
+        personal_number: personal_number
+        remarks: remarks
       properties:
         date_of_birth:
           format: date
           type: string
         date_of_expiry:
           format: date
+          type: string
+        personal_number:
           type: string
         document_numbers:
           items:
@@ -4295,8 +4329,56 @@ components:
           type: string
         issuing_authority:
           type: string
+        remarks:
+          type: string
+        civil_state:
+          type: string
+        expatriation:
+          type: string
+        father_name:
+          type: string
+        mother_name:
+          type: string
+        religion:
+          type: string
+        type_of_permit:
+          type: string
+        version_number:
+          type: string
+        document_subtype:
+          type: string
+        profession:
+          type: string
+        security_document_number:
+          type: string
+        tax_number:
+          type: string
+        nist_identity_evidence_strength:
+          enum:
+          - superior
+          - strong
+          - fair
+          - weak
+          - unacceptable
+          - unspecified_identity_evidence_strength
+          type: string
+        has_issuance_confirmation:
+          enum:
+          - "true"
+          - "false"
+          - unspecified
+          type: string
         real_id_compliance:
           type: boolean
+        security_tier:
+          enum:
+          - tier_1
+          - tier_2
+          - tier_3
+          - tier_4
+          - tier_5
+          - unspecified_security_tier
+          type: string
         address_lines:
           $ref: '#/components/schemas/document_properties_address_lines'
         barcode:
@@ -5508,7 +5590,11 @@ components:
           href: href
           properties:
             gender: gender
+            security_document_number: security_document_number
             date_of_birth: 2000-01-23
+            security_tier: tier_1
+            mother_name: mother_name
+            version_number: version_number
             categorisation: categorisation
             widow_name: widow_name
             extracted_data:
@@ -5535,6 +5621,7 @@ components:
               address_line_4: address_line_4
             mrz_line1: mrz_line1
             spouse_name: spouse_name
+            has_issuance_confirmation: "true"
             real_id_compliance: true
             address_lines:
               street_address: street_address
@@ -5551,6 +5638,7 @@ components:
             mrz_line3: mrz_line3
             issuing_country: issuing_country
             mrz_line2: mrz_line2
+            tax_number: tax_number
             issuing_state: issuing_state
             first_name: first_name
             barcode:
@@ -5591,6 +5679,8 @@ components:
               class: class
               document_type: document_type
             document_type: document_type
+            profession: profession
+            nist_identity_evidence_strength: superior
             document_numbers:
             - type: type
               value: value
@@ -5598,6 +5688,8 @@ components:
               value: value
             address: address
             issuing_date: 2000-01-23
+            document_subtype: document_subtype
+            type_of_permit: type_of_permit
             last_name: last_name
             nfc:
               document_number: document_number
@@ -5618,10 +5710,16 @@ components:
               issuing_state: issuing_state
               document_type: document_type
             alias_name: alias_name
+            expatriation: expatriation
+            religion: religion
             place_of_birth: place_of_birth
             nationality: nationality
             date_of_expiry: 2000-01-23
+            father_name: father_name
             issuing_authority: issuing_authority
+            civil_state: civil_state
+            personal_number: personal_number
+            remarks: remarks
           status: awaiting_data
         - result: clear
           documents:
@@ -5810,7 +5908,11 @@ components:
           href: href
           properties:
             gender: gender
+            security_document_number: security_document_number
             date_of_birth: 2000-01-23
+            security_tier: tier_1
+            mother_name: mother_name
+            version_number: version_number
             categorisation: categorisation
             widow_name: widow_name
             extracted_data:
@@ -5837,6 +5939,7 @@ components:
               address_line_4: address_line_4
             mrz_line1: mrz_line1
             spouse_name: spouse_name
+            has_issuance_confirmation: "true"
             real_id_compliance: true
             address_lines:
               street_address: street_address
@@ -5853,6 +5956,7 @@ components:
             mrz_line3: mrz_line3
             issuing_country: issuing_country
             mrz_line2: mrz_line2
+            tax_number: tax_number
             issuing_state: issuing_state
             first_name: first_name
             barcode:
@@ -5893,6 +5997,8 @@ components:
               class: class
               document_type: document_type
             document_type: document_type
+            profession: profession
+            nist_identity_evidence_strength: superior
             document_numbers:
             - type: type
               value: value
@@ -5900,6 +6006,8 @@ components:
               value: value
             address: address
             issuing_date: 2000-01-23
+            document_subtype: document_subtype
+            type_of_permit: type_of_permit
             last_name: last_name
             nfc:
               document_number: document_number
@@ -5920,10 +6028,16 @@ components:
               issuing_state: issuing_state
               document_type: document_type
             alias_name: alias_name
+            expatriation: expatriation
+            religion: religion
             place_of_birth: place_of_birth
             nationality: nationality
             date_of_expiry: 2000-01-23
+            father_name: father_name
             issuing_authority: issuing_authority
+            civil_state: civil_state
+            personal_number: personal_number
+            remarks: remarks
           status: awaiting_data
       properties:
         reports:
