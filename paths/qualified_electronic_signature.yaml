@@ -1,7 +1,7 @@
 documents:
   post:
     summary: Retrieves the signed document or application form
-    operationId: documents
+    operationId: download_qes_document
     description: >
       Retrieves the signed document or application form depending on the file_id provided.
     parameters:
@@ -29,5 +29,12 @@ documents:
             schema:
               type: string
               format: uri
+      "200":
+        description: The signed document PDF binary data.
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
       default:
         $ref: ../responses/default_error.yaml
