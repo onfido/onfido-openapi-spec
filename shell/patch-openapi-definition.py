@@ -29,6 +29,7 @@ SECTIONS = (
              'motion_captures': 'Motion captures',
              'watchlist_monitors': 'Monitors',
              'id_photos': 'ID Photos',
+             'qualified_electronic_signature': 'Qualified Electronic Signature',
              'timeline_file': 'Timeline Files'
              }),
     Section('Other Endpoints',
