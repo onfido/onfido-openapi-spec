@@ -3631,6 +3631,7 @@ components:
             issuing_country: issuing_country
             issuing_state: issuing_state
             document_type: document_type
+          middle_name: middle_name
           alias_name: alias_name
           expatriation: expatriation
           religion: religion
@@ -4268,6 +4269,7 @@ components:
           issuing_country: issuing_country
           issuing_state: issuing_state
           document_type: document_type
+        middle_name: middle_name
         alias_name: alias_name
         expatriation: expatriation
         religion: religion
@@ -4296,11 +4298,13 @@ components:
           type: string
         first_name:
           type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
         gender:
           type: string
         issuing_country:
-          type: string
-        last_name:
           type: string
         nationality:
           type: string
@@ -5709,6 +5713,7 @@ components:
               issuing_country: issuing_country
               issuing_state: issuing_state
               document_type: document_type
+            middle_name: middle_name
             alias_name: alias_name
             expatriation: expatriation
             religion: religion
@@ -6027,6 +6032,7 @@ components:
               issuing_country: issuing_country
               issuing_state: issuing_state
               document_type: document_type
+            middle_name: middle_name
             alias_name: alias_name
             expatriation: expatriation
             religion: religion
