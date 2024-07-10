@@ -6080,7 +6080,6 @@
         "properties": {
           "id": {
             "description": "The unique identifier of the resource.",
-            "format": "uuid",
             "type": "string"
           },
           "status": {
