@@ -30,6 +30,11 @@ properties:
             type: string
             description: The current state of the object, if available.
             example: complete
+          started_at_iso8601:
+            type: string
+            format: date-time
+            description: The date and time when the operation was started, if available.
+            example: "2019-10-28T12:00:39Z"
           completed_at_iso8601:
             type: string
             format: date-time
