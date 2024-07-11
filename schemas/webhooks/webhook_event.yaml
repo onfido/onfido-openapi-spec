@@ -34,7 +34,7 @@ properties:
             type: string
             format: date-time
             description: The date and time when the operation was started, if available.
-            example: "2019-10-28T12:00:39Z"
+            example: "2019-10-28T14:55:09Z"
           completed_at_iso8601:
             type: string
             format: date-time
