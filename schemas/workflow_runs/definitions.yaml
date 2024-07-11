@@ -21,10 +21,6 @@ workflow_run_shared:
         type: string
         minLength: 1
         maxLength: 128
-    sdk_token:
-      type: string
-      nullable: true
-      description: Client token to use when loading this workflow run in the Onfido SDK.
     link:
       type: object
       description: Object for the configuration of the Workflow Run link.
@@ -69,6 +65,10 @@ workflow_run_request:
       type: object
       additionalProperties: true
       description: Object with Custom Input Data to be used in the Workflow Run.
+    sdk_token:
+      type: string
+      nullable: true
+      description: Client token to use when loading this workflow run in the Onfido SDK.
 
 workflow_run_response:
   type: object
