@@ -1687,7 +1687,7 @@
       }
     },
     "/qualified_electronic_signature/documents" : {
-      "post" : {
+      "get" : {
         "description" : "Retrieves the signed document or application form depending on the file_id provided.\n",
         "operationId" : "download_qes_document",
         "parameters" : [ {
