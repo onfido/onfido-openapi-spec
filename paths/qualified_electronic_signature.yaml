@@ -1,5 +1,5 @@
 documents:
-  post:
+  get:
     summary: Retrieves the signed document or application form
     operationId: download_qes_document
     description: >
