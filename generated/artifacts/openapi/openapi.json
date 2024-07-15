@@ -5360,6 +5360,12 @@
             "example" : "complete",
             "type" : "string"
           },
+          "started_at_iso8601" : {
+            "description" : "The date and time when the operation was started, if available.",
+            "example" : "2019-10-28T14:55:09Z",
+            "format" : "date-time",
+            "type" : "string"
+          },
           "completed_at_iso8601" : {
             "description" : "The date and time when the operation was completed, if available.",
             "example" : "2019-10-28T15:00:39Z",
