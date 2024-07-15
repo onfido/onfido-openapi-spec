@@ -5,6 +5,7 @@ document_shared:
       type: string
       enum:
         - jpg
+        - jpeg
         - png
         - pdf
       description: The file type of the uploaded file
