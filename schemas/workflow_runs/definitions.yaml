@@ -21,6 +21,10 @@ workflow_run_shared:
         type: string
         minLength: 1
         maxLength: 128
+    customer_user_id:
+      type: string
+      maxLength: 256
+      description: Customer-provided user identifier.
     link:
       type: object
       description: Object for the configuration of the Workflow Run link.
