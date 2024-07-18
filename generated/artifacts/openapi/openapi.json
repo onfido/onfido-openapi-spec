@@ -3273,6 +3273,11 @@
             "nullable" : true,
             "type" : "array"
           },
+          "customer_user_id" : {
+            "description" : "Customer-provided user identifier.",
+            "maxLength" : 256,
+            "type" : "string"
+          },
           "link" : {
             "$ref" : "#/components/schemas/workflow_run_shared_link"
           },

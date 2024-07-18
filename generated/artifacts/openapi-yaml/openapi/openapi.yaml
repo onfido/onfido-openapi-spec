@@ -1906,6 +1906,7 @@ components:
         output: "{}"
         applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
+        customer_user_id: customer_user_id
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         workflow_version_id: 0
         dashboard_url: dashboard_url
@@ -2548,6 +2549,10 @@ components:
           maxItems: 30
           nullable: true
           type: array
+        customer_user_id:
+          description: Customer-provided user identifier.
+          maxLength: 256
+          type: string
         link:
           $ref: '#/components/schemas/workflow_run_shared_link'
         created_at:
