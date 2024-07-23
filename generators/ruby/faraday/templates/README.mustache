@@ -46,20 +46,20 @@ Documentation and code examples can be found at https://documentation.onfido.com
 
 ## Error Handling
 
-All errors are wrapped by `ApiError` coming from [FaradayExpection](https://www.rubydoc.info/github/lostisland/faraday/Faraday/ClientError):
+All errors are wrapped by `ApiError` coming from [FaradayException](https://www.rubydoc.info/github/lostisland/faraday/Faraday/ClientError):
 
 - `Connection timed out` is raised in case of `Faraday::TimeoutError`
 - `Connection failed` is raised in case of `Faraday::ConnectionFailed`
 
-All errors provide the `response_code`, `response_body`, `json_body`, `type` and `fields` of the error.
+All errors provide the `code`, `response_headers`, and `response_body` of the error.
 
 ```ruby
 def create_applicant
   onfido_api.create_applicant(params)
-rescue Faraday::ConnectionFailed => e
-  e.type          # => 'validation_error'
-  e.fields        # => { "email": { "messages": ["invalid format"] } }
-  e.response_code # => '422'
+rescue Onfido::ApiError => e
+  e.message       # => 'Unprocessable entity'
+  e.response_body # => { error: { type: "validation_error", message: "", fields: { "email": [ "invalid format" ] } } }
+  e.code          # => '422'
 end
 ```
 
