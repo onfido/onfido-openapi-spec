@@ -1906,6 +1906,7 @@ components:
         output: "{}"
         applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
+        sdk_token: sdk_token
         customer_user_id: customer_user_id
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         workflow_version_id: 0
@@ -2603,6 +2604,11 @@ components:
           type: array
         error:
           $ref: '#/components/schemas/workflow_run_response_error'
+        sdk_token:
+          description: Client token to use when loading this workflow run in the Onfido
+            SDK.
+          nullable: true
+          type: string
       required:
       - id
       type: object

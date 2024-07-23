@@ -3328,6 +3328,11 @@
           },
           "error" : {
             "$ref" : "#/components/schemas/workflow_run_response_error"
+          },
+          "sdk_token" : {
+            "description" : "Client token to use when loading this workflow run in the Onfido SDK.",
+            "nullable" : true,
+            "type" : "string"
           }
         },
         "required" : [ "id" ],
