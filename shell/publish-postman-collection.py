@@ -13,18 +13,11 @@ logger = logging.getLogger()
 
 def patch_collection(postman_collection: dict) -> None:
     """
-    Fix type of file in upload forms, while waiting for issue resolution:
-    https://github.com/postmanlabs/openapi-to-postman/issues/795
+    Patch authorization header to be in the form: Token token={{apiToken}}
     """
-    for folder in postman_collection['item']:
-        for endpoint in folder['item']:
-            if ('body' in endpoint['request'] and
-               'formdata' in endpoint['request']['body']):
-                for input_field in endpoint['request']['body']['formdata']:
-                    if (input_field['key'] == 'file' and
-                       input_field['type'] == 'text'):
-                        input_field['type'] = 'file'
-                        del input_field['value']
+    for api_key in postman_collection['auth']['apikey']:
+        if api_key['key'] == 'value':
+            api_key['value'] = 'Token token={{apiToken}}'
 
 
 def nest_collection(postman_collection: dict) -> None:
