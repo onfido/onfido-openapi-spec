@@ -11,7 +11,7 @@ us_driving_licence_shared:
     issue_state:
       type: string
       description: Two letter code of issuing state (state-issued driving licenses only)
-      pattern: "/^[A-Z]{2}$/"
+      pattern: ^[A-Z]{2}$
     address_line_1:
       type: string
       description: Line 1 of the address

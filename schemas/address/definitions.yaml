@@ -36,15 +36,15 @@ address_shared:
     line1:
       type: string
       nullable: true
-      pattern: "/^[^!$%^*=<>]*$/"
+      pattern: ^[^!$%^*=<>]*$
       description: Line 1 of the applicant's address
     line2:
       type: string
       nullable: true
-      pattern: "/^[^!$%^*=<>]*$/"
+      pattern: ^[^!$%^*=<>]*$
       description: Line 2 of the applicant's address
     line3:
       type: string
       nullable: true
-      pattern: "/^[^!$%^*=<>]*$/"
+      pattern: ^[^!$%^*=<>]*$
       description: Line 3 of the applicant's address
