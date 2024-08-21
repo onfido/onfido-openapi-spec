@@ -76,10 +76,10 @@ applicant_update:
 
 applicant_first_name:
   type: string
-  pattern: '/^[^!#$%*=<>;{}"]*$/'
+  pattern: ^[^!#$%*=<>;{}"]*$
   description: The applicant's first name
 
 applicant_last_name:
   type: string
-  pattern: '/^[^!#$%*=<>;{}"]*$/'
+  pattern: ^[^!#$%*=<>;{}"]*$
   description: The applicant's surname
