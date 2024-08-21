@@ -2461,11 +2461,11 @@ components:
       properties:
         first_name:
           description: The applicant's first name
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          pattern: "^[^!#$%*=<>;{}\"]*$"
           type: string
         last_name:
           description: The applicant's surname
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          pattern: "^[^!#$%*=<>;{}\"]*$"
           type: string
         id:
           description: The unique identifier for the applicant.
@@ -2493,11 +2493,11 @@ components:
       type: object
     applicant_first_name:
       description: The applicant's first name
-      pattern: "/^[^!#$%*=<>;{}\"]*$/"
+      pattern: "^[^!#$%*=<>;{}\"]*$"
       type: string
     applicant_last_name:
       description: The applicant's surname
-      pattern: "/^[^!#$%*=<>;{}\"]*$/"
+      pattern: "^[^!#$%*=<>;{}\"]*$"
       type: string
     applicant_request:
       properties:
@@ -2512,11 +2512,11 @@ components:
       properties:
         first_name:
           description: The applicant's first name
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          pattern: "^[^!#$%*=<>;{}\"]*$"
           type: string
         last_name:
           description: The applicant's surname
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          pattern: "^[^!#$%*=<>;{}\"]*$"
           type: string
       required:
       - first_name
@@ -2525,11 +2525,11 @@ components:
       properties:
         first_name:
           description: The applicant's first name
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          pattern: "^[^!#$%*=<>;{}\"]*$"
           type: string
         last_name:
           description: The applicant's surname
-          pattern: "/^[^!#$%*=<>;{}\"]*$/"
+          pattern: "^[^!#$%*=<>;{}\"]*$"
           type: string
     workflow_run_shared:
       properties:
@@ -2925,17 +2925,17 @@ components:
         line1:
           description: Line 1 of the applicant's address
           nullable: true
-          pattern: "/^[^!$%^*=<>]*$/"
+          pattern: "^[^!$%^*=<>]*$"
           type: string
         line2:
           description: Line 2 of the applicant's address
           nullable: true
-          pattern: "/^[^!$%^*=<>]*$/"
+          pattern: "^[^!$%^*=<>]*$"
           type: string
         line3:
           description: Line 3 of the applicant's address
           nullable: true
-          pattern: "/^[^!$%^*=<>]*$/"
+          pattern: "^[^!$%^*=<>]*$"
           type: string
       required:
       - country
@@ -4725,7 +4725,7 @@ components:
         issue_state:
           description: Two letter code of issuing state (state-issued driving licenses
             only)
-          pattern: "/^[A-Z]{2}$/"
+          pattern: "^[A-Z]{2}$"
           type: string
         address_line_1:
           description: Line 1 of the address
@@ -6346,7 +6346,7 @@ components:
           type: string
         nationality:
           description: Nationality in 3-letter ISO code.
-          pattern: "/^[A-Z]{3}$/"
+          pattern: "^[A-Z]{3}$"
           type: string
         mrz_line_1:
           description: Line 1 of the MRZ code.
