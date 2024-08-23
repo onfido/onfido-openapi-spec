@@ -9,13 +9,17 @@ properties:
     properties:
       resource_type:
         type: string
+        enum:
+          - workflow_run
+          - workflow_task
         description: Indicates the resource affected by this event.
+        example: workflow_task
       action:
         type: string
         allOf:
           - $ref: definitions.yaml#/webhook_event_type
         description: The event that triggered this webhook.
-        example: report.completed
+        example: workflow_task.completed
       object:
         type: object
         required:
@@ -27,7 +31,8 @@ properties:
             type: string
             description: The unique identifier of the resource.
           status:
-            type: string
+            allOf:
+              - $ref: ../workflow_runs/definitions.yaml#/workflow_run_status
             description: The current state of the object, if available.
             example: complete
           started_at_iso8601:
@@ -46,3 +51,64 @@ properties:
       resource:
         type: object
         description: The resource affected by this event.
+        properties:
+          id:
+            type: string
+            description: The identifier of the resource.
+            example: profile_4f4b2
+          applicant_id:
+            type: string
+            format: uuid
+            description: The unique identifier for the Applicant.
+          created_at:
+            type: string
+            format: date-time
+            description: The date and time when the resource was created.
+            example: "2022-12-05T16:41:43Z"
+          updated_at:
+            type: string
+            format: date-time
+            description: The date and time when the resource was last updated.
+            example: "2022-12-19T16:41:44Z"
+          dashboard_url:
+            type: string
+            description: The URL for viewing the resource on Onfido Dashboard.
+            example: "https://dashboard.onfido.com/results/36a56899-d617-4988-85bf-b76640861bf5"
+          workflow_id:
+            type: string
+            format: uuid
+            description: The unique identifier for the Workflow.
+          workflow_run_id:
+            type: string
+            format: uuid
+            example: 2f152409-d6c4-4711-8750-48517f99a8d6
+          workflow_version_id:
+            type: integer
+            description: The identifier for the Workflow version.
+            example: 0
+          task_def_id:
+            $ref: ../tasks/definitions.yaml#/task_def_id
+          task_def_version:
+            type: string
+            nullable: true
+            description: The task definition version.
+          input:
+            type: object
+            description: Input object with the fields used by the Task execution.
+          output:
+            type: object
+            nullable: true
+            description: Output object with the fields produced by the Task execution.
+          reasons:
+            type: array
+            description: The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow Version.
+          link:
+            type: object
+            allOf:
+              - $ref: ../workflow_runs/definitions.yaml#/workflow_run_link
+            description: Object for the configuration of the Workflow Run link.
+          error:
+            type: object
+            allOf:
+              - $ref: ../workflow_runs/definitions.yaml#/workflow_run_error
+            description: Error object that details why a Workflow Run is in Error status.
