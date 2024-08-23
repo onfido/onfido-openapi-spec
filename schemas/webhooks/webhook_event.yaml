@@ -10,6 +10,9 @@ properties:
       resource_type:
         type: string
         enum:
+          - check
+          - report
+          - audit_log
           - workflow_run
           - workflow_task
         description: Indicates the resource affected by this event.

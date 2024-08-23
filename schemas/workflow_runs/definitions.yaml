@@ -116,16 +116,15 @@ workflow_run_link:
       description: The code for the language when the workflow run is acessed using the link.
 
 workflow_run_status:
-  properties:
-    type: string
-    enum:
-      - awaiting_input
-      - processing
-      - abandoned
-      - error
-      - approved
-      - review
-      - declined
+  type: string
+  enum:
+    - awaiting_input
+    - processing
+    - abandoned
+    - error
+    - approved
+    - review
+    - declined
 
 workflow_run_error:
   type: object
