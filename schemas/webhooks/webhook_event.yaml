@@ -9,12 +9,8 @@ properties:
     properties:
       resource_type:
         type: string
-        enum:
-          - check
-          - report
-          - audit_log
-          - workflow_run
-          - workflow_task
+        allOf:
+          - $ref: definitions.yaml#/webhook_event_resource_type
         description: Indicates the resource affected by this event.
         example: workflow_task
       action:
