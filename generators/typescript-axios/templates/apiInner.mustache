@@ -209,7 +209,7 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
                 localVarFormParams.append('{{baseName}}', String({{paramName}}) as any);{{/isBoolean}}{{/isPrimitiveType}}{{#isPrimitiveType}}{{#isFile}}
                 localVarFormParams.append('{{baseName}}', {{paramName}}.buffer as any, {{paramName}}.filename);{{/isFile}}{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isEnumRef}}
                 localVarFormParams.append('{{baseName}}', {{paramName}} as any);{{/isEnumRef}}{{^isEnumRef}}
-                localVarFormParams.append('{{baseName}}', new Blob([JSON.stringify({{paramName}})], { type: "application/json", }));{{/isEnumRef}}{{/isPrimitiveType}}{{/multipartFormData}}
+                localVarFormParams.append('{{baseName}}', JSON.stringify({{paramName}}));{{/isEnumRef}}{{/isPrimitiveType}}{{/multipartFormData}}
             }{{/isArray}}{{! ONFIDO: Add a case specific for File - END }}
     {{/formParams}}{{/vendorExtensions}}
     {{#vendorExtensions}}{{#hasFormParams}}{{^multipartFormData}}
