@@ -170,6 +170,7 @@ jobs:
       image: ${{ matrix.image }}
     needs: generate_specs_and_libraries
     strategy:
+      max-parallel: 1
       matrix:
         include:
           - generator: java/okhttp-gson
@@ -200,6 +201,7 @@ jobs:
     environment: generation
     steps:
       - name: Install pre-requisites
+        if: ${{ matrix.update }}
         run: |
           if [ "$(command -v rsync)" = "" ];
           then
