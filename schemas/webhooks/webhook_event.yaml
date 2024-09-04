@@ -100,6 +100,8 @@ properties:
             description: Output object with the fields produced by the Task execution.
           reasons:
             type: array
+            items:
+              type: string
             description: The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow Version.
           link:
             type: object
