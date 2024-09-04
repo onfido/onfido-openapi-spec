@@ -113,6 +113,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifacts-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_number }}
+          include-hidden-files: true
           path: |
             shell/sync-lib.sh
             generated/artifacts
