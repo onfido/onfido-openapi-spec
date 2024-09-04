@@ -24,4 +24,9 @@ enum:
   - professional_qualification_card
   - consular_id
   - international_driving_licence
+  - home_office_letter
+  - birth_certificate
+  - vehicle_registration_certificate
+  - form_for_affixing_the_visa
+  - identification_number_document
 type: string

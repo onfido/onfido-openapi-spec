@@ -12,6 +12,8 @@ document_shared:
     type:
       type: string
       description: The type of document
+      allOf:
+        - $ref: ../document_types/document_types.yaml
     side:
       type: string
       enum:
