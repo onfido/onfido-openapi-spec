@@ -2952,7 +2952,6 @@ components:
           type: string
         application_id:
           description: The application ID (iOS or Android)
-          format: uuid
           type: string
         cross_device_url:
           description: The URL to be used by the Web SDK for the cross device flow.

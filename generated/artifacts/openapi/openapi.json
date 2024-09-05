@@ -3732,7 +3732,6 @@
           },
           "application_id" : {
             "description" : "The application ID (iOS or Android)",
-            "format" : "uuid",
             "type" : "string"
           },
           "cross_device_url" : {
