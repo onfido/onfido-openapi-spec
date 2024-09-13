@@ -84,12 +84,12 @@ properties:
                     type: string
               sub_category:
                 type: string
-          full_name:
+        full_name:
+          type: string
+        position:
+          type: array
+          items:
             type: string
-          position:
-            type: array
-            items:
-              type: string
         source:
           type: array
           items:
