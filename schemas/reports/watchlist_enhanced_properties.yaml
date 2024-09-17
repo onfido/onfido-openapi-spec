@@ -84,6 +84,8 @@ properties:
                     type: string
                   source_name:
                     type: string
+                  source_url:
+                    type: string
               sub_category:
                 type: string
         full_name:
@@ -105,4 +107,6 @@ properties:
               source_name:
                 type: string
               source_url:
+                type: string
+              source_format:
                 type: string
