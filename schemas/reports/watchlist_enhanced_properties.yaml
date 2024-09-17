@@ -71,13 +71,15 @@ properties:
                 type: string
               event_date:
                 type: string
+                format: date
               event_description:
                 type: string
-              sources:
+              source:
                 type: object
                 properties:
                   source_date:
                     type: string
+                    format: date
                   source_format:
                     type: string
                   source_name:
@@ -86,12 +88,15 @@ properties:
                 type: string
         full_name:
           type: string
+          description: The name on file
         position:
           type: array
+          description: The role, country and date of each position.
           items:
             type: string
         source:
           type: array
+          description: Details about where the information was obtained.
           items:
             type: object
             properties:
