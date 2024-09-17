@@ -16,6 +16,8 @@ properties:
                 type: string
               country:
                 type: string
+                allOf:
+                  - $ref: ../countries/country_codes.yaml
               postal_code:
                 type: string
               state_province:
