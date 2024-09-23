@@ -172,7 +172,7 @@ Described below is the procedure on how to deliver new client libraries:
     1. Removing lines that doesn't apply to current library and reference to current language if present
     2. Indenting of two spaces each line and replacing the intial asterix (`*`) with dash (`-`)
     3. Removing `by...` (till the end of the line) for keeping `CHANGELOG.md` file clean
-16. Any additional change manually performed in the library (e.g. updated tests, etc) needs to be added before the _Refresh onfido-..._ line, indented as usual (but using `-` as a list marker to make line appearing in the `CHANGELOG.md` file).
+16. Any additional change manually performed in the library (e.g. updated tests, etc) needs to be added after the _Refresh onfido-..._ line, indented as usual (but using `-` as a list marker to make line appearing in the `CHANGELOG.md` file).
 17. Click on _Publish release_ button
 18. Check that workflows have been succesfully executed (by clicking on the _Action_ button)
 19. Replace `Refresh onfido-...` line in Release notes with the more appropriate `Release based on...` line from `CHANGELOG.md` file
