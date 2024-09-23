@@ -5396,7 +5396,7 @@
           "records": {
             "description": "Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner"
             },
             "type": "array"
           }
@@ -7914,6 +7914,191 @@
         "properties": {
           "result": {
             "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_address_inner": {
+        "properties": {
+          "address_line1": {
+            "type": "string"
+          },
+          "country": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/country_codes"
+              }
+            ],
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "state_province": {
+            "type": "string"
+          },
+          "town": {
+            "type": "string"
+          },
+          "locator_type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_alias_inner": {
+        "properties": {
+          "alias_name": {
+            "type": "string"
+          },
+          "alias_type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_associate_inner": {
+        "properties": {
+          "entity_name": {
+            "type": "string"
+          },
+          "relationship_direction": {
+            "type": "string"
+          },
+          "relationship_type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_attribute_inner": {
+        "properties": {
+          "attribute_type": {
+            "type": "string"
+          },
+          "attribute_value": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_event_inner_source": {
+        "properties": {
+          "source_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "source_format": {
+            "type": "string"
+          },
+          "source_name": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_event_inner": {
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "event_date": {
+            "format": "date",
+            "type": "string"
+          },
+          "event_description": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_event_inner_source"
+          },
+          "sub_category": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner_source_inner": {
+        "properties": {
+          "source_headline": {
+            "type": "string"
+          },
+          "source_name": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "source_format": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "watchlist_enhanced_properties_records_inner": {
+        "properties": {
+          "address": {
+            "description": "All addresses on file.",
+            "items": {
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_address_inner"
+            },
+            "type": "array"
+          },
+          "alias": {
+            "description": "Any names that the person is also known as.",
+            "items": {
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_alias_inner"
+            },
+            "type": "array"
+          },
+          "associate": {
+            "description": "Any linked persons, for example family relatives or business partners.",
+            "items": {
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_associate_inner"
+            },
+            "type": "array"
+          },
+          "attribute": {
+            "description": "Information about the person, for example hair color or nationality.",
+            "items": {
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_attribute_inner"
+            },
+            "type": "array"
+          },
+          "date_of_birth": {
+            "description": "All the date of births on file.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "event": {
+            "description": "Information about events that have occurred to the person, for example deportation or arrest.",
+            "items": {
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_event_inner"
+            },
+            "type": "array"
+          },
+          "full_name": {
+            "description": "The name on file",
+            "type": "string"
+          },
+          "position": {
+            "description": "The role, country and date of each position.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "description": "Details about where the information was obtained.",
+            "items": {
+              "$ref": "#/components/schemas/watchlist_enhanced_properties_records_inner_source_inner"
+            },
+            "type": "array"
           }
         },
         "type": "object"
