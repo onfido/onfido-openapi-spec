@@ -84,3 +84,35 @@ report_name:
     - us_driving_licence
     - device_intelligence
     - india_pan
+
+report_configuration:
+  type: object
+  schema:
+    anyOf:
+      - type: object
+        properties:
+          facial_similarity_photo:
+            $ref: "#/report_configuration_facial_similarity"
+      - type: object
+        properties:
+          facial_similarity_photo_fully_auto:
+            $ref: "#/report_configuration_facial_similarity"
+      - type: object
+        properties:
+          facial_similarity_video:
+            $ref: "#/report_configuration_facial_similarity"
+      - type: object
+        properties:
+          facial_similarity_motion:
+            $ref: "#/report_configuration_facial_similarity"
+
+report_configuration_facial_similarity:
+  type: object
+  properties:
+    use_case:
+      type: string
+      enum:
+        - onboarding
+        - reverification
+      description: >
+        You should only set this to "reverification" when using this report on a post-onboarding scenario (e.g. ongoing authentication) and when opting for per user per year pricing. Defaults to "onboarding".

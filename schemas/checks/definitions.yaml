@@ -66,6 +66,8 @@ check_request:
       description: Array of names of particular reports to return consider as their results. This is a feature available in sandbox testing
     us_driving_licence:
       $ref: ../us_driving_licence/us_driving_licence_builder.yaml
+    report_configuration:
+      $ref: ../reports/definitions.yaml#/report_configuration
 
 check_response:
   type: object
