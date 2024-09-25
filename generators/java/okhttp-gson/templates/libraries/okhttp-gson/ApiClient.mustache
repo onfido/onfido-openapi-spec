@@ -817,7 +817,7 @@ public class ApiClient {
             return jsonStr.substring(1, jsonStr.length() - 1);
         } else if (param instanceof Collection) {
             StringBuilder b = new StringBuilder();
-            for (Object o : (Collection) param) {
+            for (Object o : (Collection<?>) param) {
                 if (b.length() > 0) {
                     b.append(",");
                 }
@@ -861,7 +861,7 @@ public class ApiClient {
      * @param value The value of the parameter.
      * @return A list of {@code Pair} objects.
      */
-    public List<Pair> parameterToPairs(String collectionFormat, String name, Collection value) {
+    public List<Pair> parameterToPairs(String collectionFormat, String name, Collection<Object> value) {
         List<Pair> params = new ArrayList<Pair>();
 
         // preconditions
@@ -1380,7 +1380,7 @@ public class ApiClient {
      * @return The HTTP call
      * @throws {{invokerPackage}}.ApiException If fail to serialize the request body object
      */
-    public Call buildCall(String baseUrl, String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String[] authNames, ApiCallback callback) throws ApiException {
+    public Call buildCall(String baseUrl, String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String[] authNames, ApiCallback<?> callback) throws ApiException {
         Request request = buildRequest(baseUrl, path, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames, callback);
 
         return httpClient.newCall(request);
@@ -1403,7 +1403,7 @@ public class ApiClient {
      * @return The HTTP request
      * @throws {{invokerPackage}}.ApiException If fail to serialize the request body object
      */
-    public Request buildRequest(String baseUrl, String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String[] authNames, ApiCallback callback) throws ApiException {
+    public Request buildRequest(String baseUrl, String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String[] authNames, ApiCallback<?> callback) throws ApiException {
         // aggregate queryParams (non-collection) and collectionQueryParams into allQueryParams
         List<Pair> allQueryParams = new ArrayList<Pair>(queryParams);
         allQueryParams.addAll(collectionQueryParams);
@@ -1610,7 +1610,7 @@ public class ApiClient {
                 {{! Code updated to handle FileTransfer class - END }}
                 addPartToMultiPartBuilder(mpBuilder, param.getKey(), file);
             } else if (param.getValue() instanceof List) {
-                List list = (List) param.getValue();
+                List<?> list = (List<?>) param.getValue();
                 for (Object item: list) {
                     {{! Code updated to handle FileTransfer class - BEGIN }}
                     if (item instanceof FileTransfer) {
@@ -1706,7 +1706,7 @@ public class ApiClient {
                 final Request request = chain.request();
                 final Response originalResponse = chain.proceed(request);
                 if (request.tag() instanceof ApiCallback) {
-                    final ApiCallback callback = (ApiCallback) request.tag();
+                    final ApiCallback<?> callback = (ApiCallback<?>) request.tag();
                     return originalResponse.newBuilder()
                         .body(new ProgressResponseBody(originalResponse.body(), callback))
                         .build();
