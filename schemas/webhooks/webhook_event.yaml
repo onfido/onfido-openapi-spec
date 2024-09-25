@@ -113,9 +113,27 @@ properties:
 
 webhook_event_object_status:
   type: string
-  oneOf:
-    - $ref: ../workflow_runs/definitions.yaml#/workflow_run_status
-    - $ref: ../checks/definitions.yaml#/check_status
-    - $ref: ../reports/definitions.yaml#/report_status
+  enum:
+    # ../workflow_runs/definitions.yaml#/workflow_run_status
+    - awaiting_input
+    - processing
+    - abandoned
+    - error
+    - approved
+    - review
+    - declined
+    # ../reports/definitions.yaml#/report_status
+    - awaiting_data
+    - awaiting_approval
+    - cancelled
+    - complete
+    - withdrawn
+    # ../checks/definitions.yaml#/check_status
+    - in_progress
+    - awaiting_applicant
+    - complete
+    - withdrawn
+    - paused
+    - reopened
   description: The current state of the object, if available.
   example: complete
