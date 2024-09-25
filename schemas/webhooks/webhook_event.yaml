@@ -30,10 +30,7 @@ properties:
             type: string
             description: The unique identifier of the resource.
           status:
-            allOf:
-              - $ref: ../workflow_runs/definitions.yaml#/workflow_run_status
-            description: The current state of the object, if available.
-            example: complete
+            $ref: "#/webhook_event_object_status"
           started_at_iso8601:
             type: string
             format: date-time
@@ -113,3 +110,12 @@ properties:
             allOf:
               - $ref: ../workflow_runs/definitions.yaml#/workflow_run_error
             description: Error object that details why a Workflow Run is in Error status.
+
+webhook_event_object_status:
+  type: string
+  oneOf:
+    - $ref: ../workflow_runs/definitions.yaml#/workflow_run_status
+    - $ref: ../checks/definitions.yaml#/check_status
+    - $ref: ../reports/definitions.yaml#/report_status
+  description: The current state of the object, if available.
+  example: complete
