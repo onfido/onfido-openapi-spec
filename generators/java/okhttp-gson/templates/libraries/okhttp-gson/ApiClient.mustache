@@ -35,7 +35,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URI;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -53,13 +52,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+{{#hasHttpBearerMethods}}
 import java.util.function.Supplier;
+{{/hasHttpBearerMethods}}
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import {{invokerPackage}}.auth.Authentication;
+{{#isBasicBasic}}
 import {{invokerPackage}}.auth.HttpBasicAuth;
+{{/isBasicBasic}}
+{{#isBasicBearer}}
 import {{invokerPackage}}.auth.HttpBearerAuth;
+{{/isBasicBearer}}
 import {{invokerPackage}}.auth.ApiKeyAuth;
 {{#hasOAuthMethods}}
 import {{invokerPackage}}.auth.OAuth;
