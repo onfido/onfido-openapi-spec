@@ -126,3 +126,29 @@ signed_evidence_file:
               format: binary
       default:
         $ref: ../responses/default_error.yaml
+
+evidence_folder:
+  get:
+    summary: Retrieve Workflow Run Evidence Folder
+    operationId: download_signed_evidence_folder
+    description: >
+      Retrieves the signed evidence folder for the designated Workflow Run
+    parameters:
+      - name: workflow_run_id
+        in: path
+        description: Workflow Run ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "302":
+        description: Found
+        headers:
+          Location:
+            description: Link to the signed evidence folder.
+            schema:
+              type: string
+              format: uri
+      default:
+        $ref: ../responses/default_error.yaml
