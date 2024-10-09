@@ -26,8 +26,16 @@ tasks:
                 properties:
                   id:
                     $ref: ../schemas/tasks/definitions.yaml#/task_id
+                  workflow_run_id:
+                    type: string
+                    format: uuid
+                    description: The workflow run id the task belongs to.
                   task_def_id:
                     $ref: ../schemas/tasks/definitions.yaml#/task_def_id
+                  task_def_version:
+                    type: string
+                    nullable: true
+                    description: The task definition version.
                   created_at:
                     type: string
                     format: date-time
