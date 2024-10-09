@@ -123,6 +123,10 @@ webhook_event_object_status:
     - review
     - abandoned
     - error
+    # workflow_runs' tasks status
+    - started
+    - cancelled
+    - completed
     # ../reports/definitions.yaml#/report_status
     - awaiting_data
     - awaiting_approval
