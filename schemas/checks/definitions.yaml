@@ -85,14 +85,7 @@ check_response:
       description: The uri of this resource.
     status:
       type: string
-      enum:
-        - in_progress
-        - awaiting_applicant
-        - complete
-        - withdrawn
-        - paused
-        - reopened
-      description: The current state of the check in the checking process.
+      $ref: "#/check_status"
     result:
       type: string
       enum:
@@ -114,3 +107,14 @@ check_response:
     sandbox:
       description: Indicates whether the object was created in the sandbox or not.
       type: boolean
+
+check_status:
+  type: string
+  enum:
+    - in_progress
+    - awaiting_applicant
+    - complete
+    - withdrawn
+    - paused
+    - reopened
+  description: The current state of the check in the checking process.
