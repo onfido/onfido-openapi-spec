@@ -115,13 +115,14 @@ webhook_event_object_status:
   type: string
   enum:
     # ../workflow_runs/definitions.yaml#/workflow_run_status
-    - awaiting_input
     - processing
+    - awaiting_input
+    - awaiting_client_input
+    - approved
+    - declined
+    - review
     - abandoned
     - error
-    - approved
-    - review
-    - declined
     # ../reports/definitions.yaml#/report_status
     - awaiting_data
     - awaiting_approval

@@ -118,13 +118,14 @@ workflow_run_link:
 workflow_run_status:
   type: string
   enum:
-    - awaiting_input
     - processing
+    - awaiting_input
+    - awaiting_client_input
+    - approved
+    - declined
+    - review
     - abandoned
     - error
-    - approved
-    - review
-    - declined
 
 workflow_run_error:
   type: object
