@@ -1,2 +1,4 @@
-allOf:
-  - $ref: definitions.yaml#/consents_shared
+type: array
+items:
+  allOf:
+    - $ref: definitions.yaml#/consent_shared
