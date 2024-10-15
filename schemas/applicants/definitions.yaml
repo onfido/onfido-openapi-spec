@@ -20,7 +20,9 @@ applicant_request:
   type: object
   properties:
     consents:
-      $ref: ../consents/consents_builder.yaml
+      type: array
+      items:
+        $ref: "#/applicant_consent_item"
     address:
       $ref: ../address/address_builder.yaml
     location:
@@ -83,3 +85,22 @@ applicant_last_name:
   type: string
   pattern: ^[^!#$%*=<>;{}"]*$
   description: The applicant's surname
+
+applicant_consent_item:
+  type: object
+  required:
+    - name
+    - granted
+  properties:
+    name:
+      $ref: "#/applicant_consent_name"
+    granted:
+      type: boolean
+  description: The applicant's consents
+
+applicant_consent_name:
+  type: string
+  enum:
+    - privacy_notices_read
+    - ssn_verification
+    - phone_number_verification
