@@ -61,6 +61,7 @@ webhook_event_resource_type:
     - audit_log
     - workflow_run
     - workflow_task
+    - watchlist_monitor
 
 webhook_event_type:
   type: string
