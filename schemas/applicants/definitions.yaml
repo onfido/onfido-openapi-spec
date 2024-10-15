@@ -21,6 +21,7 @@ applicant_request:
   properties:
     consents:
       type: array
+      description: The applicant's consents
       items:
         $ref: "#/applicant_consent_item"
     address:
@@ -96,7 +97,6 @@ applicant_consent_item:
       $ref: "#/applicant_consent_name"
     granted:
       type: boolean
-  description: The applicant's consents
 
 applicant_consent_name:
   type: string
