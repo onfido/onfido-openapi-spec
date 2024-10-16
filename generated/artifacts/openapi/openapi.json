@@ -3218,7 +3218,11 @@
       "applicant_request" : {
         "properties" : {
           "consents" : {
-            "$ref" : "#/components/schemas/consents_builder"
+            "description" : "The applicant's consents",
+            "items" : {
+              "$ref" : "#/components/schemas/applicant_consent"
+            },
+            "type" : "array"
           },
           "address" : {
             "$ref" : "#/components/schemas/address_builder"
@@ -3228,6 +3232,22 @@
           }
         },
         "type" : "object"
+      },
+      "applicant_consent" : {
+        "properties" : {
+          "name" : {
+            "$ref" : "#/components/schemas/applicant_consent_name"
+          },
+          "granted" : {
+            "type" : "boolean"
+          }
+        },
+        "required" : [ "granted", "name" ],
+        "type" : "object"
+      },
+      "applicant_consent_name" : {
+        "enum" : [ "privacy_notices_read", "ssn_verification", "phone_number_verification" ],
+        "type" : "string"
       },
       "applicant_create" : {
         "properties" : {
@@ -3838,6 +3858,16 @@
           "sandbox" : {
             "description" : "Indicates whether the object was created in the sandbox or not.",
             "type" : "boolean"
+          },
+          "paused" : {
+            "type" : "boolean"
+          },
+          "version" : {
+            "example" : "3.6",
+            "type" : "string"
+          },
+          "privacy_notices_read_consent_given" : {
+            "type" : "boolean"
           }
         },
         "required" : [ "id" ],
@@ -4225,11 +4255,6 @@
       "location" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/location_shared"
-        } ]
-      },
-      "consents_builder" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/consents_shared"
         } ]
       },
       "address_builder" : {
@@ -4825,12 +4850,6 @@
         },
         "type" : "object"
       },
-      "consents_shared" : {
-        "items" : {
-          "$ref" : "#/components/schemas/Consent_item"
-        },
-        "type" : "array"
-      },
       "us_driving_licence_shared" : {
         "description" : "An object that contains all accepted fields for the Driver's License Data Verification report.",
         "properties" : {
@@ -5186,8 +5205,18 @@
           "id" : {
             "$ref" : "#/components/schemas/task_id"
           },
+          "workflow_run_id" : {
+            "description" : "The workflow run id the task belongs to.",
+            "format" : "uuid",
+            "type" : "string"
+          },
           "task_def_id" : {
             "$ref" : "#/components/schemas/task_def_id"
+          },
+          "task_def_version" : {
+            "description" : "The task definition version.",
+            "nullable" : true,
+            "type" : "string"
           },
           "created_at" : {
             "description" : "The date and time when the Task was created.",
@@ -7711,22 +7740,6 @@
             "$ref" : "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
           }
         },
-        "type" : "object"
-      },
-      "Consent_item" : {
-        "description" : "The applicant's consents",
-        "properties" : {
-          "name" : {
-            "enum" : [ "privacy_notices_read", "ssn_verification", "phone_number_verification" ],
-            "title" : "Consent name",
-            "type" : "string"
-          },
-          "granted" : {
-            "type" : "boolean"
-          }
-        },
-        "required" : [ "granted", "name" ],
-        "title" : "Consent item",
         "type" : "object"
       }
     },

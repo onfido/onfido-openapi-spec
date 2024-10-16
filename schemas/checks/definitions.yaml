@@ -107,6 +107,13 @@ check_response:
     sandbox:
       description: Indicates whether the object was created in the sandbox or not.
       type: boolean
+    paused:
+      type: boolean
+    version:
+      type: string
+      example: 3.6
+    privacy_notices_read_consent_given:
+      type: boolean
 
 check_status:
   type: string
