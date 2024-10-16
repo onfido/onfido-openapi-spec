@@ -2368,8 +2368,10 @@ components:
       - $ref: '#/components/schemas/check_shared'
       - $ref: '#/components/schemas/check_response'
       example:
+        paused: true
         sandbox: true
         created_at: 2000-01-23T04:56:07.000+00:00
+        version: "3.6"
         results_uri: results_uri
         report_ids:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2377,6 +2379,7 @@ components:
         tags:
         - tags
         - tags
+        privacy_notices_read_consent_given: true
         result: clear
         form_uri: form_uri
         webhook_ids:
@@ -3322,6 +3325,13 @@ components:
         sandbox:
           description: Indicates whether the object was created in the sandbox or
             not.
+          type: boolean
+        paused:
+          type: boolean
+        version:
+          example: "3.6"
+          type: string
+        privacy_notices_read_consent_given:
           type: boolean
       required:
       - id
@@ -5193,20 +5203,30 @@ components:
       type: object
     TaskItem:
       example:
+        task_def_version: task_def_version
         updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
         id: profile_123
         task_def_id: task_123
+        workflow_run_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
           description: The identifier for the Task.
           example: profile_123
           pattern: "^[0-9a-z_-]+$"
           type: string
+        workflow_run_id:
+          description: The workflow run id the task belongs to.
+          format: uuid
+          type: string
         task_def_id:
           description: The identifier for the Task Definition.
           example: task_123
           pattern: "^[0-9a-z_-]+$"
+          type: string
+        task_def_version:
+          description: The task definition version.
+          nullable: true
           type: string
         created_at:
           description: The date and time when the Task was created.
@@ -5410,8 +5430,10 @@ components:
     Checks_list:
       example:
         checks:
-        - sandbox: true
+        - paused: true
+          sandbox: true
           created_at: 2000-01-23T04:56:07.000+00:00
+          version: "3.6"
           results_uri: results_uri
           report_ids:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5419,6 +5441,7 @@ components:
           tags:
           - tags
           - tags
+          privacy_notices_read_consent_given: true
           result: clear
           form_uri: form_uri
           webhook_ids:
@@ -5430,8 +5453,10 @@ components:
           href: href
           applicant_provides_data: true
           status: in_progress
-        - sandbox: true
+        - paused: true
+          sandbox: true
           created_at: 2000-01-23T04:56:07.000+00:00
+          version: "3.6"
           results_uri: results_uri
           report_ids:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5439,6 +5464,7 @@ components:
           tags:
           - tags
           - tags
+          privacy_notices_read_consent_given: true
           result: clear
           form_uri: form_uri
           webhook_ids:
