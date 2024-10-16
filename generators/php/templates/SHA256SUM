@@ -1,6 +1,6 @@
 
 bb92a3f3107664c296ebc45c75bff7c88abf8b765565f4656a05e24234cb6d67  ./Configuration.mustache
-270c3ec9312d3cb2c5317a1df29ffb5365ff8624f1d165a1e9e356b4ea57a7f3  ./ObjectSerializer.mustache
+76386901de81eba7d06fa8be77fc23e319bf7deb904cce3eea7edab7bdfb55ad  ./ObjectSerializer.mustache
 8eebaed003795c011df87fecd1f89c630dd3f23282d80e7f407f62009e2cd0ee  ./README.mustache
 2d94750ad5d913f8b7fbba24681c7cc1d75e96c89ec46c379e6625c825b39020  ./model_generic.mustache
 37d3333c7c3dbc6f6bffe64ce076bc512a2a1e61e986738c8e023bb745168e9a  ./phpunit.xml.mustache
