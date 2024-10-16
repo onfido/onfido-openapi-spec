@@ -57,6 +57,7 @@ function semver_bump() {
 }
 
 function validate_templates_checksum() {
+  OVERRIDE_COMMAND=""
   GENERATOR_NAME=$1
   LIBRARY_NAME=$2
   LIBRARY=""
@@ -88,12 +89,9 @@ function validate_templates_checksum() {
     then
       if [ ! -z "$OUR_SHASUM" ] && [[ "$LIB_SHASUM" != "$OUR_SHASUM" ]];   # We do have checksum and doesn't match
       then
-        echo -e "\n################################################################################\n"
-        echo -e " !!! Error while building generator ${GENERATOR}!!!\n"
-        echo " SHA256SUM for template $FILENAME changed, diff reported below. To overwrite template, run:"
-        echo "  cp generated/templates/${GENERATOR}/$FILENAME generators/${GENERATOR}/templates/"
-        echo
-        diff ${GENERATED_PATH}/$FILENAME ${GENERATORS_PATH}/$FILENAME || true
+        LIBRARY_TEMPLATE="generated/templates/${GENERATOR}/$(echo $FILENAME | sed 's/^\.\///')"
+        TEMPLATE_SUBPATH="$(dirname $FILENAME/ | sed -E 's/^\.\/?//' )"
+        OVERRIDE_COMMAND="${OVERRIDE_COMMAND}\n\tcp ${LIBRARY_TEMPLATE} generators/${GENERATOR}/templates/${TEMPLATE_SUBPATH}"
         RESULT=1
       fi
 
@@ -109,6 +107,14 @@ function validate_templates_checksum() {
     unlink ${GENERATORS_PATH}/SHA256SUM.new
   else
     mv ${GENERATORS_PATH}/SHA256SUM.new ${GENERATORS_PATH}/SHA256SUM
+  fi
+
+  if [ "$RESULT" -ne "0" ];
+  then
+    echo -e "\n################################################################################\n"
+    echo -e "ERROR while building generator ${GENERATOR}: SHA256SUM for template(s) changed with OpenAPI generator ${OPENAPI_GENERATOR_VERSION}!\n"
+    echo -e "Please overwrite the template(s) and carefully check what has changed by running:\n${OVERRIDE_COMMAND}\n"
+    echo -e "\tgit add -p generators/${GENERATOR}/templates/\n"
   fi
 
   return $RESULT
