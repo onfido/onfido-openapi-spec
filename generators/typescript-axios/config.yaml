@@ -4,6 +4,7 @@ npmVersion: ${CLIENT_LIBRARY_VERSION}
 enumUnknownDefaultCase: true
 supportsES6: true
 withNodeImports: true
+axiosVersion: ^1.7.4
 httpUserAgent: onfido-node/${CLIENT_LIBRARY_VERSION}
 # Type mapping doesn't work with this generator
 # typeMappings:
