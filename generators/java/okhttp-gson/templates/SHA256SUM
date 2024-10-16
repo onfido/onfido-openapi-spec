@@ -3,4 +3,5 @@
 7b635a5f3fcc4cb2ace38f0dd0ca8252a78090e592a6c35fe5a08f7bc407ef6b  ./libraries/okhttp-gson/ApiClient.mustache
 133ba02513dba3fa805f364770b5a2fcc87a4c6ed0cf7afd322376e03143859f  ./libraries/okhttp-gson/api.mustache
 0e77feaf2d6b0818194161ac7e621189aa6e7900b45d46fa4ff1232894bb1a7a  ./libraries/okhttp-gson/oneof_model.mustache
+9a768c6d6b3ffcf21e5aa73e2d23ca524deb4b8503e73b0bc7e48e54403e5afb  ./libraries/okhttp-gson/pojo.mustache
 e83ff873cc6a5a7e064b4732ab4bfbb3fa32660d015b9ca1b6bdb5884335c506  ./libraries/okhttp-gson/pom.mustache
