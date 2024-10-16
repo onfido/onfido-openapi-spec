@@ -3218,7 +3218,11 @@
       "applicant_request" : {
         "properties" : {
           "consents" : {
-            "$ref" : "#/components/schemas/consents_builder"
+            "description" : "The applicant's consents",
+            "items" : {
+              "$ref" : "#/components/schemas/applicant_consent"
+            },
+            "type" : "array"
           },
           "address" : {
             "$ref" : "#/components/schemas/address_builder"
@@ -3228,6 +3232,22 @@
           }
         },
         "type" : "object"
+      },
+      "applicant_consent" : {
+        "properties" : {
+          "name" : {
+            "$ref" : "#/components/schemas/applicant_consent_name"
+          },
+          "granted" : {
+            "type" : "boolean"
+          }
+        },
+        "required" : [ "granted", "name" ],
+        "type" : "object"
+      },
+      "applicant_consent_name" : {
+        "enum" : [ "privacy_notices_read", "ssn_verification", "phone_number_verification" ],
+        "type" : "string"
       },
       "applicant_create" : {
         "properties" : {
@@ -4237,11 +4257,6 @@
           "$ref" : "#/components/schemas/location_shared"
         } ]
       },
-      "consents_builder" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/consents_shared"
-        } ]
-      },
       "address_builder" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/address_shared"
@@ -4834,12 +4849,6 @@
           }
         },
         "type" : "object"
-      },
-      "consents_shared" : {
-        "items" : {
-          "$ref" : "#/components/schemas/Consent_item"
-        },
-        "type" : "array"
       },
       "us_driving_licence_shared" : {
         "description" : "An object that contains all accepted fields for the Driver's License Data Verification report.",
@@ -7731,22 +7740,6 @@
             "$ref" : "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
           }
         },
-        "type" : "object"
-      },
-      "Consent_item" : {
-        "description" : "The applicant's consents",
-        "properties" : {
-          "name" : {
-            "enum" : [ "privacy_notices_read", "ssn_verification", "phone_number_verification" ],
-            "title" : "Consent name",
-            "type" : "string"
-          },
-          "granted" : {
-            "type" : "boolean"
-          }
-        },
-        "required" : [ "granted", "name" ],
-        "title" : "Consent item",
         "type" : "object"
       }
     },
