@@ -24,6 +24,8 @@ check_shared:
     redirect_uri:
       type: string
       description: For checks where `applicant_provides_data` is `true`, redirect to this URI when the applicant has submitted their data.
+    privacy_notices_read_consent_given:
+      type: boolean
 
 check_request:
   type: object
@@ -119,5 +121,3 @@ check_response:
     version:
       type: string
       example: 3.6
-    privacy_notices_read_consent_given:
-      type: boolean
