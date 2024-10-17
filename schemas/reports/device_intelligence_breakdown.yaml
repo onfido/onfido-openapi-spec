@@ -72,22 +72,6 @@ properties:
           fake_network_request:
             type: boolean
             description: Whether device is using stolen security tokens to send the network information.
-          true_os:
-            type: string
-            description: The true operating system of the device.
-            deprecated: true
-          os_anomaly:
-            type: string
-            description: The likelihood of an operating system anomaly between the true OS and the OS sent by the device.
-            deprecated: true
-          rooted:
-            type: boolean
-            description: Whether the device is rooted.
-            deprecated: true
-          remote_software:
-            type: boolean
-            description: Whether the device is controlled via remote software.
-            deprecated: true
           ip_reputation:
             type: string
             enum:
@@ -120,18 +104,6 @@ properties:
           address:
             type: string
             description: The IP address that uploaded the media.
-          vpn_detection:
-            type: string
-            description: The likelihood of the network connection being a VPN.
-            deprecated: true
-          proxy_detection:
-            type: string
-            description: The likelihood of the network connection being a Proxy.
-            deprecated: true
-          type:
-            type: string
-            description: The type of organization that owns this IP address.
-            deprecated: true
       geolocation:
         type: object
         properties:
