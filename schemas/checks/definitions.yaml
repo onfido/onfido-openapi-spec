@@ -114,8 +114,6 @@ check_response:
     version:
       type: string
       example: 3.6
-    privacy_notices_read_consent_given:
-      type: boolean
 
 check_status:
   type: string
