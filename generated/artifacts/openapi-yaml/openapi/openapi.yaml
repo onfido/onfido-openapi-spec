@@ -1887,16 +1887,9 @@ components:
         reasons:
         - reasons
         - reasons
-        link:
-          expires_at: 2000-01-23T04:56:07.000+00:00
-          expired_redirect_url: expired_redirect_url
-          completed_redirect_url: completed_redirect_url
-          language: en_US
-          url: url
+        link: "{}"
         created_at: 2000-01-23T04:56:07.000+00:00
-        error:
-          type: type
-          message: message
+        error: "{}"
         tags:
         - tags
         - tags
@@ -1911,7 +1904,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         workflow_version_id: 0
         dashboard_url: dashboard_url
-        status: awaiting_input
+        status: ""
     workflow_run_builder:
       allOf:
       - $ref: '#/components/schemas/workflow_run_shared'
@@ -2204,6 +2197,33 @@ components:
         payload:
           $ref: '#/components/schemas/webhook_event_payload'
       type: object
+    webhook_event_object_status:
+      description: "The current state of the object, if available."
+      enum:
+      - processing
+      - awaiting_input
+      - awaiting_client_input
+      - approved
+      - declined
+      - review
+      - abandoned
+      - error
+      - started
+      - cancelled
+      - completed
+      - awaiting_data
+      - awaiting_approval
+      - cancelled
+      - complete
+      - withdrawn
+      - in_progress
+      - awaiting_applicant
+      - complete
+      - withdrawn
+      - paused
+      - reopened
+      example: complete
+      type: string
     webhook_updater:
       allOf:
       - $ref: '#/components/schemas/webhook_shared'
@@ -2390,7 +2410,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         applicant_provides_data: true
-        status: in_progress
+        status: status
     check_builder:
       allOf:
       - $ref: '#/components/schemas/check_shared'
@@ -2577,7 +2597,10 @@ components:
           maxLength: 256
           type: string
         link:
-          $ref: '#/components/schemas/workflow_run_shared_link'
+          allOf:
+          - $ref: '#/components/schemas/workflow_run_link'
+          description: Object for the configuration of the Workflow Run link.
+          type: object
         created_at:
           description: The date and time when the Workflow Run was created.
           format: date-time
@@ -2590,6 +2613,41 @@ components:
       - applicant_id
       - workflow_id
       type: object
+    workflow_run_link:
+      properties:
+        url:
+          description: Link to access the Workflow Run without the need to integrate
+            with Onfido's SDKs.
+          type: string
+        completed_redirect_url:
+          description: "When the interactive section of the Workflow Run has completed\
+            \ successfully, the user will be redirected to this URL instead of seeing\
+            \ the default Onfido 'thank you' page."
+          nullable: true
+          type: string
+        expired_redirect_url:
+          description: "When the link has expired, the user will be immediately redirected\
+            \ to this URL instead of seeing the default Onfido error message."
+          nullable: true
+          type: string
+        expires_at:
+          description: Date and time when the link will expire.
+          format: date-time
+          nullable: true
+          type: string
+        language:
+          description: The code for the language when the workflow run is acessed
+            using the link.
+          enum:
+          - en_US
+          - de_DE
+          - es_ES
+          - fr_FR
+          - it_IT
+          - pt_PT
+          - nl_NL
+          nullable: true
+          type: string
     workflow_run_response:
       properties:
         id:
@@ -2604,16 +2662,9 @@ components:
             Dashboard.
           type: string
         status:
+          allOf:
+          - $ref: '#/components/schemas/workflow_run_status'
           description: The status of the Workflow Run.
-          enum:
-          - awaiting_input
-          - processing
-          - abandoned
-          - error
-          - approved
-          - review
-          - declined
-          type: string
         output:
           description: Output object contains all of the properties configured on
             the Workflow version.
@@ -2625,7 +2676,10 @@ components:
             type: string
           type: array
         error:
-          $ref: '#/components/schemas/workflow_run_response_error'
+          allOf:
+          - $ref: '#/components/schemas/workflow_run_error'
+          description: Error object. Only set when the Workflow Run status is 'error'.
+          type: object
         sdk_token:
           description: Client token to use when loading this workflow run in the Onfido
             SDK.
@@ -2633,6 +2687,26 @@ components:
           type: string
       required:
       - id
+      type: object
+    workflow_run_status:
+      enum:
+      - processing
+      - awaiting_input
+      - awaiting_client_input
+      - approved
+      - declined
+      - review
+      - abandoned
+      - error
+      type: string
+    workflow_run_error:
+      properties:
+        type:
+          description: The type of error.
+          type: string
+        message:
+          description: A textual description of the error.
+          type: string
       type: object
     workflow_run_request:
       properties:
@@ -2652,6 +2726,8 @@ components:
           - pdf
           type: string
         type:
+          allOf:
+          - $ref: '#/components/schemas/document_types'
           description: The type of document
           type: string
         side:
@@ -2906,6 +2982,15 @@ components:
           type: string
       required:
       - url
+    webhook_event_resource_type:
+      enum:
+      - check
+      - report
+      - audit_log
+      - workflow_run
+      - workflow_task
+      - watchlist_monitor
+      type: string
     webhook_update:
       properties:
         url:
@@ -3269,6 +3354,11 @@ components:
       - professional_qualification_card
       - consular_id
       - international_driving_licence
+      - home_office_letter
+      - birth_certificate
+      - vehicle_registration_certificate
+      - form_for_affixing_the_visa
+      - identification_number_document
       type: string
     check_shared:
       properties:
@@ -3314,15 +3404,7 @@ components:
           description: The uri of this resource.
           type: string
         status:
-          description: The current state of the check in the checking process.
-          enum:
-          - in_progress
-          - awaiting_applicant
-          - complete
-          - withdrawn
-          - paused
-          - reopened
-          type: string
+          $ref: '#/components/schemas/check_status'
         result:
           description: "The overall result of the check, based on the results of the\
             \ constituent reports."
@@ -3355,6 +3437,16 @@ components:
       required:
       - id
       type: object
+    check_status:
+      description: The current state of the check in the checking process.
+      enum:
+      - in_progress
+      - awaiting_applicant
+      - complete
+      - withdrawn
+      - paused
+      - reopened
+      type: string
     check_request:
       properties:
         report_names:
@@ -5466,7 +5558,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           applicant_provides_data: true
-          status: in_progress
+          status: status
         - paused: true
           sandbox: true
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5489,7 +5581,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           applicant_provides_data: true
-          status: in_progress
+          status: status
       properties:
         checks:
           items:
@@ -6178,9 +6270,7 @@ components:
           description: The unique identifier of the resource.
           type: string
         status:
-          description: "The current state of the object, if available."
-          example: complete
-          type: string
+          $ref: '#/components/schemas/webhook_event_object_status'
         started_at_iso8601:
           description: "The date and time when the operation was started, if available."
           example: 2019-10-28T14:55:09Z
@@ -6198,22 +6288,94 @@ components:
       - href
       - id
       type: object
+    webhook_event_payload_resource:
+      description: The resource affected by this event.
+      properties:
+        id:
+          description: The identifier of the resource.
+          example: profile_4f4b2
+          type: string
+        applicant_id:
+          description: The unique identifier for the Applicant.
+          format: uuid
+          type: string
+        created_at:
+          description: The date and time when the resource was created.
+          example: 2022-12-05T16:41:43Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when the resource was last updated.
+          example: 2022-12-19T16:41:44Z
+          format: date-time
+          type: string
+        dashboard_url:
+          description: The URL for viewing the resource on Onfido Dashboard.
+          example: https://dashboard.onfido.com/results/36a56899-d617-4988-85bf-b76640861bf5
+          type: string
+        workflow_id:
+          description: The unique identifier for the Workflow.
+          format: uuid
+          type: string
+        workflow_run_id:
+          example: 2f152409-d6c4-4711-8750-48517f99a8d6
+          format: uuid
+          type: string
+        workflow_version_id:
+          description: The identifier for the Workflow version.
+          example: 0
+          type: integer
+        task_def_id:
+          description: The identifier for the Task Definition.
+          example: task_123
+          pattern: "^[0-9a-z_-]+$"
+          type: string
+        task_def_version:
+          description: The task definition version.
+          nullable: true
+          type: string
+        input:
+          description: Input object with the fields used by the Task execution.
+          type: object
+        output:
+          description: Output object with the fields produced by the Task execution.
+          nullable: true
+          type: object
+        reasons:
+          description: The reasons the Workflow Run outcome was reached. Configurable
+            when creating the Workflow Version.
+          items:
+            type: string
+          type: array
+        link:
+          allOf:
+          - $ref: '#/components/schemas/workflow_run_link'
+          description: Object for the configuration of the Workflow Run link.
+          type: object
+        error:
+          allOf:
+          - $ref: '#/components/schemas/workflow_run_error'
+          description: Error object that details why a Workflow Run is in Error status.
+          type: object
+      type: object
     webhook_event_payload:
       properties:
         resource_type:
+          allOf:
+          - $ref: '#/components/schemas/webhook_event_resource_type'
           description: Indicates the resource affected by this event.
+          example: workflow_task
           type: string
         action:
           allOf:
           - $ref: '#/components/schemas/webhook_event_type'
           description: The event that triggered this webhook.
-          example: report.completed
+          example: workflow_task.completed
           type: string
         object:
           $ref: '#/components/schemas/webhook_event_payload_object'
         resource:
-          description: The resource affected by this event.
-          type: object
+          $ref: '#/components/schemas/webhook_event_payload_resource'
       required:
       - event
       - resource_id
@@ -6436,58 +6598,6 @@ components:
           type: string
         personal_number:
           description: The owner's unique identification number.
-          type: string
-      type: object
-    workflow_run_shared_link:
-      description: Object for the configuration of the Workflow Run link.
-      example:
-        expires_at: 2000-01-23T04:56:07.000+00:00
-        expired_redirect_url: expired_redirect_url
-        completed_redirect_url: completed_redirect_url
-        language: en_US
-        url: url
-      properties:
-        url:
-          description: Link to access the Workflow Run without the need to integrate
-            with Onfido's SDKs.
-          type: string
-        completed_redirect_url:
-          description: "When the interactive section of the Workflow Run has completed\
-            \ successfully, the user will be redirected to this URL instead of seeing\
-            \ the default Onfido 'thank you' page."
-          type: string
-        expired_redirect_url:
-          description: "When the link has expired, the user will be immediately redirected\
-            \ to this URL instead of seeing the default Onfido error message."
-          type: string
-        expires_at:
-          description: Date and time when the link will expire.
-          format: date-time
-          type: string
-        language:
-          description: The code for the language when the workflow run is acessed
-            using the link.
-          enum:
-          - en_US
-          - de_DE
-          - es_ES
-          - fr_FR
-          - it_IT
-          - pt_PT
-          - nl_NL
-          type: string
-      type: object
-    workflow_run_response_error:
-      description: Error object. Only set when the Workflow Run status is 'error'.
-      example:
-        type: type
-        message: message
-      properties:
-        type:
-          description: The type of error.
-          type: string
-        message:
-          description: A textual description of the error.
           type: string
       type: object
     document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner:
