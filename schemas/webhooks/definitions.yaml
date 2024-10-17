@@ -53,6 +53,16 @@ webhook_update:
     url:
       $ref: "#/webhook_url"
 
+webhook_event_resource_type:
+  type: string
+  enum:
+    - check
+    - report
+    - audit_log
+    - workflow_run
+    - workflow_task
+    - watchlist_monitor
+
 webhook_event_type:
   type: string
   enum:

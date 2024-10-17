@@ -27,32 +27,9 @@ workflow_run_shared:
       description: Customer-provided user identifier.
     link:
       type: object
+      allOf:
+        - $ref: "#/workflow_run_link"
       description: Object for the configuration of the Workflow Run link.
-      properties:
-        url:
-          type: string
-          description: Link to access the Workflow Run without the need to integrate with Onfido's SDKs.
-        completed_redirect_url:
-          type: string
-          description: When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
-        expired_redirect_url:
-          type: string
-          description: When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.
-        expires_at:
-          type: string
-          format: date-time
-          description: Date and time when the link will expire.
-        language:
-          type: string
-          enum:
-            - en_US
-            - de_DE
-            - es_ES
-            - fr_FR
-            - it_IT
-            - pt_PT
-            - nl_NL
-          description: The code for the language when the workflow run is acessed using the link.
     created_at:
       type: string
       format: date-time
@@ -86,15 +63,8 @@ workflow_run_response:
       type: string
       description: The URL for viewing the Workflow Run results on your Onfido Dashboard.
     status:
-      type: string
-      enum:
-        - awaiting_input
-        - processing
-        - abandoned
-        - error
-        - approved
-        - review
-        - declined
+      allOf:
+        - $ref: "#/workflow_run_status"
       description: The status of the Workflow Run.
     output:
       type: object
@@ -106,15 +76,63 @@ workflow_run_response:
         type: string
     error:
       type: object
+      allOf:
+        - $ref: "#/workflow_run_error"
       description: Error object. Only set when the Workflow Run status is 'error'.
-      properties:
-        type:
-          type: string
-          description: The type of error.
-        message:
-          type: string
-          description: A textual description of the error.
     sdk_token:
       type: string
       nullable: true
       description: Client token to use when loading this workflow run in the Onfido SDK.
+
+workflow_run_link:
+  properties:
+    url:
+      type: string
+      description: Link to access the Workflow Run without the need to integrate with Onfido's SDKs.
+    completed_redirect_url:
+      type: string
+      nullable: true
+      description: When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
+    expired_redirect_url:
+      type: string
+      nullable: true
+      description: When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.
+    expires_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: Date and time when the link will expire.
+    language:
+      type: string
+      enum:
+        - en_US
+        - de_DE
+        - es_ES
+        - fr_FR
+        - it_IT
+        - pt_PT
+        - nl_NL
+      nullable: true
+      description: The code for the language when the workflow run is acessed using the link.
+
+workflow_run_status:
+  type: string
+  enum:
+    - processing
+    - awaiting_input
+    - awaiting_client_input
+    - approved
+    - declined
+    - review
+    - abandoned
+    - error
+
+workflow_run_error:
+  type: object
+  properties:
+    type:
+      type: string
+      description: The type of error.
+    message:
+      type: string
+      description: A textual description of the error.
