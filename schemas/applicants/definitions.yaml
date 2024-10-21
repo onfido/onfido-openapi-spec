@@ -23,7 +23,7 @@ applicant_request:
       type: array
       description: The applicant's consents
       items:
-        $ref: "#/applicant_consent"
+        $ref: "#/applicant_consent_builder"
     address:
       $ref: ../address/address_builder.yaml
     location:
@@ -87,7 +87,7 @@ applicant_last_name:
   pattern: ^[^!#$%*=<>;{}"]*$
   description: The applicant's surname
 
-applicant_consent:
+applicant_consent_builder:
   type: object
   required:
     - name
