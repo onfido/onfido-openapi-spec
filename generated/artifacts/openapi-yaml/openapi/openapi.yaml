@@ -2524,14 +2524,14 @@ components:
         consents:
           description: The applicant's consents
           items:
-            $ref: '#/components/schemas/applicant_consent'
+            $ref: '#/components/schemas/applicant_consent_builder'
           type: array
         address:
           $ref: '#/components/schemas/address_builder'
         location:
           $ref: '#/components/schemas/location_builder'
       type: object
-    applicant_consent:
+    applicant_consent_builder:
       properties:
         name:
           $ref: '#/components/schemas/applicant_consent_name'
