@@ -2213,13 +2213,10 @@ components:
       - completed
       - awaiting_data
       - awaiting_approval
-      - cancelled
       - complete
       - withdrawn
       - in_progress
       - awaiting_applicant
-      - complete
-      - withdrawn
       - paused
       - reopened
       example: complete
