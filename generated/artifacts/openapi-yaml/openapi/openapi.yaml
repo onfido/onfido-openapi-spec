@@ -1332,7 +1332,7 @@ paths:
         webhookEvent:
           '{$request.body#/url}':
             post:
-              operationId: webhookEvent_Post
+              operationId: webhookEventPost
               requestBody:
                 content:
                   application/json:
