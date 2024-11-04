@@ -30,7 +30,7 @@ Please find more information regarding how to use each library within their own 
 
 Please find in [OpenAPI Generator documentation](https://openapi-generator.tech) how to build client libraries and all the supported programming languages to build client libraries.
 
-The file [openapi.yaml](https://github.com/onfido/onfido-openapi-spec/blob/master/openapi.yaml) should be provided to the generator.
+The file [openapi.yaml](openapi.yaml) should be provided to the generator.
 
 We recommend providing the generator with the options below (whenever available):
 
@@ -51,11 +51,11 @@ A pre-compiled Postman collection is also available in the Onfido [documentation
 
 Most of the contents in client libraries are auto-generated using [OpenAPI Generator](https://openapi-generator.tech).
 
-Generation is controlled by configuration and template files stored in [each generator's folder](https://github.com/onfido/onfido-openapi-spec/tree/master/generators).
+Generation is controlled by configuration and template files stored in [each generator's folder](generators).
 
 ### Exclusion lists
 
-A few exceptions come from a global exclusion list (defined as part of the rsync command in [github workflow](https://github.com/onfido/onfido-openapi-spec/blob/master/.github/workflows/update-specs-and-client-libraries.yaml) and [sync-lib.sh script](https://github.com/onfido/onfido-openapi-spec/blob/master/shell/sync-lib.sh)):
+A few exceptions come from a global exclusion list (defined as part of the rsync command in [sync-lib.sh script](shell/sync-lib.sh)):
 
 - `/.git*`
 - `/CHANGELOG*`
@@ -64,13 +64,13 @@ A few exceptions come from a global exclusion list (defined as part of the rsync
 
 For each generator, additional exclusions are defined into specific [exclusions.txt files](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fexclusions.txt&type=code) stored in each generator's folder.
 
-Code is automatically generated into the [generated/artifacts](https://github.com/onfido/onfido-openapi-spec/tree/master/generated/artifacts) subfolders and pushed to each client library repository via automatically generated PRs. Every path matching the exclusion lists defined above is neither copied from artifact folder nor removed from the target client library repository: that’s the way for avoid pushing some contents to client libraries but also avoiding some files (tests and git files) from being removed or overridden.
+Code is automatically generated into the [generated/artifacts](generated/artifacts) subfolders and pushed to each client library repository via automatically generated PRs. Every path matching the exclusion lists defined above is neither copied from artifact folder nor removed from the target client library repository: that’s the way for avoid pushing some contents to client libraries but also avoiding some files (tests and git files) from being removed or overridden.
 
-A few files are automatically generated and committed in the [generated/artifacts](https://github.com/onfido/onfido-openapi-spec/tree/master/generated/artifacts) folder at PR merge time.
+A few files are automatically generated and committed in the [generated/artifacts](generated/artifacts) folder at PR merge time.
 
 ### Configuration files
 
-Configuration files are named [config.yaml](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fconfig.yaml&type=code) and allow for the provision of custom parameters to each generator. Most parameters are defined in the [OpenAPI generator documentation](https://openapi-generator.tech/docs/generators/). A global configuration ([common/config.yaml](https://github.com/onfido/onfido-openapi-spec/blob/master/generators/common/config.yaml)) is used to store common parameters and share them among the different generators. Configuration files also include some variables (e.g. ${GENERATOR_NAME}) which are replaced before being provided to the Openapi generator (see `envsubst` command in [generate.sh](https://github.com/onfido/onfido-openapi-spec/blob/master/shell/generate.sh)).
+Configuration files are named [config.yaml](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fconfig.yaml&type=code) and allow for the provision of custom parameters to each generator. Most parameters are defined in the [OpenAPI generator documentation](https://openapi-generator.tech/docs/generators/). A global configuration ([common/config.yaml](generators/common/config.yaml)) is used to store common parameters and share them among the different generators. Configuration files also include some variables (e.g. ${GENERATOR_NAME}) which are replaced before being provided to the Openapi generator (see `envsubst` command in [generate.sh](shell/generate.sh)).
 
 ### Templates
 
