@@ -2,9 +2,9 @@
 
 The official Node.js library for integrating with the Onfido API.
 
-Documentation can be found at <{{ documentationUrl }}>.
+Documentation is available at <{{ documentationUrl }}>.
 
-This library is only for use on the backend, as it uses Onfido API tokens which must be kept secret. If you do need to collect applicant data in the frontend of your application, we recommend that you use the Onfido SDKs: [iOS](https://github.com/onfido/onfido-ios-sdk), [Android](https://github.com/onfido/onfido-android-sdk), [Web](https://github.com/onfido/onfido-sdk-ui), and [React Native](https://github.com/onfido/react-native-sdk).
+{{>README_frontend_warning}}
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
 
@@ -58,7 +58,7 @@ Configure with your API token and region:
 const onfido = new DefaultApi(
   new Configuration({
     apiToken: process.env.ONFIDO_API_TOKEN,
-    region: Region.EU, // Supports Region.EU, Region.US and Region.CA
+    region: Region.EU, // Supports Region.EU (Europe), Region.US (United States), and Region.CA (Canada)
     baseOptions: { timeout: 60_000 }, // Additional Axios options (timeout, etc.)
   }),
 );
@@ -162,7 +162,7 @@ onfido.uploadDocument(
 
 ### Webhook event verification
 
-Webhook events payload needs to be verified before it can be accessed. Library allows to easily decode the payload and verify its signature before returning it as an object for user convenience:
+{{>README_webhook_verification}}
 
 ```js
 (async () => {
@@ -184,6 +184,6 @@ Webhook events payload needs to be verified before it can be accessed. Library a
 
 #### Do not use square bracket syntax
 
-Except for accessing Task object's outputs, retain from using the square bracket syntax (i.e. `[]`) to access not defined properties to avoid breaking changes when these fields will appear.
+Except for accessing Task object's outputs, avoid using the square bracket syntax (i.e. `[]`) to access undefined properties to prevent breaking changes when these fields appear.
 
 {{>README_footer}}

@@ -1,10 +1,10 @@
-# Onfido OpenAPI specification
+# Onfido OpenAPI Specification
 
 ## Introduction
 
 This specification supports the latest version of the Onfido API (v3.6).
 
-It can also be used for generating client libraries to allow backend services to interact with the Onfido API. A [Postman collection](#api-documentation) is provided as well for user's convenience.
+It can also be used for generating client libraries to allow backend services to interact with the Onfido API. Additionally, a [Postman collection](#api-documentation) is provided for user convenience.
 
 ## Client libraries
 
@@ -22,13 +22,13 @@ The libraries below are generated and maintained by Onfido:
 - [onfido-python](https://github.com/onfido/onfido-python)
 - [onfido-ruby](https://github.com/onfido/onfido-ruby)
 
-Libraries come with Webhook Events validation and the possibility to easily choose a region to target.
+Libraries come with Webhook Events validation. They also provide the possibility to easily choose a region to target.
 
 Please find more information regarding how to use each library within their own README.md file.
 
 ### How to build client libraries yourself
 
-Please find in [OpenAPI Generator documentation](https://openapi-generator.tech) how to build client libraries and all the supported programming languages to build client libraries.
+Refer to the [OpenAPI Generator documentation](https://openapi-generator.tech) for the list of supported programming languages and instructions on building client libraries.
 
 The file [openapi.yaml](openapi.yaml) should be provided to the generator.
 
@@ -64,7 +64,7 @@ A few exceptions come from a global exclusion list (defined as part of the rsync
 
 For each generator, additional exclusions are defined into specific [exclusions.txt files](https://github.com/search?q=repo%3Aonfido%2Fonfido-openapi-spec+path%3A**%2Fexclusions.txt&type=code) stored in each generator's folder.
 
-Code is automatically generated into the [generated/artifacts](generated/artifacts) subfolders and pushed to each client library repository via automatically generated PRs. Every path matching the exclusion lists defined above is neither copied from artifact folder nor removed from the target client library repository: that’s the way for avoid pushing some contents to client libraries but also avoiding some files (tests and git files) from being removed or overridden.
+Code is automatically generated into the [generated/artifacts](generated/artifacts) subfolders. It is then pushed to each client library repository via automatically generated PRs. Every path matching the exclusion lists defined above is neither copied from the artifact folder nor removed from the target client library repository. This avoids pushing some contents to client libraries and prevents some files (tests and git files) from being removed or overridden.
 
 A few files are automatically generated and committed in the [generated/artifacts](generated/artifacts) folder at PR merge time.
 
@@ -106,7 +106,7 @@ This happens when templates we're overriding have been updated. The script autom
 3. Add all changes from the new version except the ones noted by mustache comments (i.e. `{{! }}`)
 4. Commit changes to both templates and SHA256SUM files
 
-The changes to README.md should be carefully reviewed by comparing `generated/templates/**/README.mustache` files created with different OpenAPI generator versions.
+The changes to `README.md` should be carefully reviewed by comparing `generated/templates/**/README.mustache` files created with different OpenAPI generator versions.
 
 ## Contributing
 
