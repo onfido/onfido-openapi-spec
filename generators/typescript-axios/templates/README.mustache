@@ -4,12 +4,12 @@ The official Node.js library for integrating with the Onfido API.
 
 Documentation is available at <{{ documentationUrl }}>.
 
-{{>README_frontend_warning}}
+{{ >README_frontend_warning }}
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
 
 [![npm version](https://badge.fury.io/js/@onfido%2Fapi.svg)](https://badge.fury.io/js/@onfido%2Fapi)
-![Build Status](https://github.com/{{{ gitUserId }}}/{{{ gitRepoId }}}/actions/workflows/node.yml/badge.svg)
+![Build Status](https://github.com/{{ gitUserId }}/{{ gitRepoId }}/actions/workflows/node.yml/badge.svg)
 
 ## Installation & Usage
 
@@ -162,7 +162,7 @@ onfido.uploadDocument(
 
 ### Webhook event verification
 
-{{>README_webhook_verification}}
+{{ >README_webhook_verification }}
 
 ```js
 (async () => {
@@ -186,4 +186,4 @@ onfido.uploadDocument(
 
 Except for accessing Task object's outputs, avoid using the square bracket syntax (i.e. `[]`) to access undefined properties to prevent breaking changes when these fields appear.
 
-{{>README_footer}}
+{{ >README_footer }}

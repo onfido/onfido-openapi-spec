@@ -12,8 +12,8 @@ This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guid
 
 PHP 7.4 and later. Should also work with PHP 8.0.
 
-[![Latest release](https://badge.fury.io/ph/{{{gitUserId}}}%2F{{{gitRepoId}}}.svg)](https://badge.fury.io/ph/{{{gitUserId}}}%2F{{{gitRepoId}}})
-![Build Status](https://github.com/{{{gitUserId}}}/{{{gitRepoId}}}/actions/workflows/php.yml/badge.svg)
+[![Latest release](https://badge.fury.io/ph/{{ gitUserId }}%2F{{ gitRepoId }}.svg)](https://badge.fury.io/ph/{{ gitUserId }}%2F{{ gitRepoId }})
+![Build Status](https://github.com/{{ gitUserId }}/{{ gitRepoId }}/actions/workflows/php.yml/badge.svg)
 
 ### Installation
 
@@ -26,11 +26,11 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://{{gitHost}}/{{gitUserId}}/{{gitRepoId}}.git"
+      "url": "https://{{ gitHost }}/{{ gitUserId }}/{{ gitRepoId }}.git"
     }
   ],
   "require": {
-    "{{gitUserId}}/{{gitRepoId}}": "*@dev"
+    "{{ gitUserId }}/{{ gitRepoId }}": "*@dev"
   }
 }
 ```
@@ -43,7 +43,7 @@ Download the files and include `autoload.php`:
 
 ```php
 <?php
-require_once('/path/to/{{packageName}}/vendor/autoload.php');
+require_once('/path/to/{{ packageName }}/vendor/autoload.php');
 ```
 
 ## Getting Started
@@ -54,11 +54,11 @@ Please follow the [installation instructions](#installation--usage) and then run
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$configuration = {{invokerPackage}}\Configuration::getDefaultConfiguration();
+$configuration = {{ invokerPackage }}\Configuration::getDefaultConfiguration();
 $configuration->setApiToken($_ENV['ONFIDO_API_TOKEN']);
-$configuration->setRegion({{invokerPackage}}\Region::EU);   // Supports `Region::EU`, `Region::US`, and `Region::CA`
+$configuration->setRegion({{ invokerPackage }}\Region::EU);   // Supports `Region::EU`, `Region::US`, and `Region::CA`
 
-$onfidoApi = new {{invokerPackage}}\Api\DefaultApi(
+$onfidoApi = new {{ invokerPackage }}\Api\DefaultApi(
               new \GuzzleHttp\Client([
                   'timeout'  => 30,
                   'connect_timeout' => 30,
@@ -72,7 +72,7 @@ $onfidoApi = new {{invokerPackage}}\Api\DefaultApi(
 ```php
 try {
   $applicant = $onfidoApi->createApplicant(
-      new {{invokerPackage}}\Model\ApplicantBuilder(
+      new {{ invokerPackage }}\Model\ApplicantBuilder(
           [
               'first_name' => 'First',
               'last_name' => 'Last'
@@ -84,7 +84,7 @@ try {
 
   // ...
 
-} catch ({{invokerPackage}}\ApiException $ex) {
+} catch ({{ invokerPackage }}\ApiException $ex) {
   // Handle API exception
   echo 'Caught exception: ',  $ex->getMessage(), "\n";
 }
@@ -112,4 +112,4 @@ try {
 
 Except for accessing Task object's outputs, avoid using the square bracket syntax (i.e. `[]`) to access undefined properties to prevent breaking changes when these fields appear.
 
-{{>README_footer}}
+{{ >README_footer }}

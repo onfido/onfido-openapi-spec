@@ -59,6 +59,7 @@ A few exceptions come from a global exclusion list (defined as part of the rsync
 
 - `/.git*`
 - `/CHANGELOG*`
+- `/.release.json`
 - `/.openapi-generator-ignore`
 - `/.openapi-generator/FILES`
 

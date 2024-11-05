@@ -6,14 +6,14 @@ Documentation is available at <{{ documentationUrl }}>.
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details. It explains which client library versions use which versions of the API.
 
-[![PyPI version](https://badge.fury.io/py/{{{distributionPackageName}}}.svg)](https://badge.fury.io/py/{{{distributionPackageName}}})
-![Build Status](https://github.com/{{{gitUserId}}}/{{{gitRepoId}}}/actions/workflows/python.yml/badge.svg)
+[![PyPI version](https://badge.fury.io/py/{{ distributionPackageName }}.svg)](https://badge.fury.io/py/{{ distributionPackageName }})
+![Build Status](https://github.com/{{ gitUserId }}/{{ gitRepoId }}/actions/workflows/python.yml/badge.svg)
 
 ## Installation & Usage
 
 ### Requirements
 
-Python {{{generatorLanguageVersion}}}
+Python {{ generatorLanguageVersion }}
 
 ### Installation
 
@@ -22,25 +22,25 @@ Python {{{generatorLanguageVersion}}}
 If the Python package is hosted on a repository, you can install it directly using:
 
 ```sh
-pip install {{{distributionPackageName}}}
+pip install {{ distributionPackageName }}
 ```
 
 Then import the package:
 
 ```python
-import {{{packageName}}}
+import {{ packageName }}
 ```
 
 #### Poetry
 
 ```sh
-poetry add {{{distributionPackageName}}}
+poetry add {{ distributionPackageName }}
 ```
 
 Then import the package:
 
 ```python
-import {{{packageName}}}
+import {{ packageName }}
 ```
 
 ### Tests
@@ -52,18 +52,18 @@ Execute `pytest` to run the tests.
 Import the `DefaultApi` object, this is the main object used for interfacing with the API:
 
 ```python
-import {{{packageName}}}
+import {{ packageName }}
 
 import urllib3
 from os import environ
 
-configuration = {{{packageName}}}.Configuration(
+configuration = {{ packageName }}.Configuration(
     api_token=environ['ONFIDO_API_TOKEN'],
-    region={{{packageName}}}.configuration.Region.EU,     # Supports `EU`, `US` and `CA`
+    region={{ packageName }}.configuration.Region.EU,     # Supports `EU`, `US` and `CA`
     timeout=urllib3.util.Timeout(connect=60.0, read=60.0)
   )
 
-with {{{packageName}}}.ApiClient(configuration) as api_client:
+with {{ packageName }}.ApiClient(configuration) as api_client:
   onfido_api = onfido.DefaultApi(api_client)
   ...
 ```
@@ -97,11 +97,11 @@ Specific exception types are defined into [exceptions.py](onfido/exceptions.py).
 
 ### Webhook event verification
 
-{{>README_webhook_verification}}
+{{ >README_webhook_verification }}
 
 ```python
   try:
-    verifier = {{{packageName}}}.WebhookEventVerifier(os.environ["ONFIDO_WEBHOOK_SECRET_TOKEN"])
+    verifier = {{ packageName }}.WebhookEventVerifier(os.environ["ONFIDO_WEBHOOK_SECRET_TOKEN"])
 
     signature = "a0...760e"
 
@@ -117,4 +117,4 @@ Specific exception types are defined into [exceptions.py](onfido/exceptions.py).
 
 Except for accessing Task object's outputs, avoid using the `additional_properties` dictionary to access undefined properties to prevent breaking changes when these fields appear.
 
-{{>README_footer}}
+{{ >README_footer }}

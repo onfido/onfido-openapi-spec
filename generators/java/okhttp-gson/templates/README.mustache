@@ -4,11 +4,11 @@ The official Java library for integrating with the Onfido API.
 
 Documentation is available at <{{ documentationUrl }}>.
 
-{{>README_frontend_warning}}
+{{ >README_frontend_warning }}
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details. The guide explains which client library versions use which API versions.
 
-![Build Status](https://github.com/{{{ gitUserId }}}/{{{ gitRepoId }}}/actions/workflows/maven.yml/badge.svg)
+![Build Status](https://github.com/{{ gitUserId }}/{{ gitRepoId }}/actions/workflows/maven.yml/badge.svg)
 
 ## Installation & Usage
 
@@ -38,7 +38,7 @@ To deploy it to a remote Maven repository instead, configure the settings of the
 mvn clean deploy
 ```
 
-Refer to the [OSSRH Guide](https://central.sonatype.org/publish/publish-guide/) for more information.
+Refer to the [OSSRH Guide](https://central.sonatype.org/publish/publish-guide) for more information.
 
 #### Maven users
 
@@ -46,9 +46,9 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>{{{groupId}}}</groupId>
-  <artifactId>{{{artifactId}}}</artifactId>
-  <version>{{{artifactVersion}}}</version>
+  <groupId>{{ groupId }}</groupId>
+  <artifactId>{{ artifactId }}</artifactId>
+  <version>{{ artifactVersion }}</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -59,12 +59,12 @@ Add this dependency to your project's build file:
 
 ```groovy
   repositories {
-    mavenCentral()     // Needed if the '{{{artifactId}}}' jar has been published to maven central.
-    mavenLocal()       // Needed if the '{{{artifactId}}}' jar has been published to the local maven repo.
+    mavenCentral()     // Needed if the '{{ artifactId }}' jar has been published to maven central.
+    mavenLocal()       // Needed if the '{{ artifactId }}' jar has been published to the local maven repo.
   }
 
   dependencies {
-     implementation "{{{groupId}}}:{{{artifactId}}}:{{{artifactVersion}}}"
+     implementation "{{ groupId }}:{{ artifactId }}:{{ artifactVersion }}"
   }
 ```
 
@@ -78,10 +78,10 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/{{{artifactId}}}-{{{artifactVersion}}}.jar`
+- `target/{{ artifactId }}-{{ artifactVersion }}.jar`
 - `target/lib/*.jar`
 
-The latest version can be found at: https://search.maven.org/artifact/{{ groupId }}/{{ artifactId }}/{{ artifactVersion }}
+The latest version can be found at <https://search.maven.org/artifact/{{ groupId }}/{{ artifactId }}/{{ artifactVersion }}/jar>.
 
 ## Getting Started
 
@@ -141,7 +141,7 @@ try {
 
 ### Webhook event verification
 
-{{>README_webhook_verification}}
+{{ >README_webhook_verification }}
 
 ```java
 try {
@@ -167,4 +167,4 @@ It's recommended to create an instance of `DefaultApi` per thread in a multithre
 
 Except for retrieving Task object's outputs, avoid using `getAdditionalProperty()` or `getAdditionalProperties()` methods to access undefined properties to prevent breaking changes when these fields appear.
 
-{{>README_footer}}
+{{ >README_footer }}
