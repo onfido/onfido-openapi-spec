@@ -30,7 +30,7 @@ else
 fi
 
 # Sync library contents
-rsync -r --exclude='/.git*' --exclude='/CHANGELOG*' --exclude='/.release.json' \
+rsync -r --exclude='/.git*' --exclude='/CHANGELOG.md' --exclude='/MIGRATION.md' --exclude='/.release.json' \
   --exclude='/.openapi-generator-ignore' --exclude='/.openapi-generator/FILES' \
   --exclude-from=${ONFIDO_OPENAPI_SPEC_FOLDER}/generators/${generator_name}/exclusions.txt \
   --delete-after ${ONFIDO_OPENAPI_SPEC_FOLDER}/generated/artifacts/${generator_name}/ .
