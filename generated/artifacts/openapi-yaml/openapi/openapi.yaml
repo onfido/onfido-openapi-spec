@@ -3737,25 +3737,7 @@ components:
           issuing_state: issuing_state
           first_name: first_name
           barcode:
-          - document_number: document_number
-            issuing_date: 2000-01-23
-            gender: gender
-            date_of_birth: 2000-01-23
-            last_name: last_name
-            middle_name: middle_name
-            real_id_classification: real_id_classification
-            date_of_expiry: 2000-01-23
-            issuing_country: issuing_country
-            address_line_1: address_line_1
-            address_line_3: address_line_3
-            address_line_2: address_line_2
-            issuing_state: issuing_state
-            address_line_5: address_line_5
-            first_name: first_name
-            address_line_4: address_line_4
-            class: class
-            document_type: document_type
-          - document_number: document_number
+            document_number: document_number
             issuing_date: 2000-01-23
             gender: gender
             date_of_birth: 2000-01-23
@@ -4372,25 +4354,7 @@ components:
         issuing_state: issuing_state
         first_name: first_name
         barcode:
-        - document_number: document_number
-          issuing_date: 2000-01-23
-          gender: gender
-          date_of_birth: 2000-01-23
-          last_name: last_name
-          middle_name: middle_name
-          real_id_classification: real_id_classification
-          date_of_expiry: 2000-01-23
-          issuing_country: issuing_country
-          address_line_1: address_line_1
-          address_line_3: address_line_3
-          address_line_2: address_line_2
-          issuing_state: issuing_state
-          address_line_5: address_line_5
-          first_name: first_name
-          address_line_4: address_line_4
-          class: class
-          document_type: document_type
-        - document_number: document_number
+          document_number: document_number
           issuing_date: 2000-01-23
           gender: gender
           date_of_birth: 2000-01-23
@@ -4556,9 +4520,7 @@ components:
         address_lines:
           $ref: '#/components/schemas/document_properties_address_lines'
         barcode:
-          items:
-            $ref: '#/components/schemas/document_properties_barcode_inner'
-          type: array
+          $ref: '#/components/schemas/document_properties_barcode'
         nfc:
           $ref: '#/components/schemas/document_properties_nfc'
         driving_licence_information:
@@ -5830,25 +5792,7 @@ components:
             issuing_state: issuing_state
             first_name: first_name
             barcode:
-            - document_number: document_number
-              issuing_date: 2000-01-23
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              real_id_classification: real_id_classification
-              date_of_expiry: 2000-01-23
-              issuing_country: issuing_country
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              issuing_state: issuing_state
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-              class: class
-              document_type: document_type
-            - document_number: document_number
+              document_number: document_number
               issuing_date: 2000-01-23
               gender: gender
               date_of_birth: 2000-01-23
@@ -6149,25 +6093,7 @@ components:
             issuing_state: issuing_state
             first_name: first_name
             barcode:
-            - document_number: document_number
-              issuing_date: 2000-01-23
-              gender: gender
-              date_of_birth: 2000-01-23
-              last_name: last_name
-              middle_name: middle_name
-              real_id_classification: real_id_classification
-              date_of_expiry: 2000-01-23
-              issuing_country: issuing_country
-              address_line_1: address_line_1
-              address_line_3: address_line_3
-              address_line_2: address_line_2
-              issuing_state: issuing_state
-              address_line_5: address_line_5
-              first_name: first_name
-              address_line_4: address_line_4
-              class: class
-              document_type: document_type
-            - document_number: document_number
+              document_number: document_number
               issuing_date: 2000-01-23
               gender: gender
               date_of_birth: 2000-01-23
@@ -7454,7 +7380,7 @@ components:
         country_code:
           type: string
       type: object
-    document_properties_barcode_inner:
+    document_properties_barcode:
       example:
         document_number: document_number
         issuing_date: 2000-01-23

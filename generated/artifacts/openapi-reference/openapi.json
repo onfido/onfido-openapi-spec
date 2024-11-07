@@ -5321,10 +5321,7 @@
             "$ref": "#/components/schemas/document_properties_address_lines"
           },
           "barcode": {
-            "items": {
-              "$ref": "#/components/schemas/document_properties_barcode_inner"
-            },
-            "type": "array"
+            "$ref": "#/components/schemas/document_properties_barcode"
           },
           "nfc": {
             "$ref": "#/components/schemas/document_properties_nfc"
@@ -7262,7 +7259,7 @@
         },
         "type": "object"
       },
-      "document_properties_barcode_inner": {
+      "document_properties_barcode": {
         "properties": {
           "first_name": {
             "type": "string"
