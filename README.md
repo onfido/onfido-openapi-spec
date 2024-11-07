@@ -58,7 +58,8 @@ Generation is controlled by configuration and template files stored in [each gen
 A few exceptions come from a global exclusion list (defined as part of the rsync command in [sync-lib.sh script](shell/sync-lib.sh)):
 
 - `/.git*`
-- `/CHANGELOG*`
+- `/CHANGELOG.md`
+- `/MIGRATION.md`
 - `/.release.json`
 - `/.openapi-generator-ignore`
 - `/.openapi-generator/FILES`
