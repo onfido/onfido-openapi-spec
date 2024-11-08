@@ -29,6 +29,26 @@ report_shared:
       description: Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
       items:
         $ref: report_document.yaml
+    live_photos:
+      type: array
+      description: Array of objects with live photo ids that were used in the Onfido engine. [ONLY POPULATED FOR FACIAL SIMILARITY REPORTS]
+      items:
+        $ref: report_media.yaml
+    live_videos:
+      type: array
+      description: Array of objects with live video ids that were used in the Onfido engine. [ONLY POPULATED FOR FACIAL SIMILARITY REPORTS]
+      items:
+        $ref: report_media.yaml
+    motion_captures:
+      type: array
+      description: Array of objects with motion capture ids that were used in the Onfido engine. [ONLY POPULATED FOR FACIAL SIMILARITY REPORTS]
+      items:
+        $ref: report_media.yaml
+    id_photos:
+      type: array
+      description: Array of objects with id photo ids that were used in the Onfido engine. [ONLY POPULATED FOR FACIAL SIMILARITY REPORTS]
+      items:
+        $ref: report_media.yaml
     name:
       $ref: "#/report_name"
       description: The name of the report type.
