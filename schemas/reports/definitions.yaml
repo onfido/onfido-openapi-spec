@@ -33,6 +33,39 @@ report_shared:
       $ref: "#/report_name"
       description: The name of the report type.
 
+facial_similarity_report_shared:
+  properties:
+    live_photos:
+      type: array
+      description: Array of objects with live photo ids that were used in the Onfido engine.
+      items:
+        $ref: "#/facial_similarity_report_media"
+    live_videos:
+      type: array
+      description: Array of objects with live video ids that were used in the Onfido engine.
+      items:
+        $ref: "#/facial_similarity_report_media"
+    motion_captures:
+      type: array
+      description: Array of objects with motion capture ids that were used in the Onfido engine.
+      items:
+        $ref: "#/facial_similarity_report_media"
+    id_photos:
+      type: array
+      description: Array of objects with id photo ids that were used in the Onfido engine.
+      items:
+        $ref: "#/facial_similarity_report_media"
+
+facial_similarity_report_media:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: ID of uploaded biometric media to use.
+
 report_status:
   type: string
   enum:
