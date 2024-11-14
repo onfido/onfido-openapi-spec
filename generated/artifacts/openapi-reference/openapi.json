@@ -4736,6 +4736,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/facial_similarity_photo_breakdown"
@@ -4752,6 +4755,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
           },
           {
             "properties": {
@@ -4772,6 +4778,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/facial_similarity_video_breakdown"
@@ -4788,6 +4797,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
           },
           {
             "properties": {
@@ -5336,6 +5348,49 @@
             "$ref": "#/components/schemas/document_properties_extracted_data"
           }
         },
+        "type": "object"
+      },
+      "facial_similarity_report_shared": {
+        "properties": {
+          "live_photos": {
+            "description": "Array of objects with live photo ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          },
+          "live_videos": {
+            "description": "Array of objects with live video ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          },
+          "motion_captures": {
+            "description": "Array of objects with motion capture ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          },
+          "id_photos": {
+            "description": "Array of objects with id photo ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          }
+        }
+      },
+      "facial_similarity_report_media": {
+        "properties": {
+          "id": {
+            "description": "ID of uploaded biometric media to use.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
         "type": "object"
       },
       "facial_similarity_photo_breakdown": {
