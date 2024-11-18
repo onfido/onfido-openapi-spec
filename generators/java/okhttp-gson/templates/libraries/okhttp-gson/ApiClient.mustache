@@ -976,6 +976,7 @@ public class ApiClient {
             return params;
         }
 
+        @SuppressWarnings("unchecked"){{! Fix unchecked cast warning }}
         final Map<String, Object> valuesMap = (Map<String, Object>) value;
 
         for (Map.Entry<String, Object> entry : valuesMap.entrySet()) {
