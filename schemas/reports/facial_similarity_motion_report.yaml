@@ -1,5 +1,6 @@
 allOf:
   - $ref: definitions.yaml#/report_shared
+  - $ref: definitions.yaml#/document_report_shared
   - $ref: definitions.yaml#/facial_similarity_report_shared
   - type: object
     properties:
