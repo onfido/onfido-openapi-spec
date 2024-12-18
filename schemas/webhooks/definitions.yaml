@@ -62,6 +62,7 @@ webhook_event_resource_type:
     - workflow_run
     - workflow_task
     - watchlist_monitor
+    - workflow_timeline_file
 
 webhook_event_type:
   type: string
