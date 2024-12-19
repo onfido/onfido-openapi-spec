@@ -3003,7 +3003,7 @@
             "type": "object"
           },
           "output": {
-            "description": "Output object with the fields produced by the Task execution.",
+            "description": "Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.",
             "nullable": true,
             "type": "object"
           },
@@ -6430,7 +6430,7 @@
             "type": "object"
           },
           "output": {
-            "description": "Output object with the fields produced by the Task execution.",
+            "description": "Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.",
             "nullable": true,
             "type": "object"
           },
