@@ -230,13 +230,6 @@ paths:
           - desc
           - asc
           type: string
-      - description: the applicant's id.
-        in: query
-        name: applicant_id
-        required: false
-        schema:
-          format: uuid
-          type: string
       responses:
         "200":
           content:
