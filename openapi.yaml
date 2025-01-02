@@ -45,6 +45,8 @@ paths:
     $ref: paths/workflow_runs.yaml#/retrieve
   /workflow_runs/{workflow_run_id}/signed_evidence_file:
     $ref: paths/workflow_runs.yaml#/signed_evidence_file
+  /workflow_runs/{workflow_run_id}/evidence_folder:
+    $ref: paths/workflow_runs.yaml#/evidence_folder
   # Documents
   /documents:
     $ref: paths/documents.yaml#/documents
