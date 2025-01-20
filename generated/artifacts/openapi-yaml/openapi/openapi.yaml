@@ -4098,6 +4098,7 @@ components:
           - social_insurance
           - tax_id
           - identity_card
+          - driving_license
           - driving_licence
           - share_code
           - voter_id

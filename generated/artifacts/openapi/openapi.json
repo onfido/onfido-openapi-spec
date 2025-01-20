@@ -4370,7 +4370,7 @@
         "properties" : {
           "type" : {
             "description" : "Type of ID number.",
-            "enum" : [ "ssn", "social_insurance", "tax_id", "identity_card", "driving_licence", "share_code", "voter_id", "passport", "other" ],
+            "enum" : [ "ssn", "social_insurance", "tax_id", "identity_card", "driving_license", "driving_licence", "share_code", "voter_id", "passport", "other" ],
             "type" : "string"
           },
           "value" : {
