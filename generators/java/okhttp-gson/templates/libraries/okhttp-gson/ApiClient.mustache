@@ -56,6 +56,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.net.Proxy;{{! Added import }}
 
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.HttpBasicAuth;
@@ -568,12 +569,24 @@ public class ApiClient {
 
     {{! Added methods - BEGIN }}
 
+    /**
+     * Sets the Api Token.
+     *
+     * @param apiToken a String with the api token
+     * @return Api client
+     */
     public ApiClient setApiToken(String apiToken) {
         this.setApiKey("Token token=" + apiToken);
 
         return this;
     }
 
+    /**
+     * Sets the region.
+     *
+     * @param region a Region enum value
+     * @return Api client
+     */
     public ApiClient setRegion(Region region) {
         Map<String, String> serverVariables = getServerVariables();
 
@@ -586,6 +599,27 @@ public class ApiClient {
 
         return this;
     }
+
+    /**
+     * Return the HTTP proxy used by connections.
+     *
+     * @return Proxy
+     */
+    public Proxy getProxy() {
+        return httpClient.proxy();
+    }
+
+    /**
+     * Sets the HTTP proxy that will be used by connections.
+     *
+     * @param proxy a Proxy object
+     * @return Api client
+     */
+    public ApiClient setProxy(Proxy proxy) {
+        httpClient = httpClient.newBuilder().proxy(proxy).build();
+        return this;
+    }
+
     {{! Added methods - END }}
 
     /**
