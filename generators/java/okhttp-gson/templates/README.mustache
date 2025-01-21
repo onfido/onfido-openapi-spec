@@ -103,7 +103,8 @@ DefaultApi onfido = new DefaultApi(Configuration.getDefaultApiClient()
                       .setApiToken(System.getenv("ONFIDO_API_TOKEN"))
                       .setRegion(Region.EU)     // Supports `EU`, `US` and `CA`
                       .setConnectTimeout(60_000)
-                      .setReadTimeout(60_000));
+                      .setReadTimeout(60_000)
+                      .setProxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port))));   // Optionally define a connection proxy with the specified host and port
 ```
 
 NB: by default, timeout values are set to 30 seconds.
