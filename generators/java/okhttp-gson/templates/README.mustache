@@ -2,13 +2,13 @@
 
 The official Java library for integrating with the Onfido API.
 
-Documentation can be found at <{{ documentationUrl }}>.
+Documentation is available at <{{ documentationUrl }}>.
 
-This library is only for use on the backend, as it uses Onfido API tokens which must be kept secret. If you do need to collect applicant data in the frontend of your application, we recommend that you use the Onfido SDKs: [iOS](https://github.com/onfido/onfido-ios-sdk), [Android](https://github.com/onfido/onfido-android-sdk), [Web](https://github.com/onfido/onfido-sdk-ui), and [React Native](https://github.com/onfido/react-native-sdk).
+{{ >README_frontend_warning }}
 
-This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
+This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details. The guide explains which client library versions use which API versions.
 
-![Build Status](https://github.com/{{{ gitUserId }}}/{{{ gitRepoId }}}/actions/workflows/maven.yml/badge.svg)
+![Build Status](https://github.com/{{ gitUserId }}/{{ gitRepoId }}/actions/workflows/maven.yml/badge.svg)
 
 ## Installation & Usage
 
@@ -38,7 +38,7 @@ To deploy it to a remote Maven repository instead, configure the settings of the
 mvn clean deploy
 ```
 
-Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
+Refer to the [OSSRH Guide](https://central.sonatype.org/publish/publish-guide) for more information.
 
 #### Maven users
 
@@ -46,9 +46,9 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>{{{groupId}}}</groupId>
-  <artifactId>{{{artifactId}}}</artifactId>
-  <version>{{{artifactVersion}}}</version>
+  <groupId>{{ groupId }}</groupId>
+  <artifactId>{{ artifactId }}</artifactId>
+  <version>{{ artifactVersion }}</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -59,12 +59,12 @@ Add this dependency to your project's build file:
 
 ```groovy
   repositories {
-    mavenCentral()     // Needed if the '{{{artifactId}}}' jar has been published to maven central.
-    mavenLocal()       // Needed if the '{{{artifactId}}}' jar has been published to the local maven repo.
+    mavenCentral()     // Needed if the '{{ artifactId }}' jar has been published to maven central.
+    mavenLocal()       // Needed if the '{{ artifactId }}' jar has been published to the local maven repo.
   }
 
   dependencies {
-     implementation "{{{groupId}}}:{{{artifactId}}}:{{{artifactVersion}}}"
+     implementation "{{ groupId }}:{{ artifactId }}:{{ artifactVersion }}"
   }
 ```
 
@@ -78,10 +78,10 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/{{{artifactId}}}-{{{artifactVersion}}}.jar`
+- `target/{{ artifactId }}-{{ artifactVersion }}.jar`
 - `target/lib/*.jar`
 
-The latest version can be found at: https://search.maven.org/artifact/{{ groupId }}/{{ artifactVersion }}
+The latest version can be found at <https://search.maven.org/artifact/{{ groupId }}/{{ artifactId }}/{{ artifactVersion }}/jar>.
 
 ## Getting Started
 
@@ -107,7 +107,7 @@ DefaultApi onfido = new DefaultApi(Configuration.getDefaultApiClient()
                       .setProxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port))));   // Optionally define a connection proxy with the specified host and port
 ```
 
-NB: by default, timeout values are set to 30 seconds.
+NB: By default, the connection and read timeout values are set to 30 seconds. You can adjust these values as shown in the configuration section.
 
 ### Making a call to the API
 
@@ -117,7 +117,7 @@ Most of the request bodies can be created using a builder pattern, this would lo
 new ApplicantBuilder().firstName("First").lastName("Last");
 ```
 
-The above will return an `Applicant.Request` object that can be provided to the `create()` method as the request body, so a full call to to the API will look something like:
+The above will return an `ApplicantBuilder` object that can be provided to the `createApplicant()` method as the request body, a full call to the API will look something like:
 
 ```java
 try {
@@ -142,7 +142,7 @@ try {
 
 ### Webhook event verification
 
-Webhook events payload needs to be verified before it can be accessed. Library allows to easily decode the payload and verify its signature before returning it as an object for user convenience:
+{{ >README_webhook_verification }}
 
 ```java
 try {
@@ -162,10 +162,10 @@ try {
 
 ### Don't share DefaultApi among different threads
 
-It's recommended to create an instance of `DefaultApi` per thread in a multithreaded environment to avoid any potential issues.
+It's recommended to create an instance of `DefaultApi` per thread in a multithreaded environment to avoid potential issues.
 
 #### Do not use additional properties
 
-Retain from using `getAdditionalProperty()` or `getAdditionalProperties()` methods to access not defined properties to avoid breaking changes when these fields will appear.
+Except for retrieving Task object's outputs, avoid using `getAdditionalProperty()` or `getAdditionalProperties()` methods to access undefined properties to prevent breaking changes when these fields appear.
 
-{{>README_footer}}
+{{ >README_footer }}
