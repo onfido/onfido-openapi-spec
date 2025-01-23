@@ -6514,6 +6514,11 @@
             ],
             "description": "Error object that details why a Workflow Run is in Error status.",
             "type": "object"
+          },
+          "customer_user_id": {
+            "description": "Customer-provided user identifier.",
+            "maxLength": 256,
+            "type": "string"
           }
         },
         "type": "object"
