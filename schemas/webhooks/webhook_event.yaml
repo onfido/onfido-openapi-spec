@@ -111,7 +111,6 @@ properties:
             description: Error object that details why a Workflow Run is in Error status.
           customer_user_id:
             type: string
-            nullable: true
             maxLength: 256
             description: Customer-provided user identifier.
 
