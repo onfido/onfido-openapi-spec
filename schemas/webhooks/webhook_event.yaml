@@ -92,6 +92,11 @@ properties:
             type: object
             description: Input object with the fields used by the Task execution.
           output:
+            anyOf:
+              - type: object
+              - type: array
+                items:
+                  type: object
             nullable: true
             description: Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.
           reasons:
