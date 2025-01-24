@@ -23,7 +23,6 @@ properties:
         type: object
         required:
           - id
-          - href
         description: The object affected by this event.
         properties:
           id:
