@@ -6408,7 +6408,6 @@ components:
           description: The uri of the resource.
           type: string
       required:
-      - href
       - id
       type: object
     webhook_event_payload_resource:

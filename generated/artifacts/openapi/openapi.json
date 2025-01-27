@@ -5590,7 +5590,7 @@
             "type" : "string"
           }
         },
-        "required" : [ "href", "id" ],
+        "required" : [ "id" ],
         "type" : "object"
       },
       "webhook_event_payload_resource" : {
