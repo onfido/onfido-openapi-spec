@@ -1201,7 +1201,17 @@ public class ApiClient {
             contentType = "application/json";
         }
         if (isJsonMime(contentType)) {
-            return JSON.deserialize(respBody, returnType);
+            try {
+                return JSON.deserialize(respBody, returnType);
+            } catch (JsonParseException e) {
+                throw new ApiException(
+                        e.getMessage(),
+                        e,
+                        response.code(),
+                        response.headers().toMultimap(),
+                        respBody
+                );
+            }
         } else if (returnType.equals(String.class)) {
             // Expecting string, return the raw response body.
             return (T) respBody;
