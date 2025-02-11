@@ -56,7 +56,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.net.Proxy;{{! Added import }}
+{{! Added imports - BEGIN }}
+import java.net.Proxy;
+import com.google.gson.JsonParseException;
+{{! Added imports - END }}
 
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.HttpBasicAuth;
@@ -1201,6 +1204,7 @@ public class ApiClient {
             contentType = "application/json";
         }
         if (isJsonMime(contentType)) {
+            {{! Wrapped into try-catch block add more details on the exception }}
             try {
                 return JSON.deserialize(respBody, returnType);
             } catch (JsonParseException e) {
