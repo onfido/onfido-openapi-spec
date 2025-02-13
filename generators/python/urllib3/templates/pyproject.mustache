@@ -2,7 +2,7 @@
 name = "{{{distributionPackageName}}}"                            {{! package name updated with -python suffix }}
 version = "{{{packageVersion}}}"
 description = "Python library for the Onfido API"                 {{! customized description }}
-authors = ["OpenAPI Generator Community <{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}>"] {{! removed infoName field since wronlgy set }}
+authors = ["{{infoName}}{{^infoName}}OpenAPI Generator Community{{/infoName}} <{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}>"]
 license = "{{{licenseInfo}}}{{^licenseInfo}}NoLicense{{/licenseInfo}}"
 readme = "README.md"
 repository = "https://{{{gitHost}}}/{{{gitUserId}}}/{{{gitRepoId}}}"
@@ -17,14 +17,14 @@ package-mode = false                                              {{! added opti
 [tool.poetry.dependencies]
 python = "^3.8"
 
-urllib3 = ">= 1.25.3 < 3.0.0"
+urllib3 = ">= 1.25.3, < 3.0.0"
 python-dateutil = ">= 2.8.2"
 {{#asyncio}}
 aiohttp = ">= 3.8.4"
 aiohttp-retry = ">= 2.8.3"
 {{/asyncio}}
 {{#tornado}}
-tornado = ">=4.2 <5"
+tornado = ">=4.2, <5"
 {{/tornado}}
 {{#hasHttpSignatureMethods}}
 pem = ">= 19.3.0"
