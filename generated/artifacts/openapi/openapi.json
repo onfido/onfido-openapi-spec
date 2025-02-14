@@ -307,6 +307,15 @@
             "enum" : [ "desc", "asc" ],
             "type" : "string"
           }
+        }, {
+          "description" : "the applicant's id.",
+          "in" : "query",
+          "name" : "applicant_id",
+          "required" : false,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -3486,7 +3495,6 @@
         "properties" : {
           "file_type" : {
             "description" : "The file type of the uploaded file",
-            "enum" : [ "jpg", "jpeg", "png", "pdf" ],
             "type" : "string"
           },
           "type" : {
@@ -3749,7 +3757,7 @@
         "type" : "object"
       },
       "webhook_event_type" : {
-        "enum" : [ "audit_log.created", "watchlist_monitor.matches_updated", "workflow_run.completed", "workflow_task.started", "workflow_task.completed", "check.started", "check.reopened", "check.withdrawn", "check.completed", "check.form_completed", "report.withdrawn", "report.resumed", "report.cancelled", "report.awaiting_approval", "report.completed", "workflow_timeline_file.created", "workflow_signed_evidence_file.created", "workflow_run_evidence_folder.created" ],
+        "enum" : [ "audit_log.created", "watchlist_monitor.matches_updated", "workflow_run.completed", "workflow_task.started", "workflow_task.completed", "check.started", "check.reopened", "check.withdrawn", "check.completed", "check.form_completed", "report.withdrawn", "report.resumed", "report.cancelled", "report.awaiting_approval", "report.completed", "workflow_timeline_file.created", "workflow_run_evidence_folder.created" ],
         "type" : "string"
       },
       "webhook_response" : {

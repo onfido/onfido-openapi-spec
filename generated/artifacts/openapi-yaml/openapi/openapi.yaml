@@ -230,6 +230,13 @@ paths:
           - desc
           - asc
           type: string
+      - description: the applicant's id.
+        in: query
+        name: applicant_id
+        required: false
+        schema:
+          format: uuid
+          type: string
       responses:
         "200":
           content:
@@ -1954,7 +1961,7 @@ components:
         download_href: download_href
         applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         issuing_country: issuing_country
-        file_type: jpg
+        file_type: file_type
         file_name: file_name
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2753,11 +2760,6 @@ components:
       properties:
         file_type:
           description: The file type of the uploaded file
-          enum:
-          - jpg
-          - jpeg
-          - png
-          - pdf
           type: string
         type:
           allOf:
@@ -2986,7 +2988,6 @@ components:
       - report.awaiting_approval
       - report.completed
       - workflow_timeline_file.created
-      - workflow_signed_evidence_file.created
       - workflow_run_evidence_folder.created
       type: string
     webhook_response:
@@ -5345,7 +5346,7 @@ components:
           download_href: download_href
           applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           issuing_country: issuing_country
-          file_type: jpg
+          file_type: file_type
           file_name: file_name
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5356,7 +5357,7 @@ components:
           download_href: download_href
           applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           issuing_country: issuing_country
-          file_type: jpg
+          file_type: file_type
           file_name: file_name
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
