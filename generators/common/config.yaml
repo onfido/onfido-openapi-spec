@@ -5,6 +5,8 @@ library: "${GENERATOR_LIBRARY}"
 templateDir: generators/${GENERATOR}/templates
 outputDir: generated/artifacts/${GENERATOR}
 disallowAdditionalPropertiesIfNotPresent: false
+enumUnknownDefaultCase: true
+removeEnumValuePrefix: true
 additionalProperties:
   apiVersion: v3.6
   documentationUrl: https://documentation.onfido.com

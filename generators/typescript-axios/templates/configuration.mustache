@@ -91,11 +91,11 @@ export class Configuration {
 
         this.apiKey = 'Token token=' + param.apiToken;
         this.basePath = param.basePath || BASE_PATH.replace('.eu.', `.${Region[param.region || Region.EU].toLowerCase()}.`);
-        {{! set a default timeout value, add baseOptions before headers and injiect form-data }}
+        {{! set a default timeout value, add baseOptions before headers, injiect form-data and fix user-agent }}
         this.baseOptions = {...{ timeout: 30_000 },
                             ...param.baseOptions,
             headers: {...param.baseOptions?.headers,
-                'User-Agent': "OpenAPI-Generator{{#npmVersion}}/{{npmVersion}}{{/npmVersion}}/typescript-axios"
+                'User-Agent': "{{httpUserAgent}}"
             },
         };
         this.formDataCtor = param.formDataCtor || require('form-data');         // Injiect form data constructor (if needed)
