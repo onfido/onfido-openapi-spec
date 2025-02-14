@@ -3807,7 +3807,6 @@
         "properties": {
           "file_type": {
             "description": "The file type of the uploaded file",
-            "enum": ["jpg", "jpeg", "png", "pdf"],
             "type": "string"
           },
           "type": {
