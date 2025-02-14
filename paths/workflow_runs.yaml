@@ -57,6 +57,13 @@ workflow_runs:
             - desc
             - asc
           default: desc
+      - in: query
+        name: applicant_id
+        required: false
+        schema:
+          type: string
+          format: uuid
+        description: the applicant's id.
     responses:
       "200":
         description: An array of Workflow Run objects matching the query parameters.
