@@ -307,15 +307,6 @@
             "enum" : [ "desc", "asc" ],
             "type" : "string"
           }
-        }, {
-          "description" : "the applicant's id.",
-          "in" : "query",
-          "name" : "applicant_id",
-          "required" : false,
-          "schema" : {
-            "format" : "uuid",
-            "type" : "string"
-          }
         } ],
         "responses" : {
           "200" : {
@@ -3495,6 +3486,7 @@
         "properties" : {
           "file_type" : {
             "description" : "The file type of the uploaded file",
+            "enum" : [ "jpg", "jpeg", "png", "pdf" ],
             "type" : "string"
           },
           "type" : {
