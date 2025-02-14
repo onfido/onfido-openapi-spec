@@ -678,6 +678,45 @@
         "summary" : "Download document"
       }
     },
+    "/documents/{document_id}/nfc_face" : {
+      "get" : {
+        "description" : "Downloads digital photos extracted from specific documents belonging to an applicant. If successful, the response will be the binary data representing the image.\n",
+        "operationId" : "download_nfc_face",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "document_id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "format" : "binary",
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "The image binary data"
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Unexpected error"
+          }
+        },
+        "summary" : "Download NFC face"
+      }
+    },
     "/documents/{document_id}/video/download" : {
       "get" : {
         "description" : "Downloads a document video. If successful, the response will be the binary data representing the video.\n",
