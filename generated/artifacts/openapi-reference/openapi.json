@@ -4782,6 +4782,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/document_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/document_breakdown"
@@ -4798,6 +4801,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/document_report_shared"
           },
           {
             "properties": {
@@ -4818,6 +4824,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/document_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/document_breakdown"
@@ -4834,6 +4843,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/document_report_shared"
           },
           {
             "properties": {
@@ -4854,6 +4866,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/document_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/document_breakdown"
@@ -4870,6 +4885,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/document_report_shared"
           },
           {
             "properties": {
@@ -5276,13 +5294,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "documents": {
-            "description": "Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]",
-            "items": {
-              "$ref": "#/components/schemas/report_document"
-            },
-            "type": "array"
-          },
           "name": {
             "$ref": "#/components/schemas/report_name"
           }
@@ -5309,6 +5320,29 @@
         "description": "The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.",
         "enum": ["clear", "rejected", "suspected", "caution"],
         "type": "string"
+      },
+      "document_report_shared": {
+        "properties": {
+          "documents": {
+            "description": "Array of objects with document ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/report_document"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "report_document": {
+        "properties": {
+          "id": {
+            "description": "ID of uploaded document to use.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
       },
       "document_breakdown": {
         "properties": {
@@ -5510,6 +5544,13 @@
       },
       "facial_similarity_report_shared": {
         "properties": {
+          "documents": {
+            "description": "Array of objects with document ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/report_document"
+            },
+            "type": "array"
+          },
           "live_photos": {
             "description": "Array of objects with live photo ids that were used in the Onfido engine.",
             "items": {
@@ -5995,17 +6036,6 @@
           }
         },
         "required": ["id_number", "issue_state"],
-        "type": "object"
-      },
-      "report_document": {
-        "properties": {
-          "id": {
-            "description": "ID of uploaded document to use.",
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": ["id"],
         "type": "object"
       },
       "document_IQ_reasons": {

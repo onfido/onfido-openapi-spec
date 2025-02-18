@@ -3605,6 +3605,7 @@ components:
     document_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
+      - $ref: '#/components/schemas/document_report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3934,6 +3935,7 @@ components:
     document_video_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
+      - $ref: '#/components/schemas/document_report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3943,6 +3945,7 @@ components:
     document_video_with_address_information_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
+      - $ref: '#/components/schemas/document_report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3952,6 +3955,7 @@ components:
     document_with_address_information_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
+      - $ref: '#/components/schemas/document_report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3961,6 +3965,7 @@ components:
     document_with_driving_licence_information_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
+      - $ref: '#/components/schemas/document_report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -3970,6 +3975,7 @@ components:
     document_with_driver_verification_report:
       allOf:
       - $ref: '#/components/schemas/report_shared'
+      - $ref: '#/components/schemas/document_report_shared'
       - properties:
           breakdown:
             $ref: '#/components/schemas/document_breakdown'
@@ -4204,12 +4210,6 @@ components:
           description: The ID of the check to which the report belongs. Read-only.
           format: uuid
           type: string
-        documents:
-          description: "Array of objects with document ids that were used in the Onfido\
-            \ engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]"
-          items:
-            $ref: '#/components/schemas/report_document'
-          type: array
         name:
           $ref: '#/components/schemas/report_name'
       required:
@@ -4240,6 +4240,26 @@ components:
       - suspected
       - caution
       type: string
+    document_report_shared:
+      properties:
+        documents:
+          description: Array of objects with document ids that were used in the Onfido
+            engine.
+          items:
+            $ref: '#/components/schemas/report_document'
+          type: array
+      type: object
+    report_document:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: ID of uploaded document to use.
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
     document_breakdown:
       example:
         visual_authenticity:
@@ -4689,6 +4709,12 @@ components:
       type: object
     facial_similarity_report_shared:
       properties:
+        documents:
+          description: Array of objects with document ids that were used in the Onfido
+            engine.
+          items:
+            $ref: '#/components/schemas/report_document'
+          type: array
         live_photos:
           description: Array of objects with live photo ids that were used in the
             Onfido engine.
@@ -5066,17 +5092,6 @@ components:
       required:
       - id_number
       - issue_state
-      type: object
-    report_document:
-      example:
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        id:
-          description: ID of uploaded document to use.
-          format: uuid
-          type: string
-      required:
-      - id
       type: object
     document_IQ_reasons:
       example:
