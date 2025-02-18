@@ -4856,7 +4856,7 @@ components:
             \ date of birth of match, aliases and associates, and relevant events\
             \ and sources."
           items:
-            type: string
+            type: object
           type: array
       type: object
     watchlist_enhanced_breakdown:
@@ -4897,7 +4897,7 @@ components:
             \ date of birth of match, aliases and associates, and relevant events\
             \ and sources."
           items:
-            type: string
+            type: object
           type: array
       type: object
     proof_of_address_breakdown:

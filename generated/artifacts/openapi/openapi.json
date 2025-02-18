@@ -4915,7 +4915,7 @@
             "deprecated" : true,
             "description" : "Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.",
             "items" : {
-              "type" : "string"
+              "type" : "object"
             },
             "type" : "array"
           }
@@ -4971,7 +4971,7 @@
             "deprecated" : true,
             "description" : "Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.",
             "items" : {
-              "type" : "string"
+              "type" : "object"
             },
             "type" : "array"
           }
