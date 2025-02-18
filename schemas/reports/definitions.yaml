@@ -24,17 +24,26 @@ report_shared:
       type: string
       format: uuid
       description: The ID of the check to which the report belongs. Read-only.
-    documents:
-      type: array
-      description: Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
-      items:
-        $ref: report_document.yaml
     name:
       $ref: "#/report_name"
       description: The name of the report type.
 
+document_report_shared:
+  type: object
+  properties:
+    documents:
+      type: array
+      description: Array of objects with document ids that were used in the Onfido engine.
+      items:
+        $ref: "#/report_document"
+
 facial_similarity_report_shared:
   properties:
+    documents:
+      type: array
+      description: Array of objects with document ids that were used in the Onfido engine.
+      items:
+        $ref: "#/report_document"
     live_photos:
       type: array
       description: Array of objects with live photo ids that were used in the Onfido engine.
@@ -55,6 +64,16 @@ facial_similarity_report_shared:
       description: Array of objects with id photo ids that were used in the Onfido engine.
       items:
         $ref: "#/facial_similarity_report_media"
+
+report_document:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: ID of uploaded document to use.
 
 facial_similarity_report_media:
   type: object
