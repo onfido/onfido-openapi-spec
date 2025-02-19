@@ -36,6 +36,7 @@ We recommend providing the generator with the options below (whenever available)
 
 ```yaml
 enumUnknownDefaultCase: true
+removeEnumValuePrefix: true
 useOneOfDiscriminatorLookup: true
 legacyDiscriminatorBehavior: false
 disallowAdditionalPropertiesIfNotPresent: false

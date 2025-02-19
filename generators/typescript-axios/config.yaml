@@ -1,7 +1,6 @@
 gitRepoId: onfido-node
 npmName: "@onfido/api"
 npmVersion: ${CLIENT_LIBRARY_VERSION}
-enumUnknownDefaultCase: true
 supportsES6: true
 withNodeImports: true
 axiosVersion: ^1.7.4

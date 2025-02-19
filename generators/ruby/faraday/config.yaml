@@ -1,6 +1,5 @@
 gitRepoId: onfido-ruby
 gemVersion: ${CLIENT_LIBRARY_VERSION}
-enumUnknownDefaultCase: true
 gemName: onfido
 gemHomepage: https://github.com/onfido/onfido-ruby
 gemLicense: MIT
