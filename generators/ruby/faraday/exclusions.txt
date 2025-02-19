@@ -2,3 +2,6 @@
 /git_push.sh
 /docs/
 /.travis.yml
+
+# For local development
+/vendor/bundle

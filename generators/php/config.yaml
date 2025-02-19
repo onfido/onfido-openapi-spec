@@ -1,6 +1,5 @@
 gitRepoId: onfido-php
 artifactVersion: ${CLIENT_LIBRARY_VERSION}
-enumUnknownDefaultCase: true
 legacyDiscriminatorBehavior: false
 composerPackageName: onfido/api
 invokerPackage: Onfido
