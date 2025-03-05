@@ -38,6 +38,8 @@ paths:
     $ref: paths/applicants.yaml#/applicant
   /applicants/{applicant_id}/restore:
     $ref: paths/applicants.yaml#/restore
+  /applicants/{applicant_id}/consents:
+    $ref: paths/applicants.yaml#/consents
   # Workflow Runs
   /workflow_runs:
     $ref: paths/workflow_runs.yaml#/workflow_runs
