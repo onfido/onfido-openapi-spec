@@ -185,6 +185,35 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Restore Applicant
+  /applicants/{applicant_id}/consents:
+    get:
+      description: |
+        Retrieves consents for single applicant.
+      operationId: find_applicant_consents
+      parameters:
+      - in: path
+        name: applicant_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The applicant's consents
+                items:
+                  $ref: '#/components/schemas/applicant_consent'
+                type: array
+          description: Applicant Consents object
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Retrieve Applicant Consents
   /workflow_runs:
     get:
       description: |
@@ -1948,6 +1977,33 @@ components:
       - $ref: '#/components/schemas/applicant_shared'
       - $ref: '#/components/schemas/applicant_request'
       - $ref: '#/components/schemas/applicant_update'
+    applicant_consent:
+      example:
+        granted_at: 2000-01-23T04:56:07.000+00:00
+        name: privacy_notices_read
+        granted: true
+      properties:
+        name:
+          $ref: '#/components/schemas/applicant_consent_name'
+        granted:
+          type: boolean
+        granted_at:
+          description: "The date and time when this applicant consent was granted,\
+            \ if not granted the value is nil."
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - granted
+      - granted_at
+      - name
+      type: object
+    applicant_consent_name:
+      enum:
+      - privacy_notices_read
+      - ssn_verification
+      - phone_number_verification
+      type: string
     workflow_run:
       allOf:
       - $ref: '#/components/schemas/workflow_run_shared'
@@ -2612,12 +2668,6 @@ components:
       - granted
       - name
       type: object
-    applicant_consent_name:
-      enum:
-      - privacy_notices_read
-      - ssn_verification
-      - phone_number_verification
-      type: string
     applicant_create:
       properties:
         first_name:
