@@ -198,18 +198,20 @@ properties:
       issuing_authority:
         type: string
   driving_licence_information:
-    type: object
-    properties:
-      category:
-        type: string
-      obtainment_date:
-        type: string
-        format: date
-      expiry_date:
-        type: string
-        format: date
-      codes:
-        type: string
+    type: array
+    items:
+      type: object
+      properties:
+        category:
+          type: string
+        obtainment_date:
+          type: string
+          format: date
+        expiry_date:
+          type: string
+          format: date
+        codes:
+          type: string
   document_classification:
     type: object
     properties:
