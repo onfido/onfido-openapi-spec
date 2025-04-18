@@ -201,6 +201,7 @@ properties:
     type: array
     items:
       type: object
+      title: Document Properties Driving Licence Information Item
       properties:
         category:
           type: string
