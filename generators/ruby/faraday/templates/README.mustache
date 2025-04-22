@@ -14,13 +14,13 @@ This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guid
 ### Installation
 
 ```ruby
-gem {{ gemName }}, '~> {{ gemVersion }}'
+gem '{{ gemName }}', '~> {{ gemVersion }}'
 ```
 
 Configure with your API token, region and optional timeout (default value is 30):
 
 ```ruby
-require {{ gemName }}
+require '{{ gemName }}'
 
 Onfido.configure do |config|
   config.api_token = ENV["ONFIDO_API_TOKEN"]
