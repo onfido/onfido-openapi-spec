@@ -4774,7 +4774,10 @@
             "$ref" : "#/components/schemas/document_properties_nfc"
           },
           "driving_licence_information" : {
-            "$ref" : "#/components/schemas/document_properties_driving_licence_information"
+            "items" : {
+              "$ref" : "#/components/schemas/Document_Properties_Driving_Licence_Information_Item"
+            },
+            "type" : "array"
           },
           "document_classification" : {
             "$ref" : "#/components/schemas/document_properties_document_classification"
@@ -6811,7 +6814,7 @@
         },
         "type" : "object"
       },
-      "document_properties_driving_licence_information" : {
+      "Document_Properties_Driving_Licence_Information_Item" : {
         "properties" : {
           "category" : {
             "type" : "string"
@@ -6828,6 +6831,7 @@
             "type" : "string"
           }
         },
+        "title" : "Document Properties Driving Licence Information Item",
         "type" : "object"
       },
       "document_properties_document_classification" : {

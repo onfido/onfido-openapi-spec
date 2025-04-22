@@ -3891,7 +3891,11 @@ components:
             state: state
             postal_code: postal_code
           driving_licence_information:
-            codes: codes
+          - codes: codes
+            obtainment_date: 2000-01-23
+            expiry_date: 2000-01-23
+            category: category
+          - codes: codes
             obtainment_date: 2000-01-23
             expiry_date: 2000-01-23
             category: category
@@ -4550,7 +4554,11 @@ components:
           state: state
           postal_code: postal_code
         driving_licence_information:
-          codes: codes
+        - codes: codes
+          obtainment_date: 2000-01-23
+          expiry_date: 2000-01-23
+          category: category
+        - codes: codes
           obtainment_date: 2000-01-23
           expiry_date: 2000-01-23
           category: category
@@ -4751,7 +4759,9 @@ components:
         nfc:
           $ref: '#/components/schemas/document_properties_nfc'
         driving_licence_information:
-          $ref: '#/components/schemas/document_properties_driving_licence_information'
+          items:
+            $ref: '#/components/schemas/Document_Properties_Driving_Licence_Information_Item'
+          type: array
         document_classification:
           $ref: '#/components/schemas/document_properties_document_classification'
         extracted_data:
@@ -6038,7 +6048,11 @@ components:
               state: state
               postal_code: postal_code
             driving_licence_information:
-              codes: codes
+            - codes: codes
+              obtainment_date: 2000-01-23
+              expiry_date: 2000-01-23
+              category: category
+            - codes: codes
               obtainment_date: 2000-01-23
               expiry_date: 2000-01-23
               category: category
@@ -6357,7 +6371,11 @@ components:
               state: state
               postal_code: postal_code
             driving_licence_information:
-              codes: codes
+            - codes: codes
+              obtainment_date: 2000-01-23
+              expiry_date: 2000-01-23
+              category: category
+            - codes: codes
               obtainment_date: 2000-01-23
               expiry_date: 2000-01-23
               category: category
@@ -7784,7 +7802,7 @@ components:
         issuing_authority:
           type: string
       type: object
-    document_properties_driving_licence_information:
+    Document_Properties_Driving_Licence_Information_Item:
       example:
         codes: codes
         obtainment_date: 2000-01-23
@@ -7801,6 +7819,7 @@ components:
           type: string
         codes:
           type: string
+      title: Document Properties Driving Licence Information Item
       type: object
     document_properties_document_classification:
       example:
