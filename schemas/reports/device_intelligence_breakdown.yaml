@@ -33,6 +33,7 @@ properties:
                     type: object
   properties:
     type: object
+    deprecated: true
     properties:
       device:
         type: object
