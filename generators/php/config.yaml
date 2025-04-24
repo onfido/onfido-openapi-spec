@@ -9,6 +9,8 @@ artifactUrl: https://documentation.onfido.com
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
+  .markdownlint.mustache:
+    destinationFilename: .markdownlint.json
   WebhookEventVerifier.mustache:
     destinationFilename: lib/WebhookEventVerifier.php
   Region.mustache:

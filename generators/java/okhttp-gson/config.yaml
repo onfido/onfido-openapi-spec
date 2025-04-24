@@ -25,6 +25,8 @@ typeMappings:
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
+  .markdownlint.mustache:
+    destinationFilename: .markdownlint.json
   WebhookEventVerifier.mustache:
     destinationFilename: src/main/java/com/onfido/WebhookEventVerifier.java
   OnfidoInvalidSignatureError.mustache:
