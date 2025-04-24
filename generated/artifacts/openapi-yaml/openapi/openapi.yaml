@@ -4163,6 +4163,8 @@ components:
       - properties:
           breakdown:
             $ref: '#/components/schemas/device_intelligence_breakdown'
+          properties:
+            $ref: '#/components/schemas/device_intelligence_properties'
         type: object
     india_pan_report:
       allOf:
@@ -5051,10 +5053,21 @@ components:
       type: object
     device_intelligence_breakdown:
       properties:
+        device:
+          $ref: '#/components/schemas/device_intelligence_breakdown_device'
         breakdown:
           $ref: '#/components/schemas/device_intelligence_breakdown_breakdown'
         properties:
           $ref: '#/components/schemas/device_intelligence_breakdown_properties'
+      type: object
+    device_intelligence_properties:
+      properties:
+        device:
+          $ref: '#/components/schemas/device_intelligence_breakdown_properties_device'
+        ip:
+          $ref: '#/components/schemas/device_intelligence_breakdown_properties_ip'
+        geolocation:
+          $ref: '#/components/schemas/device_intelligence_breakdown_properties_geolocation'
       type: object
     location_shared:
       properties:
@@ -8619,7 +8632,7 @@ components:
         breakdown:
           $ref: '#/components/schemas/us_driving_licence_breakdown_personal_breakdown'
       type: object
-    device_intelligence_breakdown_breakdown_device_breakdown:
+    device_intelligence_breakdown_device_breakdown:
       properties:
         application_authenticity:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
@@ -8628,17 +8641,18 @@ components:
         device_reputation:
           $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
       type: object
-    device_intelligence_breakdown_breakdown_device:
+    device_intelligence_breakdown_device:
       description: "Asserts whether the device used to upload the media is trustworthy,\
         \ i.e. it is a real, physical device."
       properties:
         breakdown:
-          $ref: '#/components/schemas/device_intelligence_breakdown_breakdown_device_breakdown'
+          $ref: '#/components/schemas/device_intelligence_breakdown_device_breakdown'
       type: object
     device_intelligence_breakdown_breakdown:
+      deprecated: true
       properties:
         device:
-          $ref: '#/components/schemas/device_intelligence_breakdown_breakdown_device'
+          $ref: '#/components/schemas/device_intelligence_breakdown_device'
       type: object
     device_intelligence_breakdown_properties_device:
       properties:
@@ -8737,6 +8751,7 @@ components:
           type: string
       type: object
     device_intelligence_breakdown_properties:
+      deprecated: true
       properties:
         device:
           $ref: '#/components/schemas/device_intelligence_breakdown_properties_device'
