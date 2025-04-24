@@ -7,5 +7,7 @@ httpUserAgent: onfido-python/${CLIENT_LIBRARY_VERSION}
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
+  .markdownlint.mustache:
+    destinationFilename: .markdownlint.json
   webhook_event_verifier.py:
     folder: onfido
