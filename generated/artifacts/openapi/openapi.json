@@ -3851,6 +3851,26 @@
           "payload_version" : {
             "description" : "Webhook version used to control the payload object when sending webhooks.",
             "type" : "integer"
+          },
+          "oauth_enabled" : {
+            "description" : "Determines if the webhook will fetch OAuth access tokens to send in the Authorization header.",
+            "type" : "boolean"
+          },
+          "oauth_server_url" : {
+            "description" : "The url to fetch the OAuth access token using client credentials grant.",
+            "type" : "string"
+          },
+          "oauth_server_client_id" : {
+            "description" : "The client id to authenticate the client credentials grant.",
+            "type" : "string"
+          },
+          "oauth_server_client_secret" : {
+            "description" : "The client secret to authenticate the client credentials grant.",
+            "type" : "string"
+          },
+          "oauth_server_scope" : {
+            "description" : "The scopes to be sent when requesting the access token.",
+            "type" : "string"
           }
         },
         "type" : "object"
