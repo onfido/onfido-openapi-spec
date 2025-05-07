@@ -22,6 +22,21 @@ webhook_shared:
     payload_version:
       type: integer
       description: Webhook version used to control the payload object when sending webhooks.
+    oauth_enabled:
+      type: boolean
+      description: Determines if the webhook will fetch OAuth access tokens to send in the Authorization header.
+    oauth_server_url:
+      type: string
+      description: The url to fetch the OAuth access token using client credentials grant.
+    oauth_server_client_id:
+      type: string
+      description: The client id to authenticate the client credentials grant.
+    oauth_server_client_secret:
+      type: string
+      description: The client secret to authenticate the client credentials grant.
+    oauth_server_scope:
+      type: string
+      description: The scopes to be sent when requesting the access token.
 
 webhook_response:
   type: object
