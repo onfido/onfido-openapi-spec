@@ -28,38 +28,6 @@ properties:
                 type: string
               properties:
                 type: object
-  breakdown:
-    type: object
-    deprecated: true
-    properties:
-      device:
-        type: object
-        description: Asserts whether the device used to upload the media is trustworthy, i.e. it is a real, physical device.
-        properties:
-          breakdown:
-            type: object
-            properties:
-              application_authenticity:
-                type: object
-                properties:
-                  result:
-                    type: string
-                  properties:
-                    type: object
-              device_integrity:
-                type: object
-                properties:
-                  result:
-                    type: string
-                  properties:
-                    type: object
-              device_reputation:
-                type: object
-                properties:
-                  result:
-                    type: string
-                  properties:
-                    type: object
   properties:
     type: object
     deprecated: true
