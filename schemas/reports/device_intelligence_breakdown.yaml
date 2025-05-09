@@ -110,7 +110,7 @@ properties:
               - LOW_RISK
             description: Whether there is highly suspicious traffic related to the IP address. The risk depends on the overall ratio of clear checks on a given IP.
           device_fingerprint_reuse:
-            type: integer
+            type: number
             description: The number of times the device was used to create a report for a new applicant. A value greater than 1 indicates potential device reuse.
           single_device_used:
             type: boolean
