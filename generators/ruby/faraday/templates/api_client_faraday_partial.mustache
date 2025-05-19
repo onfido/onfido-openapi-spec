@@ -127,7 +127,7 @@
 
       # reconstruct content
       content = stream.join
-      content = content.unpack('m').join if response.headers['Content-Transfer-Encoding'] == 'binary'
+      content = content.unpack('m').join if response.headers['Content-Transfer-Encoding'] == 'base64'  {{! Do base64 decoding only when content is base64 encoded }}
       content = content.force_encoding(encoding)
 
       # return byte stream
