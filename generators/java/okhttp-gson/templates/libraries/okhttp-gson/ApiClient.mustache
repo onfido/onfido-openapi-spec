@@ -47,15 +47,21 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
+{{#jsr310}}
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+{{/jsr310}}
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+{{! Added imports - BEGIN }}
+import java.net.Proxy;
+import com.google.gson.JsonParseException;
+{{! Added imports - END }}
 
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.HttpBasicAuth;
@@ -568,12 +574,24 @@ public class ApiClient {
 
     {{! Added methods - BEGIN }}
 
+    /**
+     * Sets the Api Token.
+     *
+     * @param apiToken a String with the api token
+     * @return Api client
+     */
     public ApiClient setApiToken(String apiToken) {
         this.setApiKey("Token token=" + apiToken);
 
         return this;
     }
 
+    /**
+     * Sets the region.
+     *
+     * @param region a Region enum value
+     * @return Api client
+     */
     public ApiClient setRegion(Region region) {
         Map<String, String> serverVariables = getServerVariables();
 
@@ -586,6 +604,27 @@ public class ApiClient {
 
         return this;
     }
+
+    /**
+     * Return the HTTP proxy used by connections.
+     *
+     * @return Proxy
+     */
+    public Proxy getProxy() {
+        return httpClient.proxy();
+    }
+
+    /**
+     * Sets the HTTP proxy that will be used by connections.
+     *
+     * @param proxy a Proxy object
+     * @return Api client
+     */
+    public ApiClient setProxy(Proxy proxy) {
+        httpClient = httpClient.newBuilder().proxy(proxy).build();
+        return this;
+    }
+
     {{! Added methods - END }}
 
     /**
@@ -962,7 +1001,7 @@ public class ApiClient {
     }
     {{/dynamicOperations}}
 
-    /**
+   /**
     * Formats the specified free-form query parameters to a list of {@code Pair} objects.
     *
     * @param value The free-form query parameters.
@@ -976,6 +1015,7 @@ public class ApiClient {
             return params;
         }
 
+        @SuppressWarnings("unchecked")
         final Map<String, Object> valuesMap = (Map<String, Object>) value;
 
         for (Map.Entry<String, Object> entry : valuesMap.entrySet()) {
@@ -1166,7 +1206,18 @@ public class ApiClient {
             contentType = "application/json";
         }
         if (isJsonMime(contentType)) {
-            return JSON.deserialize(respBody, returnType);
+            {{! Wrapped into try-catch block add more details on the exception }}
+            try {
+                return JSON.deserialize(respBody, returnType);
+            } catch (JsonParseException e) {
+                throw new ApiException(
+                        e.getMessage(),
+                        e,
+                        response.code(),
+                        response.headers().toMultimap(),
+                        respBody
+                );
+            }
         } else if (returnType.equals(String.class)) {
             // Expecting string, return the raw response body.
             return (T) respBody;

@@ -1,8 +1,0 @@
-type: object
-required:
-  - id
-properties:
-  id:
-    type: string
-    format: uuid
-    description: ID of uploaded document to use.

@@ -285,6 +285,51 @@
         "tags": ["Core Resources | Applicants"]
       }
     },
+    "/applicants/{applicant_id}/consents": {
+      "get": {
+        "description": "Retrieves consents for single applicant.\n",
+        "operationId": "find_applicant_consents",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "applicant_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "The applicant's consents",
+                  "items": {
+                    "$ref": "#/components/schemas/applicant_consent"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Applicant Consents object"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Retrieve Applicant Consents",
+        "tags": ["Core Resources | Applicants"]
+      }
+    },
     "/workflow_runs": {
       "get": {
         "description": "Retrieves the Workflow Runs of the client. Returns a list of Workflow Run objects.\n",
@@ -332,6 +377,16 @@
             "schema": {
               "default": "desc",
               "enum": ["desc", "asc"],
+              "type": "string"
+            }
+          },
+          {
+            "description": "the applicant's id.",
+            "in": "query",
+            "name": "applicant_id",
+            "required": false,
+            "schema": {
+              "format": "uuid",
               "type": "string"
             }
           }
@@ -501,6 +556,61 @@
         "tags": ["Core Resources | Workflow Runs"]
       }
     },
+    "/workflow_runs/{workflow_run_id}/evidence_folder": {
+      "get": {
+        "description": "Retrieves the evidence folder for the designated Workflow Run\n",
+        "operationId": "download_evidence_folder",
+        "parameters": [
+          {
+            "description": "Workflow Run ID",
+            "in": "path",
+            "name": "workflow_run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "headers": {
+              "Location": {
+                "description": "Link to the evidence folder.",
+                "schema": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "The evidence folder binary data."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Retrieve Workflow Run Evidence Folder",
+        "tags": ["Core Resources | Workflow Runs"]
+      }
+    },
     "/documents": {
       "get": {
         "description": "All documents belonging to an applicant can be listed from this endpoint",
@@ -660,6 +770,48 @@
           }
         },
         "summary": "Download document",
+        "tags": ["Core Resources | Documents"]
+      }
+    },
+    "/documents/{document_id}/nfc_face": {
+      "get": {
+        "description": "Downloads digital photos extracted from specific documents belonging to an applicant. If successful, the response will be the binary data representing the image.\n",
+        "operationId": "download_nfc_face",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "The image binary data"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Download NFC face",
         "tags": ["Core Resources | Documents"]
       }
     },
@@ -2869,6 +3021,32 @@
           }
         ]
       },
+      "applicant_consent": {
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/applicant_consent_name"
+          },
+          "granted": {
+            "type": "boolean"
+          },
+          "granted_at": {
+            "description": "The date and time when this applicant consent was granted, if not granted the value is nil.",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": ["granted", "granted_at", "name"],
+        "type": "object"
+      },
+      "applicant_consent_name": {
+        "enum": [
+          "privacy_notices_read",
+          "ssn_verification",
+          "phone_number_verification"
+        ],
+        "type": "string"
+      },
       "workflow_run": {
         "allOf": [
           {
@@ -3003,7 +3181,7 @@
             "type": "object"
           },
           "output": {
-            "description": "Output object with the fields produced by the Task execution.",
+            "description": "Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.",
             "nullable": true,
             "type": "object"
           },
@@ -3532,14 +3710,6 @@
         "required": ["granted", "name"],
         "type": "object"
       },
-      "applicant_consent_name": {
-        "enum": [
-          "privacy_notices_read",
-          "ssn_verification",
-          "phone_number_verification"
-        ],
-        "type": "string"
-      },
       "applicant_create": {
         "properties": {
           "first_name": {
@@ -3742,7 +3912,6 @@
         "properties": {
           "file_type": {
             "description": "The file type of the uploaded file",
-            "enum": ["jpg", "jpeg", "png", "pdf"],
             "type": "string"
           },
           "type": {
@@ -4004,6 +4173,26 @@
           "payload_version": {
             "description": "Webhook version used to control the payload object when sending webhooks.",
             "type": "integer"
+          },
+          "oauth_enabled": {
+            "description": "Determines if the webhook will fetch OAuth access tokens to send in the Authorization header.",
+            "type": "boolean"
+          },
+          "oauth_server_url": {
+            "description": "The url to fetch the OAuth access token using client credentials grant.",
+            "type": "string"
+          },
+          "oauth_server_client_id": {
+            "description": "The client id to authenticate the client credentials grant.",
+            "type": "string"
+          },
+          "oauth_server_client_secret": {
+            "description": "The client secret to authenticate the client credentials grant.",
+            "type": "string"
+          },
+          "oauth_server_scope": {
+            "description": "The scopes to be sent when requesting the access token.",
+            "type": "string"
           }
         },
         "type": "object"
@@ -4026,7 +4215,7 @@
           "report.awaiting_approval",
           "report.completed",
           "workflow_timeline_file.created",
-          "workflow_signed_evidence_file.created"
+          "workflow_run_evidence_folder.created"
         ],
         "type": "string"
       },
@@ -4071,7 +4260,9 @@
           "audit_log",
           "workflow_run",
           "workflow_task",
-          "watchlist_monitor"
+          "watchlist_monitor",
+          "workflow_timeline_file",
+          "workflow_run_evidence_folder"
         ],
         "type": "string"
       },
@@ -4466,7 +4657,53 @@
           "birth_certificate",
           "vehicle_registration_certificate",
           "form_for_affixing_the_visa",
-          "identification_number_document"
+          "identification_number_document",
+          "adoption_certificate",
+          "bank_building_society_statement",
+          "bank_statement",
+          "benefit_letters",
+          "cbt",
+          "certificate_of_sponsorship",
+          "character_reference",
+          "civil_partnership_certificate",
+          "council_tax",
+          "credit_card_statement",
+          "deed_poll",
+          "divorce_absolute_decree",
+          "educational_statement",
+          "electricity_bill",
+          "gas_bill",
+          "government_letter",
+          "internet_bill",
+          "marriage_certificate",
+          "motorcycle_insurance",
+          "national_insurance_card",
+          "naturalisation_certificate",
+          "non_uk_driving_licence",
+          "p45_p60",
+          "payslip",
+          "phone_bill",
+          "professional_identification_card",
+          "right_to_work_share_code_result",
+          "statement_fact",
+          "t4_student_university_term_dates_evidence",
+          "uk_biometric_residence_permit",
+          "uk_driving_licence",
+          "unknown",
+          "utility_bill",
+          "utility_bill_electric",
+          "utility_bill_gas",
+          "utility_bill_other",
+          "water_bill",
+          "address_certificate",
+          "general_letter",
+          "insurance_statement",
+          "pension_property_statement_letter",
+          "mortgage_statement",
+          "mobile_phone_bill",
+          "identity_document_with_address",
+          "exchange_house_statement",
+          "accommodation_tenancy_certificate"
         ],
         "type": "string"
       },
@@ -4628,6 +4865,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/document_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/document_breakdown"
@@ -4644,6 +4884,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/document_report_shared"
           },
           {
             "properties": {
@@ -4664,6 +4907,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/document_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/document_breakdown"
@@ -4680,6 +4926,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/document_report_shared"
           },
           {
             "properties": {
@@ -4700,6 +4949,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/document_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/document_breakdown"
@@ -4716,6 +4968,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/document_report_shared"
           },
           {
             "properties": {
@@ -4736,6 +4991,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/facial_similarity_photo_breakdown"
@@ -4752,6 +5010,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
           },
           {
             "properties": {
@@ -4772,6 +5033,9 @@
             "$ref": "#/components/schemas/report_shared"
           },
           {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
+          },
+          {
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/facial_similarity_video_breakdown"
@@ -4788,6 +5052,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/report_shared"
+          },
+          {
+            "$ref": "#/components/schemas/facial_similarity_report_shared"
           },
           {
             "properties": {
@@ -4973,6 +5240,9 @@
             "properties": {
               "breakdown": {
                 "$ref": "#/components/schemas/device_intelligence_breakdown"
+              },
+              "properties": {
+                "$ref": "#/components/schemas/device_intelligence_properties"
               }
             },
             "type": "object"
@@ -5006,6 +5276,7 @@
               "social_insurance",
               "tax_id",
               "identity_card",
+              "driving_license",
               "driving_licence",
               "share_code",
               "voter_id",
@@ -5109,13 +5380,6 @@
             "format": "uuid",
             "type": "string"
           },
-          "documents": {
-            "description": "Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]",
-            "items": {
-              "$ref": "#/components/schemas/report_document"
-            },
-            "type": "array"
-          },
           "name": {
             "$ref": "#/components/schemas/report_name"
           }
@@ -5142,6 +5406,29 @@
         "description": "The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only.",
         "enum": ["clear", "rejected", "suspected", "caution"],
         "type": "string"
+      },
+      "document_report_shared": {
+        "properties": {
+          "documents": {
+            "description": "Array of objects with document ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/report_document"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "report_document": {
+        "properties": {
+          "id": {
+            "description": "ID of uploaded document to use.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
       },
       "document_breakdown": {
         "properties": {
@@ -5321,13 +5608,19 @@
             "$ref": "#/components/schemas/document_properties_address_lines"
           },
           "barcode": {
-            "$ref": "#/components/schemas/document_properties_barcode"
+            "items": {
+              "$ref": "#/components/schemas/document_properties_barcode_inner"
+            },
+            "type": "array"
           },
           "nfc": {
             "$ref": "#/components/schemas/document_properties_nfc"
           },
           "driving_licence_information": {
-            "$ref": "#/components/schemas/document_properties_driving_licence_information"
+            "items": {
+              "$ref": "#/components/schemas/Document_Properties_Driving_Licence_Information_Item"
+            },
+            "type": "array"
           },
           "document_classification": {
             "$ref": "#/components/schemas/document_properties_document_classification"
@@ -5336,6 +5629,56 @@
             "$ref": "#/components/schemas/document_properties_extracted_data"
           }
         },
+        "type": "object"
+      },
+      "facial_similarity_report_shared": {
+        "properties": {
+          "documents": {
+            "description": "Array of objects with document ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/report_document"
+            },
+            "type": "array"
+          },
+          "live_photos": {
+            "description": "Array of objects with live photo ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          },
+          "live_videos": {
+            "description": "Array of objects with live video ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          },
+          "motion_captures": {
+            "description": "Array of objects with motion capture ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          },
+          "id_photos": {
+            "description": "Array of objects with id photo ids that were used in the Onfido engine.",
+            "items": {
+              "$ref": "#/components/schemas/facial_similarity_report_media"
+            },
+            "type": "array"
+          }
+        }
+      },
+      "facial_similarity_report_media": {
+        "properties": {
+          "id": {
+            "description": "ID of uploaded biometric media to use.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
         "type": "object"
       },
       "facial_similarity_photo_breakdown": {
@@ -5513,7 +5856,7 @@
             "deprecated": true,
             "description": "Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.",
             "items": {
-              "type": "string"
+              "type": "object"
             },
             "type": "array"
           }
@@ -5569,7 +5912,7 @@
             "deprecated": true,
             "description": "Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.",
             "items": {
-              "type": "string"
+              "type": "object"
             },
             "type": "array"
           }
@@ -5659,11 +6002,28 @@
       },
       "device_intelligence_breakdown": {
         "properties": {
+          "device": {
+            "$ref": "#/components/schemas/device_intelligence_breakdown_device"
+          },
           "breakdown": {
             "$ref": "#/components/schemas/device_intelligence_breakdown_breakdown"
           },
           "properties": {
             "$ref": "#/components/schemas/device_intelligence_breakdown_properties"
+          }
+        },
+        "type": "object"
+      },
+      "device_intelligence_properties": {
+        "properties": {
+          "device": {
+            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_device"
+          },
+          "ip": {
+            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_ip"
+          },
+          "geolocation": {
+            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
           }
         },
         "type": "object"
@@ -5782,17 +6142,6 @@
           }
         },
         "required": ["id_number", "issue_state"],
-        "type": "object"
-      },
-      "report_document": {
-        "properties": {
-          "id": {
-            "description": "ID of uploaded document to use.",
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": ["id"],
         "type": "object"
       },
       "document_IQ_reasons": {
@@ -6262,7 +6611,7 @@
             "type": "string"
           }
         },
-        "required": ["href", "id"],
+        "required": ["id"],
         "type": "object"
       },
       "webhook_event_payload_resource": {
@@ -6323,7 +6672,7 @@
             "type": "object"
           },
           "output": {
-            "description": "Output object with the fields produced by the Task execution.",
+            "description": "Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.",
             "nullable": true,
             "type": "object"
           },
@@ -6351,6 +6700,11 @@
             ],
             "description": "Error object that details why a Workflow Run is in Error status.",
             "type": "object"
+          },
+          "customer_user_id": {
+            "description": "Customer-provided user identifier.",
+            "maxLength": 256,
+            "type": "string"
           }
         },
         "type": "object"
@@ -7259,7 +7613,7 @@
         },
         "type": "object"
       },
-      "document_properties_barcode": {
+      "document_properties_barcode_inner": {
         "properties": {
           "first_name": {
             "type": "string"
@@ -7368,7 +7722,7 @@
         },
         "type": "object"
       },
-      "document_properties_driving_licence_information": {
+      "Document_Properties_Driving_Licence_Information_Item": {
         "properties": {
           "category": {
             "type": "string"
@@ -7385,6 +7739,7 @@
             "type": "string"
           }
         },
+        "title": "Document Properties Driving Licence Information Item",
         "type": "object"
       },
       "document_properties_document_classification": {
@@ -8483,7 +8838,7 @@
         },
         "type": "object"
       },
-      "device_intelligence_breakdown_breakdown_device_breakdown": {
+      "device_intelligence_breakdown_device_breakdown": {
         "properties": {
           "application_authenticity": {
             "$ref": "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
@@ -8497,19 +8852,20 @@
         },
         "type": "object"
       },
-      "device_intelligence_breakdown_breakdown_device": {
+      "device_intelligence_breakdown_device": {
         "description": "Asserts whether the device used to upload the media is trustworthy, i.e. it is a real, physical device.",
         "properties": {
           "breakdown": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_breakdown_device_breakdown"
+            "$ref": "#/components/schemas/device_intelligence_breakdown_device_breakdown"
           }
         },
         "type": "object"
       },
       "device_intelligence_breakdown_breakdown": {
+        "deprecated": true,
         "properties": {
           "device": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_breakdown_device"
+            "$ref": "#/components/schemas/device_intelligence_breakdown_device"
           }
         },
         "type": "object"
@@ -8561,7 +8917,7 @@
           },
           "device_fingerprint_reuse": {
             "description": "The number of times the device was used to create a report for a new applicant. A value greater than 1 indicates potential device reuse.",
-            "type": "integer"
+            "type": "number"
           },
           "single_device_used": {
             "description": "Whether the document or biometric media were uploaded from a single device.",
@@ -8613,6 +8969,7 @@
         "type": "object"
       },
       "device_intelligence_breakdown_properties": {
+        "deprecated": true,
         "properties": {
           "device": {
             "$ref": "#/components/schemas/device_intelligence_breakdown_properties_device"

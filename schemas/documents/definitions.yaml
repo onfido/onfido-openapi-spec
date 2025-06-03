@@ -3,11 +3,6 @@ document_shared:
   properties:
     file_type:
       type: string
-      enum:
-        - jpg
-        - jpeg
-        - png
-        - pdf
       description: The file type of the uploaded file
     type:
       type: string

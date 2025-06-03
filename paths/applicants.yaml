@@ -153,3 +153,29 @@ restore:
         description: No Content
       default:
         $ref: ../responses/default_error.yaml
+
+consents:
+  get:
+    summary: Retrieve Applicant Consents
+    operationId: find_applicant_consents
+    description: >
+      Retrieves consents for single applicant.
+    parameters:
+      - name: applicant_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "200":
+        description: Applicant Consents object
+        content:
+          application/json:
+            schema:
+              type: array
+              description: The applicant's consents
+              items:
+                $ref: "../schemas/applicants/definitions.yaml#/applicant_consent"
+      default:
+        $ref: ../responses/default_error.yaml

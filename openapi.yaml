@@ -38,6 +38,8 @@ paths:
     $ref: paths/applicants.yaml#/applicant
   /applicants/{applicant_id}/restore:
     $ref: paths/applicants.yaml#/restore
+  /applicants/{applicant_id}/consents:
+    $ref: paths/applicants.yaml#/consents
   # Workflow Runs
   /workflow_runs:
     $ref: paths/workflow_runs.yaml#/workflow_runs
@@ -45,6 +47,8 @@ paths:
     $ref: paths/workflow_runs.yaml#/retrieve
   /workflow_runs/{workflow_run_id}/signed_evidence_file:
     $ref: paths/workflow_runs.yaml#/signed_evidence_file
+  /workflow_runs/{workflow_run_id}/evidence_folder:
+    $ref: paths/workflow_runs.yaml#/evidence_folder
   # Documents
   /documents:
     $ref: paths/documents.yaml#/documents
@@ -52,6 +56,8 @@ paths:
     $ref: paths/documents.yaml#/document
   /documents/{document_id}/download:
     $ref: paths/documents.yaml#/download
+  /documents/{document_id}/nfc_face:
+    $ref: paths/documents.yaml#/nfc_face
   /documents/{document_id}/video/download:
     $ref: paths/documents.yaml#/video/download
   # Live Photos

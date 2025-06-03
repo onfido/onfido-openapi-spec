@@ -57,6 +57,13 @@ workflow_runs:
             - desc
             - asc
           default: desc
+      - in: query
+        name: applicant_id
+        required: false
+        schema:
+          type: string
+          format: uuid
+        description: the applicant's id.
     responses:
       "200":
         description: An array of Workflow Run objects matching the query parameters.
@@ -121,6 +128,39 @@ signed_evidence_file:
         description: The signed evidence PDF binary data.
         content:
           application/pdf:
+            schema:
+              type: string
+              format: binary
+      default:
+        $ref: ../responses/default_error.yaml
+
+evidence_folder:
+  get:
+    summary: Retrieve Workflow Run Evidence Folder
+    operationId: download_evidence_folder
+    description: >
+      Retrieves the evidence folder for the designated Workflow Run
+    parameters:
+      - name: workflow_run_id
+        in: path
+        description: Workflow Run ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "302":
+        description: Found
+        headers:
+          Location:
+            description: Link to the evidence folder.
+            schema:
+              type: string
+              format: uri
+      "200":
+        description: The evidence folder binary data.
+        content:
+          application/zip:
             schema:
               type: string
               format: binary

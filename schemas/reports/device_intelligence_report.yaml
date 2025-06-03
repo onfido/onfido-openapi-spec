@@ -4,3 +4,5 @@ allOf:
     properties:
       breakdown:
         $ref: device_intelligence_breakdown.yaml
+      properties:
+        $ref: device_intelligence_properties.yaml

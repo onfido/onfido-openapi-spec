@@ -122,47 +122,49 @@ properties:
       country_code:
         type: string
   barcode:
-    type: object
-    properties:
-      first_name:
-        type: string
-      middle_name:
-        type: string
-      last_name:
-        type: string
-      document_type:
-        type: string
-      date_of_expiry:
-        type: string
-        format: date
-      date_of_birth:
-        type: string
-        format: date
-      issuing_date:
-        type: string
-        format: date
-      address_line_1:
-        type: string
-      address_line_2:
-        type: string
-      address_line_3:
-        type: string
-      address_line_4:
-        type: string
-      address_line_5:
-        type: string
-      issuing_state:
-        type: string
-      class:
-        type: string
-      gender:
-        type: string
-      issuing_country:
-        type: string
-      document_number:
-        type: string
-      real_id_classification:
-        type: string
+    type: array
+    items:
+      type: object
+      properties:
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
+        document_type:
+          type: string
+        date_of_expiry:
+          type: string
+          format: date
+        date_of_birth:
+          type: string
+          format: date
+        issuing_date:
+          type: string
+          format: date
+        address_line_1:
+          type: string
+        address_line_2:
+          type: string
+        address_line_3:
+          type: string
+        address_line_4:
+          type: string
+        address_line_5:
+          type: string
+        issuing_state:
+          type: string
+        class:
+          type: string
+        gender:
+          type: string
+        issuing_country:
+          type: string
+        document_number:
+          type: string
+        real_id_classification:
+          type: string
   nfc:
     type: object
     properties:
@@ -196,18 +198,21 @@ properties:
       issuing_authority:
         type: string
   driving_licence_information:
-    type: object
-    properties:
-      category:
-        type: string
-      obtainment_date:
-        type: string
-        format: date
-      expiry_date:
-        type: string
-        format: date
-      codes:
-        type: string
+    type: array
+    items:
+      type: object
+      title: Document Properties Driving Licence Information Item
+      properties:
+        category:
+          type: string
+        obtainment_date:
+          type: string
+          format: date
+        expiry_date:
+          type: string
+          format: date
+        codes:
+          type: string
   document_classification:
     type: object
     properties:

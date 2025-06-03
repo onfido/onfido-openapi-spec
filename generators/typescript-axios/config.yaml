@@ -1,7 +1,6 @@
 gitRepoId: onfido-node
 npmName: "@onfido/api"
 npmVersion: ${CLIENT_LIBRARY_VERSION}
-enumUnknownDefaultCase: true
 supportsES6: true
 withNodeImports: true
 axiosVersion: ^1.7.4
@@ -12,6 +11,8 @@ httpUserAgent: onfido-node/${CLIENT_LIBRARY_VERSION}
 files:
   LICENSE.mustache:
     destinationFilename: LICENSE
+  .markdownlint.mustache:
+    destinationFilename: .markdownlint.json
   webhook-event-verifier.mustache:
     destinationFilename: webhook-event-verifier.ts
   file-transfer.mustache:

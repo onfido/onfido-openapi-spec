@@ -16,9 +16,8 @@ properties:
     type: object
     description: Input object with the fields used by the Task to execute.
   output:
-    type: object
     nullable: true
-    description: Output object with the fields produced by the Task execution.
+    description: Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.
   created_at:
     type: string
     format: date-time

@@ -2,25 +2,25 @@
 
 The official Ruby library for integrating with the Onfido API.
 
-Documentation can be found at <{{ documentationUrl }}>.
+Refer to the documentation at <{{ documentationUrl }}>.
 
 This version uses Onfido API {{ apiVersion }}. Refer to our [API versioning guide](https://developers.onfido.com/guide/api-versioning-policy#client-libraries) for details of which client library versions use which versions of the API.
 
-[![Gem Version](https://badge.fury.io/rb/{{{gemName}}}.svg)](https://badge.fury.io/rb/{{{gemName}}})
-![Build Status](https://github.com/onfido/{{{gitRepoId}}}/actions/workflows/ruby.yml/badge.svg)
+[![Gem Version](https://badge.fury.io/rb/{{ gemName }}.svg)](https://badge.fury.io/rb/{{ gemName }})
+![Build Status](https://github.com/onfido/{{ gitRepoId }}/actions/workflows/ruby.yml/badge.svg)
 
 ## Installation & Usage
 
 ### Installation
 
 ```ruby
-gem {{{gemName}}}, '~> {{gemVersion}}'
+gem '{{ gemName }}', '~> {{ gemVersion }}'
 ```
 
 Configure with your API token, region and optional timeout (default value is 30):
 
 ```ruby
-require {{{gemName}}}
+require '{{ gemName }}'
 
 Onfido.configure do |config|
   config.api_token = ENV["ONFIDO_API_TOKEN"]
@@ -42,7 +42,7 @@ applicant = onfido_api.create_applicant(
 )
 ```
 
-Documentation and code examples can be found at https://documentation.onfido.com
+Documentation and code examples can be found at <{{ documentationUrl }}>.
 
 ## Error Handling
 
@@ -65,7 +65,7 @@ end
 
 ### Webhook event verification
 
-Webhook events payload needs to be verified before it can be accessed. Library allows to easily decode the payload and verify its signature before returning it as an object for user convenience:
+{{ >README_webhook_verification }}
 
 ```ruby
   require 'onfido/webhook_event_verifier'
@@ -84,4 +84,4 @@ Webhook events payload needs to be verified before it can be accessed. Library a
   end
 ```
 
-{{>README_footer}}
+{{ >README_footer }}
