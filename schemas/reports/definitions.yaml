@@ -140,6 +140,8 @@ report_name:
 report_configuration:
   type: object
   deprecated: true
+  description: >
+    Defines configuration options for facial similarity checks used to distinguish between onboarding and reverification scenarios.
   properties:
     facial_similarity_photo:
       $ref: "#/report_configuration_facial_similarity"
