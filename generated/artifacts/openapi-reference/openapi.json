@@ -4854,6 +4854,9 @@
           },
           "us_driving_licence": {
             "$ref": "#/components/schemas/us_driving_licence_builder"
+          },
+          "report_configuration": {
+            "$ref": "#/components/schemas/report_configuration"
           }
         },
         "required": ["report_names"],
@@ -5349,6 +5352,35 @@
             "$ref": "#/components/schemas/us_driving_licence_shared"
           }
         ]
+      },
+      "report_configuration": {
+        "deprecated": true,
+        "description": "Defines configuration options for facial similarity checks used to distinguish between onboarding and reverification scenarios.\n",
+        "properties": {
+          "facial_similarity_photo": {
+            "$ref": "#/components/schemas/report_configuration_facial_similarity"
+          },
+          "facial_similarity_photo_fully_auto": {
+            "$ref": "#/components/schemas/report_configuration_facial_similarity"
+          },
+          "facial_similarity_video": {
+            "$ref": "#/components/schemas/report_configuration_facial_similarity"
+          },
+          "facial_similarity_motion": {
+            "$ref": "#/components/schemas/report_configuration_facial_similarity"
+          }
+        },
+        "type": "object"
+      },
+      "report_configuration_facial_similarity": {
+        "properties": {
+          "use_case": {
+            "description": "You should set it to \"reverification\" on a post-onboarding scenario (e.g. ongoing authentication).\n",
+            "enum": ["onboarding", "reverification"],
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "report_shared": {
         "properties": {
