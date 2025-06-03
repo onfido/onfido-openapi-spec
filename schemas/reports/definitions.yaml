@@ -139,24 +139,16 @@ report_name:
 
 report_configuration:
   type: object
-  schema:
-    anyOf:
-      - type: object
-        properties:
-          facial_similarity_photo:
-            $ref: "#/report_configuration_facial_similarity"
-      - type: object
-        properties:
-          facial_similarity_photo_fully_auto:
-            $ref: "#/report_configuration_facial_similarity"
-      - type: object
-        properties:
-          facial_similarity_video:
-            $ref: "#/report_configuration_facial_similarity"
-      - type: object
-        properties:
-          facial_similarity_motion:
-            $ref: "#/report_configuration_facial_similarity"
+  deprecated: true
+  properties:
+    facial_similarity_photo:
+      $ref: "#/report_configuration_facial_similarity"
+    facial_similarity_photo_fully_auto:
+      $ref: "#/report_configuration_facial_similarity"
+    facial_similarity_video:
+      $ref: "#/report_configuration_facial_similarity"
+    facial_similarity_motion:
+      $ref: "#/report_configuration_facial_similarity"
 
 report_configuration_facial_similarity:
   type: object
@@ -166,6 +158,5 @@ report_configuration_facial_similarity:
       enum:
         - onboarding
         - reverification
-      deprecated: true
       description: >
         You should set it to "reverification" on a post-onboarding scenario (e.g. ongoing authentication).
