@@ -136,3 +136,29 @@ report_name:
     - us_driving_licence
     - device_intelligence
     - india_pan
+
+report_configuration:
+  type: object
+  deprecated: true
+  description: >
+    Defines configuration options for facial similarity checks used to distinguish between onboarding and reverification scenarios.
+  properties:
+    facial_similarity_photo:
+      $ref: "#/report_configuration_facial_similarity"
+    facial_similarity_photo_fully_auto:
+      $ref: "#/report_configuration_facial_similarity"
+    facial_similarity_video:
+      $ref: "#/report_configuration_facial_similarity"
+    facial_similarity_motion:
+      $ref: "#/report_configuration_facial_similarity"
+
+report_configuration_facial_similarity:
+  type: object
+  properties:
+    use_case:
+      type: string
+      enum:
+        - onboarding
+        - reverification
+      description: >
+        You should set it to "reverification" on a post-onboarding scenario (e.g. ongoing authentication).
