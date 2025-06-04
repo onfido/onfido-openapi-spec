@@ -6,4 +6,7 @@ allOf:
       breakdown:
         $ref: document_breakdown.yaml
       properties:
-        $ref: document_properties.yaml
+        title: Document Properties with Driving Licence Information
+        allOf:
+          - $ref: document_properties.yaml
+          - $ref: document_properties_with_driving_licence_information.yaml

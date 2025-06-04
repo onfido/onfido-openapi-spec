@@ -197,22 +197,6 @@ properties:
         format: date
       issuing_authority:
         type: string
-  driving_licence_information:
-    type: array
-    items:
-      type: object
-      title: Document Properties Driving Licence Information Item
-      properties:
-        category:
-          type: string
-        obtainment_date:
-          type: string
-          format: date
-        expiry_date:
-          type: string
-          format: date
-        codes:
-          type: string
   document_classification:
     type: object
     properties:
