@@ -22,6 +22,9 @@ allOf:
               raw_vehicle_classes:
                 type: string
                 description: Comma-separated vehicle classes that the user is qualified for
+              manual_transmission_restriction:
+                type: boolean
+                description: True if the user is not qualified to drive a manual transmission
               vehicle_class_details:
                 type: array
                 description: Detailed classes/categories information
