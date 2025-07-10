@@ -6962,6 +6962,9 @@ components:
             description: Comma-separated vehicle classes that the user is qualified
               for
             type: string
+          manual_transmission_restriction:
+            description: True if the user is not qualified to drive a manual transmission
+            type: boolean
           vehicle_class_details:
             description: Detailed classes/categories information
             items:
