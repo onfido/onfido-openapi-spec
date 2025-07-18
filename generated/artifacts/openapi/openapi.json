@@ -1889,6 +1889,67 @@
         "summary" : "Retrieves the signed document or application form"
       }
     },
+    "/advanced_electronic_signature/documents" : {
+      "get" : {
+        "description" : "Retrieves the signed document or signing transaction receipt depending on the id provided.\n",
+        "operationId" : "download_aes_document",
+        "parameters" : [ {
+          "description" : "The unique identifier of the Workflow Run for which you want to retrieve the signed document.",
+          "in" : "query",
+          "name" : "workflow_run_id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        }, {
+          "description" : "The unique identifier of the file which you want to retrieve.",
+          "in" : "query",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "302" : {
+            "description" : "Found",
+            "headers" : {
+              "Location" : {
+                "description" : "Pre-signed URL to download the file.",
+                "schema" : {
+                  "format" : "uri",
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "200" : {
+            "content" : {
+              "application/pdf" : {
+                "schema" : {
+                  "format" : "binary",
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "The signed document PDF binary data."
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Unexpected error"
+          }
+        },
+        "summary" : "Retrieves the signed document or signing transaction receipt"
+      }
+    },
     "/workflow_runs/{workflow_run_id}/timeline_file" : {
       "post" : {
         "description" : "Triggers the generation of the Timeline File for the designated Workflow Run.\n",
