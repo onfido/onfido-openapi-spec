@@ -111,6 +111,9 @@ paths:
   # Qualified Electronic Signature
   /qualified_electronic_signature/documents:
     $ref: paths/qualified_electronic_signature.yaml#/documents
+  # Advanced Electronic Signature
+  /advanced_electronic_signature/documents:
+    $ref: paths/advanced_electronic_signature.yaml#/documents
   # Timeline Files
   /workflow_runs/{workflow_run_id}/timeline_file:
     $ref: paths/timeline_files.yaml#/timeline_files
