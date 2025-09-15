@@ -87,3 +87,10 @@ properties:
     properties:
       result:
         type: string
+  ssn:
+    $ref: definitions.yaml#/idr_ssn_breakdown
+    description: Asserts if the applicant's social security number matches (When report was run using https://api.us.onfido.com/)
+
+  ssn1:
+    $ref: definitions.yaml#/idr_ssn_breakdown
+    description: Asserts if the applicant's social security number matches (When report was run using https://api.eu.onfido.com/)
