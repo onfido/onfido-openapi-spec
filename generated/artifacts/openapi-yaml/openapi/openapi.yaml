@@ -3,10 +3,10 @@ info:
   contact:
     name: Onfido
     url: https://public.support.onfido.com
-  description: The Onfido API (v3.6)
+  description: The Onfido Public API (v3.6)
   license:
     name: MIT
-  title: Onfido API v3.6
+  title: Onfido Public API v3.6
   version: v3.6
 externalDocs:
   url: https://documentation.onfido.com
