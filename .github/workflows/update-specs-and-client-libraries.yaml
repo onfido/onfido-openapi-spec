@@ -147,7 +147,7 @@ jobs:
             -p -O folderStrategy=Tags,parametersResolution=Example
           ./shell/publish-postman-collection.py \
             generated/artifacts/postman/collection.json \
-            38453665-3be48048-00b8-43bf-8c91-82953801b7aa
+            29927436-2b7c291e-121b-425f-9dcf-4a19e129bb46
         env:
           POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
       - name: Commit and push single-file OpenAPI specifications
