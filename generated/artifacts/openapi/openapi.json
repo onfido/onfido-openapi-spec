@@ -5086,6 +5086,12 @@
           },
           "mortality" : {
             "$ref" : "#/components/schemas/identity_enhanced_breakdown_mortality"
+          },
+          "ssn" : {
+            "$ref" : "#/components/schemas/idr_ssn_breakdown"
+          },
+          "ssn1" : {
+            "$ref" : "#/components/schemas/idr_ssn_breakdown"
           }
         },
         "type" : "object"
@@ -5563,6 +5569,17 @@
           "reasons" : {
             "description" : "Additional comma separated details such as the name of the fake webcam.",
             "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "idr_ssn_breakdown" : {
+        "properties" : {
+          "result" : {
+            "type" : "string"
+          },
+          "breakdown" : {
+            "$ref" : "#/components/schemas/idr_ssn_breakdown_breakdown"
           }
         },
         "type" : "object"
@@ -8204,6 +8221,41 @@
           },
           "geolocation" : {
             "$ref" : "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
+          }
+        },
+        "type" : "object"
+      },
+      "idr_ssn_breakdown_breakdown_last_4_digits_match" : {
+        "description" : "Last 4 digits of social security number match",
+        "properties" : {
+          "result" : {
+            "type" : "string"
+          },
+          "properties" : {
+            "type" : "object"
+          }
+        },
+        "type" : "object"
+      },
+      "idr_ssn_breakdown_breakdown_full_match" : {
+        "description" : "Social security number fully matches",
+        "properties" : {
+          "result" : {
+            "type" : "string"
+          },
+          "properties" : {
+            "type" : "object"
+          }
+        },
+        "type" : "object"
+      },
+      "idr_ssn_breakdown_breakdown" : {
+        "properties" : {
+          "last_4_digits_match" : {
+            "$ref" : "#/components/schemas/idr_ssn_breakdown_breakdown_last_4_digits_match"
+          },
+          "full_match" : {
+            "$ref" : "#/components/schemas/idr_ssn_breakdown_breakdown_full_match"
           }
         },
         "type" : "object"
