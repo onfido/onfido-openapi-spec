@@ -5220,7 +5220,7 @@
           },
           "document_type" : {
             "description" : "This property provides the document type according to the set of supported documents.",
-            "enum" : [ "bank_building_society_statement", "utility_bill", "council_tax", "benefit_letters", "mortgage_statement", "mobile_phone_bill", "general_letter", "insurance_statement", "pension_property_statement_letter", "identity_document_with_address", "exchange_house_statement" ],
+            "enum" : [ "bank_building_society_statement", "utility_bill", "council_tax", "benefit_letters", "mortgage_statement", "mobile_phone_bill", "general_letter", "insurance_statement", "pension_property_statement_letter", "identity_document_with_address", "exchange_house_statement", "accommodation_tenancy_certificate", "address_certificate", "electricity_bill", "gas_bill", "internet_bill", "phone_bill", "water_bill" ],
             "type" : "string"
           },
           "first_names" : {

@@ -5113,6 +5113,13 @@ components:
           - pension_property_statement_letter
           - identity_document_with_address
           - exchange_house_statement
+          - accommodation_tenancy_certificate
+          - address_certificate
+          - electricity_bill
+          - gas_bill
+          - internet_bill
+          - phone_bill
+          - water_bill
           type: string
         first_names:
           description: "This property provides the first names on the document, including\
