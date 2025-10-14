@@ -64,10 +64,9 @@ workflow_runs:
           type: string
           format: uuid
         description: the applicant's id.
-      - description: Tags assigned to the workflow run.
+      - name: tags
         in: query
-        name: tags
-        nullable: true
+        description:  A list of tags to filter the results.
         schema:
           type: array
           items:
