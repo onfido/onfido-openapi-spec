@@ -98,6 +98,11 @@ properties:
             items:
               type: string
             description: The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow Version.
+          tags:
+            type: array
+            items:
+              type: string
+            description: A list of tags associated with the Workflow Run.
           link:
             type: object
             allOf:
