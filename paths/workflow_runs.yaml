@@ -66,7 +66,7 @@ workflow_runs:
         description: the applicant's id.
       - name: tags
         in: query
-        description:  A list of tags to filter the results.
+        description: A list of tags to filter the results.
         schema:
           type: array
           items:
