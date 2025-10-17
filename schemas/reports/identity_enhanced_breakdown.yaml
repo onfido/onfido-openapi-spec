@@ -19,7 +19,8 @@ properties:
                 type: object
                 properties:
                   total_number_of_sources:
-                    type: integer
+                    type: string
+                    example: "4"
   address:
     type: object
     description: Asserts if the applicant's address matches any sources.
@@ -39,7 +40,8 @@ properties:
                 type: object
                 properties:
                   number_of_matches:
-                    type: integer
+                    type: string
+                    example: "2"
           telephone_database:
             type: object
             description: Address match against telephone database.
