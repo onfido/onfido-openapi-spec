@@ -1,0 +1,3 @@
+allOf:
+  - $ref: definitions.yaml#/signing_document_shared
+  - $ref: definitions.yaml#/signing_document_response

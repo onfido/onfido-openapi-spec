@@ -60,6 +60,13 @@ paths:
     $ref: paths/documents.yaml#/nfc_face
   /documents/{document_id}/video/download:
     $ref: paths/documents.yaml#/video/download
+  # Signing Documents
+  /signing_documents:
+    $ref: paths/signing_documents.yaml#/signing_documents
+  /signing_documents/{signing_document_id}:
+    $ref: paths/signing_documents.yaml#/signing_document
+  /signing_documents/{signing_document_id}/download:
+    $ref: paths/signing_documents.yaml#/download
   # Live Photos
   /live_photos:
     $ref: paths/live_photos.yaml#/live_photos
