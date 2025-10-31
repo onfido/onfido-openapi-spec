@@ -6095,7 +6095,7 @@
           },
           "subtype" : {
             "description" : "The document subtype (if available).",
-            "enum" : [ "full", "not_full", "provisional" ],
+            "enum" : [ "SPE", "ali", "alien", "com", "commercial", "dom", "domestic", "full", "not_full", "full driving licence", "heavy_vehicle", "learner", "minor (u21 or u18)", "mot", "mul", "provisional", "provisional driving licence", "ser", "spe", "special", "standard", "tem", "u21" ],
             "type" : "string"
           },
           "version" : {
