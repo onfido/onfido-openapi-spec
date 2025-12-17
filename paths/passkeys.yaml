@@ -1,0 +1,148 @@
+passkeys:
+  get:
+    summary: List passkeys
+    operationId: list_passkeys
+    description: >
+      Returns every passkey registered under the supplied username.
+    parameters:
+      - name: username
+        in: path
+        required: true
+        description: Username that owns the passkeys.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Passkeys belonging to the username
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Passkeys list
+              required:
+                - passkeys
+              properties:
+                passkeys:
+                  type: array
+                  items:
+                    $ref: ../schemas/passkeys/passkey.yaml
+      "404":
+        description: User not found
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Delete passkeys
+    operationId: delete_passkeys
+    description: >
+      Removes every passkey for the username.
+    parameters:
+      - name: username
+        in: path
+        required: true
+        description: Username whose passkeys will be deleted.
+        schema:
+          type: string
+    responses:
+      "204":
+        description: All passkeys deleted
+      "404":
+        description: User not found
+      default:
+        $ref: ../responses/default_error.yaml
+
+passkey:
+  get:
+    summary: Retrieve passkey
+    operationId: find_passkey
+    description: >
+      Returns a passkey's details.
+    parameters:
+      - name: username
+        in: path
+        required: true
+        description: Username that owns the passkey.
+        schema:
+          type: string
+      - name: passkey_id
+        in: path
+        required: true
+        description: Passkey ID.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: The requested passkey
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/passkeys/passkey.yaml
+      "404":
+        description: Passkey not found
+      default:
+        $ref: ../responses/default_error.yaml
+
+  put:
+    summary: Update passkey
+    operationId: update_passkey
+    description: >
+      Updates a passkey's state.
+    parameters:
+      - name: username
+        in: path
+        required: true
+        description: Username that owns the passkey.
+        schema:
+          type: string
+      - name: passkey_id
+        in: path
+        required: true
+        description: Passkey ID.
+        schema:
+          type: string
+    requestBody:
+      required: true
+      description: Passkey update payload.
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/passkeys/passkey_updater.yaml
+    responses:
+      "200":
+        description: Passkey updated
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/passkeys/passkey.yaml
+      "400":
+        description: Invalid request body
+      "404":
+        description: Passkey not found
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Delete passkey
+    operationId: delete_passkey
+    description: >
+      Deletes a passkey.
+    parameters:
+      - name: username
+        in: path
+        required: true
+        description: Username that owns the passkey.
+        schema:
+          type: string
+      - name: passkey_id
+        in: path
+        required: true
+        description: Passkey ID.
+        schema:
+          type: string
+    responses:
+      "204":
+        description: Passkey deleted
+      "404":
+        description: Passkey not found
+      default:
+        $ref: ../responses/default_error.yaml

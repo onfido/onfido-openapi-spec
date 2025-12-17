@@ -1,0 +1,24 @@
+type: object
+title: Passkey
+required:
+  - id
+  - username
+  - state
+properties:
+  id:
+    type: string
+    description: Passkey identifier.
+  username:
+    type: string
+    description: Username that owns the passkey.
+  state:
+    type: string
+    description: Current passkey state.
+  created_at:
+    type: string
+    format: date-time
+    description: Timestamp when the passkey was created.
+  updated_at:
+    type: string
+    format: date-time
+    description: Timestamp when the passkey was last updated.
