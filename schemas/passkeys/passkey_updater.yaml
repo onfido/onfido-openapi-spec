@@ -6,3 +6,6 @@ properties:
   state:
     type: string
     description: Desired passkey state value.
+    enum:
+      - ACTIVE
+      - INACTIVE

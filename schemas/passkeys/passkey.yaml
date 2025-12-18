@@ -2,23 +2,27 @@ type: object
 title: Passkey
 required:
   - id
-  - username
   - state
+  - created_at
+  - application_domain
 properties:
   id:
     type: string
     description: Passkey identifier.
-  username:
+  application_domain:
     type: string
-    description: Username that owns the passkey.
+    description: domain that the passkey is registered to, the rpId.
   state:
     type: string
     description: Current passkey state.
+    enum:
+      - ACTIVE
+      - INACTIVE
   created_at:
     type: string
     format: date-time
     description: Timestamp when the passkey was created.
-  updated_at:
+  lastUsedAt:
     type: string
     format: date-time
-    description: Timestamp when the passkey was last updated.
+    description: Timestamp when the passkey was last used.

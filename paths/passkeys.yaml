@@ -27,7 +27,7 @@ passkeys:
                   items:
                     $ref: ../schemas/passkeys/passkey.yaml
       "404":
-        description: User not found
+        description: Passkey not found
       default:
         $ref: ../responses/default_error.yaml
 
@@ -47,7 +47,7 @@ passkeys:
       "204":
         description: All passkeys deleted
       "404":
-        description: User not found
+        description: Passkey not found
       default:
         $ref: ../responses/default_error.yaml
 
