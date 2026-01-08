@@ -117,6 +117,10 @@ properties:
             type: string
             maxLength: 256
             description: Customer-provided user identifier.
+          timeline_file_download_url:
+            type: string
+            description: Pre-signed URL to download the timeline file for the Workflow Run.
+            example: "https://example.com/workflow-api/timeline_abc123.pdf?expires=1234567890&signature=abcd1234"
 
 webhook_event_object_status:
   type: string
