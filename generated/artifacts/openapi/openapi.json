@@ -5964,6 +5964,11 @@
             "description" : "Customer-provided user identifier.",
             "maxLength" : 256,
             "type" : "string"
+          },
+          "timeline_file_download_url" : {
+            "description" : "Pre-signed URL to download the timeline file for the Workflow Run.",
+            "example" : "https://example.com/workflow-api/timeline_abc123.pdf?expires=1234567890&signature=abcd1234",
+            "type" : "string"
           }
         },
         "type" : "object"
