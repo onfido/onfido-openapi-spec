@@ -1,0 +1,11 @@
+type: object
+title: Passkey updater
+required:
+  - state
+properties:
+  state:
+    type: string
+    description: Desired passkey state value.
+    enum:
+      - ACTIVE
+      - INACTIVE

@@ -119,6 +119,11 @@ paths:
     $ref: paths/timeline_files.yaml#/timeline_files
   /workflow_runs/{workflow_run_id}/timeline_file/{timeline_file_id}:
     $ref: paths/timeline_files.yaml#/retrieve
+  # Passkeys
+  /passkeys/{username}:
+    $ref: paths/passkeys.yaml#/passkeys
+  /passkeys/{username}/{passkey_id}:
+    $ref: paths/passkeys.yaml#/passkey
   #
   # OTHER ENDPOINTS
   #
