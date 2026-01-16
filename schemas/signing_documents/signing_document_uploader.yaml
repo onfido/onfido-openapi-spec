@@ -1,0 +1,6 @@
+required:
+  - applicant_id
+  - file
+allOf:
+  - $ref: definitions.yaml#/signing_document_shared
+  - $ref: definitions.yaml#/signing_document_request

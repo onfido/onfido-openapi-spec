@@ -1,0 +1,40 @@
+documents:
+  get:
+    summary: Retrieves the signed document or signing transaction receipt
+    operationId: download_ses_document
+    description: >
+      Retrieves the signed document or signing transaction receipt depending on the id provided.
+    parameters:
+      - name: workflow_run_id
+        in: query
+        required: true
+        description: The unique identifier of the Workflow Run for which you want to retrieve the signed document.
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: query
+        required: true
+        description: The unique identifier of the file which you want to retrieve.
+        schema:
+          type: string
+          format: uuid
+
+    responses:
+      "302":
+        description: Found
+        headers:
+          Location:
+            description: Pre-signed URL to download the file.
+            schema:
+              type: string
+              format: uri
+      "200":
+        description: The signed document PDF binary data.
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+      default:
+        $ref: ../responses/default_error.yaml
