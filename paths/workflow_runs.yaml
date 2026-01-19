@@ -64,13 +64,6 @@ workflow_runs:
           type: string
           format: uuid
         description: the applicant's id.
-      - name: tags
-        in: query
-        description: A list of tags to filter the results.
-        schema:
-          type: array
-          items:
-            type: string
     responses:
       "200":
         description: An array of Workflow Run objects matching the query parameters.

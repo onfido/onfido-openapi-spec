@@ -98,11 +98,6 @@ properties:
             items:
               type: string
             description: The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow Version.
-          tags:
-            type: array
-            items:
-              type: string
-            description: A list of tags associated with the Workflow Run.
           link:
             type: object
             allOf:
@@ -117,6 +112,10 @@ properties:
             type: string
             maxLength: 256
             description: Customer-provided user identifier.
+          timeline_file_download_url:
+            type: string
+            description: Pre-signed URL to download the timeline file for the Workflow Run.
+            example: "https://example.com/workflow-api/timeline_abc123.pdf?expires=1234567890&signature=abcd1234"
 
 webhook_event_object_status:
   type: string
