@@ -1432,6 +1432,162 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Unexpected error
       summary: Retrieve Timeline File for Workflow Run
+  /passkeys/{username}:
+    delete:
+      description: |
+        Removes every passkey for the username.
+      operationId: delete_passkeys
+      parameters:
+      - description: Username whose passkeys will be deleted.
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: All passkeys deleted
+        "404":
+          description: Passkey not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Delete passkeys
+    get:
+      description: |
+        Returns every passkey registered under the supplied username.
+      operationId: list_passkeys
+      parameters:
+      - description: Username that owns the passkeys.
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passkeys_list'
+          description: Passkeys belonging to the username
+        "404":
+          description: Passkey not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: List passkeys
+  /passkeys/{username}/{passkey_id}:
+    delete:
+      description: |
+        Deletes a passkey.
+      operationId: delete_passkey
+      parameters:
+      - description: Username that owns the passkey.
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: Passkey ID.
+        in: path
+        name: passkey_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Passkey deleted
+        "404":
+          description: Passkey not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Delete passkey
+    get:
+      description: |
+        Returns a passkey's details.
+      operationId: find_passkey
+      parameters:
+      - description: Username that owns the passkey.
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: Passkey ID.
+        in: path
+        name: passkey_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/passkey'
+          description: The requested passkey
+        "404":
+          description: Passkey not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Retrieve passkey
+    put:
+      description: |
+        Updates a passkey's state.
+      operationId: update_passkey
+      parameters:
+      - description: Username that owns the passkey.
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: Passkey ID.
+        in: path
+        name: passkey_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/passkey_updater'
+        description: Passkey update payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/passkey'
+          description: Passkey updated
+        "400":
+          description: Invalid request body
+        "404":
+          description: Passkey not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      summary: Update passkey
   /ping:
     get:
       description: |
@@ -2341,6 +2497,53 @@ components:
       required:
       - href
       - workflow_timeline_file_id
+      type: object
+    passkey:
+      example:
+        lastUsedAt: 2000-01-23T04:56:07.000+00:00
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        state: ACTIVE
+        application_domain: application_domain
+      properties:
+        id:
+          description: Passkey identifier.
+          type: string
+        application_domain:
+          description: "domain that the passkey is registered to, the rpId."
+          type: string
+        state:
+          description: Current passkey state.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          type: string
+        created_at:
+          description: Timestamp when the passkey was created.
+          format: date-time
+          type: string
+        lastUsedAt:
+          description: Timestamp when the passkey was last used.
+          format: date-time
+          type: string
+      required:
+      - application_domain
+      - created_at
+      - id
+      - state
+      title: Passkey
+      type: object
+    passkey_updater:
+      properties:
+        state:
+          description: Desired passkey state value.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          type: string
+      required:
+      - state
+      title: Passkey updater
       type: object
     webhook:
       allOf:
@@ -5774,6 +5977,28 @@ components:
       required:
       - id_photos
       title: Id Photos list
+      type: object
+    Passkeys_list:
+      example:
+        passkeys:
+        - lastUsedAt: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: ACTIVE
+          application_domain: application_domain
+        - lastUsedAt: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: ACTIVE
+          application_domain: application_domain
+      properties:
+        passkeys:
+          items:
+            $ref: '#/components/schemas/passkey'
+          type: array
+      required:
+      - passkeys
+      title: Passkeys list
       type: object
     Webhooks_list:
       example:

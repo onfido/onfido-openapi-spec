@@ -2199,6 +2199,247 @@
         "tags": ["Core Resources | Timeline Files"]
       }
     },
+    "/passkeys/{username}": {
+      "delete": {
+        "description": "Removes every passkey for the username.\n",
+        "operationId": "delete_passkeys",
+        "parameters": [
+          {
+            "description": "Username whose passkeys will be deleted.",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "All passkeys deleted"
+          },
+          "404": {
+            "description": "Passkey not found"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Delete passkeys",
+        "tags": ["Core Resources | Passkeys"]
+      },
+      "get": {
+        "description": "Returns every passkey registered under the supplied username.\n",
+        "operationId": "list_passkeys",
+        "parameters": [
+          {
+            "description": "Username that owns the passkeys.",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Passkeys_list"
+                }
+              }
+            },
+            "description": "Passkeys belonging to the username"
+          },
+          "404": {
+            "description": "Passkey not found"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "List passkeys",
+        "tags": ["Core Resources | Passkeys"]
+      }
+    },
+    "/passkeys/{username}/{passkey_id}": {
+      "delete": {
+        "description": "Deletes a passkey.\n",
+        "operationId": "delete_passkey",
+        "parameters": [
+          {
+            "description": "Username that owns the passkey.",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Passkey ID.",
+            "in": "path",
+            "name": "passkey_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Passkey deleted"
+          },
+          "404": {
+            "description": "Passkey not found"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Delete passkey",
+        "tags": ["Core Resources | Passkeys"]
+      },
+      "get": {
+        "description": "Returns a passkey's details.\n",
+        "operationId": "find_passkey",
+        "parameters": [
+          {
+            "description": "Username that owns the passkey.",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Passkey ID.",
+            "in": "path",
+            "name": "passkey_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/passkey"
+                }
+              }
+            },
+            "description": "The requested passkey"
+          },
+          "404": {
+            "description": "Passkey not found"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Retrieve passkey",
+        "tags": ["Core Resources | Passkeys"]
+      },
+      "put": {
+        "description": "Updates a passkey's state.\n",
+        "operationId": "update_passkey",
+        "parameters": [
+          {
+            "description": "Username that owns the passkey.",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Passkey ID.",
+            "in": "path",
+            "name": "passkey_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/passkey_updater"
+              }
+            }
+          },
+          "description": "Passkey update payload.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/passkey"
+                }
+              }
+            },
+            "description": "Passkey updated"
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "404": {
+            "description": "Passkey not found"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Update passkey",
+        "tags": ["Core Resources | Passkeys"]
+      }
+    },
     "/ping": {
       "get": {
         "description": "Run a health check on the Onfido API\n",
@@ -3386,6 +3627,48 @@
           }
         },
         "required": ["href", "workflow_timeline_file_id"],
+        "type": "object"
+      },
+      "passkey": {
+        "properties": {
+          "id": {
+            "description": "Passkey identifier.",
+            "type": "string"
+          },
+          "application_domain": {
+            "description": "domain that the passkey is registered to, the rpId.",
+            "type": "string"
+          },
+          "state": {
+            "description": "Current passkey state.",
+            "enum": ["ACTIVE", "INACTIVE"],
+            "type": "string"
+          },
+          "created_at": {
+            "description": "Timestamp when the passkey was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUsedAt": {
+            "description": "Timestamp when the passkey was last used.",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["application_domain", "created_at", "id", "state"],
+        "title": "Passkey",
+        "type": "object"
+      },
+      "passkey_updater": {
+        "properties": {
+          "state": {
+            "description": "Desired passkey state value.",
+            "enum": ["ACTIVE", "INACTIVE"],
+            "type": "string"
+          }
+        },
+        "required": ["state"],
+        "title": "Passkey updater",
         "type": "object"
       },
       "webhook": {
@@ -6585,6 +6868,19 @@
         },
         "required": ["id_photos"],
         "title": "Id Photos list",
+        "type": "object"
+      },
+      "Passkeys_list": {
+        "properties": {
+          "passkeys": {
+            "items": {
+              "$ref": "#/components/schemas/passkey"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["passkeys"],
+        "title": "Passkeys list",
         "type": "object"
       },
       "Webhooks_list": {
