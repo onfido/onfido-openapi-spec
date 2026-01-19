@@ -856,6 +856,168 @@
         "tags": ["Core Resources | Documents"]
       }
     },
+    "/signing_documents": {
+      "get": {
+        "description": "All signing documents belonging to an applicant can be listed from this endpoint",
+        "operationId": "list_signing_documents",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "applicant_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Signing_Documents_list"
+                }
+              }
+            },
+            "description": "List of Signing Documents"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "List signing documents",
+        "tags": ["Core Resources | Signing documents"]
+      },
+      "post": {
+        "description": "Signing documents are uploaded using this endpoint. Signing documents must be uploaded as a multipart form. The only valid file type is pdf. The file size must be between 2KB and 3MB.\n",
+        "operationId": "upload_signing_document",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/signing_document_uploader"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/signing_document"
+                }
+              }
+            },
+            "description": "A signing document"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Upload a signing document",
+        "tags": ["Core Resources | Signing documents"]
+      }
+    },
+    "/signing_documents/{signing_document_id}": {
+      "get": {
+        "description": "A single signing document can be retrieved by calling this endpoint with the signing document's unique identifier.\n",
+        "operationId": "find_signing_document",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "signing_document_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/signing_document"
+                }
+              }
+            },
+            "description": "A signing document"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Retrieve signing document",
+        "tags": ["Core Resources | Signing documents"]
+      }
+    },
+    "/signing_documents/{signing_document_id}/download": {
+      "get": {
+        "description": "Downloads specific signing documents belonging to an applicant. If successful, the response will be the binary data representing the pdf.\n",
+        "operationId": "download_signing_document",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "signing_document_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "The signing document binary data"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Download signing document",
+        "tags": ["Core Resources | Signing documents"]
+      }
+    },
     "/live_photos": {
       "get": {
         "description": "Lists the live photos that belong to an applicant.\n",
@@ -2090,6 +2252,71 @@
         },
         "summary": "Retrieves the signed document or signing transaction receipt",
         "tags": ["Core Resources | Advanced Electronic Signature"]
+      }
+    },
+    "/simple_electronic_signature/documents": {
+      "get": {
+        "description": "Retrieves the signed document or signing transaction receipt depending on the id provided.\n",
+        "operationId": "download_ses_document",
+        "parameters": [
+          {
+            "description": "The unique identifier of the Workflow Run for which you want to retrieve the signed document.",
+            "in": "query",
+            "name": "workflow_run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique identifier of the file which you want to retrieve.",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Found",
+            "headers": {
+              "Location": {
+                "description": "Pre-signed URL to download the file.",
+                "schema": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "The signed document PDF binary data."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Retrieves the signed document or signing transaction receipt",
+        "tags": ["Core Resources | Simple Electronic Signature"]
       }
     },
     "/workflow_runs/{workflow_run_id}/timeline_file": {
@@ -3394,6 +3621,27 @@
         ],
         "required": ["applicant_id", "file", "type"]
       },
+      "signing_document": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/signing_document_shared"
+          },
+          {
+            "$ref": "#/components/schemas/signing_document_response"
+          }
+        ]
+      },
+      "signing_document_uploader": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/signing_document_shared"
+          },
+          {
+            "$ref": "#/components/schemas/signing_document_request"
+          }
+        ],
+        "required": ["applicant_id", "file"]
+      },
       "live_photo": {
         "allOf": [
           {
@@ -4338,6 +4586,62 @@
           },
           "location": {
             "$ref": "#/components/schemas/location_builder"
+          }
+        },
+        "type": "object"
+      },
+      "signing_document_shared": {
+        "properties": {
+          "applicant_id": {
+            "description": "The ID of the applicant whose signing document is being uploaded.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "signing_document_response": {
+        "properties": {
+          "id": {
+            "description": "The unique identifier for the signing document",
+            "format": "uuid",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date and time at which the signing document was uploaded",
+            "format": "date-time",
+            "type": "string"
+          },
+          "href": {
+            "description": "The uri of this resource",
+            "type": "string"
+          },
+          "download_href": {
+            "description": "The uri that can be used to download the signing document",
+            "type": "string"
+          },
+          "file_type": {
+            "description": "The file type of the uploaded file",
+            "type": "string"
+          },
+          "file_name": {
+            "description": "The name of the uploaded file",
+            "type": "string"
+          },
+          "file_size": {
+            "description": "The size of the file in bytes",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "signing_document_request": {
+        "properties": {
+          "file": {
+            "description": "The file to be uploaded.",
+            "format": "binary",
+            "type": "string"
           }
         },
         "type": "object"
@@ -6771,6 +7075,19 @@
         },
         "required": ["documents"],
         "title": "Documents list",
+        "type": "object"
+      },
+      "Signing_Documents_list": {
+        "properties": {
+          "documents": {
+            "items": {
+              "$ref": "#/components/schemas/signing_document"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["signing_documents"],
+        "title": "Signing Documents list",
         "type": "object"
       },
       "Live_Photos_list": {
