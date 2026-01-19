@@ -29,8 +29,10 @@ SECTIONS = (
              'motion_captures': 'Motion captures',
              'watchlist_monitors': 'Monitors',
              'id_photos': 'ID Photos',
+             'signing_documents': 'Signing documents',
              'qualified_electronic_signature': 'Qualified Electronic Signature',
              'advanced_electronic_signature': 'Advanced Electronic Signature',
+             'simple_electronic_signature': 'Simple Electronic Signature',
              'timeline_file': 'Timeline Files',
              'passkeys': 'Passkeys'
              }),
