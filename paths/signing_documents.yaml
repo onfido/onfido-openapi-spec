@@ -21,7 +21,7 @@ signing_documents:
               required:
                 - signing_documents
               properties:
-                documents:
+                signing_documents:
                   type: array
                   items:
                     $ref: ../schemas/signing_documents/signing_document.yaml
