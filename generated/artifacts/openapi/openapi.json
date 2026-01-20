@@ -3623,7 +3623,7 @@
             "format" : "date-time",
             "type" : "string"
           },
-          "lastUsedAt" : {
+          "last_used_at" : {
             "description" : "Timestamp when the passkey was last used.",
             "format" : "date-time",
             "type" : "string"

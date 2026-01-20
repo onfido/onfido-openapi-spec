@@ -2667,7 +2667,7 @@ components:
       type: object
     passkey:
       example:
-        lastUsedAt: 2000-01-23T04:56:07.000+00:00
+        last_used_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
         id: id
         state: ACTIVE
@@ -2689,7 +2689,7 @@ components:
           description: Timestamp when the passkey was created.
           format: date-time
           type: string
-        lastUsedAt:
+        last_used_at:
           description: Timestamp when the passkey was last used.
           format: date-time
           type: string
@@ -6218,12 +6218,12 @@ components:
     Passkeys_list:
       example:
         passkeys:
-        - lastUsedAt: 2000-01-23T04:56:07.000+00:00
+        - last_used_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           id: id
           state: ACTIVE
           application_domain: application_domain
-        - lastUsedAt: 2000-01-23T04:56:07.000+00:00
+        - last_used_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           id: id
           state: ACTIVE
