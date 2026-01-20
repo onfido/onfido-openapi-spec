@@ -6186,7 +6186,7 @@
       },
       "Signing_Documents_list" : {
         "properties" : {
-          "documents" : {
+          "signing_documents" : {
             "items" : {
               "$ref" : "#/components/schemas/signing_document"
             },

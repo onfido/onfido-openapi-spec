@@ -6012,7 +6012,7 @@ components:
       type: object
     Signing_Documents_list:
       example:
-        documents:
+        signing_documents:
         - download_href: download_href
           applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           file_type: file_type
@@ -6030,7 +6030,7 @@ components:
           href: href
           file_size: 0
       properties:
-        documents:
+        signing_documents:
           items:
             $ref: '#/components/schemas/signing_document'
           type: array
