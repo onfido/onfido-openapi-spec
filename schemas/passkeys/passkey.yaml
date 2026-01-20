@@ -22,7 +22,7 @@ properties:
     type: string
     format: date-time
     description: Timestamp when the passkey was created.
-  lastUsedAt:
+  last_used_at:
     type: string
     format: date-time
     description: Timestamp when the passkey was last used.
