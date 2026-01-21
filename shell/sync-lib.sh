@@ -60,7 +60,7 @@ case $client_lib_name in
     sed $SED_OPTS 's/output: Optional\[Dict\[str, Any\]\]/output: Any/g' \
       onfido/models/webhook_event_payload_resource.py \
       onfido/models/task.py
-    pipx run poetry==1.8 lock
+    pipx run poetry==2.2 lock
   ;;
 
   ruby)
