@@ -146,3 +146,7 @@ properties:
       personal_number:
         type: string
         description: The owner's unique identification number.
+      valid_from:
+        type: string
+        format: date
+        description: The date this document is valid from, in YYYY-MM-DD format.
