@@ -4334,6 +4334,7 @@ components:
           date_of_birth: 2000-01-23
           security_tier: tier_1
           mother_name: mother_name
+          valid_from: 2000-01-23
           version_number: version_number
           categorisation: categorisation
           widow_name: widow_name
@@ -5023,6 +5024,7 @@ components:
         date_of_birth: 2000-01-23
         security_tier: tier_1
         mother_name: mother_name
+        valid_from: 2000-01-23
         version_number: version_number
         categorisation: categorisation
         widow_name: widow_name
@@ -5184,6 +5186,9 @@ components:
         issuing_state:
           type: string
         issuing_date:
+          format: date
+          type: string
+        valid_from:
           format: date
           type: string
         categorisation:
@@ -6606,6 +6611,7 @@ components:
             date_of_birth: 2000-01-23
             security_tier: tier_1
             mother_name: mother_name
+            valid_from: 2000-01-23
             version_number: version_number
             categorisation: categorisation
             widow_name: widow_name
@@ -6929,6 +6935,7 @@ components:
             date_of_birth: 2000-01-23
             security_tier: tier_1
             mother_name: mother_name
+            valid_from: 2000-01-23
             version_number: version_number
             categorisation: categorisation
             widow_name: widow_name

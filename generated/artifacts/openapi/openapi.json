@@ -5345,6 +5345,10 @@
             "format" : "date",
             "type" : "string"
           },
+          "valid_from" : {
+            "format" : "date",
+            "type" : "string"
+          },
           "categorisation" : {
             "type" : "string"
           },
