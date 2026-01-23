@@ -36,6 +36,9 @@ properties:
   issuing_date:
     type: string
     format: date
+  valid_from:
+    type: string
+    format: date
   categorisation:
     type: string
   mrz_line1:
