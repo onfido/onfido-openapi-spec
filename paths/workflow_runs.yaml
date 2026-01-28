@@ -41,13 +41,13 @@ workflow_runs:
         description: A ISO-8601 date to filter results with a created date greater than (after) the one provided.
         schema:
           type: string
-          format: date-time
+          format: date
       - name: created_at_lt
         in: query
         description: A ISO-8601 date to filter results with a created date less than (before) the one provided.
         schema:
           type: string
-          format: date-time
+          format: date
       - name: sort
         in: query
         description: A string with the value 'desc' or 'asc' that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to 'desc'.
