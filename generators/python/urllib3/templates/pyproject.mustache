@@ -1,16 +1,31 @@
+{{#poetry1}}
 [tool.poetry]
+{{/poetry1}}
+{{^poetry1}}
+[project]
+{{/poetry1}}
 name = "{{{distributionPackageName}}}"                            {{! package name updated with -python suffix }}
 version = "{{{packageVersion}}}"
 description = "Python library for the Onfido API"                 {{! customized description }}
+{{#poetry1}}
 authors = ["OpenAPI Generator Community <{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}>"] {{! removed infoName field since wronlgy set }}
+{{/poetry1}}
+{{^poetry1}}
+authors = [
+  {name = "OpenAPI Generator Community",email = "{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}"}, {{! removed infoName field since wronlgy set }}
+]
+{{/poetry1}}
 license = "{{{licenseInfo}}}{{^licenseInfo}}NoLicense{{/licenseInfo}}"
 readme = "README.md"
+{{#poetry1}}
 repository = "https://{{{gitHost}}}/{{{gitUserId}}}/{{{gitRepoId}}}"
+{{/poetry1}}
 keywords = ["OpenAPI", "OpenAPI-Generator", "onfido", "identity"] {{! cutomized keywords }}
-include = ["{{packageName}}/py.typed"]
 packages = [                                                      {{! added packages section }}
     { include = "onfido" }
 ]
+{{#poetry1}}
+include = ["{{packageName}}/py.typed"]
 
 {{! Added section }}
 [tool.poetry.urls]
@@ -18,7 +33,6 @@ packages = [                                                      {{! added pack
 
 [tool.poetry.dependencies]
 python = "^3.9"
-
 urllib3 = ">= 2.5.0, < 3.0.0"   {{! Patched urllib3 minimum version }}
 python-dateutil = ">= 2.8.2"
 {{#asyncio}}
@@ -35,8 +49,44 @@ pycryptodome = ">= 3.9.0"
 pydantic = ">= 2"
 typing-extensions = ">= 4.7.1"
 virtualenv = ">= 20.36.1"   {{! Added lowerbound version to solve vulnerability }}
+{{/poetry1}}
+{{^poetry1}}
+requires-python = ">=3.9"
 
-[tool.poetry.group.dev.dependencies]  {{! Updated section name for dev dependencies }}
+dependencies = [
+  "urllib3 (>=2.5.0,<3.0.0)",   {{! Patched urllib3 minimum version }}
+  "python-dateutil (>=2.8.2)",
+{{#asyncio}}
+  "aiohttp (>=3.8.4)",
+  "aiohttp-retry (>=2.8.3)",
+{{/asyncio}}
+{{#tornado}}
+  "tornado (>=4.2,<5)",
+{{/tornado}}
+{{#hasHttpSignatureMethods}}
+  "pem (>=19.3.0)",
+  "pycryptodome (>=3.9.0)",
+{{/hasHttpSignatureMethods}}
+  "pydantic (>=2)",
+  "typing-extensions (>=4.7.1)",
+  "virtualenv (>=20.36.1)"   {{! Added lowerbound version to solve vulnerability }}
+]
+
+[project.urls]
+Repository = "https://{{{gitHost}}}/{{{gitUserId}}}/{{{gitRepoId}}}"
+
+{{/poetry1}}
+{{^poetry1}}
+[tool.poetry]
+requires-poetry = ">=2.0"
+{{/poetry1}}
+
+{{#poetry1}}
+[tool.poetry.dev-dependencies]
+{{/poetry1}}
+{{^poetry1}}
+[tool.poetry.group.dev.dependencies]
+{{/poetry1}}
 pytest = ">= 7.2.1"
 pytest-cov = ">= 2.8.1"
 tox = ">= 3.9.0"
