@@ -7,9 +7,9 @@ import copy
 import http.client as httplib
 import logging
 from logging import FileHandler
-{{^asyncio}}
+{{^async}}
 import multiprocessing
-{{/asyncio}}
+{{/async}}
 import sys
 from typing import Any, ClassVar, Dict, List, Literal, Optional, TypedDict, Union
 from typing_extensions import NotRequired, Self
