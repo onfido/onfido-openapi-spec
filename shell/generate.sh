@@ -10,7 +10,7 @@ COMMON_CONFIG_FILE="generators/common/config.yaml"
 GENERATORS=${*:-`find generators -name 'config.yaml' -exec dirname {} \; | sed 's/generators\///'`}
 GENERATED_CONFIG_FILES=""
 
-OPENAPI_GENERATOR_VERSION=${OPENAPI_GENERATOR_VERSION:-v7.13.0}
+OPENAPI_GENERATOR_VERSION=${OPENAPI_GENERATOR_VERSION:-v7.14.0}
 OPENAPI_GENERATOR_COMMAND=${OPENAPI_GENERATOR_COMMAND:-\
   docker run --rm -v "$(pwd):/local" -w /local \
   openapitools/openapi-generator-cli:${OPENAPI_GENERATOR_VERSION}}
