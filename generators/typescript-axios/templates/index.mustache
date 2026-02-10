@@ -5,7 +5,7 @@
 
 export * from "./api{{importFileExtension}}";
 export * from "./configuration{{importFileExtension}}";
-{{#withSeparateModelsAndApi}}export * from "./{{tsModelPackage}}{{importFileExtension}}";{{/withSeparateModelsAndApi}}
+{{#withSeparateModelsAndApi}}export * from "./{{tsModelPackage}}{{#importFileExtension}}/index{{importFileExtension}}{{/importFileExtension}}";{{/withSeparateModelsAndApi}}
 {{! Additional exports below }}
 export * from "./webhook-event-verifier{{importFileExtension}}";
 export * from "./file-transfer{{importFileExtension}}";
