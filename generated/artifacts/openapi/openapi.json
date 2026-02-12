@@ -4865,7 +4865,7 @@
               "$ref" : "#/components/schemas/document_breakdown"
             },
             "properties" : {
-              "$ref" : "#/components/schemas/document_properties"
+              "$ref" : "#/components/schemas/Document_Properties_with_Driving_Licence_Information"
             }
           },
           "type" : "object"
@@ -5442,17 +5442,22 @@
           "nfc" : {
             "$ref" : "#/components/schemas/document_properties_nfc"
           },
-          "driving_licence_information" : {
-            "items" : {
-              "$ref" : "#/components/schemas/Document_Properties_Driving_Licence_Information_Item"
-            },
-            "type" : "array"
-          },
           "document_classification" : {
             "$ref" : "#/components/schemas/document_properties_document_classification"
           },
           "extracted_data" : {
             "$ref" : "#/components/schemas/document_properties_extracted_data"
+          }
+        },
+        "type" : "object"
+      },
+      "document_properties_with_driving_licence_information" : {
+        "properties" : {
+          "driving_licence_information" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Document_Properties_Driving_Licence_Information_Item"
+            },
+            "type" : "array"
           }
         },
         "type" : "object"
@@ -6797,6 +6802,14 @@
         },
         "type" : "object"
       },
+      "Document_Properties_with_Driving_Licence_Information" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/document_properties"
+        }, {
+          "$ref" : "#/components/schemas/document_properties_with_driving_licence_information"
+        } ],
+        "title" : "Document Properties with Driving Licence Information"
+      },
       "document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner" : {
         "properties" : {
           "category" : {
@@ -7552,26 +7565,6 @@
         },
         "type" : "object"
       },
-      "Document_Properties_Driving_Licence_Information_Item" : {
-        "properties" : {
-          "category" : {
-            "type" : "string"
-          },
-          "obtainment_date" : {
-            "format" : "date",
-            "type" : "string"
-          },
-          "expiry_date" : {
-            "format" : "date",
-            "type" : "string"
-          },
-          "codes" : {
-            "type" : "string"
-          }
-        },
-        "title" : "Document Properties Driving Licence Information Item",
-        "type" : "object"
-      },
       "document_properties_document_classification" : {
         "properties" : {
           "issuing_country" : {
@@ -7654,6 +7647,26 @@
             "type" : "string"
           }
         },
+        "type" : "object"
+      },
+      "Document_Properties_Driving_Licence_Information_Item" : {
+        "properties" : {
+          "category" : {
+            "type" : "string"
+          },
+          "obtainment_date" : {
+            "format" : "date",
+            "type" : "string"
+          },
+          "expiry_date" : {
+            "format" : "date",
+            "type" : "string"
+          },
+          "codes" : {
+            "type" : "string"
+          }
+        },
+        "title" : "Document Properties Driving Licence Information Item",
         "type" : "object"
       },
       "facial_similarity_photo_breakdown_face_comparison_breakdown_face_match_properties" : {
