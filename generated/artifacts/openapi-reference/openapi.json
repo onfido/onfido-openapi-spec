@@ -9036,7 +9036,8 @@
       "identity_enhanced_breakdown_sources_breakdown_total_sources_properties": {
         "properties": {
           "total_number_of_sources": {
-            "type": "integer"
+            "example": "4",
+            "type": "string"
           }
         },
         "type": "object"
@@ -9076,7 +9077,8 @@
       "identity_enhanced_breakdown_address_breakdown_credit_agencies_properties": {
         "properties": {
           "number_of_matches": {
-            "type": "integer"
+            "example": "2",
+            "type": "string"
           }
         },
         "type": "object"
