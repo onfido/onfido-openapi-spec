@@ -266,6 +266,13 @@ paths:
         schema:
           format: uuid
           type: string
+      - description: A list of tags to filter the results.
+        in: query
+        name: tags
+        schema:
+          items:
+            type: string
+          type: array
       responses:
         "200":
           content:
@@ -7145,6 +7152,11 @@ components:
         reasons:
           description: The reasons the Workflow Run outcome was reached. Configurable
             when creating the Workflow Version.
+          items:
+            type: string
+          type: array
+        tags:
+          description: A list of tags associated with the Workflow Run.
           items:
             type: string
           type: array
