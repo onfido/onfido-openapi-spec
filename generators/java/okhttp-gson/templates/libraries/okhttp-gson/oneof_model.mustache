@@ -67,9 +67,6 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
             {{/oneOf}}
             {{/composedSchemas}}
 
-            {{! Added line of code }}
-            final TypeAdapter<ReportShared> adapterReportShared = gson.getDelegateAdapter(this, TypeToken.get(ReportShared.class));
-
             return (TypeAdapter<T>) new TypeAdapter<{{classname}}>() {
                 @Override
                 public void write(JsonWriter out, {{classname}} value) throws IOException {
@@ -142,9 +139,6 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
                     if (jsonObject.get("{{{propertyBaseName}}}") == null) {
                         log.log(Level.WARNING, "Failed to lookup discriminator value for {{classname}} as `{{{propertyBaseName}}}` was not found in the payload or the payload is empty.");
                     } else  {
-                        {{! Added line of code }}
-                        new{{classname}}.reportShared = adapterReportShared.fromJsonTree(jsonObject);
-
                         // look up the discriminator value in the field `{{{propertyBaseName}}}`
                         switch (jsonObject.get("{{{propertyBaseName}}}").getAsString()) {
                         {{#mappedModels}}
@@ -303,9 +297,6 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
     // store a list of schema names defined in oneOf
     public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
 
-    {{! Added line of code }}
-    private ReportShared reportShared;
-
     public {{classname}}() {
         super("oneOf", {{#isNullable}}Boolean.TRUE{{/isNullable}}{{^isNullable}}Boolean.FALSE{{/isNullable}});
     }
@@ -398,6 +389,25 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
     {{/vendorExtensions.x-duplicated-data-type-ignoring-erasure}}
     {{/oneOf}}
     {{/composedSchemas}}
+
+    {{! BEGIN: Stub validateJsonElement when discriminator lookup is enabled }}
+    {{! This prevents "N class(es) match the result, expected 1" errors by allowing }}
+    {{! discriminator-based deserialization to handle validation in the read() method }}
+    {{#useOneOfDiscriminatorLookup}}
+    /**
+     * Validates the JSON Element. When discriminator-based deserialization is enabled,
+     * this method is a no-op as validation is performed during discriminator-based lookup.
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to {{classname}}
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        // No validation needed when discriminator lookup is enabled
+        // Validation happens during read() via discriminator-based deserialization
+    }
+    {{/useOneOfDiscriminatorLookup}}
+    {{! END: Stub validateJsonElement when discriminator lookup is enabled }}
+    {{^useOneOfDiscriminatorLookup}}
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
@@ -516,6 +526,7 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
             throw new IOException(String.format(Locale.ROOT, "The JSON string is invalid for {{classname}} with oneOf schemas: {{#oneOf}}{{{.}}}{{^-last}}, {{/-last}}{{/oneOf}}. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
         }
     }
+    {{/useOneOfDiscriminatorLookup}} {{! Added line to close useOneOfDiscriminatorLookup conditional }}
 
     /**
      * Create an instance of {{classname}} given an JSON string
@@ -537,43 +548,63 @@ public class {{classname}} extends AbstractOpenApiSchema{{#vendorExtensions.x-im
         return JSON.getGson().toJson(this);
     }
 
-    {{! Added block of code based on com/onfido/model/ReportShared.java - BEGIN }}
-
+    {{! BEGIN: Accessor methods for discriminator-based oneOf models }}
+    {{#discriminator}}
     /**
-     * Give access to shared properties. Read-only.
-     * @return ReportShared object with common fields
-     **/
-
-    public ReportShared getReportShared() {
-        return reportShared;
+     * Private helper method to invoke a method on the actual instance via reflection.
+     *
+     * @param <T> The expected return type
+     * @param methodName The name of the method to invoke
+     * @param returnType The class of the expected return type
+     * @return The result of invoking the method, cast to the expected type
+     * @throws RuntimeException if the method doesn't exist or invocation fails
+     */
+    @SuppressWarnings("unchecked")
+    private <T> T invokeMethodOnActualInstance(String methodName, Class<T> returnType) {
+        Object instance = getActualInstance();
+        if (instance == null) {
+            return null;
+        }
+        try {
+            java.lang.reflect.Method method = instance.getClass().getMethod(methodName);
+            Object result = method.invoke(instance);
+            return (T) result;
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("The actual instance does not have a " + methodName + "() method", e);
+        } catch (IllegalAccessException | java.lang.reflect.InvocationTargetException e) {
+            throw new RuntimeException("Failed to invoke " + methodName + "() on actual instance", e);
+        }
     }
 
     /**
-     * Give access to shared properties. Read-only.
-     * @return id
-     **/
-
-    public UUID getId() {
-        return reportShared.getId();
-    }
-
-    /**
-     * Get name
-     * @return name
-     **/
-
+     * Get the discriminator value from the actual instance without needing to cast.
+     * This is a convenience method that works for all oneOf types in this model.
+     *
+     * @return The discriminator value
+     */
     public ReportName getName() {
-        return reportShared.getName();
+        return invokeMethodOnActualInstance("getName", ReportName.class);
     }
 
     /**
-     * Get status
-     * @return status
-     **/
-
-    public ReportStatus getStatus() {
-        return reportShared.getStatus();
+     * Get the ID from the actual instance without needing to cast.
+     * This is a convenience method that works for all oneOf types that have an id field.
+     *
+     * @return The ID value
+     */
+    public UUID getId() {
+        return invokeMethodOnActualInstance("getId", UUID.class);
     }
 
-  {{! Added block of code based on com/onfido/model/ReportShared.java - END }}
+    /**
+     * Get the status from the actual instance without needing to cast.
+     * This is a convenience method that works for all oneOf types that have a status field.
+     *
+     * @return The status value
+     */
+    public ReportStatus getStatus() {
+        return invokeMethodOnActualInstance("getStatus", ReportStatus.class);
+    }
+    {{/discriminator}}
+    {{! END: Accessor methods for discriminator-based oneOf models }}
 }
