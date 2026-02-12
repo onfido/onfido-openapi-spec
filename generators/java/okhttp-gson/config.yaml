@@ -20,6 +20,7 @@ scmDeveloperConnection: scm:git:git://github.com/onfido/onfido-java.git
 scmUrl: https://github.com/onfido/onfido-java
 useOneOfDiscriminatorLookup: true
 legacyDiscriminatorBehavior: false
+useSingleRequestParameter: true
 typeMappings:
   File: FileTransfer
 files:
