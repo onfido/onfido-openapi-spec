@@ -5830,9 +5830,6 @@
           "device" : {
             "$ref" : "#/components/schemas/device_intelligence_breakdown_device"
           },
-          "breakdown" : {
-            "$ref" : "#/components/schemas/device_intelligence_breakdown_breakdown"
-          },
           "properties" : {
             "$ref" : "#/components/schemas/device_intelligence_breakdown_properties"
           }
@@ -8698,15 +8695,6 @@
         "properties" : {
           "breakdown" : {
             "$ref" : "#/components/schemas/device_intelligence_breakdown_device_breakdown"
-          }
-        },
-        "type" : "object"
-      },
-      "device_intelligence_breakdown_breakdown" : {
-        "deprecated" : true,
-        "properties" : {
-          "device" : {
-            "$ref" : "#/components/schemas/device_intelligence_breakdown_device"
           }
         },
         "type" : "object"
