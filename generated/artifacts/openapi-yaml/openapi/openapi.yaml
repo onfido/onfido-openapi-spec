@@ -239,14 +239,14 @@ paths:
         in: query
         name: created_at_gt
         schema:
-          format: date-time
+          format: date
           type: string
       - description: A ISO-8601 date to filter results with a created date less than
           (before) the one provided.
         in: query
         name: created_at_lt
         schema:
-          format: date-time
+          format: date
           type: string
       - description: "A string with the value 'desc' or 'asc' that allows to sort\
           \ the returned list by the completed datetime either descending or ascending,\

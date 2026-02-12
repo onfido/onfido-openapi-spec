@@ -357,7 +357,7 @@
             "in": "query",
             "name": "created_at_gt",
             "schema": {
-              "format": "date-time",
+              "format": "date",
               "type": "string"
             }
           },
@@ -366,7 +366,7 @@
             "in": "query",
             "name": "created_at_lt",
             "schema": {
-              "format": "date-time",
+              "format": "date",
               "type": "string"
             }
           },
