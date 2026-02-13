@@ -1,7 +1,2 @@
 type: object
-properties:
-  records:
-    description: Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
-    type: array
-    items: {}
-    deprecated: true
+properties: {}
