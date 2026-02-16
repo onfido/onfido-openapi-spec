@@ -51,13 +51,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Applicants_list'
+                $ref: "#/components/schemas/Applicants_list"
           description: A list of applicants
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List Applicants
     post:
@@ -68,20 +68,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/applicant_builder'
+              $ref: "#/components/schemas/applicant_builder"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/applicant'
+                $ref: "#/components/schemas/applicant"
           description: Created
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Create Applicant
   /applicants/{applicant_id}:
@@ -103,7 +103,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Delete Applicant
     get:
@@ -122,13 +122,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/applicant'
+                $ref: "#/components/schemas/applicant"
           description: Applicant object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Applicant
     put:
@@ -147,20 +147,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/applicant_updater'
+              $ref: "#/components/schemas/applicant_updater"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/applicant'
+                $ref: "#/components/schemas/applicant"
           description: Applicant Object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Update Applicant
   /applicants/{applicant_id}/restore:
@@ -182,7 +182,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Restore Applicant
   /applicants/{applicant_id}/consents:
@@ -204,14 +204,14 @@ paths:
               schema:
                 description: The applicant's consents
                 items:
-                  $ref: '#/components/schemas/applicant_consent'
+                  $ref: "#/components/schemas/applicant_consent"
                 type: array
           description: Applicant Consents object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Applicant Consents
   /workflow_runs:
@@ -279,7 +279,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/workflow_run'
+                  $ref: "#/components/schemas/workflow_run"
                 title: Workflow runs
                 type: array
           description: An array of Workflow Run objects matching the query parameters.
@@ -287,7 +287,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List Workflow Runs
     post:
@@ -298,20 +298,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/workflow_run_builder'
+              $ref: "#/components/schemas/workflow_run_builder"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/workflow_run'
+                $ref: "#/components/schemas/workflow_run"
           description: A Workflow Run object.
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Create a Workflow Run
   /workflow_runs/{workflow_run_id}:
@@ -332,13 +332,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/workflow_run'
+                $ref: "#/components/schemas/workflow_run"
           description: A Workflow Run object.
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Workflow Run
   /workflow_runs/{workflow_run_id}/signed_evidence_file:
@@ -374,7 +374,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Workflow Run Evidence Summary File
   /workflow_runs/{workflow_run_id}/evidence_folder:
@@ -410,7 +410,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Workflow Run Evidence Folder
   /documents:
@@ -430,13 +430,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Documents_list'
+                $ref: "#/components/schemas/Documents_list"
           description: List of Documents
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List documents
     post:
@@ -447,20 +447,20 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/document_uploader'
+              $ref: "#/components/schemas/document_uploader"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/document'
+                $ref: "#/components/schemas/document"
           description: A document
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Upload a document
   /documents/{document_id}:
@@ -480,13 +480,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/document'
+                $ref: "#/components/schemas/document"
           description: A document
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve document
   /documents/{document_id}/download:
@@ -513,7 +513,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download document
   /documents/{document_id}/nfc_face:
@@ -540,7 +540,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download NFC face
   /documents/{document_id}/video/download:
@@ -566,7 +566,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download document video
   /signing_documents:
@@ -586,13 +586,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Signing_Documents_list'
+                $ref: "#/components/schemas/Signing_Documents_list"
           description: List of Signing Documents
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List signing documents
     post:
@@ -603,20 +603,20 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/signing_document_uploader'
+              $ref: "#/components/schemas/signing_document_uploader"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/signing_document'
+                $ref: "#/components/schemas/signing_document"
           description: A signing document
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Upload a signing document
   /signing_documents/{signing_document_id}:
@@ -636,13 +636,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/signing_document'
+                $ref: "#/components/schemas/signing_document"
           description: A signing document
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve signing document
   /signing_documents/{signing_document_id}/download:
@@ -669,7 +669,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download signing document
   /live_photos:
@@ -690,13 +690,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Live_Photos_list'
+                $ref: "#/components/schemas/Live_Photos_list"
           description: An array of live photos
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List live photos
     post:
@@ -707,20 +707,20 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/live_photo_uploader'
+              $ref: "#/components/schemas/live_photo_uploader"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/live_photo'
+                $ref: "#/components/schemas/live_photo"
           description: The Live Photo
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Upload live photo
   /live_photos/{live_photo_id}:
@@ -741,13 +741,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/live_photo'
+                $ref: "#/components/schemas/live_photo"
           description: A live photo
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve live photo
   /live_photos/{live_photo_id}/download:
@@ -774,7 +774,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download live photo
   /live_videos:
@@ -795,13 +795,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Live_Videos_list'
+                $ref: "#/components/schemas/Live_Videos_list"
           description: An array of live videos
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List live videos
   /live_videos/{live_video_id}:
@@ -822,13 +822,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/live_video'
+                $ref: "#/components/schemas/live_video"
           description: A live video
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve live video
   /live_videos/{live_video_id}/download:
@@ -855,7 +855,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download live video
   /live_videos/{live_video_id}/frame:
@@ -883,7 +883,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download live video frame
   /workflow_runs/{workflow_run_id}/tasks:
@@ -906,7 +906,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/TaskItem'
+                  $ref: "#/components/schemas/TaskItem"
                 title: Tasks
                 type: array
           description: "An array of subset Task objects that were already started\
@@ -915,7 +915,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List Tasks
   /workflow_runs/{workflow_run_id}/tasks/{task_id}:
@@ -942,13 +942,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/task'
+                $ref: "#/components/schemas/task"
           description: A Task object.
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Task
   /workflow_runs/{workflow_run_id}/tasks/{task_id}/complete:
@@ -974,7 +974,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/complete_task_builder'
+              $ref: "#/components/schemas/complete_task_builder"
         required: true
       responses:
         "200":
@@ -983,7 +983,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Complete Task
   /motion_captures:
@@ -1004,13 +1004,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Motion_Captures_list'
+                $ref: "#/components/schemas/Motion_Captures_list"
           description: An array of motion captures
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List motion captures
   /motion_captures/{motion_capture_id}:
@@ -1031,13 +1031,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/motion_capture'
+                $ref: "#/components/schemas/motion_capture"
           description: A motion capture
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve motion capture
   /motion_captures/{motion_capture_id}/download:
@@ -1064,7 +1064,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download motion capture
   /motion_captures/{motion_capture_id}/frame:
@@ -1092,7 +1092,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download motion capture frame
   /watchlist_monitors:
@@ -1120,13 +1120,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Watchlist_monitors_list'
+                $ref: "#/components/schemas/Watchlist_monitors_list"
           description: An array of watchlist monitors
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List monitors
     post:
@@ -1137,20 +1137,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/watchlist_monitor_builder'
+              $ref: "#/components/schemas/watchlist_monitor_builder"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/watchlist_monitor'
+                $ref: "#/components/schemas/watchlist_monitor"
           description: Created
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Create monitor
   /watchlist_monitors/{monitor_id}:
@@ -1172,7 +1172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Delete monitor
     get:
@@ -1192,13 +1192,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/watchlist_monitor'
+                $ref: "#/components/schemas/watchlist_monitor"
           description: A watchlist monitor
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve monitor
   /watchlist_monitors/{monitor_id}/matches:
@@ -1218,7 +1218,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/watchlist_monitor_matches_list'
+                $ref: "#/components/schemas/watchlist_monitor_matches_list"
           description: An array of watchlist monitors
       summary: List matches (BETA)
     patch:
@@ -1236,20 +1236,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/watchlist_monitor_matches_updater'
+              $ref: "#/components/schemas/watchlist_monitor_matches_updater"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/watchlist_monitor_matches_list'
+                $ref: "#/components/schemas/watchlist_monitor_matches_list"
           description: An array of watchlist monitors
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Set match status (BETA)
   /watchlist_monitors/{monitor_id}/new_report:
@@ -1276,7 +1276,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Force new report creation (BETA)
   /id_photos:
@@ -1297,13 +1297,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Id_Photos_list'
+                $ref: "#/components/schemas/Id_Photos_list"
           description: An array of ID photos
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List ID photos
     post:
@@ -1314,20 +1314,20 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/id_photo_uploader'
+              $ref: "#/components/schemas/id_photo_uploader"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/id_photo'
+                $ref: "#/components/schemas/id_photo"
           description: The ID photo
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Upload ID photo
   /id_photos/{id_photo_id}:
@@ -1348,13 +1348,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/id_photo'
+                $ref: "#/components/schemas/id_photo"
           description: A ID photo
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve ID photo
   /id_photos/{id_photo_id}/download:
@@ -1381,7 +1381,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download ID photo
   /qualified_electronic_signature/documents:
@@ -1425,7 +1425,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieves the signed document or application form
   /advanced_electronic_signature/documents:
@@ -1469,7 +1469,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieves the signed document or signing transaction receipt
   /simple_electronic_signature/documents:
@@ -1513,7 +1513,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieves the signed document or signing transaction receipt
   /workflow_runs/{workflow_run_id}/timeline_file:
@@ -1534,13 +1534,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/timeline_file_reference'
+                $ref: "#/components/schemas/timeline_file_reference"
           description: A Timeline File reference.
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Create Timeline File for Workflow Run
   /workflow_runs/{workflow_run_id}/timeline_file/{timeline_file_id}:
@@ -1583,7 +1583,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Timeline File for Workflow Run
   /passkeys/{username}:
@@ -1607,7 +1607,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Delete passkeys
     get:
@@ -1626,7 +1626,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Passkeys_list'
+                $ref: "#/components/schemas/Passkeys_list"
           description: Passkeys belonging to the username
         "404":
           description: Passkey not found
@@ -1634,7 +1634,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List passkeys
   /passkeys/{username}/{passkey_id}:
@@ -1664,7 +1664,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Delete passkey
     get:
@@ -1689,7 +1689,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/passkey'
+                $ref: "#/components/schemas/passkey"
           description: The requested passkey
         "404":
           description: Passkey not found
@@ -1697,7 +1697,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve passkey
     put:
@@ -1721,7 +1721,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/passkey_updater'
+              $ref: "#/components/schemas/passkey_updater"
         description: Passkey update payload.
         required: true
       responses:
@@ -1729,7 +1729,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/passkey'
+                $ref: "#/components/schemas/passkey"
           description: Passkey updated
         "400":
           description: Invalid request body
@@ -1739,7 +1739,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Update passkey
   /ping:
@@ -1758,7 +1758,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Ping
   /webhooks:
@@ -1771,13 +1771,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Webhooks_list'
+                $ref: "#/components/schemas/Webhooks_list"
           description: A list of webhooks
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List webhooks
     post:
@@ -1790,7 +1790,7 @@ paths:
                 content:
                   application/json:
                     schema:
-                      $ref: '#/components/schemas/webhook_event'
+                      $ref: "#/components/schemas/webhook_event"
                 required: true
               responses:
                 default:
@@ -1804,20 +1804,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhook_builder'
+              $ref: "#/components/schemas/webhook_builder"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/webhook'
+                $ref: "#/components/schemas/webhook"
           description: Created
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Register webhook
   /webhooks/{webhook_id}:
@@ -1839,7 +1839,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Delete a webhook
     get:
@@ -1858,13 +1858,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/webhook'
+                $ref: "#/components/schemas/webhook"
           description: Webhook object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve a Webhook
     put:
@@ -1882,20 +1882,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhook_updater'
+              $ref: "#/components/schemas/webhook_updater"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/webhook'
+                $ref: "#/components/schemas/webhook"
           description: Webhook Object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Edit a webhook
   /webhooks/resend:
@@ -1907,7 +1907,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhook_resend'
+              $ref: "#/components/schemas/webhook_resend"
         required: true
       responses:
         "204":
@@ -1918,7 +1918,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Resends webhooks
   /addresses/pick:
@@ -1937,13 +1937,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Addresses_list'
+                $ref: "#/components/schemas/Addresses_list"
           description: A list of addresses
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Address Picker
   /sdk_token:
@@ -1955,20 +1955,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/sdk_token_builder'
+              $ref: "#/components/schemas/sdk_token_builder"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/sdk_token'
+                $ref: "#/components/schemas/sdk_token"
           description: Generated
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Generate a SDK token
   /repeat_attempts/{report_id}:
@@ -1988,13 +1988,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/repeat_attempts_list'
+                $ref: "#/components/schemas/repeat_attempts_list"
           description: Repeat attempts object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve repeat attempts
   /extractions:
@@ -2006,20 +2006,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/extract_request'
+              $ref: "#/components/schemas/extract_request"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/extraction'
+                $ref: "#/components/schemas/extraction"
           description: Extraction result
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error_1'
+                $ref: "#/components/schemas/Error_1"
           description: Unprocessable Entity
       summary: Autofill
   /results_feedback:
@@ -2031,20 +2031,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/results_feedback'
+              $ref: "#/components/schemas/results_feedback"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/results_feedback'
+                $ref: "#/components/schemas/results_feedback"
           description: Created feedback
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Fraud reporting (ALPHA)
   /checks:
@@ -2064,13 +2064,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Checks_list'
+                $ref: "#/components/schemas/Checks_list"
           description: An array of checks
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve Checks
     post:
@@ -2081,20 +2081,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/check_builder'
+              $ref: "#/components/schemas/check_builder"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/check'
+                $ref: "#/components/schemas/check"
           description: Created
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Create a check
   /checks/{check_id}:
@@ -2114,13 +2114,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/check'
+                $ref: "#/components/schemas/check"
           description: Check object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve a Check
   /checks/{check_id}/resume:
@@ -2142,7 +2142,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Resume a Check
   /checks/{check_id}/download:
@@ -2169,7 +2169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Download check
   /reports:
@@ -2189,13 +2189,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Reports_list'
+                $ref: "#/components/schemas/Reports_list"
           description: List of Reports
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: List reports
   /reports/{report_id}:
@@ -2215,13 +2215,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/report'
+                $ref: "#/components/schemas/report"
           description: Report object
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Retrieve report
   /reports/{report_id}/resume:
@@ -2243,7 +2243,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Resume report
   /reports/{report_id}/cancel:
@@ -2265,7 +2265,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Unexpected error
       summary: Cancel report
 components:
@@ -2274,19 +2274,19 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
       description: Unexpected error
     document_extraction_error:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error_1'
+            $ref: "#/components/schemas/Error_1"
       description: Unprocessable Entity
   schemas:
     applicant:
       allOf:
-      - $ref: '#/components/schemas/applicant_shared'
-      - $ref: '#/components/schemas/applicant_response'
+      - $ref: "#/components/schemas/applicant_shared"
+      - $ref: "#/components/schemas/applicant_response"
       example:
         address:
           building_name: building_name
@@ -2323,14 +2323,14 @@ components:
         email: email
     applicant_builder:
       allOf:
-      - $ref: '#/components/schemas/applicant_shared'
-      - $ref: '#/components/schemas/applicant_request'
-      - $ref: '#/components/schemas/applicant_create'
+      - $ref: "#/components/schemas/applicant_shared"
+      - $ref: "#/components/schemas/applicant_request"
+      - $ref: "#/components/schemas/applicant_create"
     applicant_updater:
       allOf:
-      - $ref: '#/components/schemas/applicant_shared'
-      - $ref: '#/components/schemas/applicant_request'
-      - $ref: '#/components/schemas/applicant_update'
+      - $ref: "#/components/schemas/applicant_shared"
+      - $ref: "#/components/schemas/applicant_request"
+      - $ref: "#/components/schemas/applicant_update"
     applicant_consent:
       example:
         granted_at: 2000-01-23T04:56:07.000+00:00
@@ -2338,7 +2338,7 @@ components:
         granted: true
       properties:
         name:
-          $ref: '#/components/schemas/applicant_consent_name'
+          $ref: "#/components/schemas/applicant_consent_name"
         granted:
           type: boolean
         granted_at:
@@ -2360,8 +2360,8 @@ components:
       type: string
     workflow_run:
       allOf:
-      - $ref: '#/components/schemas/workflow_run_shared'
-      - $ref: '#/components/schemas/workflow_run_response'
+      - $ref: "#/components/schemas/workflow_run_shared"
+      - $ref: "#/components/schemas/workflow_run_response"
       example:
         workflow_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         reasons:
@@ -2387,12 +2387,12 @@ components:
         status: ""
     workflow_run_builder:
       allOf:
-      - $ref: '#/components/schemas/workflow_run_shared'
-      - $ref: '#/components/schemas/workflow_run_request'
+      - $ref: "#/components/schemas/workflow_run_shared"
+      - $ref: "#/components/schemas/workflow_run_request"
     document:
       allOf:
-      - $ref: '#/components/schemas/document_shared'
-      - $ref: '#/components/schemas/document_response'
+      - $ref: "#/components/schemas/document_shared"
+      - $ref: "#/components/schemas/document_response"
       example:
         side: front
         download_href: download_href
@@ -2407,16 +2407,16 @@ components:
         file_size: 0
     document_uploader:
       allOf:
-      - $ref: '#/components/schemas/document_shared'
-      - $ref: '#/components/schemas/document_request'
+      - $ref: "#/components/schemas/document_shared"
+      - $ref: "#/components/schemas/document_request"
       required:
       - applicant_id
       - file
       - type
     signing_document:
       allOf:
-      - $ref: '#/components/schemas/signing_document_shared'
-      - $ref: '#/components/schemas/signing_document_response'
+      - $ref: "#/components/schemas/signing_document_shared"
+      - $ref: "#/components/schemas/signing_document_response"
       example:
         download_href: download_href
         applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2428,14 +2428,14 @@ components:
         file_size: 0
     signing_document_uploader:
       allOf:
-      - $ref: '#/components/schemas/signing_document_shared'
-      - $ref: '#/components/schemas/signing_document_request'
+      - $ref: "#/components/schemas/signing_document_shared"
+      - $ref: "#/components/schemas/signing_document_request"
       required:
       - applicant_id
       - file
     live_photo:
       allOf:
-      - $ref: '#/components/schemas/live_photo_response'
+      - $ref: "#/components/schemas/live_photo_response"
       example:
         download_href: download_href
         file_name: file_name
@@ -2446,7 +2446,7 @@ components:
         file_size: 0
     live_photo_uploader:
       allOf:
-      - $ref: '#/components/schemas/live_photo_request'
+      - $ref: "#/components/schemas/live_photo_request"
       required:
       - applicant_id
       - file
@@ -2553,7 +2553,7 @@ components:
     complete_task_builder:
       properties:
         data:
-          $ref: '#/components/schemas/Complete_Task_Data_Builder'
+          $ref: "#/components/schemas/Complete_Task_Data_Builder"
       required:
       - data
       type: object
@@ -2593,8 +2593,8 @@ components:
       type: object
     watchlist_monitor:
       allOf:
-      - $ref: '#/components/schemas/watchlist_monitor_shared'
-      - $ref: '#/components/schemas/watchlist_monitor_response'
+      - $ref: "#/components/schemas/watchlist_monitor_shared"
+      - $ref: "#/components/schemas/watchlist_monitor_response"
       example:
         applicant_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -2607,7 +2607,7 @@ components:
         - tags
     watchlist_monitor_builder:
       allOf:
-      - $ref: '#/components/schemas/watchlist_monitor_shared'
+      - $ref: "#/components/schemas/watchlist_monitor_shared"
     watchlist_monitor_matches_list:
       example:
         matches:
@@ -2618,7 +2618,7 @@ components:
       properties:
         matches:
           items:
-            $ref: '#/components/schemas/Watchlist_monitor_match'
+            $ref: "#/components/schemas/Watchlist_monitor_match"
           type: array
       required:
       - matches
@@ -2641,7 +2641,7 @@ components:
       type: object
     id_photo:
       allOf:
-      - $ref: '#/components/schemas/id_photo_response'
+      - $ref: "#/components/schemas/id_photo_response"
       example:
         download_href: download_href
         file_name: file_name
@@ -2652,7 +2652,7 @@ components:
         file_size: 0
     id_photo_uploader:
       allOf:
-      - $ref: '#/components/schemas/id_photo_request'
+      - $ref: "#/components/schemas/id_photo_request"
       required:
       - applicant_id
       - file
@@ -2721,8 +2721,8 @@ components:
       type: object
     webhook:
       allOf:
-      - $ref: '#/components/schemas/webhook_shared'
-      - $ref: '#/components/schemas/webhook_response'
+      - $ref: "#/components/schemas/webhook_shared"
+      - $ref: "#/components/schemas/webhook_response"
       example:
         oauth_enabled: true
         oauth_server_client_id: oauth_server_client_id
@@ -2743,12 +2743,12 @@ components:
         - audit_log.created
     webhook_builder:
       allOf:
-      - $ref: '#/components/schemas/webhook_shared'
-      - $ref: '#/components/schemas/webhook_create'
+      - $ref: "#/components/schemas/webhook_shared"
+      - $ref: "#/components/schemas/webhook_create"
     webhook_event:
       properties:
         payload:
-          $ref: '#/components/schemas/webhook_event_payload'
+          $ref: "#/components/schemas/webhook_event_payload"
       type: object
     webhook_event_object_status:
       description: "The current state of the object, if available."
@@ -2776,19 +2776,19 @@ components:
       type: string
     webhook_updater:
       allOf:
-      - $ref: '#/components/schemas/webhook_shared'
-      - $ref: '#/components/schemas/webhook_update'
+      - $ref: "#/components/schemas/webhook_shared"
+      - $ref: "#/components/schemas/webhook_update"
     webhook_resend:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/Webhooks_resend_item'
+            $ref: "#/components/schemas/Webhooks_resend_item"
           title: Webhooks resend list
           type: array
       type: object
     address:
       allOf:
-      - $ref: '#/components/schemas/address_shared'
+      - $ref: "#/components/schemas/address_shared"
       example:
         building_name: building_name
         country: country
@@ -2804,10 +2804,10 @@ components:
         sub_street: sub_street
     sdk_token_builder:
       allOf:
-      - $ref: '#/components/schemas/sdk_token_request'
+      - $ref: "#/components/schemas/sdk_token_request"
     sdk_token:
       allOf:
-      - $ref: '#/components/schemas/sdk_token_response'
+      - $ref: "#/components/schemas/sdk_token_response"
       example:
         token: token
     repeat_attempts_list:
@@ -2840,7 +2840,7 @@ components:
           description: |
             An array of repeat attempt objects. If no repeat attempts were found, the array will be empty. The number of objects returned can increase over time if more matches are received.
           items:
-            $ref: '#/components/schemas/repeat_attempts_list_repeat_attempts_inner'
+            $ref: "#/components/schemas/repeat_attempts_list_repeat_attempts_inner"
           type: array
         attempts_count:
           description: "The total number of attempts using the same document, including\
@@ -2904,9 +2904,9 @@ components:
           format: uuid
           type: string
         document_classification:
-          $ref: '#/components/schemas/extraction_document_classification'
+          $ref: "#/components/schemas/extraction_document_classification"
         extracted_data:
-          $ref: '#/components/schemas/extraction_extracted_data'
+          $ref: "#/components/schemas/extraction_extracted_data"
       type: object
     results_feedback:
       example:
@@ -2935,8 +2935,8 @@ components:
       type: object
     check:
       allOf:
-      - $ref: '#/components/schemas/check_shared'
-      - $ref: '#/components/schemas/check_response'
+      - $ref: "#/components/schemas/check_shared"
+      - $ref: "#/components/schemas/check_response"
       example:
         paused: true
         sandbox: true
@@ -2963,55 +2963,55 @@ components:
         status: status
     check_builder:
       allOf:
-      - $ref: '#/components/schemas/check_shared'
-      - $ref: '#/components/schemas/check_request'
+      - $ref: "#/components/schemas/check_shared"
+      - $ref: "#/components/schemas/check_request"
     report:
       discriminator:
         mapping:
-          document: '#/components/schemas/document_report'
-          document_video: '#/components/schemas/document_video_report'
-          document_video_with_address_information: '#/components/schemas/document_video_with_address_information_report'
-          document_with_address_information: '#/components/schemas/document_with_address_information_report'
-          document_with_driving_licence_information: '#/components/schemas/document_with_driving_licence_information_report'
-          document_with_driver_verification: '#/components/schemas/document_with_driver_verification_report'
-          facial_similarity_photo: '#/components/schemas/facial_similarity_photo_report'
-          facial_similarity_photo_fully_auto: '#/components/schemas/facial_similarity_photo_fully_auto_report'
-          facial_similarity_video: '#/components/schemas/facial_similarity_video_report'
-          facial_similarity_motion: '#/components/schemas/facial_similarity_motion_report'
-          known_faces: '#/components/schemas/known_faces_report'
-          identity_enhanced: '#/components/schemas/identity_enhanced_report'
-          watchlist_aml: '#/components/schemas/watchlist_aml_report'
-          watchlist_enhanced: '#/components/schemas/watchlist_enhanced_report'
-          watchlist_standard: '#/components/schemas/watchlist_standard_report'
-          watchlist_peps_only: '#/components/schemas/watchlist_peps_only_report'
-          watchlist_sanctions_only: '#/components/schemas/watchlist_sanctions_only_report'
-          proof_of_address: '#/components/schemas/proof_of_address_report'
-          us_driving_licence: '#/components/schemas/us_driving_licence_report'
-          device_intelligence: '#/components/schemas/device_intelligence_report'
-          india_pan: '#/components/schemas/india_pan_report'
+          document: "#/components/schemas/document_report"
+          document_video: "#/components/schemas/document_video_report"
+          document_video_with_address_information: "#/components/schemas/document_video_with_address_information_report"
+          document_with_address_information: "#/components/schemas/document_with_address_information_report"
+          document_with_driving_licence_information: "#/components/schemas/document_with_driving_licence_information_report"
+          document_with_driver_verification: "#/components/schemas/document_with_driver_verification_report"
+          facial_similarity_photo: "#/components/schemas/facial_similarity_photo_report"
+          facial_similarity_photo_fully_auto: "#/components/schemas/facial_similarity_photo_fully_auto_report"
+          facial_similarity_video: "#/components/schemas/facial_similarity_video_report"
+          facial_similarity_motion: "#/components/schemas/facial_similarity_motion_report"
+          known_faces: "#/components/schemas/known_faces_report"
+          identity_enhanced: "#/components/schemas/identity_enhanced_report"
+          watchlist_aml: "#/components/schemas/watchlist_aml_report"
+          watchlist_enhanced: "#/components/schemas/watchlist_enhanced_report"
+          watchlist_standard: "#/components/schemas/watchlist_standard_report"
+          watchlist_peps_only: "#/components/schemas/watchlist_peps_only_report"
+          watchlist_sanctions_only: "#/components/schemas/watchlist_sanctions_only_report"
+          proof_of_address: "#/components/schemas/proof_of_address_report"
+          us_driving_licence: "#/components/schemas/us_driving_licence_report"
+          device_intelligence: "#/components/schemas/device_intelligence_report"
+          india_pan: "#/components/schemas/india_pan_report"
         propertyName: name
       oneOf:
-      - $ref: '#/components/schemas/document_report'
-      - $ref: '#/components/schemas/document_video_report'
-      - $ref: '#/components/schemas/document_video_with_address_information_report'
-      - $ref: '#/components/schemas/document_with_address_information_report'
-      - $ref: '#/components/schemas/document_with_driving_licence_information_report'
-      - $ref: '#/components/schemas/document_with_driver_verification_report'
-      - $ref: '#/components/schemas/facial_similarity_photo_report'
-      - $ref: '#/components/schemas/facial_similarity_photo_fully_auto_report'
-      - $ref: '#/components/schemas/facial_similarity_video_report'
-      - $ref: '#/components/schemas/facial_similarity_motion_report'
-      - $ref: '#/components/schemas/known_faces_report'
-      - $ref: '#/components/schemas/identity_enhanced_report'
-      - $ref: '#/components/schemas/watchlist_aml_report'
-      - $ref: '#/components/schemas/watchlist_enhanced_report'
-      - $ref: '#/components/schemas/watchlist_standard_report'
-      - $ref: '#/components/schemas/watchlist_peps_only_report'
-      - $ref: '#/components/schemas/watchlist_sanctions_only_report'
-      - $ref: '#/components/schemas/proof_of_address_report'
-      - $ref: '#/components/schemas/us_driving_licence_report'
-      - $ref: '#/components/schemas/device_intelligence_report'
-      - $ref: '#/components/schemas/india_pan_report'
+      - $ref: "#/components/schemas/document_report"
+      - $ref: "#/components/schemas/document_video_report"
+      - $ref: "#/components/schemas/document_video_with_address_information_report"
+      - $ref: "#/components/schemas/document_with_address_information_report"
+      - $ref: "#/components/schemas/document_with_driving_licence_information_report"
+      - $ref: "#/components/schemas/document_with_driver_verification_report"
+      - $ref: "#/components/schemas/facial_similarity_photo_report"
+      - $ref: "#/components/schemas/facial_similarity_photo_fully_auto_report"
+      - $ref: "#/components/schemas/facial_similarity_video_report"
+      - $ref: "#/components/schemas/facial_similarity_motion_report"
+      - $ref: "#/components/schemas/known_faces_report"
+      - $ref: "#/components/schemas/identity_enhanced_report"
+      - $ref: "#/components/schemas/watchlist_aml_report"
+      - $ref: "#/components/schemas/watchlist_enhanced_report"
+      - $ref: "#/components/schemas/watchlist_standard_report"
+      - $ref: "#/components/schemas/watchlist_peps_only_report"
+      - $ref: "#/components/schemas/watchlist_sanctions_only_report"
+      - $ref: "#/components/schemas/proof_of_address_report"
+      - $ref: "#/components/schemas/us_driving_licence_report"
+      - $ref: "#/components/schemas/device_intelligence_report"
+      - $ref: "#/components/schemas/india_pan_report"
     applicant_shared:
       properties:
         email:
@@ -3024,7 +3024,7 @@ components:
           type: string
         id_numbers:
           items:
-            $ref: '#/components/schemas/id_number'
+            $ref: "#/components/schemas/id_number"
           type: array
         phone_number:
           description: The applicant's phone number
@@ -3058,9 +3058,9 @@ components:
         sandbox:
           type: boolean
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
         location:
-          $ref: '#/components/schemas/location'
+          $ref: "#/components/schemas/location"
       required:
       - id
       type: object
@@ -3077,17 +3077,17 @@ components:
         consents:
           description: The applicant's consents
           items:
-            $ref: '#/components/schemas/applicant_consent_builder'
+            $ref: "#/components/schemas/applicant_consent_builder"
           type: array
         address:
-          $ref: '#/components/schemas/address_builder'
+          $ref: "#/components/schemas/address_builder"
         location:
-          $ref: '#/components/schemas/location_builder'
+          $ref: "#/components/schemas/location_builder"
       type: object
     applicant_consent_builder:
       properties:
         name:
-          $ref: '#/components/schemas/applicant_consent_name'
+          $ref: "#/components/schemas/applicant_consent_name"
         granted:
           type: boolean
       required:
@@ -3142,7 +3142,7 @@ components:
           type: string
         link:
           allOf:
-          - $ref: '#/components/schemas/workflow_run_link'
+          - $ref: "#/components/schemas/workflow_run_link"
           description: Object for the configuration of the Workflow Run link.
           type: object
         created_at:
@@ -3207,7 +3207,7 @@ components:
           type: string
         status:
           allOf:
-          - $ref: '#/components/schemas/workflow_run_status'
+          - $ref: "#/components/schemas/workflow_run_status"
           description: The status of the Workflow Run.
         output:
           description: Output object contains all of the properties configured on
@@ -3221,7 +3221,7 @@ components:
           type: array
         error:
           allOf:
-          - $ref: '#/components/schemas/workflow_run_error'
+          - $ref: "#/components/schemas/workflow_run_error"
           description: Error object. Only set when the Workflow Run status is 'error'.
           type: object
         sdk_token:
@@ -3266,7 +3266,7 @@ components:
           type: string
         type:
           allOf:
-          - $ref: '#/components/schemas/document_types'
+          - $ref: "#/components/schemas/document_types"
           description: The type of document
           type: string
         side:
@@ -3278,7 +3278,7 @@ components:
           type: string
         issuing_country:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           description: "The issuing country of the document, a 3-letter ISO code."
           type: string
         applicant_id:
@@ -3322,7 +3322,7 @@ components:
             an image quality validation which may take up to 5 seconds.
           type: boolean
         location:
-          $ref: '#/components/schemas/location_builder'
+          $ref: "#/components/schemas/location_builder"
       type: object
     signing_document_shared:
       properties:
@@ -3502,7 +3502,7 @@ components:
           description: |
             The events that will be published to the webhook. If the events parameter is omitted all the events will be subscribed.
           items:
-            $ref: '#/components/schemas/webhook_event_type'
+            $ref: "#/components/schemas/webhook_event_type"
           type: array
         environments:
           description: |
@@ -3621,7 +3621,7 @@ components:
           type: string
         country:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           description: "The 3 character ISO country code of this address. For example,\
             \ GBR is the country code for the United Kingdom"
           type: string
@@ -4050,7 +4050,7 @@ components:
           description: The uri of this resource.
           type: string
         status:
-          $ref: '#/components/schemas/check_status'
+          $ref: "#/components/schemas/check_status"
         result:
           description: "The overall result of the check, based on the results of the\
             \ constituent reports."
@@ -4098,7 +4098,7 @@ components:
         report_names:
           description: An array of report names (strings).
           items:
-            $ref: '#/components/schemas/report_name'
+            $ref: "#/components/schemas/report_name"
           type: array
         document_ids:
           description: "Optional. An array of document ids, for use with Document\
@@ -4130,24 +4130,24 @@ components:
           description: Array of names of particular reports to return consider as
             their results. This is a feature available in sandbox testing
           items:
-            $ref: '#/components/schemas/report_name'
+            $ref: "#/components/schemas/report_name"
           type: array
         us_driving_licence:
-          $ref: '#/components/schemas/us_driving_licence_builder'
+          $ref: "#/components/schemas/us_driving_licence_builder"
         report_configuration:
-          $ref: '#/components/schemas/report_configuration'
+          $ref: "#/components/schemas/report_configuration"
       required:
       - report_names
       type: object
     document_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/document_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/document_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/document_breakdown'
+            $ref: "#/components/schemas/document_breakdown"
           properties:
-            $ref: '#/components/schemas/document_properties'
+            $ref: "#/components/schemas/document_properties"
         type: object
       example:
         result: clear
@@ -4467,192 +4467,192 @@ components:
         status: awaiting_data
     document_video_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/document_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/document_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/document_breakdown'
+            $ref: "#/components/schemas/document_breakdown"
           properties:
-            $ref: '#/components/schemas/document_properties'
+            $ref: "#/components/schemas/document_properties"
         type: object
     document_video_with_address_information_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/document_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/document_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/document_breakdown'
+            $ref: "#/components/schemas/document_breakdown"
           properties:
-            $ref: '#/components/schemas/document_properties'
+            $ref: "#/components/schemas/document_properties"
         type: object
     document_with_address_information_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/document_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/document_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/document_breakdown'
+            $ref: "#/components/schemas/document_breakdown"
           properties:
-            $ref: '#/components/schemas/document_properties'
+            $ref: "#/components/schemas/document_properties"
         type: object
     document_with_driving_licence_information_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/document_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/document_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/document_breakdown'
+            $ref: "#/components/schemas/document_breakdown"
           properties:
-            $ref: '#/components/schemas/Document_Properties_with_Driving_Licence_Information'
+            $ref: "#/components/schemas/Document_Properties_with_Driving_Licence_Information"
         type: object
     document_with_driver_verification_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/document_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/document_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/document_breakdown'
+            $ref: "#/components/schemas/document_breakdown"
           properties:
-            $ref: '#/components/schemas/document_with_driver_verification_report_allOf_properties'
+            $ref: "#/components/schemas/document_with_driver_verification_report_allOf_properties"
         type: object
     facial_similarity_photo_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/facial_similarity_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/facial_similarity_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/facial_similarity_photo_breakdown'
+            $ref: "#/components/schemas/facial_similarity_photo_breakdown"
           properties:
-            $ref: '#/components/schemas/facial_similarity_photo_properties'
+            $ref: "#/components/schemas/facial_similarity_photo_properties"
         type: object
     facial_similarity_photo_fully_auto_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/facial_similarity_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/facial_similarity_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown'
+            $ref: "#/components/schemas/facial_similarity_photo_fully_auto_breakdown"
           properties:
-            $ref: '#/components/schemas/facial_similarity_photo_fully_auto_properties'
+            $ref: "#/components/schemas/facial_similarity_photo_fully_auto_properties"
         type: object
     facial_similarity_video_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/facial_similarity_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/facial_similarity_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/facial_similarity_video_breakdown'
+            $ref: "#/components/schemas/facial_similarity_video_breakdown"
           properties:
-            $ref: '#/components/schemas/facial_similarity_video_properties'
+            $ref: "#/components/schemas/facial_similarity_video_properties"
         type: object
     facial_similarity_motion_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
-      - $ref: '#/components/schemas/facial_similarity_report_shared'
+      - $ref: "#/components/schemas/report_shared"
+      - $ref: "#/components/schemas/facial_similarity_report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/facial_similarity_motion_breakdown'
+            $ref: "#/components/schemas/facial_similarity_motion_breakdown"
           properties:
-            $ref: '#/components/schemas/facial_similarity_motion_properties'
+            $ref: "#/components/schemas/facial_similarity_motion_properties"
         type: object
     known_faces_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/known_faces_breakdown'
+            $ref: "#/components/schemas/known_faces_breakdown"
           properties:
-            $ref: '#/components/schemas/known_faces_properties'
+            $ref: "#/components/schemas/known_faces_properties"
         type: object
     identity_enhanced_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/identity_enhanced_breakdown'
+            $ref: "#/components/schemas/identity_enhanced_breakdown"
           properties:
-            $ref: '#/components/schemas/identity_enhanced_properties'
+            $ref: "#/components/schemas/identity_enhanced_properties"
         type: object
     watchlist_aml_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/watchlist_aml_breakdown'
+            $ref: "#/components/schemas/watchlist_aml_breakdown"
           properties:
-            $ref: '#/components/schemas/watchlist_aml_properties'
+            $ref: "#/components/schemas/watchlist_aml_properties"
         type: object
     watchlist_enhanced_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/watchlist_enhanced_breakdown'
+            $ref: "#/components/schemas/watchlist_enhanced_breakdown"
           properties:
-            $ref: '#/components/schemas/watchlist_enhanced_properties'
+            $ref: "#/components/schemas/watchlist_enhanced_properties"
         type: object
     watchlist_standard_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/watchlist_standard_breakdown'
+            $ref: "#/components/schemas/watchlist_standard_breakdown"
           properties:
-            $ref: '#/components/schemas/watchlist_standard_properties'
+            $ref: "#/components/schemas/watchlist_standard_properties"
         type: object
     watchlist_peps_only_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/watchlist_standard_breakdown'
+            $ref: "#/components/schemas/watchlist_standard_breakdown"
           properties:
-            $ref: '#/components/schemas/watchlist_standard_properties'
+            $ref: "#/components/schemas/watchlist_standard_properties"
         type: object
     watchlist_sanctions_only_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/watchlist_standard_breakdown'
+            $ref: "#/components/schemas/watchlist_standard_breakdown"
           properties:
-            $ref: '#/components/schemas/watchlist_standard_properties'
+            $ref: "#/components/schemas/watchlist_standard_properties"
         type: object
     proof_of_address_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/proof_of_address_breakdown'
+            $ref: "#/components/schemas/proof_of_address_breakdown"
           properties:
-            $ref: '#/components/schemas/proof_of_address_properties'
+            $ref: "#/components/schemas/proof_of_address_properties"
         type: object
     us_driving_licence_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/us_driving_licence_breakdown'
+            $ref: "#/components/schemas/us_driving_licence_breakdown"
           properties:
-            $ref: '#/components/schemas/document_properties'
+            $ref: "#/components/schemas/document_properties"
         type: object
     device_intelligence_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/device_intelligence_breakdown'
+            $ref: "#/components/schemas/device_intelligence_breakdown"
           properties:
-            $ref: '#/components/schemas/device_intelligence_properties'
+            $ref: "#/components/schemas/device_intelligence_properties"
         type: object
     india_pan_report:
       allOf:
-      - $ref: '#/components/schemas/report_shared'
+      - $ref: "#/components/schemas/report_shared"
       - properties:
           breakdown:
-            $ref: '#/components/schemas/india_pan_report_allOf_breakdown'
+            $ref: "#/components/schemas/india_pan_report_allOf_breakdown"
           properties:
-            $ref: '#/components/schemas/india_pan_report_allOf_properties'
+            $ref: "#/components/schemas/india_pan_report_allOf_properties"
         type: object
     id_number:
       example:
@@ -4684,16 +4684,16 @@ components:
       type: object
     location:
       allOf:
-      - $ref: '#/components/schemas/location_shared'
+      - $ref: "#/components/schemas/location_shared"
       example:
         country_of_residence: GBR
         ip_address: ip_address
     address_builder:
       allOf:
-      - $ref: '#/components/schemas/address_shared'
+      - $ref: "#/components/schemas/address_shared"
     location_builder:
       allOf:
-      - $ref: '#/components/schemas/location_shared'
+      - $ref: "#/components/schemas/location_shared"
     report_name:
       enum:
       - document
@@ -4720,20 +4720,20 @@ components:
       type: string
     us_driving_licence_builder:
       allOf:
-      - $ref: '#/components/schemas/us_driving_licence_shared'
+      - $ref: "#/components/schemas/us_driving_licence_shared"
     report_configuration:
       deprecated: true
       description: |
         Defines configuration options for facial similarity checks used to distinguish between onboarding and reverification scenarios.
       properties:
         facial_similarity_photo:
-          $ref: '#/components/schemas/report_configuration_facial_similarity'
+          $ref: "#/components/schemas/report_configuration_facial_similarity"
         facial_similarity_photo_fully_auto:
-          $ref: '#/components/schemas/report_configuration_facial_similarity'
+          $ref: "#/components/schemas/report_configuration_facial_similarity"
         facial_similarity_video:
-          $ref: '#/components/schemas/report_configuration_facial_similarity'
+          $ref: "#/components/schemas/report_configuration_facial_similarity"
         facial_similarity_motion:
-          $ref: '#/components/schemas/report_configuration_facial_similarity'
+          $ref: "#/components/schemas/report_configuration_facial_similarity"
       type: object
     report_configuration_facial_similarity:
       properties:
@@ -4760,17 +4760,17 @@ components:
           description: The API endpoint to retrieve the report. Read-only.
           type: string
         status:
-          $ref: '#/components/schemas/report_status'
+          $ref: "#/components/schemas/report_status"
         result:
-          $ref: '#/components/schemas/report_result'
+          $ref: "#/components/schemas/report_result"
         sub_result:
-          $ref: '#/components/schemas/report_sub_result'
+          $ref: "#/components/schemas/report_sub_result"
         check_id:
           description: The ID of the check to which the report belongs. Read-only.
           format: uuid
           type: string
         name:
-          $ref: '#/components/schemas/report_name'
+          $ref: "#/components/schemas/report_name"
       required:
       - id
       - name
@@ -4805,7 +4805,7 @@ components:
           description: Array of objects with document ids that were used in the Onfido
             engine.
           items:
-            $ref: '#/components/schemas/report_document'
+            $ref: "#/components/schemas/report_document"
           type: array
       type: object
     report_document:
@@ -4997,23 +4997,23 @@ components:
                 dark_photo: dark_photo
       properties:
         data_comparison:
-          $ref: '#/components/schemas/document_breakdown_data_comparison'
+          $ref: "#/components/schemas/document_breakdown_data_comparison"
         data_validation:
-          $ref: '#/components/schemas/document_breakdown_data_validation'
+          $ref: "#/components/schemas/document_breakdown_data_validation"
         image_integrity:
-          $ref: '#/components/schemas/document_breakdown_image_integrity'
+          $ref: "#/components/schemas/document_breakdown_image_integrity"
         visual_authenticity:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity"
         data_consistency:
-          $ref: '#/components/schemas/document_breakdown_data_consistency'
+          $ref: "#/components/schemas/document_breakdown_data_consistency"
         police_record:
-          $ref: '#/components/schemas/document_breakdown_police_record'
+          $ref: "#/components/schemas/document_breakdown_police_record"
         compromised_document:
-          $ref: '#/components/schemas/document_breakdown_compromised_document'
+          $ref: "#/components/schemas/document_breakdown_compromised_document"
         age_validation:
-          $ref: '#/components/schemas/document_breakdown_age_validation'
+          $ref: "#/components/schemas/document_breakdown_age_validation"
         issuing_authority:
-          $ref: '#/components/schemas/document_breakdown_issuing_authority'
+          $ref: "#/components/schemas/document_breakdown_issuing_authority"
       type: object
     document_properties:
       example:
@@ -5156,7 +5156,7 @@ components:
           type: string
         document_numbers:
           items:
-            $ref: '#/components/schemas/document_properties_document_numbers_inner'
+            $ref: "#/components/schemas/document_properties_document_numbers_inner"
           type: array
         document_type:
           type: string
@@ -5251,23 +5251,23 @@ components:
           - unspecified_security_tier
           type: string
         address_lines:
-          $ref: '#/components/schemas/document_properties_address_lines'
+          $ref: "#/components/schemas/document_properties_address_lines"
         barcode:
           items:
-            $ref: '#/components/schemas/document_properties_barcode_inner'
+            $ref: "#/components/schemas/document_properties_barcode_inner"
           type: array
         nfc:
-          $ref: '#/components/schemas/document_properties_nfc'
+          $ref: "#/components/schemas/document_properties_nfc"
         document_classification:
-          $ref: '#/components/schemas/document_properties_document_classification'
+          $ref: "#/components/schemas/document_properties_document_classification"
         extracted_data:
-          $ref: '#/components/schemas/document_properties_extracted_data'
+          $ref: "#/components/schemas/document_properties_extracted_data"
       type: object
     document_properties_with_driving_licence_information:
       properties:
         driving_licence_information:
           items:
-            $ref: '#/components/schemas/Document_Properties_Driving_Licence_Information_Item'
+            $ref: "#/components/schemas/Document_Properties_Driving_Licence_Information_Item"
           type: array
       type: object
     facial_similarity_report_shared:
@@ -5276,31 +5276,31 @@ components:
           description: Array of objects with document ids that were used in the Onfido
             engine.
           items:
-            $ref: '#/components/schemas/report_document'
+            $ref: "#/components/schemas/report_document"
           type: array
         live_photos:
           description: Array of objects with live photo ids that were used in the
             Onfido engine.
           items:
-            $ref: '#/components/schemas/facial_similarity_report_media'
+            $ref: "#/components/schemas/facial_similarity_report_media"
           type: array
         live_videos:
           description: Array of objects with live video ids that were used in the
             Onfido engine.
           items:
-            $ref: '#/components/schemas/facial_similarity_report_media'
+            $ref: "#/components/schemas/facial_similarity_report_media"
           type: array
         motion_captures:
           description: Array of objects with motion capture ids that were used in
             the Onfido engine.
           items:
-            $ref: '#/components/schemas/facial_similarity_report_media'
+            $ref: "#/components/schemas/facial_similarity_report_media"
           type: array
         id_photos:
           description: Array of objects with id photo ids that were used in the Onfido
             engine.
           items:
-            $ref: '#/components/schemas/facial_similarity_report_media'
+            $ref: "#/components/schemas/facial_similarity_report_media"
           type: array
     facial_similarity_report_media:
       properties:
@@ -5314,11 +5314,11 @@ components:
     facial_similarity_photo_breakdown:
       properties:
         face_comparison:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison"
         image_integrity:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_image_integrity'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_image_integrity"
         visual_authenticity:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity"
       type: object
     facial_similarity_photo_properties:
       properties:
@@ -5333,11 +5333,11 @@ components:
     facial_similarity_photo_fully_auto_breakdown:
       properties:
         face_comparison:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison"
         image_integrity:
-          $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity'
+          $ref: "#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity"
         visual_authenticity:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity"
       type: object
     facial_similarity_photo_fully_auto_properties:
       properties:
@@ -5352,11 +5352,11 @@ components:
     facial_similarity_video_breakdown:
       properties:
         face_comparison:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_face_comparison'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_face_comparison"
         image_integrity:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_image_integrity"
         visual_authenticity:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_visual_authenticity"
       type: object
     facial_similarity_video_properties:
       properties:
@@ -5371,11 +5371,11 @@ components:
     facial_similarity_motion_breakdown:
       properties:
         face_comparison:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_face_comparison'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_face_comparison"
         image_integrity:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_image_integrity"
         visual_authenticity:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity"
       type: object
     facial_similarity_motion_properties:
       properties:
@@ -5390,9 +5390,9 @@ components:
     known_faces_breakdown:
       properties:
         previously_seen_faces:
-          $ref: '#/components/schemas/known_faces_breakdown_previously_seen_faces'
+          $ref: "#/components/schemas/known_faces_breakdown_previously_seen_faces"
         image_integrity:
-          $ref: '#/components/schemas/known_faces_breakdown_image_integrity'
+          $ref: "#/components/schemas/known_faces_breakdown_image_integrity"
       type: object
     known_faces_properties:
       properties:
@@ -5400,23 +5400,23 @@ components:
           description: Returns any matching applicant IDs as entries inside a matches
             array under a properties bag.
           items:
-            $ref: '#/components/schemas/known_faces_properties_matches_inner'
+            $ref: "#/components/schemas/known_faces_properties_matches_inner"
           type: array
       type: object
     identity_enhanced_breakdown:
       properties:
         sources:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_sources'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_sources"
         address:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_address'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_address"
         date_of_birth:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_date_of_birth'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_date_of_birth"
         mortality:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_mortality'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_mortality"
         ssn:
-          $ref: '#/components/schemas/idr_ssn_breakdown'
+          $ref: "#/components/schemas/idr_ssn_breakdown"
         ssn1:
-          $ref: '#/components/schemas/idr_ssn_breakdown'
+          $ref: "#/components/schemas/idr_ssn_breakdown"
       type: object
     identity_enhanced_properties:
       properties:
@@ -5427,19 +5427,19 @@ components:
           description: Returns array of sources which contain matched addresses for
             the corresponding address number.
           items:
-            $ref: '#/components/schemas/identity_enhanced_properties_matched_addresses_inner'
+            $ref: "#/components/schemas/identity_enhanced_properties_matched_addresses_inner"
           type: array
       type: object
     watchlist_aml_breakdown:
       properties:
         sanction:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_sanction'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_sanction"
         politically_exposed_person:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_politically_exposed_person'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_politically_exposed_person"
         legal_and_regulatory_warnings:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_legal_and_regulatory_warnings'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_legal_and_regulatory_warnings"
         adverse_media:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_adverse_media'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_adverse_media"
       type: object
     watchlist_aml_properties:
       properties:
@@ -5455,13 +5455,13 @@ components:
     watchlist_enhanced_breakdown:
       properties:
         politically_exposed_person:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_politically_exposed_person'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_politically_exposed_person"
         sanction:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_sanction'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_sanction"
         adverse_media:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_adverse_media'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_adverse_media"
         monitored_lists:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_legal_and_regulatory_warnings'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_legal_and_regulatory_warnings"
       type: object
     watchlist_enhanced_properties:
       properties:
@@ -5470,17 +5470,17 @@ components:
             \ date of birth of match, aliases and associates, and relevant events\
             \ and sources."
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner"
           type: array
       type: object
     watchlist_standard_breakdown:
       properties:
         sanction:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_sanction'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_sanction"
         politically_exposed_person:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_politically_exposed_person'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_politically_exposed_person"
         legal_and_regulatory_warnings:
-          $ref: '#/components/schemas/watchlist_aml_breakdown_legal_and_regulatory_warnings'
+          $ref: "#/components/schemas/watchlist_aml_breakdown_legal_and_regulatory_warnings"
       type: object
     watchlist_standard_properties:
       properties:
@@ -5496,11 +5496,11 @@ components:
     proof_of_address_breakdown:
       properties:
         data_comparison:
-          $ref: '#/components/schemas/proof_of_address_breakdown_data_comparison'
+          $ref: "#/components/schemas/proof_of_address_breakdown_data_comparison"
         document_classification:
-          $ref: '#/components/schemas/proof_of_address_breakdown_document_classification'
+          $ref: "#/components/schemas/proof_of_address_breakdown_document_classification"
         image_integrity:
-          $ref: '#/components/schemas/proof_of_address_breakdown_image_integrity'
+          $ref: "#/components/schemas/proof_of_address_breakdown_image_integrity"
       type: object
     proof_of_address_properties:
       properties:
@@ -5557,27 +5557,27 @@ components:
     us_driving_licence_breakdown:
       properties:
         document:
-          $ref: '#/components/schemas/us_driving_licence_breakdown_document'
+          $ref: "#/components/schemas/us_driving_licence_breakdown_document"
         address:
-          $ref: '#/components/schemas/us_driving_licence_breakdown_address'
+          $ref: "#/components/schemas/us_driving_licence_breakdown_address"
         personal:
-          $ref: '#/components/schemas/us_driving_licence_breakdown_personal'
+          $ref: "#/components/schemas/us_driving_licence_breakdown_personal"
       type: object
     device_intelligence_breakdown:
       properties:
         device:
-          $ref: '#/components/schemas/device_intelligence_breakdown_device'
+          $ref: "#/components/schemas/device_intelligence_breakdown_device"
         properties:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties"
       type: object
     device_intelligence_properties:
       properties:
         device:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties_device'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties_device"
         ip:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties_ip'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties_ip"
         geolocation:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties_geolocation'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
       type: object
     location_shared:
       properties:
@@ -5586,7 +5586,7 @@ components:
           type: string
         country_of_residence:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           description: The applicant's country of residence in 3-letter ISO code.
           example: GBR
       type: object
@@ -5863,7 +5863,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/idr_ssn_breakdown_breakdown'
+          $ref: "#/components/schemas/idr_ssn_breakdown_breakdown"
       type: object
     Applicants_list:
       example:
@@ -5937,7 +5937,7 @@ components:
       properties:
         applicants:
           items:
-            $ref: '#/components/schemas/applicant'
+            $ref: "#/components/schemas/applicant"
           type: array
       required:
       - applicants
@@ -5968,7 +5968,7 @@ components:
             key: ""
       properties:
         error:
-          $ref: '#/components/schemas/ErrorProperties'
+          $ref: "#/components/schemas/ErrorProperties"
       title: Error
       type: object
     Documents_list:
@@ -5999,7 +5999,7 @@ components:
       properties:
         documents:
           items:
-            $ref: '#/components/schemas/document'
+            $ref: "#/components/schemas/document"
           type: array
       required:
       - documents
@@ -6027,7 +6027,7 @@ components:
       properties:
         signing_documents:
           items:
-            $ref: '#/components/schemas/signing_document'
+            $ref: "#/components/schemas/signing_document"
           type: array
       required:
       - signing_documents
@@ -6053,7 +6053,7 @@ components:
       properties:
         live_photos:
           items:
-            $ref: '#/components/schemas/live_photo'
+            $ref: "#/components/schemas/live_photo"
           type: array
       required:
       - live_photos
@@ -6085,7 +6085,7 @@ components:
       properties:
         live_videos:
           items:
-            $ref: '#/components/schemas/live_video'
+            $ref: "#/components/schemas/live_video"
           type: array
       required:
       - live_videos
@@ -6148,7 +6148,7 @@ components:
       properties:
         motion_captures:
           items:
-            $ref: '#/components/schemas/motion_capture'
+            $ref: "#/components/schemas/motion_capture"
           type: array
       required:
       - motion_captures
@@ -6178,7 +6178,7 @@ components:
       properties:
         monitors:
           items:
-            $ref: '#/components/schemas/watchlist_monitor'
+            $ref: "#/components/schemas/watchlist_monitor"
           type: array
       required:
       - monitors
@@ -6204,7 +6204,7 @@ components:
       properties:
         id_photos:
           items:
-            $ref: '#/components/schemas/id_photo'
+            $ref: "#/components/schemas/id_photo"
           type: array
       required:
       - id_photos
@@ -6226,7 +6226,7 @@ components:
       properties:
         passkeys:
           items:
-            $ref: '#/components/schemas/passkey'
+            $ref: "#/components/schemas/passkey"
           type: array
       required:
       - passkeys
@@ -6272,7 +6272,7 @@ components:
       properties:
         webhooks:
           items:
-            $ref: '#/components/schemas/webhook'
+            $ref: "#/components/schemas/webhook"
           type: array
       required:
       - webhooks
@@ -6308,7 +6308,7 @@ components:
       properties:
         addresses:
           items:
-            $ref: '#/components/schemas/address'
+            $ref: "#/components/schemas/address"
           type: array
       required:
       - address
@@ -6346,7 +6346,7 @@ components:
           description: The unique identifier of the uploaded document
           type: string
         error:
-          $ref: '#/components/schemas/ErrorProperties_1'
+          $ref: "#/components/schemas/ErrorProperties_1"
       title: Error
       type: object
     Checks_list:
@@ -6401,7 +6401,7 @@ components:
       properties:
         checks:
           items:
-            $ref: '#/components/schemas/check'
+            $ref: "#/components/schemas/check"
           type: array
       required:
       - checks
@@ -7043,7 +7043,7 @@ components:
       properties:
         reports:
           items:
-            $ref: '#/components/schemas/report'
+            $ref: "#/components/schemas/report"
           type: array
       required:
       - reports
@@ -7078,7 +7078,7 @@ components:
           description: The unique identifier of the resource.
           type: string
         status:
-          $ref: '#/components/schemas/webhook_event_object_status'
+          $ref: "#/components/schemas/webhook_event_object_status"
         started_at_iso8601:
           description: "The date and time when the operation was started, if available."
           example: 2019-10-28T14:55:09Z
@@ -7162,12 +7162,12 @@ components:
           type: array
         link:
           allOf:
-          - $ref: '#/components/schemas/workflow_run_link'
+          - $ref: "#/components/schemas/workflow_run_link"
           description: Object for the configuration of the Workflow Run link.
           type: object
         error:
           allOf:
-          - $ref: '#/components/schemas/workflow_run_error'
+          - $ref: "#/components/schemas/workflow_run_error"
           description: Error object that details why a Workflow Run is in Error status.
           type: object
         customer_user_id:
@@ -7184,20 +7184,20 @@ components:
       properties:
         resource_type:
           allOf:
-          - $ref: '#/components/schemas/webhook_event_resource_type'
+          - $ref: "#/components/schemas/webhook_event_resource_type"
           description: Indicates the resource affected by this event.
           example: workflow_task
           type: string
         action:
           allOf:
-          - $ref: '#/components/schemas/webhook_event_type'
+          - $ref: "#/components/schemas/webhook_event_type"
           description: The event that triggered this webhook.
           example: workflow_task.completed
           type: string
         object:
-          $ref: '#/components/schemas/webhook_event_payload_object'
+          $ref: "#/components/schemas/webhook_event_payload_object"
         resource:
-          $ref: '#/components/schemas/webhook_event_payload_resource'
+          $ref: "#/components/schemas/webhook_event_payload_resource"
       required:
       - event
       - resource_id
@@ -7211,7 +7211,7 @@ components:
           type: string
         event:
           allOf:
-          - $ref: '#/components/schemas/webhook_event_type'
+          - $ref: "#/components/schemas/webhook_event_type"
           description: The events that should retrigger webhooks. Accepts values check.completed.
           example: check.completed
           type: string
@@ -7276,12 +7276,12 @@ components:
       properties:
         issuing_country:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           description: Document country in 3-letter ISO code.
           type: string
         document_type:
           allOf:
-          - $ref: '#/components/schemas/document_types'
+          - $ref: "#/components/schemas/document_types"
           description: Type of document.
           type: string
         issuing_state:
@@ -7420,12 +7420,12 @@ components:
           type: string
         issuing_country:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           description: Document country in 3-letter ISO code.
           type: string
         document_type:
           allOf:
-          - $ref: '#/components/schemas/document_types'
+          - $ref: "#/components/schemas/document_types"
           description: Type of document.
           type: string
         place_of_birth:
@@ -7444,8 +7444,8 @@ components:
       type: object
     Document_Properties_with_Driving_Licence_Information:
       allOf:
-      - $ref: '#/components/schemas/document_properties'
-      - $ref: '#/components/schemas/document_properties_with_driving_licence_information'
+      - $ref: "#/components/schemas/document_properties"
+      - $ref: "#/components/schemas/document_properties_with_driving_licence_information"
       title: Document Properties with Driving Licence Information
     document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner:
       properties:
@@ -7483,7 +7483,7 @@ components:
       type: object
     document_with_driver_verification_report_allOf_properties:
       allOf:
-      - $ref: '#/components/schemas/document_properties'
+      - $ref: "#/components/schemas/document_properties"
       - properties:
           drivers_licence:
             description: True for **non-restricted** driving licences
@@ -7506,10 +7506,10 @@ components:
           vehicle_class_details:
             description: Detailed classes/categories information
             items:
-              $ref: '#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner'
+              $ref: "#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_vehicle_class_details_inner"
             type: array
           passenger_vehicle:
-            $ref: '#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_passenger_vehicle'
+            $ref: "#/components/schemas/document_with_driver_verification_report_allOf_properties_allOf_passenger_vehicle"
         type: object
     india_pan_report_allOf_breakdown_device_breakdown_pan_valid:
       properties:
@@ -7519,19 +7519,19 @@ components:
     india_pan_report_allOf_breakdown_device_breakdown:
       properties:
         pan_valid:
-          $ref: '#/components/schemas/india_pan_report_allOf_breakdown_device_breakdown_pan_valid'
+          $ref: "#/components/schemas/india_pan_report_allOf_breakdown_device_breakdown_pan_valid"
         name_match:
-          $ref: '#/components/schemas/india_pan_report_allOf_breakdown_device_breakdown_pan_valid'
+          $ref: "#/components/schemas/india_pan_report_allOf_breakdown_device_breakdown_pan_valid"
       type: object
     india_pan_report_allOf_breakdown_device:
       properties:
         breakdown:
-          $ref: '#/components/schemas/india_pan_report_allOf_breakdown_device_breakdown'
+          $ref: "#/components/schemas/india_pan_report_allOf_breakdown_device_breakdown"
       type: object
     india_pan_report_allOf_breakdown:
       properties:
         device:
-          $ref: '#/components/schemas/india_pan_report_allOf_breakdown_device'
+          $ref: "#/components/schemas/india_pan_report_allOf_breakdown_device"
       type: object
     india_pan_report_allOf_properties_device:
       properties:
@@ -7545,7 +7545,7 @@ components:
     india_pan_report_allOf_properties:
       properties:
         device:
-          $ref: '#/components/schemas/india_pan_report_allOf_properties_device'
+          $ref: "#/components/schemas/india_pan_report_allOf_properties_device"
       type: object
     document_breakdown_data_comparison_breakdown_issuing_country:
       example:
@@ -7585,21 +7585,21 @@ components:
           properties: "{}"
       properties:
         issuing_country:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         gender:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         date_of_expiry:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         last_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_type:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_numbers:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         first_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         date_of_birth:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     document_breakdown_data_comparison:
       description: Asserts whether data on the document is consistent with data provided
@@ -7635,7 +7635,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown"
       type: object
     document_breakdown_data_validation_breakdown_document_expiration:
       description: "If this is flagged, the document has expired."
@@ -7684,19 +7684,19 @@ components:
           properties: "{}"
       properties:
         gender:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         date_of_birth:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_numbers:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_expiration:
-          $ref: '#/components/schemas/document_breakdown_data_validation_breakdown_document_expiration'
+          $ref: "#/components/schemas/document_breakdown_data_validation_breakdown_document_expiration"
         expiry_date:
-          $ref: '#/components/schemas/document_breakdown_data_validation_breakdown_expiry_date'
+          $ref: "#/components/schemas/document_breakdown_data_validation_breakdown_expiry_date"
         mrz:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         barcode:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     document_breakdown_data_validation:
       description: Asserts whether algorithmically validatable elements are correct.
@@ -7728,7 +7728,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_data_validation_breakdown'
+          $ref: "#/components/schemas/document_breakdown_data_validation_breakdown"
       type: object
     document_breakdown_image_integrity_breakdown_image_quality:
       description: Asserts whether the quality of the image was sufficient for processing.
@@ -7749,7 +7749,7 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/document_IQ_reasons'
+          $ref: "#/components/schemas/document_IQ_reasons"
       type: object
     document_breakdown_image_integrity_breakdown_supported_document:
       description: Asserts whether the submitted document is supported.
@@ -7791,7 +7791,7 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/document_CDQ_reasons'
+          $ref: "#/components/schemas/document_CDQ_reasons"
       type: object
     document_breakdown_image_integrity_breakdown:
       example:
@@ -7827,13 +7827,13 @@ components:
             dark_photo: dark_photo
       properties:
         image_quality:
-          $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown_image_quality'
+          $ref: "#/components/schemas/document_breakdown_image_integrity_breakdown_image_quality"
         supported_document:
-          $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown_supported_document'
+          $ref: "#/components/schemas/document_breakdown_image_integrity_breakdown_supported_document"
         colour_picture:
-          $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown_colour_picture'
+          $ref: "#/components/schemas/document_breakdown_image_integrity_breakdown_colour_picture"
         conclusive_document_quality:
-          $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown_conclusive_document_quality'
+          $ref: "#/components/schemas/document_breakdown_image_integrity_breakdown_conclusive_document_quality"
       type: object
     document_breakdown_image_integrity:
       description: Asserts if the document is of sufficient quality to verify.
@@ -7874,7 +7874,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_image_integrity_breakdown'
+          $ref: "#/components/schemas/document_breakdown_image_integrity_breakdown"
       type: object
     document_breakdown_visual_authenticity_breakdown_fonts:
       description: Fonts in the document don't match the expected ones.
@@ -7935,7 +7935,7 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/document_ODP_reasons'
+          $ref: "#/components/schemas/document_ODP_reasons"
       type: object
     document_breakdown_visual_authenticity_breakdown_digital_tampering:
       description: Indication of digital tampering in the image.
@@ -8004,21 +8004,21 @@ components:
           properties: "{}"
       properties:
         fonts:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_fonts'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_fonts"
         picture_face_integrity:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_picture_face_integrity'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_picture_face_integrity"
         template:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_template'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_template"
         security_features:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_security_features'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_security_features"
         original_document_present:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_original_document_present'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_original_document_present"
         digital_tampering:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_digital_tampering'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_digital_tampering"
         other:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_other'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_other"
         face_detection:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown_face_detection'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown_face_detection"
       type: object
     document_breakdown_visual_authenticity:
       description: "Asserts whether visual, non-textual, elements are correct given\
@@ -8058,7 +8058,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_visual_authenticity_breakdown'
+          $ref: "#/components/schemas/document_breakdown_visual_authenticity_breakdown"
       type: object
     document_breakdown_data_consistency_breakdown:
       example:
@@ -8094,25 +8094,25 @@ components:
           properties: "{}"
       properties:
         date_of_expiry:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_numbers:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         issuing_country:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_type:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         date_of_birth:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         gender:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         first_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         nationality:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         last_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         multiple_data_sources_present:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     document_breakdown_data_consistency:
       description: Asserts whether data represented in multiple places on the document
@@ -8154,7 +8154,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_data_consistency_breakdown'
+          $ref: "#/components/schemas/document_breakdown_data_consistency_breakdown"
       type: object
     document_breakdown_police_record:
       description: "Asserts whether the document had been identified as lost, stolen\
@@ -8175,9 +8175,9 @@ components:
           properties: "{}"
       properties:
         document_database:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         repeat_attempts:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     document_breakdown_compromised_document:
       description: Asserts whether the image of the document has been found in our
@@ -8195,7 +8195,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_compromised_document_breakdown'
+          $ref: "#/components/schemas/document_breakdown_compromised_document_breakdown"
       type: object
     document_breakdown_age_validation_breakdown:
       example:
@@ -8204,7 +8204,7 @@ components:
           properties: "{}"
       properties:
         minimum_accepted_age:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     document_breakdown_age_validation:
       description: Asserts whether the age calculated from the document's date of
@@ -8219,7 +8219,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_age_validation_breakdown'
+          $ref: "#/components/schemas/document_breakdown_age_validation_breakdown"
       type: object
     document_breakdown_issuing_authority_breakdown_nfc_active_authentication:
       description: Asserts whether the document NFC chip is original or cloned.
@@ -8253,9 +8253,9 @@ components:
           properties: "{}"
       properties:
         nfc_active_authentication:
-          $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown_nfc_active_authentication'
+          $ref: "#/components/schemas/document_breakdown_issuing_authority_breakdown_nfc_active_authentication"
         nfc_passive_authentication:
-          $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown_nfc_passive_authentication'
+          $ref: "#/components/schemas/document_breakdown_issuing_authority_breakdown_nfc_passive_authentication"
       type: object
     document_breakdown_issuing_authority:
       description: Asserts whether data on the document matches the issuing authority
@@ -8273,7 +8273,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/document_breakdown_issuing_authority_breakdown'
+          $ref: "#/components/schemas/document_breakdown_issuing_authority_breakdown"
       type: object
     document_properties_document_numbers_inner:
       example:
@@ -8529,12 +8529,12 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown_face_match_properties'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown_face_match_properties"
       type: object
     facial_similarity_photo_breakdown_face_comparison_breakdown:
       properties:
         face_match:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown_face_match'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown_face_match"
       type: object
     facial_similarity_photo_breakdown_face_comparison:
       description: Asserts whether the face in the document matches the face in the
@@ -8543,7 +8543,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown"
       type: object
     facial_similarity_photo_breakdown_image_integrity_breakdown_face_detected:
       description: Asserts a single face of good enough quality has been found in
@@ -8561,14 +8561,14 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/photo_reasons'
+          $ref: "#/components/schemas/photo_reasons"
       type: object
     facial_similarity_photo_breakdown_image_integrity_breakdown:
       properties:
         face_detected:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown_face_detected'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown_face_detected"
         source_integrity:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown_source_integrity'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown_source_integrity"
       type: object
     facial_similarity_photo_breakdown_image_integrity:
       description: Asserts whether the quality and integrity of the uploaded files
@@ -8577,7 +8577,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown"
       type: object
     facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties:
       properties:
@@ -8593,12 +8593,12 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties"
       type: object
     facial_similarity_photo_breakdown_visual_authenticity_breakdown:
       properties:
         spoofing_detection:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection"
       type: object
     facial_similarity_photo_breakdown_visual_authenticity:
       description: Asserts whether the person in the live photo is real and not a
@@ -8607,7 +8607,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown"
       type: object
     facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown_source_integrity:
       description: "Asserts whether the live photo is trustworthy - i.e. not digitally\
@@ -8616,14 +8616,14 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/photo_auto_reasons'
+          $ref: "#/components/schemas/photo_auto_reasons"
       type: object
     facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown:
       properties:
         face_detected:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown_face_detected'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_image_integrity_breakdown_face_detected"
         source_integrity:
-          $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown_source_integrity'
+          $ref: "#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown_source_integrity"
       type: object
     facial_similarity_photo_fully_auto_breakdown_image_integrity:
       description: Asserts whether the quality and integrity of the uploaded files
@@ -8632,7 +8632,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_photo_fully_auto_breakdown_image_integrity_breakdown"
       type: object
     facial_similarity_video_breakdown_face_comparison:
       description: Asserts whether the face in the document matches the face in the
@@ -8641,7 +8641,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown"
       readOnly: true
       type: object
     facial_similarity_video_breakdown_image_integrity_breakdown_face_detected:
@@ -8660,14 +8660,14 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/video_reasons'
+          $ref: "#/components/schemas/video_reasons"
       type: object
     facial_similarity_video_breakdown_image_integrity_breakdown:
       properties:
         face_detected:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown_face_detected'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown_face_detected"
         source_integrity:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown_source_integrity'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown_source_integrity"
       type: object
     facial_similarity_video_breakdown_image_integrity:
       description: Asserts whether the quality and integrity of the uploaded files
@@ -8676,7 +8676,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_image_integrity_breakdown"
       readOnly: true
       type: object
     facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected:
@@ -8694,14 +8694,14 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties"
       type: object
     facial_similarity_video_breakdown_visual_authenticity_breakdown:
       properties:
         liveness_detected:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected"
         spoofing_detection:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_spoofing_detection'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_spoofing_detection"
       type: object
     facial_similarity_video_breakdown_visual_authenticity:
       description: Asserts whether the person in the live video is real (not a spoof)
@@ -8710,7 +8710,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown"
       readOnly: true
       type: object
     facial_similarity_motion_breakdown_face_comparison:
@@ -8720,7 +8720,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_face_comparison_breakdown"
       readOnly: true
       type: object
     facial_similarity_motion_breakdown_image_integrity_breakdown_face_detected:
@@ -8739,14 +8739,14 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/video_reasons'
+          $ref: "#/components/schemas/video_reasons"
       type: object
     facial_similarity_motion_breakdown_image_integrity_breakdown:
       properties:
         face_detected:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown_face_detected'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown_face_detected"
         source_integrity:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown_source_integrity'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown_source_integrity"
       type: object
     facial_similarity_motion_breakdown_image_integrity:
       description: Asserts whether the quality and integrity of the uploaded files
@@ -8755,7 +8755,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_image_integrity_breakdown"
       readOnly: true
       type: object
     facial_similarity_motion_breakdown_visual_authenticity_breakdown_spoofing_detection:
@@ -8765,14 +8765,14 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties'
+          $ref: "#/components/schemas/facial_similarity_photo_breakdown_visual_authenticity_breakdown_spoofing_detection_properties"
       type: object
     facial_similarity_motion_breakdown_visual_authenticity_breakdown:
       properties:
         liveness_detected:
-          $ref: '#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected'
+          $ref: "#/components/schemas/facial_similarity_video_breakdown_visual_authenticity_breakdown_liveness_detected"
         spoofing_detection:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown_spoofing_detection'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown_spoofing_detection"
       type: object
     facial_similarity_motion_breakdown_visual_authenticity:
       description: Asserts whether the person in the motion capture is real (not a
@@ -8781,7 +8781,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown'
+          $ref: "#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown"
       readOnly: true
       type: object
     known_faces_breakdown_previously_seen_faces:
@@ -8835,12 +8835,12 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_sources_breakdown_total_sources_properties'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_sources_breakdown_total_sources_properties"
       type: object
     identity_enhanced_breakdown_sources_breakdown:
       properties:
         total_sources:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_sources_breakdown_total_sources'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_sources_breakdown_total_sources"
       type: object
     identity_enhanced_breakdown_sources:
       description: Asserts if any sources that an applicant's details have been verified
@@ -8849,7 +8849,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_sources_breakdown'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_sources_breakdown"
       type: object
     identity_enhanced_breakdown_address_breakdown_credit_agencies_properties:
       properties:
@@ -8863,7 +8863,7 @@ components:
         result:
           type: string
         properties:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_address_breakdown_credit_agencies_properties'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_address_breakdown_credit_agencies_properties"
       type: object
     identity_enhanced_breakdown_address_breakdown_telephone_database:
       description: Address match against telephone database.
@@ -8884,11 +8884,11 @@ components:
     identity_enhanced_breakdown_address_breakdown:
       properties:
         credit_agencies:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_address_breakdown_credit_agencies'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_address_breakdown_credit_agencies"
         telephone_database:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_address_breakdown_telephone_database'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_address_breakdown_telephone_database"
         voting_register:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_address_breakdown_voting_register'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_address_breakdown_voting_register"
       type: object
     identity_enhanced_breakdown_address:
       description: Asserts if the applicant's address matches any sources.
@@ -8896,7 +8896,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_address_breakdown'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_address_breakdown"
       type: object
     identity_enhanced_breakdown_date_of_birth_breakdown_credit_agencies:
       description: Date of birth match against credit agencies.
@@ -8917,9 +8917,9 @@ components:
     identity_enhanced_breakdown_date_of_birth_breakdown:
       properties:
         credit_agencies:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_date_of_birth_breakdown_credit_agencies'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_date_of_birth_breakdown_credit_agencies"
         voting_register:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_date_of_birth_breakdown_voting_register'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_date_of_birth_breakdown_voting_register"
       type: object
     identity_enhanced_breakdown_date_of_birth:
       description: Asserts if the applicant's date of birth matches any sources.
@@ -8927,7 +8927,7 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/identity_enhanced_breakdown_date_of_birth_breakdown'
+          $ref: "#/components/schemas/identity_enhanced_breakdown_date_of_birth_breakdown"
       type: object
     identity_enhanced_breakdown_mortality:
       description: Asserts if the applicant's details match any death records.
@@ -8982,7 +8982,7 @@ components:
           type: string
         country:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           type: string
         postal_code:
           type: string
@@ -9038,7 +9038,7 @@ components:
         event_description:
           type: string
         source:
-          $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_event_inner_source'
+          $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_event_inner_source"
         sub_category:
           type: string
       type: object
@@ -9058,23 +9058,23 @@ components:
         address:
           description: All addresses on file.
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_address_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_address_inner"
           type: array
         alias:
           description: Any names that the person is also known as.
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_alias_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_alias_inner"
           type: array
         associate:
           description: "Any linked persons, for example family relatives or business\
             \ partners."
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_associate_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_associate_inner"
           type: array
         attribute:
           description: "Information about the person, for example hair color or nationality."
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_attribute_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_attribute_inner"
           type: array
         date_of_birth:
           description: All the date of births on file.
@@ -9085,7 +9085,7 @@ components:
           description: "Information about events that have occurred to the person,\
             \ for example deportation or arrest."
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_event_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_event_inner"
           type: array
         full_name:
           description: The name on file
@@ -9098,17 +9098,17 @@ components:
         source:
           description: Details about where the information was obtained.
           items:
-            $ref: '#/components/schemas/watchlist_enhanced_properties_records_inner_source_inner'
+            $ref: "#/components/schemas/watchlist_enhanced_properties_records_inner_source_inner"
           type: array
       type: object
     proof_of_address_breakdown_data_comparison_breakdown:
       properties:
         address:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         first_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         last_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     proof_of_address_breakdown_data_comparison:
       description: "Asserts whether the first name, last name and address provided\
@@ -9117,12 +9117,12 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/proof_of_address_breakdown_data_comparison_breakdown'
+          $ref: "#/components/schemas/proof_of_address_breakdown_data_comparison_breakdown"
       type: object
     proof_of_address_breakdown_document_classification_breakdown:
       properties:
         supported_document:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     proof_of_address_breakdown_document_classification:
       description: Asserts whether the document is of a valid type as PoA.
@@ -9130,12 +9130,12 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/proof_of_address_breakdown_document_classification_breakdown'
+          $ref: "#/components/schemas/proof_of_address_breakdown_document_classification_breakdown"
       type: object
     proof_of_address_breakdown_image_integrity_breakdown:
       properties:
         image_quality:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     proof_of_address_breakdown_image_integrity:
       description: Asserts whether the quality of the uploaded document was sufficient
@@ -9144,18 +9144,18 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/proof_of_address_breakdown_image_integrity_breakdown'
+          $ref: "#/components/schemas/proof_of_address_breakdown_image_integrity_breakdown"
       type: object
     us_driving_licence_breakdown_document_breakdown:
       properties:
         category:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         expiration_date:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         issue_date:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         document_number:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     us_driving_licence_breakdown_document:
       description: Asserts whether the document data provided matches a real driving
@@ -9164,22 +9164,22 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/us_driving_licence_breakdown_document_breakdown'
+          $ref: "#/components/schemas/us_driving_licence_breakdown_document_breakdown"
       type: object
     us_driving_licence_breakdown_address_breakdown:
       properties:
         city:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         line_1:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         line_2:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         state_code:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         zip4:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         zip5:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     us_driving_licence_breakdown_address:
       description: Asserts whether the address data provided matches a real driving
@@ -9188,36 +9188,36 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/us_driving_licence_breakdown_address_breakdown'
+          $ref: "#/components/schemas/us_driving_licence_breakdown_address_breakdown"
       type: object
     us_driving_licence_breakdown_personal_breakdown:
       properties:
         first_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         name_suffix:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         height:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         weight:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         sex_code:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         eye_color:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         date_of_birth:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         last_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         middle_name:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         first_name_fuzzy:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         middle_name_fuzzy:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         last_name_fuzzy:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         middle_initial:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     us_driving_licence_breakdown_personal:
       description: Asserts whether the personal data provided matches a real driving
@@ -9226,23 +9226,23 @@ components:
         result:
           type: string
         breakdown:
-          $ref: '#/components/schemas/us_driving_licence_breakdown_personal_breakdown'
+          $ref: "#/components/schemas/us_driving_licence_breakdown_personal_breakdown"
       type: object
     device_intelligence_breakdown_device_breakdown:
       properties:
         application_authenticity:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         device_integrity:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
         device_reputation:
-          $ref: '#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country'
+          $ref: "#/components/schemas/document_breakdown_data_comparison_breakdown_issuing_country"
       type: object
     device_intelligence_breakdown_device:
       description: "Asserts whether the device used to upload the media is trustworthy,\
         \ i.e. it is a real, physical device."
       properties:
         breakdown:
-          $ref: '#/components/schemas/device_intelligence_breakdown_device_breakdown'
+          $ref: "#/components/schemas/device_intelligence_breakdown_device_breakdown"
       type: object
     device_intelligence_breakdown_properties_device:
       properties:
@@ -9336,7 +9336,7 @@ components:
           type: string
         country:
           allOf:
-          - $ref: '#/components/schemas/country_codes'
+          - $ref: "#/components/schemas/country_codes"
           description: Country location of the IP address in a three letter format.
           type: string
       type: object
@@ -9344,11 +9344,11 @@ components:
       deprecated: true
       properties:
         device:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties_device'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties_device"
         ip:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties_ip'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties_ip"
         geolocation:
-          $ref: '#/components/schemas/device_intelligence_breakdown_properties_geolocation'
+          $ref: "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
       type: object
     idr_ssn_breakdown_breakdown_last_4_digits_match:
       description: Last 4 digits of social security number match
@@ -9369,9 +9369,9 @@ components:
     idr_ssn_breakdown_breakdown:
       properties:
         last_4_digits_match:
-          $ref: '#/components/schemas/idr_ssn_breakdown_breakdown_last_4_digits_match'
+          $ref: "#/components/schemas/idr_ssn_breakdown_breakdown_last_4_digits_match"
         full_match:
-          $ref: '#/components/schemas/idr_ssn_breakdown_breakdown_full_match'
+          $ref: "#/components/schemas/idr_ssn_breakdown_breakdown_full_match"
       type: object
   securitySchemes:
     Token:
