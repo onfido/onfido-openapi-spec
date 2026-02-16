@@ -28,9 +28,12 @@ readme = "README.md"
 repository = "https://{{{gitHost}}}/{{{gitUserId}}}/{{{gitRepoId}}}"
 {{/poetry1}}
 keywords = ["OpenAPI", "OpenAPI-Generator", "onfido", "identity"] {{! cutomized keywords }}
+{{! packages section moved to [tool.poetry] for non-poetry1 mode to fix poetry install }}
+{{#poetry1}}
 packages = [                                                      {{! added packages section }}
     { include = "onfido" }
 ]
+{{/poetry1}}
 {{#poetry1}}
 include = ["{{packageName}}/py.typed"]
 
@@ -95,6 +98,9 @@ Repository = "https://{{{gitHost}}}/{{{gitUserId}}}/{{{gitRepoId}}}"
 {{^poetry1}}
 [tool.poetry]
 requires-poetry = ">=2.0"
+packages = [                                                      {{! added packages section }}
+    { include = "onfido" }
+]
 {{/poetry1}}
 
 {{#poetry1}}
