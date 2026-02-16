@@ -5567,17 +5567,15 @@ components:
       properties:
         device:
           $ref: "#/components/schemas/device_intelligence_breakdown_device"
-        properties:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties"
       type: object
     device_intelligence_properties:
       properties:
         device:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties_device"
+          $ref: "#/components/schemas/device_intelligence_properties_device"
         ip:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties_ip"
+          $ref: "#/components/schemas/device_intelligence_properties_ip"
         geolocation:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
+          $ref: "#/components/schemas/device_intelligence_properties_geolocation"
       type: object
     location_shared:
       properties:
@@ -9244,7 +9242,7 @@ components:
         breakdown:
           $ref: "#/components/schemas/device_intelligence_breakdown_device_breakdown"
       type: object
-    device_intelligence_breakdown_properties_device:
+    device_intelligence_properties_device:
       properties:
         sdk_version:
           description: The SDK version that was used.
@@ -9320,13 +9318,13 @@ components:
           - unknown_method
           type: string
       type: object
-    device_intelligence_breakdown_properties_ip:
+    device_intelligence_properties_ip:
       properties:
         address:
           description: The IP address that uploaded the media.
           type: string
       type: object
-    device_intelligence_breakdown_properties_geolocation:
+    device_intelligence_properties_geolocation:
       properties:
         city:
           description: City location of the IP address.
@@ -9339,16 +9337,6 @@ components:
           - $ref: "#/components/schemas/country_codes"
           description: Country location of the IP address in a three letter format.
           type: string
-      type: object
-    device_intelligence_breakdown_properties:
-      deprecated: true
-      properties:
-        device:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties_device"
-        ip:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties_ip"
-        geolocation:
-          $ref: "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
       type: object
     idr_ssn_breakdown_breakdown_last_4_digits_match:
       description: Last 4 digits of social security number match

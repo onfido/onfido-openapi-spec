@@ -6721,9 +6721,6 @@
         "properties": {
           "device": {
             "$ref": "#/components/schemas/device_intelligence_breakdown_device"
-          },
-          "properties": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties"
           }
         },
         "type": "object"
@@ -6731,13 +6728,13 @@
       "device_intelligence_properties": {
         "properties": {
           "device": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_device"
+            "$ref": "#/components/schemas/device_intelligence_properties_device"
           },
           "ip": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_ip"
+            "$ref": "#/components/schemas/device_intelligence_properties_ip"
           },
           "geolocation": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
+            "$ref": "#/components/schemas/device_intelligence_properties_geolocation"
           }
         },
         "type": "object"
@@ -9665,7 +9662,7 @@
         },
         "type": "object"
       },
-      "device_intelligence_breakdown_properties_device": {
+      "device_intelligence_properties_device": {
         "properties": {
           "sdk_version": {
             "description": "The SDK version that was used.",
@@ -9732,7 +9729,7 @@
         },
         "type": "object"
       },
-      "device_intelligence_breakdown_properties_ip": {
+      "device_intelligence_properties_ip": {
         "properties": {
           "address": {
             "description": "The IP address that uploaded the media.",
@@ -9741,7 +9738,7 @@
         },
         "type": "object"
       },
-      "device_intelligence_breakdown_properties_geolocation": {
+      "device_intelligence_properties_geolocation": {
         "properties": {
           "city": {
             "description": "City location of the IP address.",
@@ -9759,21 +9756,6 @@
             ],
             "description": "Country location of the IP address in a three letter format.",
             "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "device_intelligence_breakdown_properties": {
-        "deprecated": true,
-        "properties": {
-          "device": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_device"
-          },
-          "ip": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_ip"
-          },
-          "geolocation": {
-            "$ref": "#/components/schemas/device_intelligence_breakdown_properties_geolocation"
           }
         },
         "type": "object"
