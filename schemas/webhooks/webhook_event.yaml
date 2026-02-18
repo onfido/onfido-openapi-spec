@@ -29,7 +29,7 @@ properties:
             type: string
             description: The unique identifier of the resource.
           status:
-            $ref: "#/webhook_event_object_status"
+            $ref: "#/webhook_event_resource_status"
           started_at_iso8601:
             type: string
             format: date-time
@@ -155,3 +155,22 @@ webhook_event_object_status:
     - reopened
   description: The current state of the object, if available.
   example: complete
+
+webhook_event_resource_status:
+  type: string
+  enum:
+    # ../workflow_runs/definitions.yaml#/workflow_run_status
+    - processing
+    - awaiting_input
+    - awaiting_client_input
+    - approved
+    - declined
+    - review
+    - abandoned
+    - error
+    # workflow_runs' tasks status
+    - started
+    - cancelled
+    - completed
+  description: The current state of the reference, if available.
+  example: completed
