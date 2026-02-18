@@ -3958,6 +3958,24 @@
         },
         "type": "object"
       },
+      "webhook_event_resource_status": {
+        "description": "The current state of the reference, if available.",
+        "enum": [
+          "processing",
+          "awaiting_input",
+          "awaiting_client_input",
+          "approved",
+          "declined",
+          "review",
+          "abandoned",
+          "error",
+          "started",
+          "cancelled",
+          "completed"
+        ],
+        "example": "completed",
+        "type": "string"
+      },
       "webhook_event_object_status": {
         "description": "The current state of the object, if available.",
         "enum": [
@@ -7340,7 +7358,7 @@
             "type": "string"
           },
           "status": {
-            "$ref": "#/components/schemas/webhook_event_object_status"
+            "$ref": "#/components/schemas/webhook_event_resource_status"
           },
           "started_at_iso8601": {
             "description": "The date and time when the operation was started, if available.",
