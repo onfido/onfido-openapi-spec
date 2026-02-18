@@ -3677,16 +3677,16 @@
         },
         "type" : "object"
       },
-      "webhook_event_resource_status" : {
-        "description" : "The current state of the reference, if available.",
-        "enum" : [ "processing", "awaiting_input", "awaiting_client_input", "approved", "declined", "review", "abandoned", "error", "started", "cancelled", "completed" ],
-        "example" : "completed",
-        "type" : "string"
-      },
       "webhook_event_object_status" : {
         "description" : "The current state of the object, if available.",
         "enum" : [ "processing", "awaiting_input", "awaiting_client_input", "approved", "declined", "review", "abandoned", "error", "started", "cancelled", "completed", "awaiting_data", "awaiting_approval", "complete", "withdrawn", "in_progress", "awaiting_applicant", "paused", "reopened" ],
         "example" : "complete",
+        "type" : "string"
+      },
+      "webhook_event_resource_status" : {
+        "description" : "The current state of the reference, if available.",
+        "enum" : [ "processing", "awaiting_input", "awaiting_client_input", "approved", "declined", "review", "abandoned", "error", "started", "cancelled", "completed" ],
+        "example" : "completed",
         "type" : "string"
       },
       "webhook_updater" : {
@@ -6449,7 +6449,7 @@
             "type" : "string"
           },
           "status" : {
-            "$ref" : "#/components/schemas/webhook_event_resource_status"
+            "$ref" : "#/components/schemas/webhook_event_object_status"
           },
           "started_at_iso8601" : {
             "description" : "The date and time when the operation was started, if available.",
@@ -6485,7 +6485,7 @@
             "type" : "string"
           },
           "status" : {
-            "$ref" : "#/components/schemas/webhook_event_object_status"
+            "$ref" : "#/components/schemas/webhook_event_resource_status"
           },
           "created_at" : {
             "description" : "The date and time when the resource was created.",
