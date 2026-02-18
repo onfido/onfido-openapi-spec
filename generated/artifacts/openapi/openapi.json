@@ -6478,6 +6478,9 @@
             "format" : "uuid",
             "type" : "string"
           },
+          "status" : {
+            "$ref" : "#/components/schemas/webhook_event_object_status"
+          },
           "created_at" : {
             "description" : "The date and time when the resource was created.",
             "example" : "2022-12-05T16:41:43Z",
