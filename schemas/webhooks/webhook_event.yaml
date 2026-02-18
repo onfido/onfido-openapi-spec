@@ -173,4 +173,4 @@ webhook_event_resource_status:
     - cancelled
     - completed
   description: The current state of the reference, if available.
-  example: complete
+  example: completed
