@@ -28,6 +28,7 @@ SECTIONS = (
              'tasks': None,
              'motion_captures': 'Motion captures',
              'watchlist_monitors': 'Monitors',
+             'complyadvantage_watchlists': 'ComplyAdvantage watchlists',
              'id_photos': 'ID Photos',
              'signing_documents': 'Signing documents',
              'qualified_electronic_signature': 'Qualified Electronic Signature',

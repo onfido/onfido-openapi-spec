@@ -1,0 +1,25 @@
+alert_risks:
+  get:
+    summary: List alert risks
+    operationId: list_complyadvantage_watchlist_alert_risks
+    description: >
+      Retrieves the risks associated with the given ComplyAdvantage watchlist alert.
+    parameters:
+      - name: alert_id
+        in: path
+        required: true
+        description: The alert's unique identifier.
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "200":
+        description: An array of alert risks
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+      default:
+        $ref: ../responses/default_error.yaml
