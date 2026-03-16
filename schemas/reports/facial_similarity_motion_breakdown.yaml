@@ -84,3 +84,35 @@ properties:
                     type: number
                     format: float
                     description: A floating point number between 0 and 1. The closer the score is to 0, the more likely it is to be a spoof.
+  applicant_autonomy:
+    type: object
+    readOnly: true
+    description: Asserts whether the capture was performed independently by the applicant without external guidance or third-party interference.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          independent_capture:
+            type: object
+            description: Asserts whether the applicant maintained full agency and physical control over the device throughout the capture process.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  reasons:
+                    type: string
+          challenge_integrity:
+            type: object
+            description: Asserts whether the interaction occurred within a valid and controlled environment, free from external influence or procedural anomalies.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  reasons:
+                    type: string
