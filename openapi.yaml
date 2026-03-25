@@ -116,6 +116,9 @@ paths:
     $ref: paths/watchlist_monitors.yaml#/matches
   /watchlist_monitors/{monitor_id}/new_report:
     $ref: paths/watchlist_monitors.yaml#/new_report
+  # ComplyAdvantage Watchlists
+  /complyadvantage_watchlists/alerts/{alert_id}/risks:
+    $ref: paths/complyadvantage_watchlists.yaml#/alert_risks
   # ID Photos
   /id_photos:
     $ref: paths/id_photos.yaml#/id_photos
