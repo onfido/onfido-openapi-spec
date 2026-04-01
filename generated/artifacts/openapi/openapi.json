@@ -26,6 +26,8 @@
   } ],
   "security" : [ {
     "Token" : [ ]
+  }, {
+    "OAuth2ClientCredentials" : [ ]
   } ],
   "paths" : {
     "/applicants" : {
@@ -8760,6 +8762,14 @@
             "description" : "Whether the device is providing false randomized device and network information.",
             "type" : "boolean"
           },
+          "number_of_ip_reuse_reports" : {
+            "description" : "Number of times the IP address used by the applicant to submit media matched an IP address associated with another report.",
+            "type" : "number"
+          },
+          "number_of_suspected_ip_reuse_reports" : {
+            "description" : "Number of times the IP address used by the applicant to submit media matched an IP address associated with a suspected report.",
+            "type" : "number"
+          },
           "fake_network_request" : {
             "description" : "Whether device is using stolen security tokens to send the network information.",
             "type" : "boolean"
@@ -8861,6 +8871,17 @@
         "in" : "header",
         "name" : "Authorization",
         "type" : "apiKey"
+      },
+      "OAuth2ClientCredentials" : {
+        "flows" : {
+          "clientCredentials" : {
+            "scopes" : {
+              "all_scopes" : "All scopes"
+            },
+            "tokenUrl" : "https://api.{region}.onfido.com/v3.6/oauth/token"
+          }
+        },
+        "type" : "oauth2"
       }
     }
   }
