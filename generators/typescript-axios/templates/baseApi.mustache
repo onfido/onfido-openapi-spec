@@ -7,9 +7,12 @@ import type { Configuration } from './configuration{{importFileExtension}}';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
-import globalAxios from 'axios';
+import axios from 'axios';
+import { attachFileTransferInterceptor } from './file-transfer{{importFileExtension}}';
 
 export const BASE_PATH = "{{{basePath}}}".replace(/\/+$/, "");
+
+const sdkAxios: AxiosInstance = axios.create();
 
 export const COLLECTION_FORMATS = {
     csv: ",",
@@ -26,11 +29,12 @@ export interface RequestArgs {
 export class BaseAPI {
     protected configuration: Configuration | undefined;
 
-    constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
+    constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = sdkAxios) {
         if (configuration) {
             this.configuration = configuration;
             this.basePath = configuration.basePath ?? basePath;
         }
+        attachFileTransferInterceptor(this.axios);
     }
 };
 
