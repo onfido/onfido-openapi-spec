@@ -24,29 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 
 {{! ONFIDO: Added lines of code - BEGIN }}
 import { FileTransfer } from './file-transfer{{importFileExtension}}';
-import { AxiosHeaders } from 'axios';
-
-globalAxios.interceptors.response.use(async (response) => {
-    if (response.headers instanceof AxiosHeaders && response.headers['content-type']) {
-        if ( ! response.headers['content-type'].toString().includes('application/json') ) {
-            const contentDisposition = response.headers['content-disposition'];
-            var filename = "";
-
-            if (contentDisposition && contentDisposition != "") {
-                const matcher = contentDisposition.match(/filename=['\"]?([^'\"\s]+)['\"]?/);
-
-                if (matcher != null) {
-                  filename = matcher[1].replace(/.*[/\\\\]/g, "");
-                }
-            }
-
-            response.data = new FileTransfer(response.data, filename);
-        }
-    }
-
-    return response;
-  });
-
+{{! Interceptor registration previously lived here. Moved to BaseAPI constructor in baseApi.mustache — see file-transfer.mustache attachFileTransferInterceptor(). }}
 {{! ONFIDO: Added lines of code - END }}
 
 {{#models}}
