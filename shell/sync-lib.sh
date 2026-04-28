@@ -3,9 +3,49 @@
 # Don't carry on when any command fails
 set -e
 
+function usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS] CLIENT_LIB_NAME [GENERATOR_NAME]
+
+Sync generated client library code into the corresponding repository folder.
+
+This script must be run from the root of the target client library repository
+(e.g. from inside onfido-python/, onfido-node/, etc.).
+
+Arguments:
+  CLIENT_LIB_NAME        The client library identifier (python, node, java, php, ruby)
+  GENERATOR_NAME         The generator name used during generation (defaults to CLIENT_LIB_NAME)
+                         Examples: python/urllib3, python/asyncio, typescript-axios
+
+Environment variables:
+  ONFIDO_OPENAPI_SPEC_FOLDER   Path to the openapi-spec repo (default: ../onfido-openapi-spec)
+
+Examples:
+  # From inside onfido-python/:
+  ../onfido-openapi-spec/shell/$(basename "$0") python python/urllib3
+
+  # From inside onfido-node/:
+  ../onfido-openapi-spec/shell/$(basename "$0") node typescript-axios
+
+  # From inside onfido-java/:
+  ../onfido-openapi-spec/shell/$(basename "$0") java
+
+  # From inside onfido-php/:
+  ../onfido-openapi-spec/shell/$(basename "$0") php
+
+  # From inside onfido-ruby/:
+  ../onfido-openapi-spec/shell/$(basename "$0") ruby
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 if [ $# -lt 1 ];
 then
-  echo "Usage: $0 client-lib-name [generator-name]"
+  usage
   exit 1
 fi
 
