@@ -22,10 +22,7 @@ import type { RequestArgs } from './base{{importFileExtension}}';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base{{importFileExtension}}';
 
-{{! ONFIDO: Added lines of code - BEGIN }}
-import { FileTransfer } from './file-transfer{{importFileExtension}}';
-{{! Interceptor registration previously lived here. Moved to BaseAPI constructor in baseApi.mustache — see file-transfer.mustache attachFileTransferInterceptor(). }}
-{{! ONFIDO: Added lines of code - END }}
+import { FileTransfer } from './file-transfer{{importFileExtension}}';    {{! ONFIDO: Added import }}
 
 {{#models}}
 {{#model}}{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{#oneOf}}{{#-first}}{{>modelOneOf}}{{/-first}}{{/oneOf}}{{^isEnum}}{{^oneOf}}{{>modelGeneric}}{{/oneOf}}{{/isEnum}}{{/model}}
