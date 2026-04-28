@@ -9723,11 +9723,11 @@
             "type": "boolean"
           },
           "number_of_ip_reuse_reports": {
-            "description": "Number of times the IP address used by the applicant to submit media matched an IP address associated with another report.",
+            "description": "Counts the number of distinct document reports submitted in the last 24 hours that are associated with the applicant\u2019s IP address.",
             "type": "number"
           },
           "number_of_suspected_ip_reuse_reports": {
-            "description": "Number of times the IP address used by the applicant to submit media matched an IP address associated with a suspected report.",
+            "description": "Counts the number of distinct document reports from the last 24 hours associated with the applicant\u2019s IP address that have a result of suspected and other document integrity or authenticity signals have been flagged.",
             "type": "number"
           },
           "fake_network_request": {
