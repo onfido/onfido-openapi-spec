@@ -7,12 +7,12 @@ import type { Configuration } from './configuration{{importFileExtension}}';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
-import axios from 'axios';
+import globalAxios from 'axios';
 import { attachFileTransferInterceptor } from './file-transfer{{importFileExtension}}';    {{! ONFIDO: Added import }}
 
 export const BASE_PATH = "{{{basePath}}}".replace(/\/+$/, "");
 
-const sdkAxios: AxiosInstance = axios.create();    {{! ONFIDO: Added line }}
+const sdkAxios: AxiosInstance = globalAxios.create();    {{! ONFIDO: Added line }}
 
 export const COLLECTION_FORMATS = {
     csv: ",",
