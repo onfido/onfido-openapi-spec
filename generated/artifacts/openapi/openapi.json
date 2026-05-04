@@ -26,8 +26,6 @@
   } ],
   "security" : [ {
     "Token" : [ ]
-  }, {
-    "OAuth2ClientCredentials" : [ ]
   } ],
   "paths" : {
     "/applicants" : {
@@ -8871,17 +8869,6 @@
         "in" : "header",
         "name" : "Authorization",
         "type" : "apiKey"
-      },
-      "OAuth2ClientCredentials" : {
-        "flows" : {
-          "clientCredentials" : {
-            "scopes" : {
-              "all_scopes" : "All scopes"
-            },
-            "tokenUrl" : "https://api.{region}.onfido.com/v3.6/oauth/token"
-          }
-        },
-        "type" : "oauth2"
       }
     }
   }
