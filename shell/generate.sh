@@ -3,6 +3,40 @@
 # Don't carry on when any command fails
 set -e
 
+function usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS] [GENERATOR...]
+
+Generate client libraries from the OpenAPI specification using openapi-generator.
+
+If no GENERATOR is specified, all generators found under generators/ are built.
+
+Arguments:
+  GENERATOR              One or more generator paths relative to generators/
+                         (e.g. python/urllib3, typescript-axios, java, php, ruby)
+
+Environment variables:
+  OPENAPI_GENERATOR_VERSION        Generator Docker image tag (default: v7.16.0)
+  OPENAPI_GENERATOR_COMMAND        Override the full generator command
+  BUMP_CLIENT_LIBRARY_VERSION      Semver bump type: Major, Minor, or Patch
+  CLIENT_LIBRARY_VERSION_SUFFIX    Suffix appended to the version string
+  OVERRIDE_CLIENT_LIBRARY_VERSION  Force a specific version (skips GitHub lookup)
+
+Examples:
+  $(basename "$0")                    # Generate all client libraries
+  $(basename "$0") python/urllib3     # Generate only the Python (urllib3) client
+  $(basename "$0") java php ruby     # Generate Java, PHP, and Ruby clients
+
+  OPENAPI_GENERATOR_VERSION=v7.12.0 $(basename "$0") typescript-axios
+  OVERRIDE_CLIENT_LIBRARY_VERSION=1.0.0 $(basename "$0") java
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASEDIR=${SCRIPT_DIR}/..
 
