@@ -19,20 +19,12 @@ servers:
         default: eu
 security:
   - Token: []
-  - OAuth2ClientCredentials: []
 components:
   securitySchemes:
     Token:
       type: apiKey
       name: Authorization
       in: header
-    OAuth2ClientCredentials:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://api.{region}.onfido.com/v3.6/oauth/token
-          scopes:
-            all_scopes: All scopes
 externalDocs:
   url: https://documentation.onfido.com
 paths:
