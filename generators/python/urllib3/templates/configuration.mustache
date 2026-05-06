@@ -279,6 +279,8 @@ conf = {{{packageName}}}.Configuration(
         self,
         host: Optional[str]=None,
         api_token: Optional[str]=None,
+        oauth_client_id: Optional[str]=None,
+        oauth_client_secret: Optional[str]=None,
         region: Optional[Region]=Region.EU,
         timeout: Optional[urllib3.util.Timeout]=None,
 {{#hasHttpSignatureMethods}}
@@ -296,6 +298,11 @@ conf = {{{packageName}}}.Configuration(
     ) -> None:
         """Constructor
         """
+        if api_token and oauth_client_id:
+            raise ValueError("api_token and oauth_client_id are mutually exclusive")
+        if oauth_client_id and not oauth_client_secret:
+            raise ValueError("oauth_client_secret is required when oauth_client_id is provided")
+
         self._base_path = "{{{basePath}}}" if host is None else host
         """Default Base url
         """
@@ -324,6 +331,13 @@ conf = {{{packageName}}}.Configuration(
         self.password = None
         self.access_token = None
         {{! Replaced block of code - END }}
+
+        {{! OAuth client credentials - BEGIN }}
+        self.oauth_client_id = oauth_client_id
+        self.oauth_client_secret = oauth_client_secret
+        self._oauth_access_token: Optional[str] = None
+        self._oauth_token_expires_at: float = 0
+        {{! OAuth client credentials - END }}
 
 {{#hasHttpSignatureMethods}}
         if signing_info is not None:
@@ -602,11 +616,58 @@ conf = {{{packageName}}}.Configuration(
             basic_auth=username + ':' + password
         ).get('authorization')
 
+    {{! OAuth client credentials method - BEGIN }}
+    def _get_oauth_access_token(self) -> str:
+        """Fetches or returns a cached OAuth2 access token.
+
+        :return: The OAuth2 access token.
+        """
+        import time
+        if self._oauth_access_token and time.time() < self._oauth_token_expires_at:
+            return self._oauth_access_token
+
+        import json
+        from urllib.request import Request, urlopen
+        from urllib.parse import urlencode
+
+        token_url = self.host + '/oauth/token'
+        data = urlencode({
+            'grant_type': 'client_credentials',
+            'client_id': self.oauth_client_id,
+            'client_secret': self.oauth_client_secret,
+        }).encode('utf-8')
+
+        req = Request(token_url, data=data, method='POST')
+        req.add_header('Content-Type', 'application/x-www-form-urlencoded')
+
+        with urlopen(req) as response:
+            if response.status != 200:
+                raise RuntimeError(f"OAuth token exchange failed with status {response.status}")
+            body = json.loads(response.read().decode('utf-8'))
+
+        self._oauth_access_token = body['access_token']
+        expires_in = int(body['expires_in'])
+        self._oauth_token_expires_at = time.time() + (expires_in - 30)
+
+        return self._oauth_access_token
+    {{! OAuth client credentials method - END }}
+
     def auth_settings(self)-> AuthSettings:
         """Gets Auth Settings dict for api client.
 
         :return: The Auth Settings information dict.
         """
+        {{! OAuth override - BEGIN }}
+        if self.oauth_client_id:
+            return {
+                'Token': {
+                    'type': 'api_key',
+                    'in': 'header',
+                    'key': 'Authorization',
+                    'value': f"Bearer {self._get_oauth_access_token()}",
+                },
+            }
+        {{! OAuth override - END }}
         auth: AuthSettings = {}
 {{#authMethods}}
 {{#isApiKey}}
