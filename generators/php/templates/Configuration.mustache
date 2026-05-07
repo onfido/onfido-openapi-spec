@@ -534,7 +534,7 @@ class Configuration
         }
 
         $this->oauthAccessToken = $data['access_token'];
-        $expiresIn = (int)($data['expires_in'] ?? 3600);
+        $expiresIn = (int)$data['expires_in'];
         $this->oauthTokenExpiresAt = microtime(true) + ($expiresIn - 30);
 
         return $this->oauthAccessToken;
