@@ -15,6 +15,9 @@ from typing import Any, ClassVar, Dict, List, Literal, Optional, TypedDict, Unio
 from typing_extensions import NotRequired, Self
 
 import urllib3
+import time
+import json
+from {{packageName}}.rest import RESTClientObject
 
 {{! Added block of code - BEGIN }}
 from enum import Enum
@@ -298,8 +301,8 @@ conf = {{{packageName}}}.Configuration(
     ) -> None:
         """Constructor
         """
-        if api_token and oauth_client_id:
-            raise ValueError("api_token and oauth_client_id are mutually exclusive")
+        if api_token and (oauth_client_id or oauth_client_secret):
+            raise ValueError("api_token and oauth_client_id|oauth_client_secret are mutually exclusive")
         if oauth_client_id and not oauth_client_secret:
             raise ValueError("oauth_client_secret is required when oauth_client_id is provided")
 
@@ -622,28 +625,24 @@ conf = {{{packageName}}}.Configuration(
 
         :return: The OAuth2 access token.
         """
-        import time
         if self._oauth_access_token and time.time() < self._oauth_token_expires_at:
             return self._oauth_access_token
 
-        import json
-        from urllib.request import Request, urlopen
-        from urllib.parse import urlencode
-
         token_url = self.host + '/oauth/token'
-        data = urlencode({
-            'grant_type': 'client_credentials',
-            'client_id': self.oauth_client_id,
-            'client_secret': self.oauth_client_secret,
-        }).encode('utf-8')
-
-        req = Request(token_url, data=data, method='POST')
-        req.add_header('Content-Type', 'application/x-www-form-urlencoded')
-
-        with urlopen(req) as response:
-            if response.status != 200:
-                raise RuntimeError(f"OAuth token exchange failed with status {response.status}")
-            body = json.loads(response.read().decode('utf-8'))
+        rest_client = RESTClientObject(self)
+        response = rest_client.request(
+            'POST',
+            token_url,
+            post_params=[
+                ('grant_type', 'client_credentials'),
+                ('client_id', self.oauth_client_id),
+                ('client_secret', self.oauth_client_secret),
+            ],
+            headers={'Content-Type': 'application/x-www-form-urlencoded'},
+        )
+        if response.status != 200:
+            raise RuntimeError(f"OAuth token exchange failed with status {response.status}")
+        body = json.loads(response.read())
 
         self._oauth_access_token = body['access_token']
         expires_in = int(body['expires_in'])
