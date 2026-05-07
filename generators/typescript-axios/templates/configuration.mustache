@@ -148,7 +148,6 @@ export class Configuration {
         const response = await axios.post(
             this._oauthTokenUrl!,
             new URLSearchParams({
-                grant_type: 'client_credentials',
                 client_id: this._oauthClientId!,
                 client_secret: this._oauthClientSecret!,
             }).toString(),

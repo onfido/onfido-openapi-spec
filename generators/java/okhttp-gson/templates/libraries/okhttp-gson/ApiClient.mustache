@@ -662,7 +662,6 @@ public class ApiClient {
         String tokenUrl = getEffectiveBasePath() + "/oauth/token";
 
         RequestBody body = new FormBody.Builder()
-            .add("grant_type", "client_credentials")
             .add("client_id", oauthClientId)
             .add("client_secret", oauthClientSecret)
             .build();

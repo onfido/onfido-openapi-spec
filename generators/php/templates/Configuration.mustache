@@ -510,7 +510,6 @@ class Configuration
         $tokenUrl = $this->getHost() . '/oauth/token';
 
         $postData = http_build_query([
-            'grant_type' => 'client_credentials',
             'client_id' => $this->oauthClientId,
             'client_secret' => $this->oauthClientSecret,
         ]);

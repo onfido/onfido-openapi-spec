@@ -634,7 +634,6 @@ conf = {{{packageName}}}.Configuration(
             'POST',
             token_url,
             post_params=[
-                ('grant_type', 'client_credentials'),
                 ('client_id', self.oauth_client_id),
                 ('client_secret', self.oauth_client_secret),
             ],
