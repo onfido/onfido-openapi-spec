@@ -304,8 +304,8 @@ conf = {{{packageName}}}.Configuration(
         """
         if api_token and (oauth_client_id or oauth_client_secret):
             raise ValueError("api_token and oauth_client_id|oauth_client_secret are mutually exclusive")
-        if oauth_client_id and not oauth_client_secret:
-            raise ValueError("oauth_client_secret is required when oauth_client_id is provided")
+        if bool(oauth_client_id) != bool(oauth_client_secret):
+            raise ValueError("Both oauth_client_id and oauth_client_secret must be provided together")
 
         self._base_path = "{{{basePath}}}" if host is None else host
         """Default Base url
