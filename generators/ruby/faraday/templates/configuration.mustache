@@ -4,7 +4,7 @@
 
 {{! Added include }}
 require 'faraday/follow_redirects'
-require 'net/http'
+require 'uri'
 require 'json'
 
 module {{moduleName}}
@@ -270,22 +270,29 @@ module {{moduleName}}
       @oauth_mutex.synchronize do
         return @oauth_access_token if @oauth_access_token && @oauth_token_expires_at && Time.now.to_f < @oauth_token_expires_at
 
-        token_url = "#{base_url}/oauth/token"
+        conn = Faraday.new(
+          url: base_url,
+          ssl: { ca_file: ssl_ca_file, verify: ssl_verify, verify_mode: ssl_verify_mode,
+                 client_cert: ssl_client_cert, client_key: ssl_client_key },
+          proxy: proxy
+        ) do |f|
+          configure_middleware(f)
+          f.adapter(Faraday.default_adapter)
+          configure_connection(f)
+        end
 
-        uri = URI(token_url)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == 'https')
+        response = conn.post('/oauth/token') do |req|
+          req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+          req.options.timeout = timeout
+          req.body = URI.encode_www_form(
+            'grant_type' => 'client_credentials',
+            'client_id' => @oauth_client_id,
+            'client_secret' => @oauth_client_secret
+          )
+        end
 
-        request = Net::HTTP::Post.new(uri)
-        request.set_form_data(
-          'client_id' => @oauth_client_id,
-          'client_secret' => @oauth_client_secret
-        )
-
-        response = http.request(request)
-
-        unless response.is_a?(Net::HTTPSuccess)
-          raise "OAuth token exchange failed with status #{response.code}: #{response.body}"
+        unless response.success?
+          raise "OAuth token exchange failed with status #{response.status}: #{response.body}"
         end
 
         data = JSON.parse(response.body)
@@ -295,7 +302,6 @@ module {{moduleName}}
 
         @oauth_access_token
       end
-    end
     end
 
     public

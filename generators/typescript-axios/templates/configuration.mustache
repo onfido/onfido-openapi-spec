@@ -152,8 +152,11 @@ export class Configuration {
                 client_secret: this._oauthClientSecret!,
             }).toString(),
             {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                timeout: 30_000,
+                ...this.baseOptions,
+                headers: {
+                    ...this.baseOptions?.headers,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
             },
         );
 
