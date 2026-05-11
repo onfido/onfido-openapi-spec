@@ -4,6 +4,8 @@
 
 {{! Added include }}
 require 'faraday/follow_redirects'
+require 'net/http'
+require 'json'
 
 module {{moduleName}}
   class Configuration
@@ -181,6 +183,7 @@ module {{moduleName}}
       @ignore_operation_servers = false
       @inject_format = false
       @force_ending_format = false
+      @oauth_mutex = Mutex.new
       @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
 
       use( Faraday::FollowRedirects::Middleware ) {{! Added middleware to follow 302 Found redirection }}
@@ -262,37 +265,35 @@ module {{moduleName}}
     private
 
     def fetch_oauth_access_token
-      if @oauth_access_token && @oauth_token_expires_at && Time.now.to_f < @oauth_token_expires_at
-        return @oauth_access_token
+      @oauth_mutex.synchronize do
+        return @oauth_access_token if @oauth_access_token && @oauth_token_expires_at && Time.now.to_f < @oauth_token_expires_at
+
+        token_url = "#{base_url}/oauth/token"
+
+        uri = URI(token_url)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = (uri.scheme == 'https')
+
+        request = Net::HTTP::Post.new(uri)
+        request.set_form_data(
+          'client_id' => @oauth_client_id,
+          'client_secret' => @oauth_client_secret
+        )
+
+        response = http.request(request)
+
+        unless response.is_a?(Net::HTTPSuccess)
+          raise "OAuth token exchange failed with status #{response.code}: #{response.body}"
+        end
+
+        data = JSON.parse(response.body)
+        @oauth_access_token = data['access_token']
+        expires_in = data['expires_in'].to_i
+        @oauth_token_expires_at = Time.now.to_f + (expires_in - 30)
+
+        @oauth_access_token
       end
-
-      token_url = "#{base_url}/oauth/token"
-
-      require 'net/http'
-      require 'json'
-
-      uri = URI(token_url)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = (uri.scheme == 'https')
-
-      request = Net::HTTP::Post.new(uri)
-      request.set_form_data(
-        'client_id' => @oauth_client_id,
-        'client_secret' => @oauth_client_secret
-      )
-
-      response = http.request(request)
-
-      unless response.is_a?(Net::HTTPSuccess)
-        raise "OAuth token exchange failed with status #{response.code}: #{response.body}"
-      end
-
-      data = JSON.parse(response.body)
-      @oauth_access_token = data['access_token']
-      expires_in = data['expires_in'].to_i
-      @oauth_token_expires_at = Time.now.to_f + (expires_in - 30)
-
-      @oauth_access_token
+    end
     end
 
     public

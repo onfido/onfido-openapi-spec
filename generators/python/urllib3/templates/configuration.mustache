@@ -17,6 +17,7 @@ from typing_extensions import NotRequired, Self
 import urllib3
 import time
 import json
+import threading
 from {{packageName}}.rest import RESTClientObject
 
 {{! Added block of code - BEGIN }}
@@ -340,6 +341,7 @@ conf = {{{packageName}}}.Configuration(
         self.oauth_client_secret = oauth_client_secret
         self._oauth_access_token: Optional[str] = None
         self._oauth_token_expires_at: float = 0
+        self._oauth_lock = threading.Lock()
         {{! OAuth client credentials - END }}
 
 {{#hasHttpSignatureMethods}}
@@ -628,26 +630,31 @@ conf = {{{packageName}}}.Configuration(
         if self._oauth_access_token and time.time() < self._oauth_token_expires_at:
             return self._oauth_access_token
 
-        token_url = self.host + '/oauth/token'
-        rest_client = RESTClientObject(self)
-        response = rest_client.request(
-            'POST',
-            token_url,
-            post_params=[
-                ('client_id', self.oauth_client_id),
-                ('client_secret', self.oauth_client_secret),
-            ],
-            headers={'Content-Type': 'application/x-www-form-urlencoded'},
-        )
-        if response.status != 200:
-            raise RuntimeError(f"OAuth token exchange failed with status {response.status}")
-        body = json.loads(response.read())
+        with self._oauth_lock:
+            # Double-checked locking: another thread may have refreshed while we waited
+            if self._oauth_access_token and time.time() < self._oauth_token_expires_at:
+                return self._oauth_access_token
 
-        self._oauth_access_token = body['access_token']
-        expires_in = int(body['expires_in'])
-        self._oauth_token_expires_at = time.time() + (expires_in - 30)
+            token_url = self.host + '/oauth/token'
+            rest_client = RESTClientObject(self)
+            response = rest_client.request(
+                'POST',
+                token_url,
+                post_params=[
+                    ('client_id', self.oauth_client_id),
+                    ('client_secret', self.oauth_client_secret),
+                ],
+                headers={'Content-Type': 'application/x-www-form-urlencoded'},
+            )
+            if response.status != 200:
+                raise RuntimeError(f"OAuth token exchange failed with status {response.status}")
+            body = json.loads(response.read())
 
-        return self._oauth_access_token
+            self._oauth_access_token = body['access_token']
+            expires_in = int(body['expires_in'])
+            self._oauth_token_expires_at = time.time() + (expires_in - 30)
+
+            return self._oauth_access_token
     {{! OAuth client credentials method - END }}
 
     def auth_settings(self)-> AuthSettings:
