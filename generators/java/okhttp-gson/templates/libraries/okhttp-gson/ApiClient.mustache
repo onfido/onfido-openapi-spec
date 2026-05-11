@@ -591,6 +591,9 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setApiToken(String apiToken) {
+        if (this.oauthClientId != null) {
+            throw new IllegalStateException("Cannot set API token when OAuth credentials are already configured");
+        }
         this.setApiKey("Token token=" + apiToken);
 
         return this;
@@ -630,6 +633,10 @@ public class ApiClient {
         }
         if (clientSecret == null || clientSecret.isEmpty()) {
             throw new IllegalArgumentException("OAuth client secret must not be null or empty");
+        }
+        Authentication existingAuth = this.authentications.get("Token");
+        if (existingAuth instanceof ApiKeyAuth && ((ApiKeyAuth) existingAuth).getApiKey() != null) {
+            throw new IllegalStateException("Cannot set OAuth credentials when API token is already configured");
         }
 
         this.oauthClientId = clientId;

@@ -150,6 +150,9 @@ class Configuration
      */
     public function setApiToken($apiToken)
     {
+        if ($this->oauthClientId !== null) {
+            throw new \InvalidArgumentException('Cannot set API token when OAuth credentials are already configured');
+        }
         return $this->setApiKey('Authorization', "Token token=$apiToken");
     }
 
@@ -184,6 +187,9 @@ class Configuration
         }
         if (empty($clientSecret)) {
             throw new \InvalidArgumentException('OAuth client secret must not be empty');
+        }
+        if ($this->getApiKey('Authorization') !== null) {
+            throw new \InvalidArgumentException('Cannot set OAuth credentials when API token is already configured');
         }
 
         $this->oauthClientId = $clientId;
