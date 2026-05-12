@@ -285,7 +285,6 @@ module {{moduleName}}
           req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
           req.options.timeout = timeout
           req.body = URI.encode_www_form(
-            'grant_type' => 'client_credentials',
             'client_id' => @oauth_client_id,
             'client_secret' => @oauth_client_secret
           )
