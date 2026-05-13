@@ -17,8 +17,8 @@ from typing_extensions import NotRequired, Self
 import urllib3
 import time
 import json
-import threading
-from {{packageName}}.rest import RESTClientObject
+import threading  {{! Added import for OAuth thread-safety }}
+from {{packageName}}.rest import RESTClientObject  {{! Added import for OAuth token exchange }}
 
 {{! Added block of code - BEGIN }}
 from enum import Enum
@@ -278,7 +278,7 @@ conf = {{{packageName}}}.Configuration(
 
     _default: ClassVar[Optional[Self]] = None
 
-{{! api_key, api_key_prefix, username, password, access_token and server_variables removed, api_token, region and timeout added }}
+{{! api_key, api_key_prefix, username, password, access_token and server_variables removed, api_token, oauth_client_id, oauth_client_secret, region and timeout added }}
     def __init__(
         self,
         host: Optional[str]=None,
@@ -302,10 +302,12 @@ conf = {{{packageName}}}.Configuration(
     ) -> None:
         """Constructor
         """
+        {{! Added mutual exclusivity validation for api_token and OAuth credentials - BEGIN }}
         if api_token and (oauth_client_id or oauth_client_secret):
             raise ValueError("api_token and oauth_client_id|oauth_client_secret are mutually exclusive")
         if bool(oauth_client_id) != bool(oauth_client_secret):
             raise ValueError("Both oauth_client_id and oauth_client_secret must be provided together")
+        {{! Added mutual exclusivity validation for api_token and OAuth credentials - END }}
 
         self._base_path = "{{{basePath}}}" if host is None else host
         """Default Base url

@@ -183,7 +183,7 @@ module {{moduleName}}
       @ignore_operation_servers = false
       @inject_format = false
       @force_ending_format = false
-      @oauth_mutex = Mutex.new
+      @oauth_mutex = Mutex.new {{! Added mutex for OAuth token refresh thread-safety }}
       @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
 
       use( Faraday::FollowRedirects::Middleware ) {{! Added middleware to follow 302 Found redirection }}
@@ -229,7 +229,7 @@ module {{moduleName}}
 
     {{! BEGIN - Added api token, region and timeout}}
     def api_token=(api_token)
-      raise ArgumentError, 'Cannot set API token when OAuth credentials are already configured' if @oauth_client_id
+      raise ArgumentError, 'Cannot set API token when OAuth credentials are already configured' if @oauth_client_id {{! Added mutual exclusivity check }}
       @api_key = {'Token' => "Token token=#{api_token}"}
     end
 
@@ -256,7 +256,7 @@ module {{moduleName}}
     def set_oauth_credentials(client_id, client_secret)
       raise ArgumentError, 'OAuth client ID must not be nil or empty' if client_id.nil? || client_id.empty?
       raise ArgumentError, 'OAuth client secret must not be nil or empty' if client_secret.nil? || client_secret.empty?
-      raise ArgumentError, 'Cannot set OAuth credentials when API token is already configured' if @api_key&.key?('Token')
+      raise ArgumentError, 'Cannot set OAuth credentials when API token is already configured' if @api_key&.key?('Token') {{! Added mutual exclusivity check }}
 
       @oauth_client_id = client_id
       @oauth_client_secret = client_secret

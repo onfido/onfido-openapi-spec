@@ -59,6 +59,7 @@ class Configuration
      */
     protected $accessToken = '';
 
+    {{! Added OAuth client credentials fields - BEGIN }}
     /**
      * OAuth2 client ID for client credentials flow
      *
@@ -86,6 +87,7 @@ class Configuration
      * @var float
      */
     private $oauthTokenExpiresAt = 0;
+    {{! Added OAuth client credentials fields - END }}
 
     /**
      * Boolean format for query string
@@ -480,10 +482,12 @@ class Configuration
      */
     public function getApiKeyWithPrefix($apiKeyIdentifier)
     {
+        {{! Added block to intercept OAuth token - BEGIN }}
         // If OAuth credentials are configured, return Bearer token
         if ($apiKeyIdentifier === 'Authorization' && $this->oauthClientId !== null) {
             return 'Bearer ' . $this->getOAuthAccessToken();
         }
+        {{! dded block to intercept OAuth token - END }}
 
         $prefix = $this->getApiKeyPrefix($apiKeyIdentifier);
         $apiKey = $this->getApiKey($apiKeyIdentifier);
@@ -501,6 +505,8 @@ class Configuration
         return $keyWithPrefix;
     }
 
+
+    {{! Added OAuth token exchange method - BEGIN }}
     /**
      * Fetches or returns a cached OAuth2 access token.
      *
@@ -538,6 +544,7 @@ class Configuration
 
         return $this->oauthAccessToken;
     }
+    {{! Added OAuth token exchange method - END }}
 
     /**
      * Returns an array of host settings

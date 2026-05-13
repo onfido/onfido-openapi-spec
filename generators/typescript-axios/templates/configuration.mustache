@@ -73,7 +73,7 @@ export class Configuration {
     private _tokenExpiresAt?: number;
     private _tokenRefreshPromise?: Promise<string>;
 
-    {{! Updated constructor (remove unused username, password, accessToken and serverIndex) }}
+    {{! Updated constructor (remove unused username, password, accessToken and serverIndex; add API token and OAuth authentication) }}
     constructor(param: ConfigurationParameters = {}) {
         const hasApiToken = !!param.apiToken;
         const hasPartialOAuth = !!(param.oauthClientId || param.oauthClientSecret);
@@ -118,6 +118,7 @@ export class Configuration {
         this.formDataCtor = param.formDataCtor || require('form-data');         // Injiect form data constructor (if needed)
     }
 
+    {{! Added OAuth token exchange methods - BEGIN }}
     /**
      * Fetches and caches an OAuth2 access token using the client credentials flow.
      * Automatically refreshes the token when it expires (with a 30-second buffer).
@@ -170,6 +171,7 @@ export class Configuration {
         this._tokenExpiresAt = Date.now() + ((expires_in) - 30) * 1000;
         return access_token;
     }
+    {{! Added OAuth token exchange methods - END }}
 
     /**
      * Check if the given MIME is a JSON MIME.
