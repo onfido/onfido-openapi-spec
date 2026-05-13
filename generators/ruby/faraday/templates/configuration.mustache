@@ -4,6 +4,8 @@
 
 {{! Added include }}
 require 'faraday/follow_redirects'
+require 'uri'
+require 'json'
 
 module {{moduleName}}
   class Configuration
@@ -68,6 +70,16 @@ module {{moduleName}}
     # Overrides the access_token if set
     # @return [Proc]
     attr_accessor :access_token_getter
+
+    {{! OAuth client credentials - BEGIN }}
+    # Defines the OAuth2 client ID for client credentials flow.
+    # @return [String]
+    attr_accessor :oauth_client_id
+
+    # Defines the OAuth2 client secret for client credentials flow.
+    # @return [String]
+    attr_accessor :oauth_client_secret
+    {{! OAuth client credentials - END }}
 
     # Set this to return data as binary instead of downloading a temp file. When enabled (set to true)
     # HTTP responses with return type `File` will be returned as a stream of binary data.
@@ -171,6 +183,7 @@ module {{moduleName}}
       @ignore_operation_servers = false
       @inject_format = false
       @force_ending_format = false
+      @oauth_mutex = Mutex.new {{! Added mutex for OAuth token refresh thread-safety }}
       @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
 
       use( Faraday::FollowRedirects::Middleware ) {{! Added middleware to follow 302 Found redirection }}
@@ -216,6 +229,7 @@ module {{moduleName}}
 
     {{! BEGIN - Added api token, region and timeout}}
     def api_token=(api_token)
+      raise ArgumentError, 'Cannot set API token when OAuth credentials are already configured' if @oauth_client_id {{! Added mutual exclusivity check }}
       @api_key = {'Token' => "Token token=#{api_token}"}
     end
 
@@ -231,6 +245,66 @@ module {{moduleName}}
     def timeout=(timeout)
       @timeout = timeout
     end
+
+    {{! OAuth client credentials methods - BEGIN }}
+    # Sets OAuth2 client credentials for authentication.
+    # The client will automatically exchange credentials for an access token
+    # and refresh it when expired. This is mutually exclusive with api_token.
+    #
+    # @param client_id [String] OAuth2 client ID
+    # @param client_secret [String] OAuth2 client secret
+    def set_oauth_credentials(client_id, client_secret)
+      raise ArgumentError, 'OAuth client ID must not be nil or empty' if client_id.nil? || client_id.empty?
+      raise ArgumentError, 'OAuth client secret must not be nil or empty' if client_secret.nil? || client_secret.empty?
+      raise ArgumentError, 'Cannot set OAuth credentials when API token is already configured' if @api_key&.key?('Token') {{! Added mutual exclusivity check }}
+
+      @oauth_client_id = client_id
+      @oauth_client_secret = client_secret
+      @oauth_access_token = nil
+      @oauth_token_expires_at = nil
+    end
+
+    private
+
+    def fetch_oauth_access_token
+      @oauth_mutex.synchronize do
+        return @oauth_access_token if @oauth_access_token && @oauth_token_expires_at && Time.now.to_f < @oauth_token_expires_at
+
+        conn = Faraday.new(
+          url: base_url,
+          ssl: { ca_file: ssl_ca_file, verify: ssl_verify, verify_mode: ssl_verify_mode,
+                 client_cert: ssl_client_cert, client_key: ssl_client_key },
+          proxy: proxy
+        ) do |f|
+          configure_middleware(f)
+          f.adapter(Faraday.default_adapter)
+          configure_connection(f)
+        end
+
+        response = conn.post('/oauth/token') do |req|
+          req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+          req.options.timeout = timeout
+          req.body = URI.encode_www_form(
+            'client_id' => @oauth_client_id,
+            'client_secret' => @oauth_client_secret
+          )
+        end
+
+        unless response.success?
+          raise "OAuth token exchange failed with status #{response.status}: #{response.body}"
+        end
+
+        data = JSON.parse(response.body)
+        @oauth_access_token = data['access_token']
+        expires_in = data['expires_in'].to_i
+        @oauth_token_expires_at = Time.now.to_f + (expires_in - 30)
+
+        @oauth_access_token
+      end
+    end
+
+    public
+    {{! OAuth client credentials methods - END }}
     {{! END - Added api token, region and timeout}}
 
     # Gets API key (with prefix if set).
@@ -258,6 +332,19 @@ module {{moduleName}}
 
     # Returns Auth Settings hash for api client.
     def auth_settings
+      {{! OAuth override - BEGIN }}
+      if @oauth_client_id && !@oauth_client_id.empty?
+        return {
+          'Token' =>
+            {
+              type: 'bearer',
+              in: 'header',
+              key: 'Authorization',
+              value: "Bearer #{fetch_oauth_access_token}"
+            },
+        }
+      end
+      {{! OAuth override - END }}
       {
 {{#authMethods}}
 {{#isApiKey}}

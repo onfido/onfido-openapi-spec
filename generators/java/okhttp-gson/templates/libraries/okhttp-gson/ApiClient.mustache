@@ -130,6 +130,13 @@ public class ApiClient {
 
     protected HttpLoggingInterceptor loggingInterceptor;
 
+    {{! OAuth client credentials fields - BEGIN }}
+    private String oauthClientId;
+    private String oauthClientSecret;
+    private volatile String oauthAccessToken;
+    private volatile long oauthTokenExpiresAt;
+    {{! OAuth client credentials fields - END }}
+
     {{#dynamicOperations}}
     protected Map<String, ApiOperation> operationLookupMap = new HashMap<>();
 
@@ -584,6 +591,9 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setApiToken(String apiToken) {
+        if (this.oauthClientId != null) {
+            throw new IllegalStateException("Cannot set API token when OAuth credentials are already configured");
+        }
         this.setApiKey("Token token=" + apiToken);
 
         return this;
@@ -606,6 +616,83 @@ public class ApiClient {
         serverVariables.put("region", region.name().toLowerCase());
 
         return this;
+    }
+
+    /**
+     * Sets OAuth2 client credentials for authentication.
+     * The client will automatically exchange credentials for an access token
+     * and refresh it when expired. This is mutually exclusive with setApiToken.
+     *
+     * @param clientId OAuth2 client ID
+     * @param clientSecret OAuth2 client secret
+     * @return Api client
+     */
+    public ApiClient setOAuthCredentials(String clientId, String clientSecret) {
+        if (clientId == null || clientId.isEmpty()) {
+            throw new IllegalArgumentException("OAuth client ID must not be null or empty");
+        }
+        if (clientSecret == null || clientSecret.isEmpty()) {
+            throw new IllegalArgumentException("OAuth client secret must not be null or empty");
+        }
+        Authentication existingAuth = this.authentications.get("Token");
+        if (existingAuth instanceof ApiKeyAuth && ((ApiKeyAuth) existingAuth).getApiKey() != null) {
+            throw new IllegalStateException("Cannot set OAuth credentials when API token is already configured");
+        }
+
+        this.oauthClientId = clientId;
+        this.oauthClientSecret = clientSecret;
+        this.oauthAccessToken = null;
+        this.oauthTokenExpiresAt = 0;
+
+        HttpBearerAuth bearerAuth = new HttpBearerAuth("Bearer");
+        bearerAuth.setBearerToken(() -> getOAuthAccessToken());
+
+        Map<String, Authentication> newAuth = new HashMap<>(this.authentications);
+        newAuth.put("Token", bearerAuth);
+        this.authentications = Collections.unmodifiableMap(newAuth);
+
+        return this;
+    }
+
+    private String getEffectiveBasePath() {
+        if (serverIndex != null && serverIndex >= 0 && serverIndex < servers.size()) {
+            return servers.get(serverIndex).URL(serverVariables);
+        }
+        return basePath;
+    }
+
+    private synchronized String getOAuthAccessToken() {
+        if (oauthAccessToken != null && System.currentTimeMillis() < oauthTokenExpiresAt) {
+            return oauthAccessToken;
+        }
+
+        String tokenUrl = getEffectiveBasePath() + "/oauth/token";
+
+        RequestBody body = new FormBody.Builder()
+            .add("client_id", oauthClientId)
+            .add("client_secret", oauthClientSecret)
+            .build();
+
+        Request request = new Request.Builder()
+            .url(tokenUrl)
+            .post(body)
+            .build();
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("OAuth token exchange failed with status " + response.code());
+            }
+
+            String responseBody = response.body().string();
+            com.google.gson.JsonObject jsonResponse = com.google.gson.JsonParser.parseString(responseBody).getAsJsonObject();
+            oauthAccessToken = jsonResponse.get("access_token").getAsString();
+            long expiresIn = jsonResponse.get("expires_in").getAsLong();
+            oauthTokenExpiresAt = System.currentTimeMillis() + (expiresIn - 30) * 1000;
+
+            return oauthAccessToken;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to exchange OAuth credentials for access token", e);
+        }
     }
 
     /**
