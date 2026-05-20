@@ -281,7 +281,7 @@ module {{moduleName}}
           configure_connection(f)
         end
 
-        response = conn.post('/oauth/token') do |req|
+        response = conn.post('oauth/token') do |req|
           req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
           req.options.timeout = timeout
           req.body = URI.encode_www_form(
