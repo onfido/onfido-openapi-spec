@@ -47,6 +47,9 @@ webhook_response:
       type: string
       format: uuid
       description: The unique identifier of the webhook.
+    name:
+      type: string
+      description: Name of the webhook.
     url:
       $ref: "#/webhook_url"
     token:
@@ -60,11 +63,17 @@ webhook_create:
   required:
     - url
   properties:
+    name:
+      type: string
+      description: Name of the webhook.
     url:
       $ref: "#/webhook_url"
 
 webhook_update:
   properties:
+    name:
+      type: string
+      description: Name of the webhook.
     url:
       $ref: "#/webhook_url"
 
