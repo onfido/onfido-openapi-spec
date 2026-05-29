@@ -4514,6 +4514,10 @@
             "format" : "uuid",
             "type" : "string"
           },
+          "name" : {
+            "description" : "Name of the webhook.",
+            "type" : "string"
+          },
           "url" : {
             "$ref" : "#/components/schemas/webhook_url"
           },
@@ -4535,6 +4539,10 @@
       },
       "webhook_create" : {
         "properties" : {
+          "name" : {
+            "description" : "Name of the webhook.",
+            "type" : "string"
+          },
           "url" : {
             "$ref" : "#/components/schemas/webhook_url"
           }
@@ -4547,6 +4555,10 @@
       },
       "webhook_update" : {
         "properties" : {
+          "name" : {
+            "description" : "Name of the webhook.",
+            "type" : "string"
+          },
           "url" : {
             "$ref" : "#/components/schemas/webhook_url"
           }

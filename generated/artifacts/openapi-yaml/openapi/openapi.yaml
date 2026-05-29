@@ -2736,6 +2736,7 @@ components:
         url: url
         token: token
         oauth_server_scope: oauth_server_scope
+        name: name
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         href: href
         oauth_server_client_secret: oauth_server_client_secret
@@ -3575,6 +3576,9 @@ components:
           description: The unique identifier of the webhook.
           format: uuid
           type: string
+        name:
+          description: Name of the webhook.
+          type: string
         url:
           description: The url that will listen to notifications (must be https).
           type: string
@@ -3592,6 +3596,9 @@ components:
       type: string
     webhook_create:
       properties:
+        name:
+          description: Name of the webhook.
+          type: string
         url:
           description: The url that will listen to notifications (must be https).
           type: string
@@ -3610,6 +3617,9 @@ components:
       type: string
     webhook_update:
       properties:
+        name:
+          description: Name of the webhook.
+          type: string
         url:
           description: The url that will listen to notifications (must be https).
           type: string
@@ -6261,6 +6271,7 @@ components:
           url: url
           token: token
           oauth_server_scope: oauth_server_scope
+          name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           oauth_server_client_secret: oauth_server_client_secret
@@ -6278,6 +6289,7 @@ components:
           url: url
           token: token
           oauth_server_scope: oauth_server_scope
+          name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           href: href
           oauth_server_client_secret: oauth_server_client_secret
