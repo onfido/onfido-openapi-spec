@@ -1,0 +1,15 @@
+type: object
+title: Invalidated biometric tokens summary
+description: Invalidated biometric tokens response payload.
+required:
+  - deleted_items
+properties:
+  deleted_items:
+    type: object
+    description: Summary of invalidated biometric token items.
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+        description: Number of invalidated biometric tokens.

@@ -107,6 +107,11 @@ paths:
     $ref: paths/motion_captures.yaml#/download
   /motion_captures/{motion_capture_id}/frame:
     $ref: paths/motion_captures.yaml#/frame
+  # Biometric Tokens
+  /biometric_tokens/{user_id}:
+    $ref: paths/biometric_tokens.yaml#/biometric_tokens
+  /biometric_tokens/{user_id}/{token_uuid}:
+    $ref: paths/biometric_tokens.yaml#/biometric_token
   # Monitors
   /watchlist_monitors:
     $ref: paths/watchlist_monitors.yaml#/watchlist_monitors

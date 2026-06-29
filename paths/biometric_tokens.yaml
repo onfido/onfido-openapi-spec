@@ -1,0 +1,170 @@
+biometric_tokens:
+  get:
+    summary: List biometric tokens
+    operationId: list_biometric_tokens
+    description: >
+      Returns the biometric tokens associated with the supplied customer user ID.
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: Customer user ID that owns the biometric tokens.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Biometric tokens belonging to the user
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Biometric tokens list
+              required:
+                - biometric_tokens
+              properties:
+                biometric_tokens:
+                  type: array
+                  items:
+                    $ref: ../schemas/biometric_tokens/biometric_token.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Invalidate biometric tokens
+    operationId: invalidate_biometric_tokens
+    description: >
+      Invalidates every biometric token associated with the supplied customer user ID.
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: Customer user ID whose biometric tokens will be invalidated.
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Biometric tokens invalidated
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Invalidated biometric tokens summary
+              required:
+                - biometric_tokens
+              properties:
+                biometric_tokens:
+                  $ref: ../schemas/biometric_tokens/invalidated_biometric_token_summary.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+biometric_token:
+  get:
+    summary: Retrieve biometric token
+    operationId: find_biometric_token
+    description: >
+      Returns a biometric token's details.
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: Customer user ID that owns the biometric token.
+        schema:
+          type: string
+      - name: token_uuid
+        in: path
+        required: true
+        description: Biometric token UUID.
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "200":
+        description: The requested biometric token
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Biometric token
+              required:
+                - biometric_token
+              properties:
+                biometric_token:
+                  $ref: ../schemas/biometric_tokens/biometric_token.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  put:
+    summary: Update biometric token
+    operationId: update_biometric_token
+    description: >
+      Updates a biometric token's status.
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: Customer user ID that owns the biometric token.
+        schema:
+          type: string
+      - name: token_uuid
+        in: path
+        required: true
+        description: Biometric token UUID.
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      description: Biometric token update payload.
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/biometric_tokens/biometric_token_updater.yaml
+    responses:
+      "200":
+        description: Biometric token updated
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - biometric_token
+              properties:
+                biometric_token:
+                  $ref: ../schemas/biometric_tokens/biometric_token.yaml
+      default:
+        $ref: ../responses/default_error.yaml
+
+  delete:
+    summary: Invalidate biometric token
+    operationId: invalidate_biometric_token
+    description: >
+      Invalidates a biometric token.
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: Customer user ID that owns the biometric token.
+        schema:
+          type: string
+      - name: token_uuid
+        in: path
+        required: true
+        description: Biometric token UUID.
+        schema:
+          type: string
+          format: uuid
+    responses:
+      "200":
+        description: Biometric token invalidated
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Invalidated biometric tokens summary
+              required:
+                - biometric_token
+              properties:
+                biometric_token:
+                  $ref: ../schemas/biometric_tokens/invalidated_biometric_token_summary.yaml
+      default:
+        $ref: ../responses/default_error.yaml

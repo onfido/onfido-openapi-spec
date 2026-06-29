@@ -1,0 +1,11 @@
+type: object
+title: Biometric token updater
+required:
+  - status
+properties:
+  status:
+    type: string
+    description: Desired biometric token status value.
+    enum:
+      - approved
+      - declined
