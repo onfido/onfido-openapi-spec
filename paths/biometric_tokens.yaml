@@ -160,7 +160,7 @@ biometric_token:
           application/json:
             schema:
               type: object
-              title: Invalidated biometric tokens summary
+              title: Invalidated biometric token summary
               required:
                 - biometric_token
               properties:
