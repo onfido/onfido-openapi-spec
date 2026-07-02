@@ -1,0 +1,37 @@
+type: object
+title: Biometric token
+description: Biometric token.
+required:
+  - uuid
+  - data
+properties:
+  uuid:
+    type: string
+    format: uuid
+    description: The biometric token's unique identifier.
+  data:
+    type: object
+    description: Token metadata.
+    required:
+      - inserted_at
+      - media_type
+      - status
+    properties:
+      inserted_at:
+        type: string
+        format: date-time
+        description: Timestamp indicating when the biometric token was created.
+      media_type:
+        type: string
+        description: Type of media associated with the biometric token.
+      status:
+        type: string
+        description: Current biometric token status.
+        enum:
+          - awaiting_input
+          - processing
+          - error
+          - abandoned
+          - review
+          - declined
+          - approved
