@@ -27,6 +27,7 @@ SECTIONS = (
              'workflow_runs': None,
              'tasks': None,
              'motion_captures': 'Motion captures',
+             'biometric_tokens': 'Biometric tokens',
              'watchlist_monitors': 'Monitors',
              'id_photos': 'ID Photos',
              'signing_documents': 'Signing documents',
