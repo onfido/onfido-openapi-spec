@@ -1688,6 +1688,246 @@
         "tags": ["Core Resources | Motion captures"]
       }
     },
+    "/biometric_tokens/{user_id}": {
+      "delete": {
+        "description": "Invalidates every biometric token associated with the supplied customer user ID.\n",
+        "operationId": "invalidate_biometric_tokens",
+        "parameters": [
+          {
+            "description": "Customer user ID whose biometric tokens will be invalidated.",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invalidated_biometric_tokens_summary"
+                }
+              }
+            },
+            "description": "Biometric tokens invalidated"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Invalidate biometric tokens",
+        "tags": ["Core Resources | Biometric tokens"]
+      },
+      "get": {
+        "description": "Returns the biometric tokens associated with the supplied customer user ID.\n",
+        "operationId": "list_biometric_tokens",
+        "parameters": [
+          {
+            "description": "Customer user ID that owns the biometric tokens.",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Biometric_tokens_list"
+                }
+              }
+            },
+            "description": "Biometric tokens belonging to the user"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "List biometric tokens",
+        "tags": ["Core Resources | Biometric tokens"]
+      }
+    },
+    "/biometric_tokens/{user_id}/{token_uuid}": {
+      "delete": {
+        "description": "Invalidates a biometric token.\n",
+        "operationId": "invalidate_biometric_token",
+        "parameters": [
+          {
+            "description": "Customer user ID that owns the biometric token.",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Biometric token UUID.",
+            "in": "path",
+            "name": "token_uuid",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invalidated_biometric_token_summary"
+                }
+              }
+            },
+            "description": "Biometric token invalidated"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Invalidate biometric token",
+        "tags": ["Core Resources | Biometric tokens"]
+      },
+      "get": {
+        "description": "Returns a biometric token's details.\n",
+        "operationId": "find_biometric_token",
+        "parameters": [
+          {
+            "description": "Customer user ID that owns the biometric token.",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Biometric token UUID.",
+            "in": "path",
+            "name": "token_uuid",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Biometric_token"
+                }
+              }
+            },
+            "description": "The requested biometric token"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Retrieve biometric token",
+        "tags": ["Core Resources | Biometric tokens"]
+      },
+      "put": {
+        "description": "Updates a biometric token's status.\n",
+        "operationId": "update_biometric_token",
+        "parameters": [
+          {
+            "description": "Customer user ID that owns the biometric token.",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Biometric token UUID.",
+            "in": "path",
+            "name": "token_uuid",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/biometric_token_updater"
+              }
+            }
+          },
+          "description": "Biometric token update payload.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_biometric_token_200_response"
+                }
+              }
+            },
+            "description": "Biometric token updated"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "summary": "Update biometric token",
+        "tags": ["Core Resources | Biometric tokens"]
+      }
+    },
     "/watchlist_monitors": {
       "get": {
         "description": "List all available monitors for an applicant\n",
@@ -3808,6 +4048,45 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "biometric_token": {
+        "description": "Biometric token.",
+        "properties": {
+          "uuid": {
+            "description": "The biometric token's unique identifier.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/biometric_token_data"
+          }
+        },
+        "required": ["data", "uuid"],
+        "title": "Biometric token",
+        "type": "object"
+      },
+      "invalidated_biometric_token_summary": {
+        "description": "Invalidated biometric tokens response payload.",
+        "properties": {
+          "deleted_items": {
+            "$ref": "#/components/schemas/invalidated_biometric_token_summary_deleted_items"
+          }
+        },
+        "required": ["deleted_items"],
+        "title": "Invalidated biometric tokens summary",
+        "type": "object"
+      },
+      "biometric_token_updater": {
+        "properties": {
+          "status": {
+            "description": "Desired biometric token status value.",
+            "enum": ["approved", "declined"],
+            "type": "string"
+          }
+        },
+        "required": ["status"],
+        "title": "Biometric token updater",
         "type": "object"
       },
       "watchlist_monitor": {
@@ -7208,6 +7487,58 @@
         "title": "Motion Captures list",
         "type": "object"
       },
+      "Biometric_tokens_list": {
+        "properties": {
+          "biometric_tokens": {
+            "items": {
+              "$ref": "#/components/schemas/biometric_token"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["biometric_tokens"],
+        "title": "Biometric tokens list",
+        "type": "object"
+      },
+      "Invalidated_biometric_tokens_summary": {
+        "properties": {
+          "biometric_tokens": {
+            "$ref": "#/components/schemas/invalidated_biometric_token_summary"
+          }
+        },
+        "required": ["biometric_tokens"],
+        "title": "Invalidated biometric tokens summary",
+        "type": "object"
+      },
+      "Biometric_token": {
+        "properties": {
+          "biometric_token": {
+            "$ref": "#/components/schemas/biometric_token"
+          }
+        },
+        "required": ["biometric_token"],
+        "title": "Biometric token",
+        "type": "object"
+      },
+      "update_biometric_token_200_response": {
+        "properties": {
+          "biometric_token": {
+            "$ref": "#/components/schemas/biometric_token"
+          }
+        },
+        "required": ["biometric_token"],
+        "type": "object"
+      },
+      "Invalidated_biometric_token_summary": {
+        "properties": {
+          "biometric_token": {
+            "$ref": "#/components/schemas/invalidated_biometric_token_summary"
+          }
+        },
+        "required": ["biometric_token"],
+        "title": "Invalidated biometric token summary",
+        "type": "object"
+      },
       "Watchlist_monitors_list": {
         "properties": {
           "monitors": {
@@ -7349,6 +7680,46 @@
           }
         ],
         "title": "Complete Task Data Builder"
+      },
+      "biometric_token_data": {
+        "description": "Token metadata.",
+        "properties": {
+          "inserted_at": {
+            "description": "Timestamp indicating when the biometric token was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "media_type": {
+            "description": "Type of media associated with the biometric token.",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current biometric token status.",
+            "enum": [
+              "awaiting_input",
+              "processing",
+              "error",
+              "abandoned",
+              "review",
+              "declined",
+              "approved"
+            ],
+            "type": "string"
+          }
+        },
+        "required": ["inserted_at", "media_type", "status"],
+        "type": "object"
+      },
+      "invalidated_biometric_token_summary_deleted_items": {
+        "description": "Summary of invalidated biometric token items.",
+        "properties": {
+          "count": {
+            "description": "Number of invalidated biometric tokens.",
+            "type": "integer"
+          }
+        },
+        "required": ["count"],
+        "type": "object"
       },
       "Watchlist_monitor_match": {
         "properties": {
