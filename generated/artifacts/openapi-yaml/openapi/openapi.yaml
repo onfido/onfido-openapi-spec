@@ -1113,7 +1113,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invalidated_biometric_tokens_summary"
+                $ref: "#/components/schemas/Invalidated_biometric_tokens_response"
           description: Biometric tokens invalidated
         default:
           content:
@@ -1138,7 +1138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Biometric_tokens_list"
+                $ref: "#/components/schemas/Biometric_tokens_response"
           description: Biometric tokens belonging to the user
         default:
           content:
@@ -1171,7 +1171,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invalidated_biometric_token_summary"
+                $ref: "#/components/schemas/Invalidated_biometric_token_response"
           description: Biometric token invalidated
         default:
           content:
@@ -1203,7 +1203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Biometric_token"
+                $ref: "#/components/schemas/Biometric_token_response"
           description: The requested biometric token
         default:
           content:
@@ -1242,7 +1242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/update_biometric_token_200_response"
+                $ref: "#/components/schemas/Updated_biometric_token_response"
           description: Biometric token updated
         default:
           content:
@@ -6378,7 +6378,7 @@ components:
       - motion_captures
       title: Motion Captures list
       type: object
-    Biometric_tokens_list:
+    Biometric_tokens_response:
       example:
         biometric_tokens:
         - data:
@@ -6398,9 +6398,9 @@ components:
           type: array
       required:
       - biometric_tokens
-      title: Biometric tokens list
+      title: Biometric tokens response
       type: object
-    Invalidated_biometric_tokens_summary:
+    Invalidated_biometric_tokens_response:
       example:
         biometric_tokens:
           deleted_items:
@@ -6410,9 +6410,9 @@ components:
           $ref: "#/components/schemas/invalidated_biometric_token_summary"
       required:
       - biometric_tokens
-      title: Invalidated biometric tokens summary
+      title: Invalidated biometric tokens response
       type: object
-    Biometric_token:
+    Biometric_token_response:
       example:
         biometric_token:
           data:
@@ -6425,9 +6425,9 @@ components:
           $ref: "#/components/schemas/biometric_token"
       required:
       - biometric_token
-      title: Biometric token
+      title: Biometric token response
       type: object
-    update_biometric_token_200_response:
+    Updated_biometric_token_response:
       example:
         biometric_token:
           data:
@@ -6440,8 +6440,9 @@ components:
           $ref: "#/components/schemas/biometric_token"
       required:
       - biometric_token
+      title: Updated biometric token response
       type: object
-    Invalidated_biometric_token_summary:
+    Invalidated_biometric_token_response:
       example:
         biometric_token:
           deleted_items:
@@ -6451,7 +6452,7 @@ components:
           $ref: "#/components/schemas/invalidated_biometric_token_summary"
       required:
       - biometric_token
-      title: Invalidated biometric token summary
+      title: Invalidated biometric token response
       type: object
     Watchlist_monitors_list:
       example:
