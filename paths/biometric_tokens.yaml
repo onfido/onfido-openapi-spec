@@ -18,7 +18,7 @@ biometric_tokens:
           application/json:
             schema:
               type: object
-              title: Biometric tokens list
+              title: Biometric tokens response
               required:
                 - biometric_tokens
               properties:
@@ -48,7 +48,7 @@ biometric_tokens:
           application/json:
             schema:
               type: object
-              title: Invalidated biometric tokens summary
+              title: Invalidated biometric tokens response
               required:
                 - biometric_tokens
               properties:
@@ -84,7 +84,7 @@ biometric_token:
           application/json:
             schema:
               type: object
-              title: Biometric token
+              title: Biometric token response
               required:
                 - biometric_token
               properties:
@@ -126,6 +126,7 @@ biometric_token:
           application/json:
             schema:
               type: object
+              title: Updated biometric token response
               required:
                 - biometric_token
               properties:
@@ -160,7 +161,7 @@ biometric_token:
           application/json:
             schema:
               type: object
-              title: Invalidated biometric token summary
+              title: Invalidated biometric token response
               required:
                 - biometric_token
               properties:
