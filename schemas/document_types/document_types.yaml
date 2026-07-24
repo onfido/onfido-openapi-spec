@@ -75,4 +75,6 @@ enum:
   - identity_document_with_address
   - exchange_house_statement
   - accommodation_tenancy_certificate
+  - diplomatic_id
+  - travel_document
 type: string
