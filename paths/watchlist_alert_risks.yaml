@@ -1,0 +1,45 @@
+watchlist_alert_risks:
+  get:
+    summary: Retrieve watchlist alert risks
+    operationId: list_watchlist_alert_risks
+    description: >
+      Retrieves the detailed risks associated with a watchlist alert.
+    parameters:
+      - name: alert_id
+        in: path
+        required: true
+        description: The unique identifier of the alert whose risks you want to retrieve.
+        schema:
+          type: string
+          format: uuid
+      - name: page
+        in: query
+        required: false
+        description: The page of results to retrieve.
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: The number of risks to return per page.
+        schema:
+          type: integer
+          default: 25
+    responses:
+      "200":
+        description: An array of watchlist alert risks.
+        headers:
+          X-Total-Count:
+            description: The total number of risks associated with the alert.
+            schema:
+              type: integer
+        content:
+          application/json:
+            schema:
+              type: array
+              title: Watchlist alert risks
+              items:
+                $ref: ../schemas/watchlist_alert_risks/watchlist_alert_risk.yaml
+      default:
+        $ref: ../responses/default_error.yaml

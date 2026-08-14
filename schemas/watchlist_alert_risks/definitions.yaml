@@ -1,0 +1,388 @@
+watchlist_alert_risk:
+  type: object
+  properties:
+    created_at:
+      type: string
+      format: date-time
+      description: The date and time at which the risk record was created.
+    decision:
+      allOf:
+        - $ref: "#/risk_decision"
+      description: The review decision currently applied to the risk.
+    previous_decision:
+      nullable: true
+      allOf:
+        - $ref: "#/risk_decision"
+      description: The previous review decision, if one exists.
+    detail:
+      allOf:
+        - $ref: "#/risk_detail"
+      description: Additional details about the risk.
+    identifier:
+      type: string
+      description: The unique identifier of the risk record.
+    type:
+      type: string
+      description: The type of risk returned for the alert.
+    updated_by:
+      type: string
+      nullable: true
+      description: The identifier of the user or system that last updated the risk decision.
+    updated_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: The date and time at which the risk record was last updated.
+
+risk_decision:
+  type: string
+  enum:
+    - NOT_REVIEWED
+    - IN_REVIEW
+    - FALSE_POSITIVE
+    - TRUE_POSITIVE
+
+risk_detail:
+  type: object
+  properties:
+    change_type:
+      type: string
+      nullable: true
+      description: The type of change that triggered the risk, if available.
+    configuration_identifier:
+      type: string
+      format: uuid
+      nullable: true
+      description: The identifier of the screening configuration associated with the risk.
+    profile:
+      nullable: true
+      allOf:
+        - $ref: "#/profile"
+      description: The matched profile associated with the risk.
+    added_mentions:
+      nullable: true
+      allOf:
+        - $ref: "#/added_mentions"
+      description: Newly added mentions associated with the risk.
+
+added_mentions:
+  type: object
+  properties:
+    added_aml_types:
+      type: array
+      nullable: true
+      items:
+        type: string
+    added_snippets:
+      type: array
+      nullable: true
+      items:
+        type: string
+    added_listings:
+      type: array
+      nullable: true
+      items:
+        type: string
+
+profile:
+  type: object
+  properties:
+    identifier:
+      type: string
+      nullable: true
+    match_types:
+      type: array
+      nullable: true
+      items:
+        type: string
+    match_score:
+      type: number
+      description: The match score assigned to the profile.
+    matching_name:
+      type: string
+      nullable: true
+    person:
+      nullable: true
+      allOf:
+        - $ref: "#/person"
+    risk_indicators:
+      nullable: true
+      allOf:
+        - $ref: "#/risk_indicators"
+
+person:
+  type: object
+  properties:
+    associates:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/associate"
+    dates_of_birth:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/date_value"
+    dates_of_death:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/date_value"
+    images:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/image"
+    names:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/name"
+    places_of_birth:
+      type: array
+      nullable: true
+      items:
+        type: string
+
+associate:
+  type: object
+  properties:
+    name:
+      type: string
+      nullable: true
+    type:
+      type: string
+      nullable: true
+
+date_value:
+  type: object
+  properties:
+    source:
+      type: string
+      nullable: true
+    value:
+      type: string
+      nullable: true
+
+image:
+  type: object
+  properties:
+    source:
+      type: string
+      nullable: true
+    url:
+      type: string
+      nullable: true
+
+name:
+  type: object
+  properties:
+    name:
+      type: string
+      nullable: true
+    type:
+      type: string
+      nullable: true
+
+risk_indicators:
+  type: object
+  properties:
+    aml_types:
+      type: array
+      nullable: true
+      items:
+        type: string
+    lists:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/lists"
+    media:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/media"
+    peps:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/pep"
+    sanctions:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/sanctions"
+
+sanctions:
+  type: object
+  properties:
+    aml_types:
+      type: array
+      nullable: true
+      items:
+        type: string
+    country_codes:
+      type: array
+      nullable: true
+      items:
+        type: string
+    fields:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/field"
+    identifier:
+      type: string
+      nullable: true
+    listing_ended_utc:
+      type: string
+      nullable: true
+    listing_started_utc:
+      type: string
+      nullable: true
+    name:
+      type: string
+      nullable: true
+    related_urls:
+      type: array
+      nullable: true
+      items:
+        type: string
+    url:
+      type: string
+      nullable: true
+
+media:
+  type: object
+  properties:
+    identifier:
+      type: string
+      nullable: true
+    publishing_date:
+      type: string
+      nullable: true
+    snippet:
+      type: string
+      nullable: true
+    title:
+      type: string
+      nullable: true
+    url:
+      type: string
+      nullable: true
+
+lists:
+  type: object
+  properties:
+    aml_types:
+      type: array
+      nullable: true
+      items:
+        type: string
+    country_codes:
+      type: array
+      nullable: true
+      items:
+        type: string
+    fields:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/field"
+    identifier:
+      type: string
+      nullable: true
+    listing_ended_utc:
+      type: string
+      nullable: true
+    listing_started_utc:
+      type: string
+      nullable: true
+    name:
+      type: string
+      nullable: true
+    related_urls:
+      type: array
+      nullable: true
+      items:
+        type: string
+    url:
+      type: string
+      nullable: true
+
+pep:
+  type: object
+  properties:
+    aml_types:
+      type: array
+      nullable: true
+      items:
+        type: string
+    active_end_dates:
+      type: array
+      nullable: true
+      items:
+        type: string
+    active_start_dates:
+      type: array
+      nullable: true
+      items:
+        type: string
+    country_codes:
+      type: array
+      nullable: true
+      items:
+        type: string
+    fields:
+      type: array
+      nullable: true
+      items:
+        $ref: "#/field"
+    identifier:
+      type: string
+      nullable: true
+    listing_ended_utc:
+      type: string
+      nullable: true
+    listing_started_utc:
+      type: string
+      nullable: true
+    name:
+      type: string
+      nullable: true
+    political_parties:
+      type: array
+      nullable: true
+      items:
+        type: string
+    political_positions:
+      type: array
+      nullable: true
+      items:
+        type: string
+    political_regions:
+      type: array
+      nullable: true
+      items:
+        type: string
+    related_urls:
+      type: array
+      nullable: true
+      items:
+        type: string
+    url:
+      type: string
+      nullable: true
+
+field:
+  type: object
+  properties:
+    name:
+      type: string
+      nullable: true
+    tag:
+      type: string
+      nullable: true
+    value:
+      type: string
+      nullable: true
