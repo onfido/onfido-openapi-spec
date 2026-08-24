@@ -94,7 +94,13 @@
         form_params.each do |key, value|
           case value
           when ::File, ::Tempfile
-            data[key] = Faraday::FilePart.new(value.path, Marcel::MimeType.for(Pathname.new(value.path)))
+            {{! SP-374: Marcel MIME fallback for unrecognized extensions (e.g. .json) - BEGIN }}
+            mime = Marcel::MimeType.for(Pathname.new(value.path))
+            if mime == 'application/octet-stream'
+              mime = Marcel::MimeType.for(extension: File.extname(value.path).delete_prefix('.')) || mime
+            end
+            data[key] = Faraday::FilePart.new(value.path, mime)
+            {{! SP-374: Marcel MIME fallback for unrecognized extensions (e.g. .json) - END }}
           when ::Array, nil
             # let Faraday handle Array and nil parameters
             data[key] = value
