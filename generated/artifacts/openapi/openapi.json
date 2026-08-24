@@ -2059,6 +2059,75 @@
         "summary" : "Force new report creation (BETA)"
       }
     },
+    "/complyadvantage_watchlists/alerts/{alert_id}/risks" : {
+      "get" : {
+        "description" : "Retrieves the detailed risks associated with a watchlist alert.\n",
+        "operationId" : "list_watchlist_alert_risks",
+        "parameters" : [ {
+          "description" : "The unique identifier of the alert whose risks you want to retrieve.",
+          "in" : "path",
+          "name" : "alert_id",
+          "required" : true,
+          "schema" : {
+            "format" : "uuid",
+            "type" : "string"
+          }
+        }, {
+          "description" : "The page of results to retrieve.",
+          "in" : "query",
+          "name" : "page",
+          "required" : false,
+          "schema" : {
+            "default" : 1,
+            "type" : "integer"
+          }
+        }, {
+          "description" : "The number of risks to return per page.",
+          "in" : "query",
+          "name" : "per_page",
+          "required" : false,
+          "schema" : {
+            "default" : 25,
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/watchlist_alert_risk"
+                  },
+                  "title" : "Watchlist alert risks",
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "An array of watchlist alert risks.",
+            "headers" : {
+              "X-Total-Count" : {
+                "description" : "The total number of risks associated with the alert.",
+                "schema" : {
+                  "type" : "integer"
+                }
+              }
+            }
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Unexpected error"
+          }
+        },
+        "summary" : "Retrieve watchlist alert risks"
+      }
+    },
     "/id_photos" : {
       "get" : {
         "description" : "Lists the ID photos that belong to an applicant.\n",
@@ -3850,6 +3919,11 @@
         },
         "type" : "object"
       },
+      "watchlist_alert_risk" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/watchlist_alert_risk_1"
+        } ]
+      },
       "id_photo" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/id_photo_response"
@@ -4664,6 +4738,525 @@
           }
         },
         "required" : [ "id" ],
+        "type" : "object"
+      },
+      "watchlist_alert_risk_1" : {
+        "properties" : {
+          "created_at" : {
+            "description" : "The date and time at which the risk record was created.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "decision" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/risk_decision"
+            } ],
+            "description" : "The review decision currently applied to the risk."
+          },
+          "previous_decision" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/risk_decision"
+            } ],
+            "description" : "The previous review decision, if one exists.",
+            "nullable" : true
+          },
+          "detail" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/risk_detail"
+            } ],
+            "description" : "Additional details about the risk."
+          },
+          "identifier" : {
+            "description" : "The unique identifier of the risk record.",
+            "type" : "string"
+          },
+          "type" : {
+            "description" : "The type of risk returned for the alert.",
+            "type" : "string"
+          },
+          "updated_by" : {
+            "description" : "The identifier of the user or system that last updated the risk decision.",
+            "nullable" : true,
+            "type" : "string"
+          },
+          "updated_at" : {
+            "description" : "The date and time at which the risk record was last updated.",
+            "format" : "date-time",
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "risk_decision" : {
+        "enum" : [ "NOT_REVIEWED", "IN_REVIEW", "FALSE_POSITIVE", "TRUE_POSITIVE" ],
+        "type" : "string"
+      },
+      "risk_detail" : {
+        "properties" : {
+          "change_type" : {
+            "description" : "The type of change that triggered the risk, if available.",
+            "nullable" : true,
+            "type" : "string"
+          },
+          "configuration_identifier" : {
+            "description" : "The identifier of the screening configuration associated with the risk.",
+            "format" : "uuid",
+            "nullable" : true,
+            "type" : "string"
+          },
+          "profile" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/profile"
+            } ],
+            "description" : "The matched profile associated with the risk.",
+            "nullable" : true
+          },
+          "added_mentions" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/added_mentions"
+            } ],
+            "description" : "Newly added mentions associated with the risk.",
+            "nullable" : true
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : {
+        "properties" : {
+          "identifier" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "match_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "match_score" : {
+            "description" : "The match score assigned to the profile.",
+            "type" : "number"
+          },
+          "matching_name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "person" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/person"
+            } ],
+            "nullable" : true
+          },
+          "risk_indicators" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/risk_indicators"
+            } ],
+            "nullable" : true
+          }
+        },
+        "type" : "object"
+      },
+      "person" : {
+        "properties" : {
+          "associates" : {
+            "items" : {
+              "$ref" : "#/components/schemas/associate"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "dates_of_birth" : {
+            "items" : {
+              "$ref" : "#/components/schemas/date_value"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "dates_of_death" : {
+            "items" : {
+              "$ref" : "#/components/schemas/date_value"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "images" : {
+            "items" : {
+              "$ref" : "#/components/schemas/image"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "names" : {
+            "items" : {
+              "$ref" : "#/components/schemas/name"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "places_of_birth" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "associate" : {
+        "properties" : {
+          "name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "type" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "date_value" : {
+        "properties" : {
+          "source" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "value" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "image" : {
+        "properties" : {
+          "source" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "url" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "name" : {
+        "properties" : {
+          "name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "type" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "risk_indicators" : {
+        "properties" : {
+          "aml_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "lists" : {
+            "items" : {
+              "$ref" : "#/components/schemas/lists"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "media" : {
+            "items" : {
+              "$ref" : "#/components/schemas/media"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "peps" : {
+            "items" : {
+              "$ref" : "#/components/schemas/pep"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "sanctions" : {
+            "items" : {
+              "$ref" : "#/components/schemas/sanctions"
+            },
+            "nullable" : true,
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "lists" : {
+        "properties" : {
+          "aml_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "country_codes" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "fields" : {
+            "items" : {
+              "$ref" : "#/components/schemas/field"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "identifier" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "listing_ended_utc" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "listing_started_utc" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "related_urls" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "url" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "field" : {
+        "properties" : {
+          "name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "tag" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "value" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "media" : {
+        "properties" : {
+          "identifier" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "publishing_date" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "snippet" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "title" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "url" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "pep" : {
+        "properties" : {
+          "aml_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "active_end_dates" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "active_start_dates" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "country_codes" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "fields" : {
+            "items" : {
+              "$ref" : "#/components/schemas/field"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "identifier" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "listing_ended_utc" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "listing_started_utc" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "political_parties" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "political_positions" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "political_regions" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "related_urls" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "url" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "sanctions" : {
+        "properties" : {
+          "aml_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "country_codes" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "fields" : {
+            "items" : {
+              "$ref" : "#/components/schemas/field"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "identifier" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "listing_ended_utc" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "listing_started_utc" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "name" : {
+            "nullable" : true,
+            "type" : "string"
+          },
+          "related_urls" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "url" : {
+            "nullable" : true,
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "added_mentions" : {
+        "properties" : {
+          "added_aml_types" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "added_snippets" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          },
+          "added_listings" : {
+            "items" : {
+              "type" : "string"
+            },
+            "nullable" : true,
+            "type" : "array"
+          }
+        },
         "type" : "object"
       },
       "id_photo_response" : {
