@@ -29,6 +29,7 @@ SECTIONS = (
              'motion_captures': 'Motion captures',
              'biometric_tokens': 'Biometric tokens',
              'watchlist_monitors': 'Monitors',
+             'complyadvantage_watchlists': 'ComplyAdvantage Watchlists',
              'id_photos': 'ID Photos',
              'signing_documents': 'Signing documents',
              'qualified_electronic_signature': 'Qualified Electronic Signature',
