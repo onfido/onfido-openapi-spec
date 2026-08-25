@@ -56,6 +56,87 @@ SECTIONS = (
 PROMOTED_PATH = ('tasks', 'timeline_file')
 
 
+PLACEHOLDER_UUID = '00000000-0000-0000-0000-000000000000'
+
+# Sensible example values for common string fields that lack an explicit example.
+# Keys are property names; the value is injected as the "example" when the schema
+# is type: string with no format and no existing example.
+PLACEHOLDER_STRINGS = {
+    # Applicant (from public docs example response)
+    'first_name': 'Jane',
+    'last_name': 'Doe',
+    'applicant_first_name': 'Jane',
+    'applicant_last_name': 'Doe',
+    'email': 'jane.doe@example.com',
+    'phone_number': '+44 7911 123456',
+    'customer_user_id': 'customer-12345',
+    # Address (from public docs example response)
+    'flat_number': '3',
+    'building_number': '29',
+    'building_name': 'Albert Court',
+    'street': 'Second Street',
+    'sub_street': '',
+    'town': 'London',
+    'state': 'TX',
+    'postcode': 'SW4 6EH',
+    'line1': '29 Second Street',
+    'line2': 'Albert Court',
+    'line3': '',
+    # US Driving Licence
+    'id_number': 'D1234567',
+    'issue_state': 'CA',
+    'address_line_1': '100 Main Street',
+    'address_line_2': 'Apt 4B',
+    'city': 'San Francisco',
+    'postal_code': '94105',
+    'middle_name': 'Mary',
+    'name_suffix': 'Jr',
+    # Location (from public docs example response)
+    'ip_address': '127.0.0.1',
+    # Document
+    'issuing_country': 'GBR',
+    'file_type': 'png',
+    'side': 'front',
+    # SDK token
+    'referrer': 'https://*.example.com/*',
+    'application_id': 'com.example.app',
+    # Webhook
+    'url': 'https://example.com/webhooks/onfido',
+    # ID numbers
+    'value': 'AB123456C',
+    'state_code': 'CA',
+}
+
+# Example values keyed by schema format (takes precedence over field name)
+PLACEHOLDER_FORMATS = {
+    'uuid': PLACEHOLDER_UUID,
+}
+
+
+def add_schema_examples(spec_dict, parent_key=None):
+    """
+    Recursively find any type: string schema that lacks an example and inject
+    a safe placeholder based on format or property name. This prevents Postman's
+    secret scanner from flagging auto-generated UUIDs and produces readable
+    example payloads.
+    """
+    if isinstance(spec_dict, dict):
+        if spec_dict.get('type') == 'string' and 'example' not in spec_dict:
+            fmt = spec_dict.get('format')
+            if fmt in PLACEHOLDER_FORMATS:
+                spec_dict['example'] = PLACEHOLDER_FORMATS[fmt]
+            elif (fmt is None
+                    and 'enum' not in spec_dict
+                    and parent_key in PLACEHOLDER_STRINGS):
+                spec_dict['example'] = PLACEHOLDER_STRINGS[parent_key]
+
+        for key, value in spec_dict.items():
+            add_schema_examples(value, parent_key=key)
+    elif isinstance(spec_dict, list):
+        for item in spec_dict:
+            add_schema_examples(item, parent_key=parent_key)
+
+
 def convert_path(snake_str: str) -> None:
     return " ".join(x.capitalize() for x in snake_str.lower().split("_"))
 
@@ -88,6 +169,7 @@ def patch_spec(input_spec_file: str, output_spec_file: str) -> dict:
                 spec_dict['paths'][path][method]['tags'] = [tag]
 
     with open(output_spec_file, 'w') as fp:
+        add_schema_examples(spec_dict)
         json.dump(spec_dict, fp, indent=2)
 
     return spec_dict
