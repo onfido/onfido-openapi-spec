@@ -1438,8 +1438,8 @@ paths:
   /complyadvantage_watchlists/alerts/{alert_id}/risks:
     get:
       description: |
-        Retrieves the detailed risks associated with a watchlist alert.
-      operationId: list_watchlist_alert_risks
+        Retrieves the detailed risks associated with a watchlist mesh alert.
+      operationId: list_watchlist_mesh_alert_risks
       parameters:
       - description: The unique identifier of the alert whose risks you want to retrieve.
         in: path
@@ -1468,7 +1468,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/watchlist_alert_risk"
+                  $ref: "#/components/schemas/watchlist_mesh_alert_risk"
                 title: Watchlist alert risks
                 type: array
           description: An array of watchlist alert risks.
@@ -1483,7 +1483,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Unexpected error
-      summary: Retrieve watchlist alert risks
+      summary: Retrieve watchlist mesh alert risks
   /id_photos:
     get:
       description: |
@@ -2888,9 +2888,9 @@ components:
             type: string
           type: array
       type: object
-    watchlist_alert_risk:
+    watchlist_mesh_alert_risk:
       allOf:
-      - $ref: "#/components/schemas/watchlist_alert_risk_1"
+      - $ref: "#/components/schemas/watchlist_mesh_alert_risk_1"
       example:
         identifier: identifier
         previous_decision: ""
@@ -3732,7 +3732,7 @@ components:
       required:
       - id
       type: object
-    watchlist_alert_risk_1:
+    watchlist_mesh_alert_risk_1:
       properties:
         created_at:
           description: The date and time at which the risk record was created.
@@ -3740,16 +3740,16 @@ components:
           type: string
         decision:
           allOf:
-          - $ref: "#/components/schemas/risk_decision"
+          - $ref: "#/components/schemas/watchlist_mesh_risk_decision"
           description: The review decision currently applied to the risk.
         previous_decision:
           allOf:
-          - $ref: "#/components/schemas/risk_decision"
+          - $ref: "#/components/schemas/watchlist_mesh_risk_decision"
           description: "The previous review decision, if one exists."
           nullable: true
         detail:
           allOf:
-          - $ref: "#/components/schemas/risk_detail"
+          - $ref: "#/components/schemas/watchlist_mesh_risk_detail"
           description: Additional details about the risk.
         identifier:
           description: The unique identifier of the risk record.
@@ -3768,14 +3768,14 @@ components:
           nullable: true
           type: string
       type: object
-    risk_decision:
+    watchlist_mesh_risk_decision:
       enum:
       - NOT_REVIEWED
       - IN_REVIEW
       - FALSE_POSITIVE
       - TRUE_POSITIVE
       type: string
-    risk_detail:
+    watchlist_mesh_risk_detail:
       properties:
         change_type:
           description: "The type of change that triggered the risk, if available."
@@ -3789,16 +3789,16 @@ components:
           type: string
         profile:
           allOf:
-          - $ref: "#/components/schemas/profile"
+          - $ref: "#/components/schemas/watchlist_mesh_profile"
           description: The matched profile associated with the risk.
           nullable: true
         added_mentions:
           allOf:
-          - $ref: "#/components/schemas/added_mentions"
+          - $ref: "#/components/schemas/watchlist_mesh_added_mentions"
           description: Newly added mentions associated with the risk.
           nullable: true
       type: object
-    profile:
+    watchlist_mesh_profile:
       properties:
         identifier:
           nullable: true
@@ -3816,38 +3816,38 @@ components:
           type: string
         person:
           allOf:
-          - $ref: "#/components/schemas/person"
+          - $ref: "#/components/schemas/watchlist_mesh_person"
           nullable: true
         risk_indicators:
           allOf:
-          - $ref: "#/components/schemas/risk_indicators"
+          - $ref: "#/components/schemas/watchlist_mesh_risk_indicators"
           nullable: true
       type: object
-    person:
+    watchlist_mesh_person:
       properties:
         associates:
           items:
-            $ref: "#/components/schemas/associate"
+            $ref: "#/components/schemas/watchlist_mesh_associate"
           nullable: true
           type: array
         dates_of_birth:
           items:
-            $ref: "#/components/schemas/date_value"
+            $ref: "#/components/schemas/watchlist_mesh_date_value"
           nullable: true
           type: array
         dates_of_death:
           items:
-            $ref: "#/components/schemas/date_value"
+            $ref: "#/components/schemas/watchlist_mesh_date_value"
           nullable: true
           type: array
         images:
           items:
-            $ref: "#/components/schemas/image"
+            $ref: "#/components/schemas/watchlist_mesh_image"
           nullable: true
           type: array
         names:
           items:
-            $ref: "#/components/schemas/name"
+            $ref: "#/components/schemas/watchlist_mesh_name"
           nullable: true
           type: array
         places_of_birth:
@@ -3856,7 +3856,7 @@ components:
           nullable: true
           type: array
       type: object
-    associate:
+    watchlist_mesh_associate:
       properties:
         name:
           nullable: true
@@ -3865,7 +3865,7 @@ components:
           nullable: true
           type: string
       type: object
-    date_value:
+    watchlist_mesh_date_value:
       properties:
         source:
           nullable: true
@@ -3874,7 +3874,7 @@ components:
           nullable: true
           type: string
       type: object
-    image:
+    watchlist_mesh_image:
       properties:
         source:
           nullable: true
@@ -3883,7 +3883,7 @@ components:
           nullable: true
           type: string
       type: object
-    name:
+    watchlist_mesh_name:
       properties:
         name:
           nullable: true
@@ -3892,7 +3892,7 @@ components:
           nullable: true
           type: string
       type: object
-    risk_indicators:
+    watchlist_mesh_risk_indicators:
       properties:
         aml_types:
           items:
@@ -3901,26 +3901,26 @@ components:
           type: array
         lists:
           items:
-            $ref: "#/components/schemas/lists"
+            $ref: "#/components/schemas/watchlist_mesh_lists"
           nullable: true
           type: array
         media:
           items:
-            $ref: "#/components/schemas/media"
+            $ref: "#/components/schemas/watchlist_mesh_media"
           nullable: true
           type: array
         peps:
           items:
-            $ref: "#/components/schemas/pep"
+            $ref: "#/components/schemas/watchlist_mesh_pep"
           nullable: true
           type: array
         sanctions:
           items:
-            $ref: "#/components/schemas/sanctions"
+            $ref: "#/components/schemas/watchlist_mesh_sanctions"
           nullable: true
           type: array
       type: object
-    lists:
+    watchlist_mesh_lists:
       properties:
         aml_types:
           items:
@@ -3934,7 +3934,7 @@ components:
           type: array
         fields:
           items:
-            $ref: "#/components/schemas/field"
+            $ref: "#/components/schemas/watchlist_mesh_field"
           nullable: true
           type: array
         identifier:
@@ -3958,7 +3958,7 @@ components:
           nullable: true
           type: string
       type: object
-    field:
+    watchlist_mesh_field:
       properties:
         name:
           nullable: true
@@ -3970,7 +3970,7 @@ components:
           nullable: true
           type: string
       type: object
-    media:
+    watchlist_mesh_media:
       properties:
         identifier:
           nullable: true
@@ -3988,7 +3988,7 @@ components:
           nullable: true
           type: string
       type: object
-    pep:
+    watchlist_mesh_pep:
       properties:
         aml_types:
           items:
@@ -4012,7 +4012,7 @@ components:
           type: array
         fields:
           items:
-            $ref: "#/components/schemas/field"
+            $ref: "#/components/schemas/watchlist_mesh_field"
           nullable: true
           type: array
         identifier:
@@ -4051,7 +4051,7 @@ components:
           nullable: true
           type: string
       type: object
-    sanctions:
+    watchlist_mesh_sanctions:
       properties:
         aml_types:
           items:
@@ -4065,7 +4065,7 @@ components:
           type: array
         fields:
           items:
-            $ref: "#/components/schemas/field"
+            $ref: "#/components/schemas/watchlist_mesh_field"
           nullable: true
           type: array
         identifier:
@@ -4089,7 +4089,7 @@ components:
           nullable: true
           type: string
       type: object
-    added_mentions:
+    watchlist_mesh_added_mentions:
       properties:
         added_aml_types:
           items:
