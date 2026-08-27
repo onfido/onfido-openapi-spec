@@ -1,0 +1,2 @@
+allOf:
+  - $ref: definitions.yaml#/watchlist_mesh_alert_risk

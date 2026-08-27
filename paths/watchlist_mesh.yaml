@@ -1,9 +1,9 @@
-watchlist_alert_risks:
+watchlist_mesh_alert_risks:
   get:
-    summary: Retrieve watchlist alert risks
-    operationId: list_watchlist_alert_risks
+    summary: Retrieve watchlist mesh alert risks
+    operationId: list_watchlist_mesh_alert_risks
     description: >
-      Retrieves the detailed risks associated with a watchlist alert.
+      Retrieves the detailed risks associated with a watchlist mesh alert.
     parameters:
       - name: alert_id
         in: path
@@ -40,6 +40,6 @@ watchlist_alert_risks:
               type: array
               title: Watchlist alert risks
               items:
-                $ref: ../schemas/watchlist_alert_risks/watchlist_alert_risk.yaml
+                $ref: ../schemas/watchlist_mesh/watchlist_mesh_alert_risk.yaml
       default:
         $ref: ../responses/default_error.yaml

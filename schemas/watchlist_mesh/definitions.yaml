@@ -1,4 +1,4 @@
-watchlist_alert_risk:
+watchlist_mesh_alert_risk:
   type: object
   properties:
     created_at:
@@ -7,16 +7,16 @@ watchlist_alert_risk:
       description: The date and time at which the risk record was created.
     decision:
       allOf:
-        - $ref: "#/risk_decision"
+        - $ref: "#/watchlist_mesh_risk_decision"
       description: The review decision currently applied to the risk.
     previous_decision:
       nullable: true
       allOf:
-        - $ref: "#/risk_decision"
+        - $ref: "#/watchlist_mesh_risk_decision"
       description: The previous review decision, if one exists.
     detail:
       allOf:
-        - $ref: "#/risk_detail"
+        - $ref: "#/watchlist_mesh_risk_detail"
       description: Additional details about the risk.
     identifier:
       type: string
@@ -34,7 +34,7 @@ watchlist_alert_risk:
       nullable: true
       description: The date and time at which the risk record was last updated.
 
-risk_decision:
+watchlist_mesh_risk_decision:
   type: string
   enum:
     - NOT_REVIEWED
@@ -42,7 +42,7 @@ risk_decision:
     - FALSE_POSITIVE
     - TRUE_POSITIVE
 
-risk_detail:
+watchlist_mesh_risk_detail:
   type: object
   properties:
     change_type:
@@ -57,15 +57,15 @@ risk_detail:
     profile:
       nullable: true
       allOf:
-        - $ref: "#/profile"
+        - $ref: "#/watchlist_mesh_profile"
       description: The matched profile associated with the risk.
     added_mentions:
       nullable: true
       allOf:
-        - $ref: "#/added_mentions"
+        - $ref: "#/watchlist_mesh_added_mentions"
       description: Newly added mentions associated with the risk.
 
-added_mentions:
+watchlist_mesh_added_mentions:
   type: object
   properties:
     added_aml_types:
@@ -84,7 +84,7 @@ added_mentions:
       items:
         type: string
 
-profile:
+watchlist_mesh_profile:
   type: object
   properties:
     identifier:
@@ -104,47 +104,47 @@ profile:
     person:
       nullable: true
       allOf:
-        - $ref: "#/person"
+        - $ref: "#/watchlist_mesh_person"
     risk_indicators:
       nullable: true
       allOf:
-        - $ref: "#/risk_indicators"
+        - $ref: "#/watchlist_mesh_risk_indicators"
 
-person:
+watchlist_mesh_person:
   type: object
   properties:
     associates:
       type: array
       nullable: true
       items:
-        $ref: "#/associate"
+        $ref: "#/watchlist_mesh_associate"
     dates_of_birth:
       type: array
       nullable: true
       items:
-        $ref: "#/date_value"
+        $ref: "#/watchlist_mesh_date_value"
     dates_of_death:
       type: array
       nullable: true
       items:
-        $ref: "#/date_value"
+        $ref: "#/watchlist_mesh_date_value"
     images:
       type: array
       nullable: true
       items:
-        $ref: "#/image"
+        $ref: "#/watchlist_mesh_image"
     names:
       type: array
       nullable: true
       items:
-        $ref: "#/name"
+        $ref: "#/watchlist_mesh_name"
     places_of_birth:
       type: array
       nullable: true
       items:
         type: string
 
-associate:
+watchlist_mesh_associate:
   type: object
   properties:
     name:
@@ -154,7 +154,7 @@ associate:
       type: string
       nullable: true
 
-date_value:
+watchlist_mesh_date_value:
   type: object
   properties:
     source:
@@ -164,7 +164,7 @@ date_value:
       type: string
       nullable: true
 
-image:
+watchlist_mesh_image:
   type: object
   properties:
     source:
@@ -174,7 +174,7 @@ image:
       type: string
       nullable: true
 
-name:
+watchlist_mesh_name:
   type: object
   properties:
     name:
@@ -184,7 +184,7 @@ name:
       type: string
       nullable: true
 
-risk_indicators:
+watchlist_mesh_risk_indicators:
   type: object
   properties:
     aml_types:
@@ -196,24 +196,24 @@ risk_indicators:
       type: array
       nullable: true
       items:
-        $ref: "#/lists"
+        $ref: "#/watchlist_mesh_lists"
     media:
       type: array
       nullable: true
       items:
-        $ref: "#/media"
+        $ref: "#/watchlist_mesh_media"
     peps:
       type: array
       nullable: true
       items:
-        $ref: "#/pep"
+        $ref: "#/watchlist_mesh_pep"
     sanctions:
       type: array
       nullable: true
       items:
-        $ref: "#/sanctions"
+        $ref: "#/watchlist_mesh_sanctions"
 
-sanctions:
+watchlist_mesh_sanctions:
   type: object
   properties:
     aml_types:
@@ -230,7 +230,7 @@ sanctions:
       type: array
       nullable: true
       items:
-        $ref: "#/field"
+        $ref: "#/watchlist_mesh_field"
     identifier:
       type: string
       nullable: true
@@ -252,7 +252,7 @@ sanctions:
       type: string
       nullable: true
 
-media:
+watchlist_mesh_media:
   type: object
   properties:
     identifier:
@@ -271,7 +271,7 @@ media:
       type: string
       nullable: true
 
-lists:
+watchlist_mesh_lists:
   type: object
   properties:
     aml_types:
@@ -288,7 +288,7 @@ lists:
       type: array
       nullable: true
       items:
-        $ref: "#/field"
+        $ref: "#/watchlist_mesh_field"
     identifier:
       type: string
       nullable: true
@@ -310,7 +310,7 @@ lists:
       type: string
       nullable: true
 
-pep:
+watchlist_mesh_pep:
   type: object
   properties:
     aml_types:
@@ -337,7 +337,7 @@ pep:
       type: array
       nullable: true
       items:
-        $ref: "#/field"
+        $ref: "#/watchlist_mesh_field"
     identifier:
       type: string
       nullable: true
@@ -374,7 +374,7 @@ pep:
       type: string
       nullable: true
 
-field:
+watchlist_mesh_field:
   type: object
   properties:
     name:
