@@ -143,7 +143,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -175,7 +176,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -214,7 +216,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -265,7 +268,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -299,7 +303,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -390,7 +395,8 @@
             "required": false,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -485,7 +491,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -527,7 +534,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -582,7 +590,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -636,7 +645,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -715,7 +725,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -756,7 +767,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -798,7 +810,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -881,7 +894,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -960,7 +974,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1001,7 +1016,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1044,7 +1060,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1124,7 +1141,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1166,7 +1184,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1209,7 +1228,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1251,7 +1271,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1293,7 +1314,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1336,7 +1358,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1379,7 +1402,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1425,7 +1449,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -1476,7 +1501,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -1530,7 +1556,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1572,7 +1599,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1614,7 +1642,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1657,7 +1686,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1789,7 +1819,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1838,7 +1869,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1887,7 +1919,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -1940,7 +1973,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -2028,7 +2062,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2061,7 +2096,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2102,7 +2138,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2131,7 +2168,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2182,7 +2220,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2225,7 +2264,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -2299,7 +2339,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2379,7 +2420,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2421,7 +2463,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2464,7 +2507,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -2474,7 +2518,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2529,7 +2574,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -2539,7 +2585,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2594,7 +2641,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -2604,7 +2652,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2659,7 +2708,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -2701,7 +2751,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           },
           {
@@ -2711,7 +2762,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3127,7 +3179,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3159,7 +3212,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3198,7 +3252,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3365,7 +3420,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3486,7 +3542,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3565,7 +3622,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3606,7 +3664,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3640,7 +3699,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3682,7 +3742,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3723,7 +3784,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3764,7 +3826,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3798,7 +3861,8 @@
             "required": true,
             "schema": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
         ],
@@ -3990,7 +4054,8 @@
           "id": {
             "description": "The unique identifier for the video.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the video was uploaded.",
@@ -4015,7 +4080,8 @@
           },
           "file_type": {
             "description": "The file type of the uploaded file.",
-            "type": "string"
+            "type": "string",
+            "example": "png"
           },
           "challenge": {
             "description": "Challenge the end user was asked to perform during the video recording.",
@@ -4048,7 +4114,8 @@
           "workflow_run_id": {
             "description": "The workflow run id the task belongs to.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "task_def_id": {
             "$ref": "#/components/schemas/task_def_id"
@@ -4094,7 +4161,8 @@
           "id": {
             "description": "The unique identifier for the motion capture.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the motion capture was uploaded.",
@@ -4119,7 +4187,8 @@
           },
           "file_type": {
             "description": "The file type of the uploaded file.",
-            "type": "string"
+            "type": "string",
+            "example": "png"
           }
         },
         "type": "object"
@@ -4130,7 +4199,8 @@
           "uuid": {
             "description": "The biometric token's unique identifier.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "data": {
             "$ref": "#/components/schemas/biometric_token_data"
@@ -4199,7 +4269,8 @@
             "items": {
               "description": "Match ID to enable.",
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             },
             "type": "array"
           },
@@ -4207,7 +4278,8 @@
             "items": {
               "description": "Match ID to disable.",
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             },
             "type": "array"
           }
@@ -4241,7 +4313,8 @@
           "workflow_timeline_file_id": {
             "description": "The unique identifier for the Timefile File that will be created.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "href": {
             "description": "Link to access the Timefile File that will be created.",
@@ -4413,7 +4486,8 @@
           "report_id": {
             "description": "The unique identifier of the completed Document report.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "repeat_attempts": {
             "description": "An array of repeat attempt objects. If no repeat attempts were found, the array will be empty. The number of objects returned can increase over time if more matches are received.\n",
@@ -4446,7 +4520,8 @@
           "document_id": {
             "description": "The unique identifier of the uploaded document.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "document_classification": {
             "$ref": "#/components/schemas/extraction_document_classification"
@@ -4467,12 +4542,14 @@
           "check_id": {
             "description": "The ID of the check (only if report_id is not provided).",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "report_id": {
             "description": "The ID of the check (only if check_id is not provided).",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "feedback_notes": {
             "description": "Any additional information or feedback.",
@@ -4598,7 +4675,8 @@
         "properties": {
           "email": {
             "description": "The applicant's email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.",
-            "type": "string"
+            "type": "string",
+            "example": "jane.doe@example.com"
           },
           "dob": {
             "description": "The applicant's date of birth",
@@ -4613,7 +4691,8 @@
           },
           "phone_number": {
             "description": "The applicant's phone number",
-            "type": "string"
+            "type": "string",
+            "example": "+44 7911 123456"
           }
         },
         "type": "object"
@@ -4629,7 +4708,8 @@
           "id": {
             "description": "The unique identifier for the applicant.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time when this applicant was created.",
@@ -4661,12 +4741,14 @@
       "applicant_first_name": {
         "description": "The applicant's first name",
         "pattern": "^[^!#$%*=<>;{}\"]*$",
-        "type": "string"
+        "type": "string",
+        "example": "Jane"
       },
       "applicant_last_name": {
         "description": "The applicant's surname",
         "pattern": "^[^!#$%*=<>;{}\"]*$",
-        "type": "string"
+        "type": "string",
+        "example": "Doe"
       },
       "applicant_request": {
         "properties": {
@@ -4724,12 +4806,14 @@
           "applicant_id": {
             "description": "The unique identifier for the Applicant.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "workflow_id": {
             "description": "The unique identifier for the Workflow.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "tags": {
             "description": "Tags or labels assigned to the workflow run.",
@@ -4745,7 +4829,8 @@
           "customer_user_id": {
             "description": "Customer-provided user identifier.",
             "maxLength": 256,
-            "type": "string"
+            "type": "string",
+            "example": "customer-12345"
           },
           "link": {
             "allOf": [
@@ -4774,7 +4859,8 @@
         "properties": {
           "url": {
             "description": "Link to access the Workflow Run without the need to integrate with Onfido's SDKs.",
-            "type": "string"
+            "type": "string",
+            "example": "https://example.com/webhooks/onfido"
           },
           "completed_redirect_url": {
             "description": "When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.",
@@ -4813,7 +4899,8 @@
           "id": {
             "description": "The unique identifier for the Workflow Run.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "workflow_version_id": {
             "description": "The identifier for the Workflow version.",
@@ -4900,7 +4987,8 @@
         "properties": {
           "file_type": {
             "description": "The file type of the uploaded file",
-            "type": "string"
+            "type": "string",
+            "example": "png"
           },
           "type": {
             "allOf": [
@@ -4923,12 +5011,14 @@
               }
             ],
             "description": "The issuing country of the document, a 3-letter ISO code.",
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "applicant_id": {
             "description": "The ID of the applicant whose document is being uploaded.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         },
         "type": "object"
@@ -4938,7 +5028,8 @@
           "id": {
             "description": "The unique identifier for the document",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the document was uploaded",
@@ -4987,7 +5078,8 @@
           "applicant_id": {
             "description": "The ID of the applicant whose signing document is being uploaded.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         },
         "type": "object"
@@ -4997,7 +5089,8 @@
           "id": {
             "description": "The unique identifier for the signing document",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the signing document was uploaded",
@@ -5014,7 +5107,8 @@
           },
           "file_type": {
             "description": "The file type of the uploaded file",
-            "type": "string"
+            "type": "string",
+            "example": "png"
           },
           "file_name": {
             "description": "The name of the uploaded file",
@@ -5043,7 +5137,8 @@
           "id": {
             "description": "The unique identifier for the photo.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the photo was uploaded.",
@@ -5064,7 +5159,8 @@
           },
           "file_type": {
             "description": "The file type of the uploaded file.",
-            "type": "string"
+            "type": "string",
+            "example": "png"
           },
           "file_size": {
             "description": "The size of the file in bytes.",
@@ -5079,7 +5175,8 @@
           "applicant_id": {
             "description": "The ID of the applicant whose live photo is being uploaded.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "file": {
             "description": "The file to be uploaded.",
@@ -5099,7 +5196,8 @@
           "applicant_id": {
             "description": "The ID for the applicant associated with the monitor.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "report_name": {
             "description": "The name of the report type the monitor creates.",
@@ -5122,7 +5220,8 @@
           "id": {
             "description": "The unique identifier for the monitor.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the monitor was created.",
@@ -5217,7 +5316,8 @@
             "description": "The identifier of the screening configuration associated with the risk.",
             "format": "uuid",
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "profile": {
             "allOf": [
@@ -5348,7 +5448,8 @@
           },
           "value": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "AB123456C"
           }
         },
         "type": "object"
@@ -5361,7 +5462,8 @@
           },
           "url": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "https://example.com/webhooks/onfido"
           }
         },
         "type": "object"
@@ -5467,7 +5569,8 @@
           },
           "url": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "https://example.com/webhooks/onfido"
           }
         },
         "type": "object"
@@ -5484,7 +5587,8 @@
           },
           "value": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "AB123456C"
           }
         },
         "type": "object"
@@ -5509,7 +5613,8 @@
           },
           "url": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "https://example.com/webhooks/onfido"
           }
         },
         "type": "object"
@@ -5597,7 +5702,8 @@
           },
           "url": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "https://example.com/webhooks/onfido"
           }
         },
         "type": "object"
@@ -5650,7 +5756,8 @@
           },
           "url": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "example": "https://example.com/webhooks/onfido"
           }
         },
         "type": "object"
@@ -5686,7 +5793,8 @@
           "id": {
             "description": "The unique identifier for the photo.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the photo was uploaded.",
@@ -5707,7 +5815,8 @@
           },
           "file_type": {
             "description": "The file type of the uploaded file.",
-            "type": "string"
+            "type": "string",
+            "example": "png"
           },
           "file_size": {
             "description": "The size of the file in bytes.",
@@ -5722,7 +5831,8 @@
           "applicant_id": {
             "description": "The ID of the applicant whose ID photo is being uploaded.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "file": {
             "description": "The file to be uploaded.",
@@ -5806,7 +5916,8 @@
           "id": {
             "description": "The unique identifier of the webhook.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "name": {
             "description": "Name of the webhook.",
@@ -5871,31 +5982,38 @@
         "properties": {
           "flat_number": {
             "description": "The flat number of this address",
-            "type": "string"
+            "type": "string",
+            "example": "3"
           },
           "building_number": {
             "description": "The building number of this address",
-            "type": "string"
+            "type": "string",
+            "example": "29"
           },
           "building_name": {
             "description": "The building name of this address",
-            "type": "string"
+            "type": "string",
+            "example": "Albert Court"
           },
           "street": {
             "description": "The street of the applicant's address",
-            "type": "string"
+            "type": "string",
+            "example": "Second Street"
           },
           "sub_street": {
             "description": "The sub-street of the applicant's address",
-            "type": "string"
+            "type": "string",
+            "example": ""
           },
           "town": {
             "description": "The town of the applicant's address",
-            "type": "string"
+            "type": "string",
+            "example": "London"
           },
           "postcode": {
             "description": "The postcode or ZIP of the applicant's address",
-            "type": "string"
+            "type": "string",
+            "example": "SW4 6EH"
           },
           "country": {
             "allOf": [
@@ -5908,25 +6026,29 @@
           },
           "state": {
             "description": "The address state. US states must use the USPS abbreviation (see also ISO 3166-2:US), for example AK, CA, or TX.",
-            "type": "string"
+            "type": "string",
+            "example": "TX"
           },
           "line1": {
             "description": "Line 1 of the applicant's address",
             "nullable": true,
             "pattern": "^[^!$%^*=<>]*$",
-            "type": "string"
+            "type": "string",
+            "example": "29 Second Street"
           },
           "line2": {
             "description": "Line 2 of the applicant's address",
             "nullable": true,
             "pattern": "^[^!$%^*=<>]*$",
-            "type": "string"
+            "type": "string",
+            "example": "Albert Court"
           },
           "line3": {
             "description": "Line 3 of the applicant's address",
             "nullable": true,
             "pattern": "^[^!$%^*=<>]*$",
-            "type": "string"
+            "type": "string",
+            "example": ""
           }
         },
         "required": ["country", "postcode"],
@@ -5937,15 +6059,18 @@
           "applicant_id": {
             "description": "The unique identifier of the applicant",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "referrer": {
             "description": "The referrer URL pattern",
-            "type": "string"
+            "type": "string",
+            "example": "https://*.example.com/*"
           },
           "application_id": {
             "description": "The application ID (iOS or Android)",
-            "type": "string"
+            "type": "string",
+            "example": "com.example.app"
           },
           "cross_device_url": {
             "description": "The URL to be used by the Web SDK for the cross device flow.",
@@ -6315,7 +6440,8 @@
           "applicant_id": {
             "description": "The ID of the applicant to do the check on.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "applicant_provides_data": {
             "description": "Send an applicant form to applicant to complete to proceed with check. Defaults to false.\n",
@@ -6344,7 +6470,8 @@
           "id": {
             "description": "The unique identifier for the check.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time when this check was created.",
@@ -6375,7 +6502,8 @@
             "description": "An array of report ids.",
             "items": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             },
             "type": "array"
           },
@@ -6419,7 +6547,8 @@
             "description": "Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.",
             "items": {
               "format": "uuid",
-              "type": "string"
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
             },
             "type": "array"
           },
@@ -6886,11 +7015,13 @@
           },
           "value": {
             "description": "Value of ID number",
-            "type": "string"
+            "type": "string",
+            "example": "AB123456C"
           },
           "state_code": {
             "description": "Two letter code of issuing state (state-issued driving licenses only)",
-            "type": "string"
+            "type": "string",
+            "example": "CA"
           }
         },
         "type": "object"
@@ -6983,7 +7114,8 @@
           "id": {
             "description": "The unique identifier for the report. Read-only.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "created_at": {
             "description": "The date and time at which the report was first initiated. Read-only.",
@@ -7006,7 +7138,8 @@
           "check_id": {
             "description": "The ID of the check to which the report belongs. Read-only.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "name": {
             "$ref": "#/components/schemas/report_name"
@@ -7052,7 +7185,8 @@
           "id": {
             "description": "ID of uploaded document to use.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         },
         "required": ["id"],
@@ -7113,19 +7247,23 @@
             "type": "string"
           },
           "first_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Jane"
           },
           "middle_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Mary"
           },
           "last_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Doe"
           },
           "gender": {
             "type": "string"
           },
           "issuing_country": {
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "nationality": {
             "type": "string"
@@ -7312,7 +7450,8 @@
           "id": {
             "description": "ID of uploaded biometric media to use.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         },
         "required": ["id"],
@@ -7676,7 +7815,8 @@
         "properties": {
           "ip_address": {
             "description": "The applicant's ip address.",
-            "type": "string"
+            "type": "string",
+            "example": "127.0.0.1"
           },
           "country_of_residence": {
             "allOf": [
@@ -7695,24 +7835,29 @@
         "properties": {
           "id_number": {
             "description": "Driving licence ID number",
-            "type": "string"
+            "type": "string",
+            "example": "D1234567"
           },
           "issue_state": {
             "description": "Two letter code of issuing state (state-issued driving licenses only)",
             "pattern": "^[A-Z]{2}$",
-            "type": "string"
+            "type": "string",
+            "example": "CA"
           },
           "address_line_1": {
             "description": "Line 1 of the address",
-            "type": "string"
+            "type": "string",
+            "example": "100 Main Street"
           },
           "address_line_2": {
             "description": "Line 2 of the address",
-            "type": "string"
+            "type": "string",
+            "example": "Apt 4B"
           },
           "city": {
             "description": "The city of the owner's address",
-            "type": "string"
+            "type": "string",
+            "example": "San Francisco"
           },
           "date_of_birth": {
             "description": "Date of birth in yyyy-mm-dd format",
@@ -7746,7 +7891,8 @@
           },
           "first_name": {
             "description": "The owner's first name",
-            "type": "string"
+            "type": "string",
+            "example": "Jane"
           },
           "gender": {
             "enum": ["Male", "Female"],
@@ -7760,19 +7906,23 @@
           },
           "last_name": {
             "description": "The owner's surname",
-            "type": "string"
+            "type": "string",
+            "example": "Doe"
           },
           "middle_name": {
             "description": "The owner's middle name",
-            "type": "string"
+            "type": "string",
+            "example": "Mary"
           },
           "name_suffix": {
             "description": "The owner's name suffix",
-            "type": "string"
+            "type": "string",
+            "example": "Jr"
           },
           "postal_code": {
             "description": "The postcode or ZIP of the owner's address",
-            "type": "string"
+            "type": "string",
+            "example": "94105"
           },
           "state": {
             "description": "2-characters state code",
@@ -8071,7 +8221,8 @@
           "workflow_run_id": {
             "description": "The workflow run id the task belongs to.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "task_def_id": {
             "$ref": "#/components/schemas/task_def_id"
@@ -8231,7 +8382,8 @@
           "document_id": {
             "description": "The unique identifier of the uploaded document to run extraction on",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         },
         "required": ["document_id"],
@@ -8348,7 +8500,8 @@
           "id": {
             "description": "Monitor ID",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "enabled": {
             "description": "Monitor status",
@@ -8399,7 +8552,8 @@
           "applicant_id": {
             "description": "The unique identifier for the Applicant.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "status": {
             "$ref": "#/components/schemas/webhook_event_resource_status"
@@ -8424,7 +8578,8 @@
           "workflow_id": {
             "description": "The unique identifier for the Workflow.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "workflow_run_id": {
             "example": "2f152409-d6c4-4711-8750-48517f99a8d6",
@@ -8488,7 +8643,8 @@
           "customer_user_id": {
             "description": "Customer-provided user identifier.",
             "maxLength": 256,
-            "type": "string"
+            "type": "string",
+            "example": "customer-12345"
           },
           "timeline_file_download_url": {
             "description": "Pre-signed URL to download the timeline file for the Workflow Run.",
@@ -8535,7 +8691,8 @@
           "resource_id": {
             "description": "ID of the resource whose webhooks are to be retriggered.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "event": {
             "allOf": [
@@ -8557,12 +8714,14 @@
           "report_id": {
             "description": "The unique identifier of the matching Document report.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "applicant_id": {
             "description": "The unique identifier of the applicant for the matching Document report.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "date_of_birth": {
             "description": "Whether the dates of birth are exactly the same or are different.",
@@ -8601,7 +8760,8 @@
               }
             ],
             "description": "Document country in 3-letter ISO code.",
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "document_type": {
             "allOf": [
@@ -8660,11 +8820,13 @@
           },
           "first_name": {
             "description": "First name.",
-            "type": "string"
+            "type": "string",
+            "example": "Jane"
           },
           "last_name": {
             "description": "Last name.",
-            "type": "string"
+            "type": "string",
+            "example": "Doe"
           },
           "full_name": {
             "description": "Full name.",
@@ -8750,7 +8912,8 @@
               }
             ],
             "description": "Document country in 3-letter ISO code.",
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "document_type": {
             "allOf": [
@@ -9410,7 +9573,8 @@
       "document_properties_document_numbers_inner": {
         "properties": {
           "value": {
-            "type": "string"
+            "type": "string",
+            "example": "AB123456C"
           },
           "type": {
             "type": "string"
@@ -9424,16 +9588,19 @@
             "type": "string"
           },
           "state": {
-            "type": "string"
+            "type": "string",
+            "example": "TX"
           },
           "postal_code": {
-            "type": "string"
+            "type": "string",
+            "example": "94105"
           },
           "country": {
             "type": "string"
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "example": "San Francisco"
           },
           "country_code": {
             "type": "string"
@@ -9444,13 +9611,16 @@
       "document_properties_barcode_inner": {
         "properties": {
           "first_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Jane"
           },
           "middle_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Mary"
           },
           "last_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Doe"
           },
           "document_type": {
             "type": "string"
@@ -9468,10 +9638,12 @@
             "type": "string"
           },
           "address_line_1": {
-            "type": "string"
+            "type": "string",
+            "example": "100 Main Street"
           },
           "address_line_2": {
-            "type": "string"
+            "type": "string",
+            "example": "Apt 4B"
           },
           "address_line_3": {
             "type": "string"
@@ -9492,7 +9664,8 @@
             "type": "string"
           },
           "issuing_country": {
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "document_number": {
             "type": "string"
@@ -9509,7 +9682,8 @@
             "type": "string"
           },
           "issuing_country": {
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "full_name": {
             "type": "string"
@@ -9553,7 +9727,8 @@
       "document_properties_document_classification": {
         "properties": {
           "issuing_country": {
-            "type": "string"
+            "type": "string",
+            "example": "GBR"
           },
           "document_type": {
             "type": "string"
@@ -9578,13 +9753,16 @@
             "type": "string"
           },
           "first_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Jane"
           },
           "last_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Doe"
           },
           "middle_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Mary"
           },
           "full_name": {
             "type": "string"
@@ -9614,10 +9792,12 @@
             "type": "string"
           },
           "address_line_1": {
-            "type": "string"
+            "type": "string",
+            "example": "100 Main Street"
           },
           "address_line_2": {
-            "type": "string"
+            "type": "string",
+            "example": "Apt 4B"
           },
           "address_line_3": {
             "type": "string"
@@ -9664,7 +9844,8 @@
           "document_id": {
             "description": "The UUID for the document containing the extracted face that was used for face matching.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           }
         },
         "type": "object"
@@ -10054,7 +10235,8 @@
           "applicant_id": {
             "description": "The applicant ID of the matched applicant.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "score": {
             "description": "A floating point number between 0 and 1 that expresses how similar the two faces are, where 1 is a perfect match.",
@@ -10064,7 +10246,8 @@
           "media_id": {
             "description": "The corresponding UUID for the media type.",
             "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
           },
           "media_type": {
             "description": "The media type (for example live_photos or live_videos).",
@@ -10311,13 +10494,15 @@
             "type": "string"
           },
           "postal_code": {
-            "type": "string"
+            "type": "string",
+            "example": "94105"
           },
           "state_province": {
             "type": "string"
           },
           "town": {
-            "type": "string"
+            "type": "string",
+            "example": "London"
           },
           "locator_type": {
             "type": "string"
@@ -10779,7 +10964,8 @@
         "properties": {
           "city": {
             "description": "City location of the IP address.",
-            "type": "string"
+            "type": "string",
+            "example": "San Francisco"
           },
           "region": {
             "description": "Region location of the IP address.",
