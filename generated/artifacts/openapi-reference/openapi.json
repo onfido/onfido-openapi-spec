@@ -8304,11 +8304,11 @@
       },
       "Invalidated_biometric_token_response": {
         "properties": {
-          "biometric_token": {
+          "biometric_tokens": {
             "$ref": "#/components/schemas/invalidated_biometric_token_summary"
           }
         },
-        "required": ["biometric_token"],
+        "required": ["biometric_tokens"],
         "title": "Invalidated biometric token response",
         "type": "object"
       },

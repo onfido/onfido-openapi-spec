@@ -6882,14 +6882,14 @@ components:
       type: object
     Invalidated_biometric_token_response:
       example:
-        biometric_token:
+        biometric_tokens:
           deleted_items:
             count: 0
       properties:
-        biometric_token:
+        biometric_tokens:
           $ref: "#/components/schemas/invalidated_biometric_token_summary"
       required:
-      - biometric_token
+      - biometric_tokens
       title: Invalidated biometric token response
       type: object
     Watchlist_monitors_list:
