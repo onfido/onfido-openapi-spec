@@ -163,9 +163,9 @@ biometric_token:
               type: object
               title: Invalidated biometric token response
               required:
-                - biometric_token
+                - biometric_tokens
               properties:
-                biometric_token:
+                biometric_tokens:
                   $ref: ../schemas/biometric_tokens/invalidated_biometric_token_summary.yaml
       default:
         $ref: ../responses/default_error.yaml
