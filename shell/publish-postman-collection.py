@@ -57,6 +57,13 @@ def replace_collection(postman_collection_file: str,
                         "collection": postman_collection
                     }))
 
+        if not result.ok:
+            api_key = headers['X-API-Key']
+            logger.error("POSTMAN_API_KEY set: %s, length: %d",
+                         bool(api_key), len(api_key or ''))
+            logger.error("Postman response status: %s", result.status_code)
+            logger.error("Postman response body: %s", result.text)
+
         result.raise_for_status()
 
 
