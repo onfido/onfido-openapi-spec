@@ -1,0 +1,29 @@
+name: Postman API key keep-alive
+
+# Postman expires API keys after a period of inactivity: call a read-only
+# endpoint monthly to keep POSTMAN_API_KEY active.
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    environment: generation
+    steps:
+      - name: Call Postman /me endpoint
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          status=$(curl -s -o /dev/null -w '%{http_code}' \
+            -H "X-API-Key: ${POSTMAN_API_KEY}" \
+            https://api.getpostman.com/me)
+          echo "Postman response status: ${status}"
+          if [ "${status}" != "200" ]; then
+            echo "::error::POSTMAN_API_KEY is invalid or expired (HTTP ${status})"
+            exit 1
+          fi
