@@ -7539,6 +7539,9 @@
           },
           "visual_authenticity": {
             "$ref": "#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity"
+          },
+          "applicant_autonomy": {
+            "$ref": "#/components/schemas/facial_similarity_motion_breakdown_applicant_autonomy"
           }
         },
         "type": "object"
@@ -10207,6 +10210,63 @@
           },
           "breakdown": {
             "$ref": "#/components/schemas/facial_similarity_motion_breakdown_visual_authenticity_breakdown"
+          }
+        },
+        "readOnly": true,
+        "type": "object"
+      },
+      "facial_similarity_motion_breakdown_applicant_autonomy_breakdown_independent_capture_properties": {
+        "properties": {
+          "reasons": {
+            "description": "Additional comma separated details explaining the result.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "facial_similarity_motion_breakdown_applicant_autonomy_breakdown_independent_capture": {
+        "description": "Asserts whether the motion capture shows signs that the applicant was not capturing it independently - e.g. their eyes are closed, or the back camera was used.",
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/facial_similarity_motion_breakdown_applicant_autonomy_breakdown_independent_capture_properties"
+          }
+        },
+        "type": "object"
+      },
+      "facial_similarity_motion_breakdown_applicant_autonomy_breakdown_challenge_integrity": {
+        "description": "Asserts whether anyone other than the applicant could be heard giving voice instructions during the capture challenge. Omitted when it could not be evaluated.",
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/facial_similarity_motion_breakdown_applicant_autonomy_breakdown_independent_capture_properties"
+          }
+        },
+        "type": "object"
+      },
+      "facial_similarity_motion_breakdown_applicant_autonomy_breakdown": {
+        "properties": {
+          "independent_capture": {
+            "$ref": "#/components/schemas/facial_similarity_motion_breakdown_applicant_autonomy_breakdown_independent_capture"
+          },
+          "challenge_integrity": {
+            "$ref": "#/components/schemas/facial_similarity_motion_breakdown_applicant_autonomy_breakdown_challenge_integrity"
+          }
+        },
+        "type": "object"
+      },
+      "facial_similarity_motion_breakdown_applicant_autonomy": {
+        "description": "Asserts whether the motion capture was completed by the applicant of their own free will, without signs of coercion or third-party assistance. Only returned when applicant autonomy verification is enabled.",
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "breakdown": {
+            "$ref": "#/components/schemas/facial_similarity_motion_breakdown_applicant_autonomy_breakdown"
           }
         },
         "readOnly": true,
