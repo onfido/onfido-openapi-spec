@@ -84,3 +84,37 @@ properties:
                     type: number
                     format: float
                     description: A floating point number between 0 and 1. The closer the score is to 0, the more likely it is to be a spoof.
+  applicant_autonomy:
+    type: object
+    readOnly: true
+    description: Asserts whether the motion capture was completed by the applicant of their own free will, without signs of coercion or third-party assistance. Only returned when applicant autonomy verification is enabled.
+    properties:
+      result:
+        type: string
+      breakdown:
+        type: object
+        properties:
+          independent_capture:
+            type: object
+            description: Asserts whether the motion capture shows signs that the applicant was not capturing it independently - e.g. their eyes are closed, or the back camera was used.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  reasons:
+                    type: string
+                    description: Additional comma separated details explaining the result.
+          challenge_integrity:
+            type: object
+            description: Asserts whether anyone other than the applicant could be heard giving voice instructions during the capture challenge. Omitted when it could not be evaluated.
+            properties:
+              result:
+                type: string
+              properties:
+                type: object
+                properties:
+                  reasons:
+                    type: string
+                    description: Additional comma separated details explaining the result.
